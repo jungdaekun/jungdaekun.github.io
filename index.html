@@ -806,16 +806,25 @@ function replaySectionAnimation(sectionId) {
   const section = document.getElementById(sectionId);
   if (!section) return;
   const els = section.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
-  // 리셋
+
+  // 1단계: transition 끄고 리셋 (브라우저가 리셋 상태 확실히 렌더링)
   els.forEach(function(el) {
+    el.style.transition = 'none';
     el.classList.remove('revealed');
   });
-  // 살짝 딜레이 후 다시 트리거
-  setTimeout(function() {
-    els.forEach(function(el) {
-      el.classList.add('revealed');
+
+  // 2단계: 브라우저 리페인트 강제 후 transition 복구 + 애니메이션 시작
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      els.forEach(function(el) {
+        el.style.transition = '';
+      });
+      // 각 요소를 딜레이 클래스 기준으로 순서대로 재생
+      els.forEach(function(el) {
+        el.classList.add('revealed');
+      });
     });
-  }, 120);
+  });
 }
 
 // ── NAV ACTIVE ON SCROLL ──
@@ -826,9 +835,10 @@ const navLinks = document.querySelectorAll('nav a');
 navLinks.forEach(function(a) {
   a.addEventListener('click', function() {
     const targetId = a.getAttribute('href').replace('#', '');
+    // 스크롤 완료 후 재생 (smooth scroll 시간 고려)
     setTimeout(function() {
       replaySectionAnimation(targetId);
-    }, 400); // 스크롤 이동 후 재생
+    }, 600);
   });
 });
 
