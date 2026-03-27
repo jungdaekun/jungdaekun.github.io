@@ -611,5 +611,93 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Active n
+</footer>
+
+<script>
+// ── LIGHTBOX ──
+const projects = {
+  'proj-2019': {
+    id: '// PERSONAL · 2019—2020',
+    title: '2D Normal Building Assets',
+    images: [
+      'images/personal/2019-2020/2DNormal_001.jpg',
+      'images/personal/2019-2020/2DNormal_002.jpg',
+      'images/personal/2019-2020/2DNormal_003.jpg',
+      'images/personal/2019-2020/2DNormal_004.jpg',
+      'images/personal/2019-2020/2DNormal_005.jpg',
+      'images/personal/2019-2020/2DNormal_006.jpg',
+      'images/personal/2019-2020/2DNormal_007.jpg',
+      'images/personal/2019-2020/2DNormal_008.jpg',
+      'images/personal/2019-2020/2DNormal_009.jpg'
+    ]
+  }
+};
+
+let currentProject = null;
+let currentIdx = 0;
+
+function openLightbox(projectId, startIdx) {
+  currentProject = projects[projectId];
+  currentIdx = startIdx || 0;
+  document.getElementById('lb-id').textContent = currentProject.id;
+  document.getElementById('lb-title').textContent = currentProject.title;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLightbox() {
+  const imgs = currentProject.images;
+  document.getElementById('lb-img').src = imgs[currentIdx];
+  document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + imgs.length;
+  const tb = document.getElementById('lb-thumbnails');
+  tb.innerHTML = imgs.map((src, i) =>
+    '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + src + '" onclick="lbGoto(' + i + ')">'
+  ).join('');
+  const activeThumb = tb.querySelectorAll('.lb-thumb')[currentIdx];
+  if (activeThumb) activeThumb.scrollIntoView({inline:'center', behavior:'smooth'});
+}
+
+function lbNext() {
+  currentIdx = (currentIdx + 1) % currentProject.images.length;
+  renderLightbox();
+}
+function lbPrev() {
+  currentIdx = (currentIdx - 1 + currentProject.images.length) % currentProject.images.length;
+  renderLightbox();
+}
+function lbGoto(i) {
+  currentIdx = i;
+  renderLightbox();
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function closeLightboxOutside(e) {
+  if (e.target.id === 'lightbox') closeLightbox();
+}
+
+// 키보드 지원
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'ArrowRight') lbNext();
+  if (e.key === 'ArrowLeft') lbPrev();
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ── NAV ACTIVE ON SCROLL ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', function() {
+  let current = '';
+  sections.forEach(function(s) {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(function(a) {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
