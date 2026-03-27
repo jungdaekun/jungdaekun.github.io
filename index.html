@@ -47,7 +47,18 @@ nav a:hover,nav a.active{color:var(--gold);border-bottom-color:var(--gold);}
 /* ── HERO VIDEO ── */
 .hero-video-wrap{position:absolute;inset:0;overflow:hidden;z-index:0;}
 .hero-video-overlay{position:absolute;inset:0;background:rgba(8,10,13,0.72);z-index:1;}
-.hero-video-iframe{position:absolute;top:50%;left:50%;width:180%;height:180%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;}
+.hero-video-iframe{
+  position:absolute;
+  top:50%;left:50%;
+  /* 16:9 기준으로 화면을 완전히 덮는 크기 계산 */
+  width:calc(100vh * (16/9));
+  height:calc(100vw * (9/16));
+  min-width:100vw;
+  min-height:100vh;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:0;
+}
 
 /* ── HERO ── */
 #hero{min-height:100vh;display:flex;align-items:center;padding:80px 0 0;position:relative;overflow:hidden;}
@@ -195,26 +206,39 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .lb-scroll-hint::before{content:'↕';color:var(--gold-dim);}
 .lb-btn{background:none;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .lb-btn:hover{border-color:var(--border2);color:var(--gold);}
-.lb-img-viewport{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;background:#000;position:relative;}
+.lb-img-viewport{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;position:relative;}
 .lb-img-viewport::-webkit-scrollbar{width:6px;height:6px;}
 .lb-img-viewport::-webkit-scrollbar-track{background:#000;}
 .lb-img-viewport::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
-.lb-img{display:block;width:100%;height:auto;image-rendering:high-quality;cursor:grab;user-select:none;}
+.lb-img{display:block;width:100%;height:100%;object-fit:contain;image-rendering:high-quality;cursor:grab;user-select:none;}
 .lb-img:active{cursor:grabbing;}
 .lb-img-transition{animation:lbFade .25s ease;}
 @keyframes lbFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.lb-thumbnails{display:flex;gap:5px;padding:10px 16px;overflow-x:auto;flex-shrink:0;border-top:1px solid var(--border);background:rgba(8,10,13,.95);}
+.lb-thumbnails{display:none;}
 .lb-thumbnails::-webkit-scrollbar{height:4px;}
 .lb-thumbnails::-webkit-scrollbar-track{background:var(--bg);}
 .lb-thumbnails::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.lb-thumb{height:48px;width:auto;object-fit:cover;cursor:pointer;border:2px solid transparent;opacity:.45;transition:all .2s;flex-shrink:0;}
-.lb-thumb.active{border-color:var(--gold);opacity:1;}
-.lb-thumb:hover{opacity:.75;}
+.lb-thumb{display:none;}
 .lb-nav-indicator{position:absolute;bottom:70px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:3;}
 .lb-nav-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .2s;cursor:pointer;}
 .lb-nav-dot.active{background:var(--gold);transform:scale(1.4);}
 
 @media(max-width:768px){.project-grid{grid-template-columns:1fr;}.lb-thumbnails{display:none;}.lb-scroll-hint{display:none;}}
+
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal-up{opacity:0;transform:translateY(40px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
+.revealed{opacity:1!important;transform:translate(0)!important;}
+
+/* stagger delays */
+.delay-1{transition-delay:.1s;}
+.delay-2{transition-delay:.2s;}
+.delay-3{transition-delay:.3s;}
+.delay-4{transition-delay:.4s;}
+.delay-5{transition-delay:.5s;}
+.delay-6{transition-delay:.6s;}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
@@ -293,16 +317,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="sec-header">
+  <div class="sec-header reveal-up">
     <span class="sec-id">// 01</span>
     <h2 class="sec-title">About</h2>
     <div class="sec-line"></div>
   </div>
   <div class="about-grid">
     <div class="about-left">
-      <div class="name-big">Jung<br>Daekun</div>
-      <div class="title-tag">Senior Environment Artist</div>
-      <div class="about-contact">
+      <div class="name-big reveal-left">Jung<br>Daekun</div>
+      <div class="title-tag reveal-left delay-1">Senior Environment Artist</div>
+      <div class="about-contact reveal-left delay-2">
         Contact: <a href="/cdn-cgi/l/email-protection#fd9788939a999c98968893bd9a909c9491d39e9290"><span class="__cf_email__" data-cfemail="066c7368616267636d736846616b676f6a2865696b">[email&#160;protected]</span></a>
       </div>
       <div class="skills-grid" style="margin-top:32px">
@@ -325,7 +349,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
     <div class="about-right">
-      <div class="exp-item">
+      <div class="exp-item reveal-right delay-1">
         <div class="exp-year">2021 —</div>
         <div class="exp-company">NCSoft</div>
         <div class="exp-role">Senior Environment Artist · Integration & Lighting</div>
@@ -337,7 +361,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">PS5</span>
         </div>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-right delay-2">
         <div class="exp-year">2020 —</div>
         <div class="exp-company">Line Games</div>
         <div class="exp-role">Lead Environment Artist</div>
@@ -349,7 +373,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Switch</span>
         </div>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-right delay-3">
         <div class="exp-year">2018 —</div>
         <div class="exp-company">Nexon Korea</div>
         <div class="exp-role">Senior Environment Artist</div>
@@ -360,7 +384,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Knald</span>
         </div>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-right delay-4">
         <div class="exp-year">2017 —</div>
         <div class="exp-company">XLGames</div>
         <div class="exp-role">Environment Artist</div>
@@ -371,7 +395,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Shader</span>
         </div>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-right delay-5">
         <div class="exp-year">2016 —</div>
         <div class="exp-company">Neptune</div>
         <div class="exp-role">Lead Environment Artist</div>
@@ -398,7 +422,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 <!-- PERSONAL WORKS -->
 <section id="personal">
-  <div class="sec-header">
+  <div class="sec-header reveal-up">
     <span class="sec-id">// 02</span>
     <h2 class="sec-title">Personal Works</h2>
     <div class="sec-line"></div>
@@ -407,7 +431,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="project-grid">
 
     <!-- 2019-2020 프로젝트 카드 -->
-    <div class="project-card" onclick="openLightbox('proj-2019', 0)">
+    <div class="project-card reveal-up" onclick="openLightbox('proj-2019', 0)">
       <div class="project-thumb-wrap">
         <img class="project-thumb" src="images/personal/2019-2020/2DNormal_001.jpg" alt="2D Normal Building Assets">
         <div class="project-count-badge">9 images</div>
@@ -429,7 +453,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
 
     <!-- 2017-2018 (이미지 추가 예정) -->
-    <div class="project-card project-card-empty">
+    <div class="project-card project-card-empty reveal-up">
       <div class="project-thumb-wrap empty-thumb">
         <div class="empty-label">// 2017 — 2018</div>
       </div>
@@ -441,7 +465,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
 
     <!-- 2016 (이미지 추가 예정) -->
-    <div class="project-card project-card-empty">
+    <div class="project-card project-card-empty reveal-up">
       <div class="project-thumb-wrap empty-thumb">
         <div class="empty-label">// 2016</div>
       </div>
@@ -453,7 +477,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
 
     <!-- 2013-2014 (이미지 추가 예정) -->
-    <div class="project-card project-card-empty">
+    <div class="project-card project-card-empty reveal-up">
       <div class="project-thumb-wrap empty-thumb">
         <div class="empty-label">// 2013 — 2014</div>
       </div>
@@ -465,7 +489,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
 
     <!-- 2011-2012 (이미지 추가 예정) -->
-    <div class="project-card project-card-empty">
+    <div class="project-card project-card-empty reveal-up">
       <div class="project-thumb-wrap empty-thumb">
         <div class="empty-label">// 2011 — 2012</div>
       </div>
@@ -504,7 +528,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 <!-- RE:LIGHTING -->
 <section id="relighting">
-  <div class="sec-header">
+  <div class="sec-header reveal-up">
     <span class="sec-id">// 03</span>
     <h2 class="sec-title">Re:Lighting</h2>
     <div class="sec-line"></div>
@@ -537,7 +561,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 <!-- PROFESSIONAL -->
 <section id="professional">
-  <div class="sec-header">
+  <div class="sec-header reveal-up">
     <span class="sec-id">// 04</span>
     <h2 class="sec-title">Professional</h2>
     <div class="sec-line"></div>
@@ -602,7 +626,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 <!-- SKETCH NOTE -->
 <section id="sketch">
-  <div class="sec-header">
+  <div class="sec-header reveal-up">
     <span class="sec-id">// 05</span>
     <h2 class="sec-title">Sketch Note</h2>
     <div class="sec-line"></div>
@@ -643,7 +667,8 @@ const randomVideoId = bgVideos[Math.floor(Math.random() * bgVideos.length)];
 const heroIframe = document.getElementById('hero-video');
 heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
   '?autoplay=1&mute=1&loop=1&playlist=' + randomVideoId +
-  '&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&start=10';
+  '&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0' +
+  '&iv_load_policy=3&start=5&vq=hd1080&playsinline=1';
 </script>
 
 <script>
@@ -696,13 +721,7 @@ function renderLightbox() {
 
   document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + imgs.length;
 
-  // Thumbnails
-  const tb = document.getElementById('lb-thumbnails');
-  tb.innerHTML = imgs.map((src, i) =>
-    '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + src + '" onclick="lbGoto(' + i + ')">'
-  ).join('');
-  const activeThumb = tb.querySelectorAll('.lb-thumb')[currentIdx];
-  if (activeThumb) activeThumb.scrollIntoView({inline:'center', behavior:'smooth'});
+  // Thumbnails hidden
 
   // Nav dots
   const dots = document.getElementById('lb-nav-dots');
@@ -765,6 +784,20 @@ document.addEventListener('keydown', function(e) {
 // ESC 버튼 / 배경 클릭으로 닫기
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
+});
+
+// ── SCROLL REVEAL ANIMATION ──
+const revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(function(el) {
+  revealObserver.observe(el);
 });
 
 // ── NAV ACTIVE ON SCROLL ──
