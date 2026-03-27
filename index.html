@@ -407,7 +407,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Zbrush</span>
         </div>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-right">
         <div class="exp-year">2013 — 2015</div>
         <div class="exp-company">Pure Games</div>
         <div class="exp-role">Art Director</div>
@@ -790,59 +790,68 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 // ── 이미지 줌 & 드래그 ──
 (function() {
   var img = document.getElementById('lb-img');
-  var isZoomed = false;
+  var isZoomed  = false;
+  var isDragging = false;
+  var didDrag   = false;
   var transX = 0, transY = 0;
   var ZOOM = 1.8;
+  var THRESHOLD = 4;
 
   function applyTransform(tx, ty) {
     img.style.transform = 'scale(' + ZOOM + ') translate(' + (tx/ZOOM) + 'px, ' + (ty/ZOOM) + 'px)';
   }
-
   function resetZoom() {
-    isZoomed = false;
+    isZoomed   = false;
+    isDragging = false;
+    didDrag    = false;
     transX = 0; transY = 0;
-    img.style.cursor = 'zoom-in';
-    img.style.transform = 'scale(1)';
+    img.style.cursor    = 'zoom-in';
+    img.style.transform = '';
   }
 
-  // 이미지 변경 시 줌 리셋
   var origRender = window.renderLightbox;
-  window.renderLightbox = function() {
-    resetZoom();
-    origRender();
-  };
+  window.renderLightbox = function() { resetZoom(); origRender(); };
 
-  // ── mousedown: 즉시 줌 진입 ──
+  // mousedown → 드래그 시작 준비
   img.addEventListener('mousedown', function(e) {
     if (e.button !== 0) return;
-    e.preventDefault();
-    e.stopPropagation();
-    isZoomed = true;
-    transX = 0; transY = 0;
-    img.style.cursor = 'grabbing';
-    applyTransform(0, 0);
+    e.preventDefault(); e.stopPropagation();
+    isDragging = true;
+    didDrag    = false;
+    if (isZoomed) img.style.cursor = 'grabbing';
   });
 
-  // ── mousemove: 드래그 이동 ──
+  // mousemove → 줌 상태에서 이동
   document.addEventListener('mousemove', function(e) {
-    if (!isZoomed) return;
-    if (e.buttons !== 1) return; // 왼쪽 버튼 누르고 있을 때만
+    if (!isDragging || !isZoomed) return;
+    var moved = Math.abs(e.movementX) + Math.abs(e.movementY);
+    if (moved > 0) didDrag = true;
     transX += e.movementX;
     transY += e.movementY;
     applyTransform(transX, transY);
   });
 
-  // ── mouseup: 항상 줌 해제 ──
+  // mouseup → 클릭(줌 토글) or 드래그 끝
   document.addEventListener('mouseup', function(e) {
-    if (e.button !== 0) return;
-    if (isZoomed) resetZoom();
+    if (e.button !== 0 || !isDragging) return;
+    isDragging = false;
+    if (!didDrag) {
+      // 순수 클릭 → 줌 토글
+      if (!isZoomed) {
+        isZoomed = true;
+        img.style.cursor = 'grab';
+        applyTransform(0, 0);
+      } else {
+        resetZoom();
+      }
+    } else {
+      // 드래그 끝 → 커서만 복구
+      if (isZoomed) img.style.cursor = 'grab';
+    }
+    didDrag = false;
   });
 
-  // ESC / 우클릭으로 줌 해제
-  img.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    if (isZoomed) resetZoom();
-  });
+  img.addEventListener('contextmenu', function(e) { e.preventDefault(); resetZoom(); });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && isZoomed) resetZoom();
   });
@@ -853,22 +862,23 @@ const revealEls = document.querySelectorAll('.reveal-left, .reveal-right, .revea
 
 const revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      // 스킬 그리드 아이템은 순서대로 스태거 재생
-      if (entry.target.classList.contains('skill-item')) {
-        var siblings = Array.from(document.querySelectorAll('.skill-item.reveal-left, .skill-item.reveal-right'));
-        siblings.forEach(function(el, i) {
-          setTimeout(function() { el.classList.add('revealed'); }, i * 60);
-        });
-        // 한번 트리거되면 전부 unobserve
-        siblings.forEach(function(el) { revealObserver.unobserve(el); });
-      } else {
-        entry.target.classList.add('revealed');
-        revealObserver.unobserve(entry.target);
-      }
+    if (!entry.isIntersecting) return;
+    if (entry.target.classList.contains('skill-item')) {
+      // 스킬 아이템 → 형제 전부 스태거
+      var siblings = Array.from(document.querySelectorAll('.skill-item.reveal-left, .skill-item.reveal-right'));
+      siblings.forEach(function(el, i) {
+        setTimeout(function() { el.classList.add('revealed'); }, i * 60);
+        revealObserver.unobserve(el);
+      });
+    } else {
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, {
+  threshold: 0,
+  rootMargin: '0px 0px 0px 0px'  // 화면에 1px만 걸쳐도 트리거
+});
 
 revealEls.forEach(function(el) {
   revealObserver.observe(el);
