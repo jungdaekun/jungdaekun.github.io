@@ -350,7 +350,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
     <div class="about-right">
-      <div class="exp-item reveal-right delay-1">
+      <div class="exp-item reveal-right">
         <div class="exp-year">2021 —</div>
         <div class="exp-company">NCSoft</div>
         <div class="exp-role">Senior Environment Artist · Integration & Lighting</div>
@@ -362,7 +362,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">PS5</span>
         </div>
       </div>
-      <div class="exp-item reveal-right delay-2">
+      <div class="exp-item reveal-right">
         <div class="exp-year">2020 —</div>
         <div class="exp-company">Line Games</div>
         <div class="exp-role">Lead Environment Artist</div>
@@ -374,7 +374,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Switch</span>
         </div>
       </div>
-      <div class="exp-item reveal-right delay-3">
+      <div class="exp-item reveal-right">
         <div class="exp-year">2018 —</div>
         <div class="exp-company">Nexon Korea</div>
         <div class="exp-role">Senior Environment Artist</div>
@@ -385,7 +385,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Knald</span>
         </div>
       </div>
-      <div class="exp-item reveal-right delay-4">
+      <div class="exp-item reveal-right">
         <div class="exp-year">2017 —</div>
         <div class="exp-company">XLGames</div>
         <div class="exp-role">Environment Artist</div>
@@ -396,7 +396,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="exp-tag">Shader</span>
         </div>
       </div>
-      <div class="exp-item reveal-right delay-5">
+      <div class="exp-item reveal-right">
         <div class="exp-year">2016 —</div>
         <div class="exp-company">Neptune</div>
         <div class="exp-role">Lead Environment Artist</div>
@@ -789,26 +789,20 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 
 // ── 이미지 줌 & 드래그 ──
 (function() {
-  var img    = document.getElementById('lb-img');
-  var isZoomed   = false;
-  var mouseIsDown = false;
-  var didDrag    = false;
-  var startMouseX, startMouseY;
+  var img = document.getElementById('lb-img');
+  var isZoomed = false;
   var transX = 0, transY = 0;
   var ZOOM = 1.8;
-  var DRAG_THRESHOLD = 5; // px
 
-  function applyTransform(scale, tx, ty) {
-    img.style.transform = 'scale(' + scale + ') translate(' + (tx/scale) + 'px, ' + (ty/scale) + 'px)';
+  function applyTransform(tx, ty) {
+    img.style.transform = 'scale(' + ZOOM + ') translate(' + (tx/ZOOM) + 'px, ' + (ty/ZOOM) + 'px)';
   }
 
   function resetZoom() {
-    isZoomed    = false;
-    mouseIsDown = false;
-    didDrag     = false;
+    isZoomed = false;
     transX = 0; transY = 0;
-    img.style.cursor    = 'zoom-in';
-    img.style.transform = '';
+    img.style.cursor = 'zoom-in';
+    img.style.transform = 'scale(1)';
   }
 
   // 이미지 변경 시 줌 리셋
@@ -818,64 +812,39 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     origRender();
   };
 
-  // ── mousedown: 드래그 추적 시작 ──
+  // ── mousedown: 즉시 줌 진입 ──
   img.addEventListener('mousedown', function(e) {
-    if (e.button !== 0) return; // 왼쪽 버튼만
+    if (e.button !== 0) return;
     e.preventDefault();
     e.stopPropagation();
-    mouseIsDown  = true;
-    didDrag      = false;
-    startMouseX  = e.clientX;
-    startMouseY  = e.clientY;
-    if (isZoomed) {
-      img.style.cursor = 'grabbing';
-    }
+    isZoomed = true;
+    transX = 0; transY = 0;
+    img.style.cursor = 'grabbing';
+    applyTransform(0, 0);
   });
 
   // ── mousemove: 드래그 이동 ──
   document.addEventListener('mousemove', function(e) {
-    if (!mouseIsDown || !isZoomed) return;
-    var dx = e.clientX - startMouseX;
-    var dy = e.clientY - startMouseY;
-    if (!didDrag && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
-      didDrag = true;
-    }
-    if (didDrag) {
-      transX += e.movementX;
-      transY += e.movementY;
-      applyTransform(ZOOM, transX, transY);
-    }
+    if (!isZoomed) return;
+    if (e.buttons !== 1) return; // 왼쪽 버튼 누르고 있을 때만
+    transX += e.movementX;
+    transY += e.movementY;
+    applyTransform(transX, transY);
   });
 
-  // ── mouseup: 클릭 → 줌, 드래그 끝 → 줌 해제 ──
+  // ── mouseup: 항상 줌 해제 ──
   document.addEventListener('mouseup', function(e) {
     if (e.button !== 0) return;
-    if (!mouseIsDown) return;
-    mouseIsDown = false;
-
-    if (!didDrag) {
-      // 순수 클릭
-      if (!isZoomed) {
-        // 줌 진입
-        isZoomed = true;
-        transX = 0; transY = 0;
-        img.style.cursor = 'grab';
-        applyTransform(ZOOM, 0, 0);
-      }
-      // 클릭만으로는 해제 안 함 (드래그 후 손 뗄 때 해제)
-    } else {
-      // 드래그 끝 → 줌 자동 해제
-      resetZoom();
-    }
-    didDrag = false;
+    if (isZoomed) resetZoom();
   });
 
   // ESC / 우클릭으로 줌 해제
   img.addEventListener('contextmenu', function(e) {
-    if (isZoomed) { e.preventDefault(); resetZoom(); }
+    e.preventDefault();
+    if (isZoomed) resetZoom();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isZoomed) { e.stopPropagation(); resetZoom(); }
+    if (e.key === 'Escape' && isZoomed) resetZoom();
   });
 })();
 
