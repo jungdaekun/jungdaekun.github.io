@@ -801,27 +801,29 @@ revealEls.forEach(function(el) {
   revealObserver.observe(el);
 });
 
-// 특정 섹션 애니메이션 리셋 + 재생
+// 특정 섹션 애니메이션 리셋 + 재생 (JS 스태거)
 function replaySectionAnimation(sectionId) {
   const section = document.getElementById(sectionId);
   if (!section) return;
-  const els = section.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+  const els = Array.from(section.querySelectorAll('.reveal-left, .reveal-right, .reveal-up'));
+  if (els.length === 0) return;
 
-  // 1단계: transition 끄고 리셋 (브라우저가 리셋 상태 확실히 렌더링)
+  // 1단계: transition 끄고 전부 리셋
   els.forEach(function(el) {
     el.style.transition = 'none';
+    el.style.transitionDelay = '0s';
     el.classList.remove('revealed');
   });
 
-  // 2단계: 브라우저 리페인트 강제 후 transition 복구 + 애니메이션 시작
+  // 2단계: 리페인트 후 하나씩 순서대로 재생
   requestAnimationFrame(function() {
     requestAnimationFrame(function() {
-      els.forEach(function(el) {
-        el.style.transition = '';
-      });
-      // 각 요소를 딜레이 클래스 기준으로 순서대로 재생
-      els.forEach(function(el) {
-        el.classList.add('revealed');
+      els.forEach(function(el, i) {
+        setTimeout(function() {
+          el.style.transition = '';
+          el.style.transitionDelay = '';
+          el.classList.add('revealed');
+        }, i * 120); // 요소마다 120ms 간격으로 순서대로 재생
       });
     });
   });
@@ -835,7 +837,6 @@ const navLinks = document.querySelectorAll('nav a');
 navLinks.forEach(function(a) {
   a.addEventListener('click', function() {
     const targetId = a.getAttribute('href').replace('#', '');
-    // 스크롤 완료 후 재생 (smooth scroll 시간 고려)
     setTimeout(function() {
       replaySectionAnimation(targetId);
     }, 600);
