@@ -331,22 +331,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         Contact: <a href="/cdn-cgi/l/email-protection#fd9788939a999c98968893bd9a909c9491d39e9290"><span class="__cf_email__" data-cfemail="066c7368616267636d736846616b676f6a2865696b">[email&#160;protected]</span></a>
       </div>
       <div class="skills-grid" style="margin-top:32px">
-        <div class="skill-item">Level Design</div>
-        <div class="skill-item">Integration</div>
-        <div class="skill-item">Modeling & Mapping</div>
-        <div class="skill-item">Shader & Lighting</div>
-        <div class="skill-item">Optimization</div>
-        <div class="skill-item">Outsourcing</div>
-        <div class="skill-item">3ds Max</div>
-        <div class="skill-item">Substance Painter</div>
-        <div class="skill-item">Substance Designer</div>
-        <div class="skill-item">Z-Brush</div>
-        <div class="skill-item">Unreal Engine 4/5</div>
-        <div class="skill-item">Photoshop</div>
-        <div class="skill-item">SpeedTree</div>
-        <div class="skill-item">CryEngine 3.x</div>
-        <div class="skill-item">Unity</div>
-        <div class="skill-item">Quixel Megascan</div>
+        <div class="skill-item reveal-left">Level Design</div>
+        <div class="skill-item reveal-right">Integration</div>
+        <div class="skill-item reveal-left">Modeling & Mapping</div>
+        <div class="skill-item reveal-right">Shader & Lighting</div>
+        <div class="skill-item reveal-left">Optimization</div>
+        <div class="skill-item reveal-right">Outsourcing</div>
+        <div class="skill-item reveal-left">3ds Max</div>
+        <div class="skill-item reveal-right">Substance Painter</div>
+        <div class="skill-item reveal-left">Substance Designer</div>
+        <div class="skill-item reveal-right">Z-Brush</div>
+        <div class="skill-item reveal-left">Unreal Engine 4/5</div>
+        <div class="skill-item reveal-right">Photoshop</div>
+        <div class="skill-item reveal-left">SpeedTree</div>
+        <div class="skill-item reveal-right">CryEngine 3.x</div>
+        <div class="skill-item reveal-left">Unity</div>
+        <div class="skill-item reveal-right">Quixel Megascan</div>
       </div>
     </div>
     <div class="about-right">
@@ -790,20 +790,24 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 // ── 이미지 줌 & 드래그 ──
 (function() {
   var img = document.getElementById('lb-img');
-  var isZoomed = false;
+  var vp  = document.getElementById('lb-img-viewport');
+  var isZoomed  = false;
   var isDragging = false;
+  var didDrag   = false;
   var startX, startY, transX = 0, transY = 0;
-  var ZOOM = 1.8; // 확대 배율
+  var ZOOM = 1.8;
 
   function applyTransform(scale, tx, ty) {
     img.style.transform = 'scale(' + scale + ') translate(' + tx + 'px, ' + ty + 'px)';
   }
 
   function resetZoom() {
-    isZoomed = false;
+    isZoomed   = false;
     isDragging = false;
+    didDrag    = false;
     transX = 0; transY = 0;
     img.classList.remove('zoomed', 'dragging');
+    img.style.cursor = 'zoom-in';
     applyTransform(1, 0, 0);
   }
 
@@ -814,56 +818,55 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     origRender();
   };
 
-  // 마우스 클릭: 줌 토글
+  // mousedown: 줌 ON 또는 드래그 시작
   img.addEventListener('mousedown', function(e) {
     e.preventDefault();
+    e.stopPropagation();
     if (!isZoomed) {
-      // 클릭 위치 기준으로 확대
-      var rect = img.getBoundingClientRect();
-      var cx = (e.clientX - rect.left - rect.width / 2) / ZOOM;
-      var cy = (e.clientY - rect.top - rect.height / 2) / ZOOM;
-      transX = -cx * 0.3;
-      transY = -cy * 0.3;
+      // 줌 진입
       isZoomed = true;
+      didDrag  = false;
+      transX   = 0;
+      transY   = 0;
       img.classList.add('zoomed');
+      img.style.cursor = 'grab';
       applyTransform(ZOOM, transX, transY);
-
-      // 드래그 시작
-      startX = e.clientX - transX;
-      startY = e.clientY - transY;
-    } else {
-      // 이미 줌 상태면 드래그 시작
-      isDragging = true;
-      img.classList.add('dragging');
-      startX = e.clientX - transX;
-      startY = e.clientY - transY;
     }
+    // 줌 상태면 항상 드래그 준비
+    isDragging = true;
+    didDrag    = false;
+    startX     = e.clientX - transX;
+    startY     = e.clientY - transY;
+    img.classList.add('dragging');
+    img.style.cursor = 'grabbing';
   });
 
   document.addEventListener('mousemove', function(e) {
     if (!isZoomed || !isDragging) return;
-    transX = e.clientX - startX;
-    transY = e.clientY - startY;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (Math.abs(dx - transX) > 3 || Math.abs(dy - transY) > 3) didDrag = true;
+    transX = dx;
+    transY = dy;
     applyTransform(ZOOM, transX, transY);
   });
 
   document.addEventListener('mouseup', function(e) {
     if (!isZoomed) return;
-    if (isDragging) {
-      isDragging = false;
-      img.classList.remove('dragging');
-    } else {
+    isDragging = false;
+    img.classList.remove('dragging');
+    img.style.cursor = 'grab';
+    if (!didDrag) {
       // 드래그 없이 클릭 → 줌 해제
       resetZoom();
     }
+    didDrag = false;
   });
 
-  // 줌 상태에서 우클릭으로도 해제
+  // ESC / 우클릭으로 줌 해제
   img.addEventListener('contextmenu', function(e) {
     if (isZoomed) { e.preventDefault(); resetZoom(); }
   });
-
-  // ESC로 줌 해제
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && isZoomed) resetZoom();
   });
@@ -906,7 +909,7 @@ function replaySectionAnimation(sectionId) {
           el.style.transition = '';
           el.style.transitionDelay = '';
           el.classList.add('revealed');
-        }, i * 120); // 요소마다 120ms 간격으로 순서대로 재생
+        }, i * 80); // 요소마다 80ms 간격으로 순서대로 재생
       });
     });
   });
