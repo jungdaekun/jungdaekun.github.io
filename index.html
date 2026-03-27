@@ -847,7 +847,7 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     }
   });
 
-  // ── mouseup: 클릭 vs 드래그 판단 ──
+  // ── mouseup: 클릭 → 줌, 드래그 끝 → 줌 해제 ──
   document.addEventListener('mouseup', function(e) {
     if (e.button !== 0) return;
     if (!mouseIsDown) return;
@@ -861,13 +861,11 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
         transX = 0; transY = 0;
         img.style.cursor = 'grab';
         applyTransform(ZOOM, 0, 0);
-      } else {
-        // 줌 해제
-        resetZoom();
       }
+      // 클릭만으로는 해제 안 함 (드래그 후 손 뗄 때 해제)
     } else {
-      // 드래그 끝
-      if (isZoomed) img.style.cursor = 'grab';
+      // 드래그 끝 → 줌 자동 해제
+      resetZoom();
     }
     didDrag = false;
   });
@@ -907,7 +905,7 @@ revealEls.forEach(function(el) {
   revealObserver.observe(el);
 });
 
-// 특정 섹션 애니메이션 리셋 + 재생 (JS 스태거)
+// 특정 섹션 애니메이션 리셋 + 재생
 function replaySectionAnimation(sectionId) {
   const section = document.getElementById(sectionId);
   if (!section) return;
@@ -921,15 +919,27 @@ function replaySectionAnimation(sectionId) {
     el.classList.remove('revealed');
   });
 
-  // 2단계: 리페인트 후 하나씩 순서대로 재생
+  // 2단계: 좌/우/위 그룹별로 묶어서 같은 행끼리 동시 재생
   requestAnimationFrame(function() {
     requestAnimationFrame(function() {
-      els.forEach(function(el, i) {
-        setTimeout(function() {
-          el.style.transition = '';
-          el.style.transitionDelay = '';
-          el.classList.add('revealed');
-        }, i * 80); // 요소마다 80ms 간격으로 순서대로 재생
+      // 행 번호 계산: 같은 offsetTop이면 같은 행
+      var rows = [];
+      var rowMap = {};
+      els.forEach(function(el) {
+        var top = Math.round(el.getBoundingClientRect().top);
+        if (!rowMap[top]) { rowMap[top] = []; rows.push(top); }
+        rowMap[top].push(el);
+      });
+      rows.sort(function(a,b){return a-b;});
+
+      rows.forEach(function(top, rowIdx) {
+        rowMap[top].forEach(function(el) {
+          setTimeout(function() {
+            el.style.transition = '';
+            el.style.transitionDelay = '';
+            el.classList.add('revealed');
+          }, rowIdx * 100); // 행마다 100ms 간격, 같은 행은 동시!
+        });
       });
     });
   });
