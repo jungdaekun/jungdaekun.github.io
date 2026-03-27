@@ -330,7 +330,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="about-contact reveal-left delay-2">
         Contact: <a href="/cdn-cgi/l/email-protection#fd9788939a999c98968893bd9a909c9491d39e9290"><span class="__cf_email__" data-cfemail="066c7368616267636d736846616b676f6a2865696b">[email&#160;protected]</span></a>
       </div>
-      <div class="skills-grid" style="margin-top:32px">
+      <div class="skills-grid" id="skills-grid" style="margin-top:32px">
         <div class="skill-item reveal-left">Level Design</div>
         <div class="skill-item reveal-right">Integration</div>
         <div class="skill-item reveal-left">Modeling & Mapping</div>
@@ -789,26 +789,26 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 
 // ── 이미지 줌 & 드래그 ──
 (function() {
-  var img = document.getElementById('lb-img');
-  var vp  = document.getElementById('lb-img-viewport');
-  var isZoomed  = false;
-  var isDragging = false;
-  var didDrag   = false;
-  var startX, startY, transX = 0, transY = 0;
+  var img    = document.getElementById('lb-img');
+  var isZoomed   = false;
+  var mouseIsDown = false;
+  var didDrag    = false;
+  var startMouseX, startMouseY;
+  var transX = 0, transY = 0;
   var ZOOM = 1.8;
+  var DRAG_THRESHOLD = 5; // px
 
   function applyTransform(scale, tx, ty) {
-    img.style.transform = 'scale(' + scale + ') translate(' + tx + 'px, ' + ty + 'px)';
+    img.style.transform = 'scale(' + scale + ') translate(' + (tx/scale) + 'px, ' + (ty/scale) + 'px)';
   }
 
   function resetZoom() {
-    isZoomed   = false;
-    isDragging = false;
-    didDrag    = false;
+    isZoomed    = false;
+    mouseIsDown = false;
+    didDrag     = false;
     transX = 0; transY = 0;
-    img.classList.remove('zoomed', 'dragging');
-    img.style.cursor = 'zoom-in';
-    applyTransform(1, 0, 0);
+    img.style.cursor    = 'zoom-in';
+    img.style.transform = '';
   }
 
   // 이미지 변경 시 줌 리셋
@@ -818,47 +818,56 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     origRender();
   };
 
-  // mousedown: 줌 ON 또는 드래그 시작
+  // ── mousedown: 드래그 추적 시작 ──
   img.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return; // 왼쪽 버튼만
     e.preventDefault();
     e.stopPropagation();
-    if (!isZoomed) {
-      // 줌 진입
-      isZoomed = true;
-      didDrag  = false;
-      transX   = 0;
-      transY   = 0;
-      img.classList.add('zoomed');
-      img.style.cursor = 'grab';
+    mouseIsDown  = true;
+    didDrag      = false;
+    startMouseX  = e.clientX;
+    startMouseY  = e.clientY;
+    if (isZoomed) {
+      img.style.cursor = 'grabbing';
+    }
+  });
+
+  // ── mousemove: 드래그 이동 ──
+  document.addEventListener('mousemove', function(e) {
+    if (!mouseIsDown || !isZoomed) return;
+    var dx = e.clientX - startMouseX;
+    var dy = e.clientY - startMouseY;
+    if (!didDrag && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
+      didDrag = true;
+    }
+    if (didDrag) {
+      transX += e.movementX;
+      transY += e.movementY;
       applyTransform(ZOOM, transX, transY);
     }
-    // 줌 상태면 항상 드래그 준비
-    isDragging = true;
-    didDrag    = false;
-    startX     = e.clientX - transX;
-    startY     = e.clientY - transY;
-    img.classList.add('dragging');
-    img.style.cursor = 'grabbing';
   });
 
-  document.addEventListener('mousemove', function(e) {
-    if (!isZoomed || !isDragging) return;
-    var dx = e.clientX - startX;
-    var dy = e.clientY - startY;
-    if (Math.abs(dx - transX) > 3 || Math.abs(dy - transY) > 3) didDrag = true;
-    transX = dx;
-    transY = dy;
-    applyTransform(ZOOM, transX, transY);
-  });
-
+  // ── mouseup: 클릭 vs 드래그 판단 ──
   document.addEventListener('mouseup', function(e) {
-    if (!isZoomed) return;
-    isDragging = false;
-    img.classList.remove('dragging');
-    img.style.cursor = 'grab';
+    if (e.button !== 0) return;
+    if (!mouseIsDown) return;
+    mouseIsDown = false;
+
     if (!didDrag) {
-      // 드래그 없이 클릭 → 줌 해제
-      resetZoom();
+      // 순수 클릭
+      if (!isZoomed) {
+        // 줌 진입
+        isZoomed = true;
+        transX = 0; transY = 0;
+        img.style.cursor = 'grab';
+        applyTransform(ZOOM, 0, 0);
+      } else {
+        // 줌 해제
+        resetZoom();
+      }
+    } else {
+      // 드래그 끝
+      if (isZoomed) img.style.cursor = 'grab';
     }
     didDrag = false;
   });
@@ -868,7 +877,7 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     if (isZoomed) { e.preventDefault(); resetZoom(); }
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isZoomed) resetZoom();
+    if (e.key === 'Escape' && isZoomed) { e.stopPropagation(); resetZoom(); }
   });
 })();
 
@@ -878,10 +887,21 @@ const revealEls = document.querySelectorAll('.reveal-left, .reveal-right, .revea
 const revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
+      // 스킬 그리드 아이템은 순서대로 스태거 재생
+      if (entry.target.classList.contains('skill-item')) {
+        var siblings = Array.from(document.querySelectorAll('.skill-item.reveal-left, .skill-item.reveal-right'));
+        siblings.forEach(function(el, i) {
+          setTimeout(function() { el.classList.add('revealed'); }, i * 60);
+        });
+        // 한번 트리거되면 전부 unobserve
+        siblings.forEach(function(el) { revealObserver.unobserve(el); });
+      } else {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 revealEls.forEach(function(el) {
   revealObserver.observe(el);
