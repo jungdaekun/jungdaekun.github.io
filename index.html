@@ -787,22 +787,51 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 });
 
 // ── SCROLL REVEAL ANIMATION ──
+const revealEls = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+
 const revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       entry.target.classList.add('revealed');
-      revealObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
-document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(function(el) {
+revealEls.forEach(function(el) {
   revealObserver.observe(el);
 });
+
+// 특정 섹션 애니메이션 리셋 + 재생
+function replaySectionAnimation(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+  const els = section.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+  // 리셋
+  els.forEach(function(el) {
+    el.classList.remove('revealed');
+  });
+  // 살짝 딜레이 후 다시 트리거
+  setTimeout(function() {
+    els.forEach(function(el) {
+      el.classList.add('revealed');
+    });
+  }, 120);
+}
 
 // ── NAV ACTIVE ON SCROLL ──
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('nav a');
+
+// 네비게이션 클릭 시 애니메이션 재생
+navLinks.forEach(function(a) {
+  a.addEventListener('click', function() {
+    const targetId = a.getAttribute('href').replace('#', '');
+    setTimeout(function() {
+      replaySectionAnimation(targetId);
+    }, 400); // 스크롤 이동 후 재생
+  });
+});
+
 window.addEventListener('scroll', function() {
   let current = '';
   sections.forEach(function(s) {
