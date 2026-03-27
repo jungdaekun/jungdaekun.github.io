@@ -154,6 +154,56 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:.08em;}
 .footer-links a:hover{color:var(--gold);}
 
+
+/* ── PROJECT GRID ── */
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.project-card{background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:border-color .2s,transform .2s;}
+.project-card:hover{border-color:var(--border2);transform:translateY(-4px);}
+.project-card-empty{cursor:default;}
+.project-card-empty:hover{transform:none;border-color:var(--border);}
+.project-thumb-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;}
+.project-thumb{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.project-card:hover .project-thumb{transform:scale(1.05);}
+.empty-thumb{background:var(--bg4);display:flex;align-items:center;justify-content:center;}
+.empty-label{font-family:var(--font-mono);font-size:12px;color:var(--text3);letter-spacing:.15em;}
+.project-count-badge{position:absolute;top:12px;right:12px;font-family:var(--font-mono);font-size:10px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);padding:3px 10px;letter-spacing:.1em;}
+.project-open-hint{position:absolute;inset:0;background:rgba(8,10,13,.7);display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-title);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;opacity:0;transition:opacity .2s;}
+.project-card:hover .project-open-hint{opacity:1;}
+.project-info{padding:16px 18px;}
+.project-year{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:6px;}
+.project-title{font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:4px;}
+.project-desc{font-size:12px;color:var(--text2);margin-bottom:10px;}
+.project-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.proj-tag{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border:1px solid var(--border);color:var(--text3);letter-spacing:.05em;}
+
+/* ── LIGHTBOX ── */
+.lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;}
+.lightbox.active{display:flex;}
+.lb-wrap{width:90vw;max-width:1100px;background:var(--bg2);border:1px solid var(--border);display:flex;flex-direction:column;max-height:90vh;}
+.lb-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.lb-title-area{display:flex;align-items:center;gap:12px;}
+.lb-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;}
+.lb-title{font-family:var(--font-title);font-size:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}
+.lb-controls{display:flex;align-items:center;gap:16px;}
+.lb-counter{font-family:var(--font-mono);font-size:12px;color:var(--text2);}
+.lb-btn{background:none;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.lb-btn:hover{border-color:var(--border2);color:var(--gold);}
+.lb-img-wrap{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:0;background:var(--bg);}
+.lb-img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text);width:44px;height:44px;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;}
+.lb-arrow:hover{background:var(--bg2);border-color:var(--border2);color:var(--gold);}
+.lb-prev{left:12px;}
+.lb-next{right:12px;}
+.lb-thumbnails{display:flex;gap:6px;padding:12px 16px;overflow-x:auto;flex-shrink:0;border-top:1px solid var(--border);}
+.lb-thumbnails::-webkit-scrollbar{height:4px;}
+.lb-thumbnails::-webkit-scrollbar-track{background:var(--bg);}
+.lb-thumbnails::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.lb-thumb{width:60px;height:40px;object-fit:cover;cursor:pointer;border:2px solid transparent;opacity:.5;transition:all .2s;flex-shrink:0;}
+.lb-thumb.active{border-color:var(--gold);opacity:1;}
+.lb-thumb:hover{opacity:.8;}
+
+@media(max-width:768px){.project-grid{grid-template-columns:1fr;}.lb-wrap{width:100vw;max-height:100vh;}.lb-thumbnails{display:none;}}
+
 /* ── MOBILE ── */
 @media(max-width:768px){
   section{padding:60px 24px;}
@@ -334,116 +384,103 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title">Personal Works</h2>
     <div class="sec-line"></div>
   </div>
-  <p class="works-year-label">// 2019 — 2020 &nbsp;·&nbsp; 2D Normal Building Assets</p>
-  <div class="works-grid">
-    <div class="work-card wide">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_001.jpg" alt="2D Normal 01">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 01</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+  <!-- 프로젝트 카드 그리드 -->
+  <div class="project-grid">
+
+    <!-- 2019-2020 프로젝트 카드 -->
+    <div class="project-card" onclick="openLightbox('proj-2019', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/personal/2019-2020/2DNormal_001.jpg" alt="2D Normal Building Assets">
+        <div class="project-count-badge">9 images</div>
+        <div class="project-open-hint">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>
+          갤러리 보기
+        </div>
       </div>
-      <div class="corner-mark"></div>
+      <div class="project-info">
+        <div class="project-year">// 2019 — 2020</div>
+        <div class="project-title">2D Normal Building Assets</div>
+        <div class="project-desc">2D 노말맵을 이용한 건물 에셋 작업</div>
+        <div class="project-tags">
+          <span class="proj-tag">Substance Designer</span>
+          <span class="proj-tag">3ds Max</span>
+          <span class="proj-tag">Normal Map</span>
+        </div>
+      </div>
     </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_002.jpg" alt="2D Normal 02">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 02</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+
+    <!-- 2017-2018 (이미지 추가 예정) -->
+    <div class="project-card project-card-empty">
+      <div class="project-thumb-wrap empty-thumb">
+        <div class="empty-label">// 2017 — 2018</div>
       </div>
-      <div class="corner-mark"></div>
+      <div class="project-info">
+        <div class="project-year">// 2017 — 2018</div>
+        <div class="project-title">Personal Works</div>
+        <div class="project-desc">이미지 업로드 후 추가 예정</div>
+      </div>
     </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_003.jpg" alt="2D Normal 03">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 03</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+
+    <!-- 2016 (이미지 추가 예정) -->
+    <div class="project-card project-card-empty">
+      <div class="project-thumb-wrap empty-thumb">
+        <div class="empty-label">// 2016</div>
       </div>
-      <div class="corner-mark"></div>
+      <div class="project-info">
+        <div class="project-year">// 2016</div>
+        <div class="project-title">Personal Works</div>
+        <div class="project-desc">이미지 업로드 후 추가 예정</div>
+      </div>
     </div>
-    <div class="work-card wide">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_004.jpg" alt="2D Normal 04">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 04</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+
+    <!-- 2013-2014 (이미지 추가 예정) -->
+    <div class="project-card project-card-empty">
+      <div class="project-thumb-wrap empty-thumb">
+        <div class="empty-label">// 2013 — 2014</div>
       </div>
-      <div class="corner-mark"></div>
+      <div class="project-info">
+        <div class="project-year">// 2013 — 2014</div>
+        <div class="project-title">Personal Works</div>
+        <div class="project-desc">이미지 업로드 후 추가 예정</div>
+      </div>
     </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_005.jpg" alt="2D Normal 05">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 05</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+
+    <!-- 2011-2012 (이미지 추가 예정) -->
+    <div class="project-card project-card-empty">
+      <div class="project-thumb-wrap empty-thumb">
+        <div class="empty-label">// 2011 — 2012</div>
       </div>
-      <div class="corner-mark"></div>
+      <div class="project-info">
+        <div class="project-year">// 2011 — 2012</div>
+        <div class="project-title">Personal Works</div>
+        <div class="project-desc">이미지 업로드 후 추가 예정</div>
+      </div>
     </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_006.jpg" alt="2D Normal 06">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 06</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" class="lightbox" onclick="closeLightboxOutside(event)">
+    <div class="lb-wrap">
+      <div class="lb-header">
+        <div class="lb-title-area">
+          <span class="lb-id" id="lb-id"></span>
+          <span class="lb-title" id="lb-title"></span>
+        </div>
+        <div class="lb-controls">
+          <span class="lb-counter" id="lb-counter"></span>
+          <button class="lb-btn" onclick="closeLightbox()">✕</button>
+        </div>
       </div>
-      <div class="corner-mark"></div>
-    </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_007.jpg" alt="2D Normal 07">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 07</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
+      <div class="lb-img-wrap">
+        <button class="lb-arrow lb-prev" onclick="lbPrev()">&#8249;</button>
+        <img id="lb-img" class="lb-img" src="" alt="">
+        <button class="lb-arrow lb-next" onclick="lbNext()">&#8250;</button>
       </div>
-      <div class="corner-mark"></div>
-    </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_008.jpg" alt="2D Normal 08">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 08</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
-      </div>
-      <div class="corner-mark"></div>
-    </div>
-    <div class="work-card">
-      <img class="work-thumb" src="images/personal/2019-2020/2DNormal_009.jpg" alt="2D Normal 09">
-      <div class="work-overlay">
-        <div class="work-year">// 2019 — 2020</div>
-        <div class="work-title">2D Normal Building Asset 09</div>
-        <div class="work-desc">2D 노말맵을 이용한 건물 에셋</div>
-      </div>
-      <div class="corner-mark"></div>
+      <div class="lb-thumbnails" id="lb-thumbnails"></div>
     </div>
   </div>
 
-  <!-- 나머지 연도 — 이미지 업로드 후 추가 예정 -->
-  <p class="works-year-label" style="margin-top:48px">// 2017 — 2018</p>
-  <div class="works-grid coming-soon">
-    <div class="work-card" style="aspect-ratio:unset;min-height:120px;align-items:center;justify-content:center">
-      <div class="work-placeholder"><div class="work-placeholder-id">// 이미지 업로드 후 추가 예정</div></div>
-    </div>
-  </div>
-  <p class="works-year-label" style="margin-top:32px">// 2016</p>
-  <div class="works-grid coming-soon">
-    <div class="work-card" style="aspect-ratio:unset;min-height:120px;align-items:center;justify-content:center">
-      <div class="work-placeholder"><div class="work-placeholder-id">// 이미지 업로드 후 추가 예정</div></div>
-    </div>
-  </div>
-  <p class="works-year-label" style="margin-top:32px">// 2013 — 2014</p>
-  <div class="works-grid coming-soon">
-    <div class="work-card" style="aspect-ratio:unset;min-height:120px;align-items:center;justify-content:center">
-      <div class="work-placeholder"><div class="work-placeholder-id">// 이미지 업로드 후 추가 예정</div></div>
-    </div>
-  </div>
-  <p class="works-year-label" style="margin-top:32px">// 2011 — 2012</p>
-  <div class="works-grid coming-soon">
-    <div class="work-card" style="aspect-ratio:unset;min-height:120px;align-items:center;justify-content:center">
-      <div class="work-placeholder"><div class="work-placeholder-id">// 이미지 업로드 후 추가 예정</div></div>
-    </div>
-  </div>
 </section>
 
 <!-- RE:LIGHTING -->
