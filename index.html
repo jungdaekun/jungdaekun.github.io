@@ -143,7 +143,14 @@ section{padding:100px 80px;}
 .professional-note{background:rgba(200,168,75,0.06);border:1px solid var(--border2);padding:20px 24px;margin-bottom:40px;display:flex;align-items:center;gap:16px;}
 .professional-note-icon{font-family:var(--font-mono);font-size:18px;color:var(--gold);}
 .professional-note-text{font-size:13px;color:var(--text2);line-height:1.6;}
-.prof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.prof-grid-wrap{position:relative;}
+.prof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid::-webkit-scrollbar{width:4px;}
+.prof-grid::-webkit-scrollbar-track{background:transparent;}
+.prof-grid::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.prof-grid::-webkit-scrollbar-thumb:hover{background:var(--gold-dim);}
+.prof-grid-fade{position:absolute;bottom:0;left:0;right:4px;height:60px;background:linear-gradient(to top,var(--bg) 0%,transparent 100%);pointer-events:none;transition:opacity .3s;}
+.prof-grid-fade.hidden{opacity:0;}
 .prof-card{background:var(--bg3);border:1px solid var(--border);padding:20px 24px;position:relative;}
 .prof-card:hover{border-color:var(--border2);}
 .prof-card-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:8px;}
@@ -655,7 +662,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       열람을 원하시면 별도 문의 부탁드립니다 — <a href="/cdn-cgi/l/email-protection#dab0afb4bdbebbbfb1afb49abdb7bbb3b6f4b9b5b7" style="color:var(--gold);text-decoration:none;"><span class="__cf_email__" data-cfemail="2f455a41484b4e4a445a416f48424e4643014c4042">[email&#160;protected]</span></a>
     </div>
   </div>
-  <div class="prof-grid">
+  <div class="prof-grid-wrap">
+    <div class="prof-grid" id="prof-grid">
     <!-- NCSOFT -->
     <div class="prof-card" onclick="openProfLb('ncsoft')">
       <div class="lock-badge">// NDA PROTECTED</div>
@@ -845,6 +853,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+    </div>
+    <div class="prof-grid-fade" id="prof-grid-fade"></div>
   </div>
 </section>
 
@@ -1152,6 +1162,50 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 })();
 
 // ── SCROLL REVEAL ANIMATION ──
+// ── PROF GRID 스크롤 제어 ──
+(function() {
+  var grid = document.getElementById('prof-grid');
+  var fade = document.getElementById('prof-grid-fade');
+  if (!grid) return;
+
+  // 첫 카드 높이 기준으로 max-height 동적 계산
+  function calcHeight() {
+    var card = grid.querySelector('.prof-card');
+    if (!card) return;
+    var h = card.offsetHeight;
+    var gap = 12;
+    grid.style.maxHeight = (h * 2 + gap) + 'px';
+  }
+  window.addEventListener('load', calcHeight);
+  window.addEventListener('resize', calcHeight);
+
+  // 페이드 표시 여부
+  function updateFade() {
+    if (!fade) return;
+    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 4;
+    fade.classList.toggle('hidden', atBottom);
+  }
+  grid.addEventListener('scroll', updateFade);
+  setTimeout(updateFade, 300);
+
+  // 휠: 그리드 안에서 스크롤 → 끝 도달하면 페이지로 넘김
+  grid.addEventListener('wheel', function(e) {
+    // 팝업 열려있으면 무시
+    if (document.getElementById('prof-lb').classList.contains('active')) return;
+
+    var atTop    = grid.scrollTop <= 0;
+    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 2;
+
+    if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+      // 끝에 도달 → 페이지 스크롤로 넘김
+      return;
+    }
+    e.stopPropagation();
+    grid.scrollTop += e.deltaY;
+    e.preventDefault();
+  }, { passive: false });
+})();
+
 // ── PROF CARD 랜덤 썸네일 ──
 document.querySelectorAll('.prof-card-media[data-vids]').forEach(function(el) {
   var vids = el.dataset.vids.split(',');
