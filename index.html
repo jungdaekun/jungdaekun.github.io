@@ -1330,7 +1330,7 @@ function renderProfLb() {
     wrap.className = 'prof-lb-video-wrap';
     var iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube.com/embed/' + item.videoId +
-      '?autoplay=1&rel=0&modestbranding=1';
+      '?autoplay=1&mute=1&rel=0&modestbranding=1';
     iframe.allow = 'autoplay; encrypted-media';
     iframe.allowFullscreen = true;
     iframe.frameBorder = '0';
@@ -1660,11 +1660,14 @@ function renderProfLb(instant) {
     wrap.className = 'prof-lb-video-wrap';
     var iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube.com/embed/' + item.videoId +
-      '?autoplay=1&rel=0&modestbranding=1&controls=1';
+      '?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1';
     iframe.allow = 'autoplay; encrypted-media; fullscreen';
     iframe.allowFullscreen = true;
     iframe.frameBorder = '0';
+    var overlay = document.createElement('div');
+    overlay.className = 'prof-lb-wheel-overlay';
     wrap.appendChild(iframe);
+    wrap.appendChild(overlay);
     main.insertBefore(wrap, prevBtn);
   } else {
     var img = document.createElement('img');
