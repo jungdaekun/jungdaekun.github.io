@@ -453,6 +453,25 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
 
+    <!-- M4 -->
+    <div class="project-card" onclick="openLightbox('proj-m4', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/personal/M4/shot_01.jpg" alt="M4">
+        <div class="project-count-badge">7 images</div>
+        <div class="project-open-hint">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>
+          갤러리 보기
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-year reveal-left">// M4</div>
+        <div class="project-title reveal-left delay-1">M4</div>
+        <div class="project-desc reveal-up delay-2">개인 작업물</div>
+        <div class="project-tags reveal-up delay-3">
+        </div>
+      </div>
+    </div>
+
     <!-- 2017-2018 (이미지 추가 예정) -->
     <div class="project-card project-card-empty">
       <div class="project-thumb-wrap empty-thumb">
@@ -675,6 +694,19 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
+  'proj-m4': {
+    id: '// PERSONAL · M4',
+    title: 'M4',
+    images: [
+      'images/personal/M4/shot_01.jpg',
+      'images/personal/M4/shot_02.jpg',
+      'images/personal/M4/shot_03.jpg',
+      'images/personal/M4/shot_04.jpg',
+      'images/personal/M4/shot_05.jpg',
+      'images/personal/M4/shot_06.jpg',
+      'images/personal/M4/shot_07.jpg'
+    ]
+  },
   'proj-2019': {
     id: '// PERSONAL · 2019—2020',
     title: '2D Normal Building Assets',
