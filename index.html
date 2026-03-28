@@ -897,8 +897,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="prof-card-info">
         <div class="prof-card-id">// PROJ_009 · 2009 — 2011</div>
         <div class="prof-card-title">ArtechSoft</div>
-        <div class="prof-card-sub">신의하루 · SNG · Web · Service</div>
-        <div class="prof-card-desc">All Background Creation<br>Xkick Online · Sport · Online · Service<br>Level Design, Lighting</div>
+        <div class="prof-card-sub">신의하루 · Xkick Online</div>
+        <div class="prof-card-desc">All Background Creation<br>SNG · Web · Service · Sport · Online · Service<br>Level Design, Lighting</div>
         <div class="prof-tags">
           <span class="prof-tag">Dev : Entermate</span>
           <span class="prof-tag">Pub : Naver</span>
@@ -1326,8 +1326,8 @@ function renderFreqViewed() {
     // 클릭 데이터 없을 때: 전부 span-1
     var spanClass = 'span-1x1';
     if (clickItems.length > 0) {
-      if (i === 0) spanClass = 'span-2x2';
-      else if (i === 1 || i === 2) spanClass = 'span-1x2';
+      if (i === 0) spanClass = 'span-1x2';
+      else if (i === 1) spanClass = 'span-1x2';
     }
     var p = s.item;
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(\'' + p.key + '\',' +
