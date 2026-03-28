@@ -164,9 +164,7 @@ section{padding:100px 80px;}
 .prof-card-media.hovered .prof-card-thumb{opacity:0;transform:scale(1.04);}
 .prof-card-media.hovered .prof-card-media-overlay{opacity:0;}
 .prof-card-media-overlay{position:absolute;inset:0;background:rgba(8,10,13,.45);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;transition:opacity .3s;}
-.prof-card-play-btn{width:52px;height:52px;border-radius:50%;background:rgba(200,168,75,.85);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;}
-.prof-card-play-btn svg{margin-left:4px;}
-.prof-card-media-label{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.12em;}
+.prof-card-media-label{font-family:var(--font-mono);font-size:15px;color:rgba(255,255,255,.9);letter-spacing:.15em;font-weight:600;}
 .prof-card-info{padding:16px 20px 20px;}
 
 /* ── PROF MEDIA LIGHTBOX ── */
@@ -204,7 +202,12 @@ section{padding:100px 80px;}
 .prof-lb-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);font-size:16px;color:var(--gold);}
 
 
-/* ── SKETCH NOTE ── */
+/* ── PERSONAL CARD THUMB STRIP ── */
+.project-thumb-strip{display:flex;gap:3px;padding:8px 10px;background:var(--bg4);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;}
+.project-thumb-strip::-webkit-scrollbar{height:3px;}
+.project-thumb-strip::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.project-strip-thumb{flex-shrink:0;width:56px;height:36px;object-fit:cover;border:1px solid var(--border);cursor:pointer;opacity:.55;transition:opacity .2s,border-color .2s;}
+.project-strip-thumb:hover{opacity:1;border-color:var(--gold);}
 #sketch{background:var(--bg2);}
 .sketch-desc{font-size:13px;color:var(--text2);line-height:1.8;max-width:600px;margin-bottom:40px;}
 .sketch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
@@ -501,6 +504,17 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <span class="proj-tag">Normal Map</span>
         </div>
       </div>
+      <div class="project-thumb-strip">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_001.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',0)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_002.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',1)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_003.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',2)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_004.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',3)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_005.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',4)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_006.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',5)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_007.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',6)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_008.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',7)">
+        <img class="project-strip-thumb" src="images/personal/2019-2020/2DNormal_009.jpg" onclick="event.stopPropagation();openLightbox('proj-2019',8)">
+      </div>
     </div>
 
     <!-- M4 -->
@@ -519,6 +533,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="project-desc reveal-up delay-2">개인 작업물</div>
         <div class="project-tags reveal-up delay-3">
         </div>
+      </div>
+      <div class="project-thumb-strip">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_01.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',0)">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_02.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',1)">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_03.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',2)">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_04.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',3)">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_05.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',4)">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_06.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',5)">
+        <img class="project-strip-thumb" src="images/personal/M4/shot_07.jpg" onclick="event.stopPropagation();openLightbox('proj-m4',6)">
       </div>
     </div>
 
@@ -654,9 +677,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/bDXLAaqR_Yg/maxresdefault.jpg" alt="Project M thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-play-btn">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="5,2 16,9 5,16"/></svg>
-          </div>
           <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
         </div>
       </div>
@@ -683,9 +703,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/aiv_rDkXtP8/maxresdefault.jpg" alt="창세기전 thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-play-btn">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="5,2 16,9 5,16"/></svg>
-          </div>
           <div class="prof-card-media-label">▶ VIDEO</div>
         </div>
       </div>
