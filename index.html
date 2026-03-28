@@ -1038,7 +1038,7 @@ function openLightbox(projectId, startIdx) {
   renderLightbox(true);
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
-  // 트래킹
+  // 트래킹 - 이미지 단위로
   var key = projectId + '_' + currentIdx;
   var src = currentProject.images[currentIdx];
   trackFreqClick(key, src, currentProject.title);
@@ -1224,14 +1224,14 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 // ── ALL 트렌드 포트폴리오 ──
 var FREQ_KEY = 'jdk_freq_viewed';
 
-// 전체 이미지 풀 (personal + professional 이미지 타입만)
+// 전체 이미지 풀 (personal + professional 이미지 전체)
 function getAllImagePool() {
   var pool = [];
   // Personal
   Object.keys(projects).forEach(function(pid) {
     var proj = projects[pid];
     proj.images.forEach(function(src, idx) {
-      pool.push({ key: pid + '_' + idx, src: src, title: proj.title, type: 'personal', projectId: pid, idx: idx, added: idx });
+      pool.push({ key: pid + '_' + idx, src: src, title: proj.title, type: 'personal', projectId: pid, idx: idx });
     });
   });
   // Professional (이미지 타입만)
@@ -1239,7 +1239,7 @@ function getAllImagePool() {
     var proj = profProjects[pid];
     proj.items.forEach(function(item, idx) {
       if (item.type !== 'image') return;
-      pool.push({ key: pid + '_' + idx, src: item.src, title: proj.title, type: 'prof', projectId: pid, idx: idx, added: idx });
+      pool.push({ key: pid + '_' + idx, src: item.src, title: proj.title, type: 'prof', projectId: pid, idx: idx });
     });
   });
   return pool;
@@ -1294,41 +1294,53 @@ function renderFreqViewed() {
     // 클릭 상위 5개
     clickItems.forEach(function(k) {
       var p = pool.find(function(x){ return x.key === k; });
-      if (p && !usedKeys[k]) { selected.push({ item: p, badge: '🔥 ' + data[k].count + ' views' }); usedKeys[k] = true; }
+      if (p && !usedKeys[k]) { selected.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: selected.length }); usedKeys[k] = true; }
     });
 
-    // 최신 5개 (pool 뒤쪽 = 나중에 추가된 것)
+    // 최신 4개
     var reversed = pool.slice().reverse();
     reversed.forEach(function(p) {
-      if (selected.length >= 10) return;
+      if (selected.length >= 9) return;
       if (usedKeys[p.key]) return;
-      selected.push({ item: p, badge: '✦ NEW' }); usedKeys[p.key] = true;
+      selected.push({ item: p, badge: '✦ NEW', rank: -1 }); usedKeys[p.key] = true;
     });
 
-    // 랜덤 6개
+    // 랜덤 5개
     var rest = shuffle(pool.filter(function(p){ return !usedKeys[p.key]; }));
-    rest.slice(0, 6).forEach(function(p) {
-      selected.push({ item: p, badge: '' });
+    rest.slice(0, 5).forEach(function(p) {
+      selected.push({ item: p, badge: '', rank: -1 });
     });
 
   } else {
-    // 데이터 없으면 랜덤 16개
-    shuffle(pool).slice(0, 16).forEach(function(p) {
-      selected.push({ item: p, badge: '' });
+    // 데이터 없으면 랜덤 14개
+    shuffle(pool).slice(0, 14).forEach(function(p) {
+      selected.push({ item: p, badge: '', rank: -1 });
     });
   }
 
-  // 16개로 고정, 섞기
-  selected = shuffle(selected).slice(0, 16);
+  // 14개로 고정
+  selected = selected.slice(0, 14);
 
-  grid.innerHTML = selected.map(function(s, i) {
-    // 클릭 데이터 있을 때: 0번(1등)=span-4, 1~2번(2~3등)=span-2, 나머지=span-1
-    // 클릭 데이터 없을 때: 전부 span-1
+  // 1등(rank=0), 2등(rank=1) 뽑아서 랜덤 위치에 배치
+  var top1 = selected.find(function(s){ return s.rank === 0; });
+  var top2 = selected.find(function(s){ return s.rank === 1; });
+  var rest2 = selected.filter(function(s){ return s.rank !== 0 && s.rank !== 1; });
+  rest2 = shuffle(rest2);
+
+  // 1등 랜덤 위치 (0~3), 2등은 1등과 다른 위치 (0~5)
+  var pos1 = Math.floor(Math.random() * 4);
+  var pos2 = pos1;
+  while (pos2 === pos1) pos2 = Math.floor(Math.random() * 6);
+
+  // 위치에 삽입
+  if (top1) rest2.splice(pos1, 0, top1);
+  if (top2) rest2.splice(pos2, 0, top2);
+  selected = rest2.slice(0, 14);
+
+  grid.innerHTML = selected.map(function(s) {
     var spanClass = 'span-1x1';
-    if (clickItems.length > 0) {
-      if (i === 0) spanClass = 'span-1x2';
-      else if (i === 1) spanClass = 'span-1x2';
-    }
+    if (s.rank === 0) spanClass = 'span-1x2';
+    else if (s.rank === 1) spanClass = 'span-1x2';
     var p = s.item;
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(\'' + p.key + '\',' +
       '\''+p.type+'\',\''+p.projectId+'\','+p.idx+')">' +
@@ -1595,7 +1607,7 @@ function openProfLb(key, idx) {
   renderProfLb();
   document.getElementById('prof-lb').classList.add('active');
   document.body.style.overflow = 'hidden';
-  // 트래킹
+  // 트래킹 - 이미지 단위로
   var item = profCurrent.items[profIdx];
   var src = item.type === 'image' ? item.src : 'https://img.youtube.com/vi/' + item.videoId + '/mqdefault.jpg';
   trackFreqClick(key + '_' + profIdx, src, profCurrent.title);
