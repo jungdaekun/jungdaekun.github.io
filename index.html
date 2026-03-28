@@ -153,6 +153,12 @@ section{padding:100px 80px;}
 .prof-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
 .prof-tag{font-family:var(--font-mono);font-size:10px;padding:2px 8px;background:rgba(200,168,75,0.07);border:1px solid var(--border2);color:var(--gold-dim);letter-spacing:.05em;}
 .lock-badge{position:absolute;top:16px;right:16px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:var(--bg4);border:1px solid var(--border);color:var(--text3);letter-spacing:.1em;}
+.prof-card-imgs{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:14px;cursor:pointer;}
+.prof-card-img-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--border);}
+.prof-card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.prof-card-img-wrap:hover img{transform:scale(1.06);}
+.prof-card-img-hint{position:absolute;inset:0;background:rgba(8,10,13,.6);display:flex;align-items:center;justify-content:center;font-family:var(--font-title);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;opacity:0;transition:opacity .2s;}
+.prof-card-img-wrap:hover .prof-card-img-hint{opacity:1;}
 
 /* ── SKETCH NOTE ── */
 #sketch{background:var(--bg2);}
@@ -605,6 +611,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <span class="prof-tag">PS5</span>
         <span class="prof-tag">Lighting</span>
       </div>
+      <div class="prof-card-imgs">
+        <div class="prof-card-img-wrap" onclick="openLightbox('proj-ncsoft', 0)">
+          <img src="images/Professional/Ncsoft/001.jpg" alt="NCSoft 001" loading="lazy">
+          <div class="prof-card-img-hint">VIEW</div>
+        </div>
+        <div class="prof-card-img-wrap" onclick="openLightbox('proj-ncsoft', 1)">
+          <img src="images/Professional/Ncsoft/002.jpg" alt="NCSoft 002" loading="lazy">
+          <div class="prof-card-img-hint">VIEW</div>
+        </div>
+      </div>
     </div>
     <div class="prof-card">
       <div class="lock-badge">// NDA PROTECTED</div>
@@ -694,6 +710,14 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
+  'proj-ncsoft': {
+    id: '// PROFESSIONAL · NCSOFT · 2021',
+    title: 'Project M',
+    images: [
+      'images/Professional/Ncsoft/001.jpg',
+      'images/Professional/Ncsoft/002.jpg'
+    ]
+  },
   'proj-m4': {
     id: '// PERSONAL · M4',
     title: 'M4',
