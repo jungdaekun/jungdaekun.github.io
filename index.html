@@ -730,15 +730,27 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
-    <div class="prof-card">
+    <div class="prof-card" onclick="openProfLb('xlgames')">
       <div class="lock-badge">// NDA PROTECTED</div>
-      <div class="prof-card-id">// PROJ_004 · 2017</div>
-      <div class="prof-card-title">Civilization Online</div>
-      <div class="prof-card-sub">XLGames · MMORPG · PC Online</div>
-      <div class="prof-card-desc">Level Design, Shader, Lighting, Optimization 담당</div>
-      <div class="prof-tags">
-        <span class="prof-tag">CryEngine 3.x</span>
-        <span class="prof-tag">World Machine</span>
+      <div class="prof-card-media"
+           data-vid="7wK8bw_T4Zc"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/7wK8bw_T4Zc/maxresdefault.jpg" alt="Civilization Online thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_004 · 2017</div>
+        <div class="prof-card-title">Civilization Online</div>
+        <div class="prof-card-sub">XLGames · MMORPG · PC Online</div>
+        <div class="prof-card-desc">Level Design, Shader, Lighting, Optimization 담당</div>
+        <div class="prof-tags">
+          <span class="prof-tag">CryEngine 3.x</span>
+          <span class="prof-tag">World Machine</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1083,6 +1095,15 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
+    ]
+  },
+  'xlgames': {
+    id: '// PROFESSIONAL · XLGAMES · 2017',
+    title: 'Civilization Online',
+    items: [
+      { type: 'video', videoId: '7wK8bw_T4Zc' },
+      { type: 'image', src: 'images/Professional/XLGAMES/X3_003.jpg' },
+      { type: 'image', src: 'images/Professional/XLGAMES/X3_004.jpg' }
     ]
   },
   'nexon': {
