@@ -187,7 +187,7 @@ section{padding:100px 80px;}
 .prof-lb-nav-prev{left:16px;}
 .prof-lb-nav-next{right:16px;}
 .prof-lb-nav-prev:hover,.prof-lb-nav-next:hover{border-color:var(--border2);color:var(--gold);}
-.prof-lb-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2;}
+.prof-lb-dots{position:absolute;bottom:16px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:2;}
 .prof-lb-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .2s;}
 .prof-lb-dot.active{background:var(--gold);transform:scale(1.4);}
 .prof-lb-type-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:rgba(200,168,75,.15);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:2;}
@@ -278,6 +278,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .lb-nav-indicator{position:absolute;bottom:70px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:3;}
 .lb-nav-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .2s;cursor:pointer;}
 .lb-nav-dot.active{background:var(--gold);transform:scale(1.4);}
+.lb-nav-prev,.lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3;}
+.lb-nav-prev{left:16px;}
+.lb-nav-next{right:16px;}
+.lb-nav-prev:hover,.lb-nav-next:hover{border-color:var(--border2);color:var(--gold);}
 
 @media(max-width:768px){.project-grid{grid-template-columns:1fr;}.lb-thumbnails{display:none;}.lb-scroll-hint{display:none;}}
 
@@ -593,6 +597,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
         <img id="lb-img" class="lb-img" src="" alt="">
+        <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
+        <button class="lb-nav-next" onclick="lbNext()">›</button>
         <div class="lb-nav-indicator" id="lb-nav-dots"></div>
       </div>
       <div class="lb-thumbnails" id="lb-thumbnails"></div>
@@ -1046,7 +1052,7 @@ function profHoverIn(el) {
   clearTimeout(profHoverTimer);
   profHoverTimer = setTimeout(function() {
     el.classList.add('hovered');
-  }, 600);
+  }, 200);
 }
 function profHoverOut(el) {
   clearTimeout(profHoverTimer);
@@ -1181,6 +1187,24 @@ document.addEventListener('keydown', function(e) {
 document.getElementById('prof-lb').addEventListener('click', function(e) {
   if (e.target === this) closeProfLb();
 });
+
+// 휠 스크롤로 이미지/영상 넘기기
+var profScrollAcc = 0, profScrollTimer = null, profIsAnimating = false;
+document.addEventListener('wheel', function(e) {
+  if (!document.getElementById('prof-lb').classList.contains('active')) return;
+  e.preventDefault();
+  profScrollAcc += e.deltaY;
+  clearTimeout(profScrollTimer);
+  if (Math.abs(profScrollAcc) > 80) {
+    if (!profIsAnimating) {
+      profIsAnimating = true;
+      profLbStep(profScrollAcc > 0 ? 1 : -1);
+      setTimeout(function() { profIsAnimating = false; }, 350);
+    }
+    profScrollAcc = 0;
+  }
+  profScrollTimer = setTimeout(function() { profScrollAcc = 0; }, 300);
+}, { passive: false });
 
 // ── PROF-LB 이미지 줌 & 드래그 ──
 (function() {
