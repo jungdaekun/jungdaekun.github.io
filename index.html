@@ -111,12 +111,14 @@ section{padding:100px 80px;}
 
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
-.freq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:4px;}
+.freq-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);aspect-ratio:1/1;}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;aspect-ratio:1/1;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;aspect-ratio:1/1;}
-.freq-item.span-1x2{grid-column:span 1;grid-row:span 2;aspect-ratio:auto;}
-.freq-item::before{content:none;}
+@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);}}
+@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);}}
+@media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:600px){.freq-grid{grid-template-columns:repeat(3,1fr);}}
 .freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
 .freq-item:hover img{transform:scale(1.05);}
 .freq-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 60%);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;}
@@ -957,6 +959,30 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+    <!-- Sunwoo Entertainment -->
+    <div class="prof-card" onclick="openProfLb('sunwoo')">
+      <div class="lock-badge">// NDA PROTECTED</div>
+      <div class="prof-card-media"
+           data-vid="zNFNPu2T8q4"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/zNFNPu2T8q4/maxresdefault.jpg" alt="Sunwoo Entertainment thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_012 · 2006</div>
+        <div class="prof-card-title">Sunwoo Entertainment</div>
+        <div class="prof-card-sub">WarRook Episode II Cinematic</div>
+        <div class="prof-card-desc">Prop Modeling & Textures</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Developer : SUNWOO ENTERTAINMENT</span>
+          <span class="prof-tag">Publisher : Nexon & Dream Execution Techno</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1338,10 +1364,10 @@ function renderFreqViewed() {
     .sort(function(a,b) { return data[b].count - data[a].count; })
     .slice(0, 5);
 
-  // 화면 너비에 따라 열 수 계산 → 4행 분량 표시 (1920px=16열x4행=~32개 정도)
-  var colCount = Math.floor((window.innerWidth - 160) / 114);
-  colCount = Math.max(4, Math.min(16, colCount));
-  var totalItems = colCount * 2 + 4; // span-2x2 두 개가 4칸 차지하므로 +4
+  // 해상도별 열 수
+  var w = window.innerWidth;
+  var colCount = w >= 1500 ? 8 : w >= 1200 ? 7 : w >= 900 ? 6 : w >= 600 ? 4 : 3;
+  var totalItems = colCount * 4; // 4행 고정
 
   if (clickItems.length > 0) {
     clickItems.forEach(function(k) {
@@ -1528,6 +1554,23 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_019.jpg' },
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_020.jpg' },
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_021.jpg' }
+    ]
+  },
+  'sunwoo': {
+    id: '// PROFESSIONAL · SUNWOO ENTERTAINMENT · 2006',
+    title: 'WarRook Episode II',
+    items: [
+      { type: 'video', videoId: 'zNFNPu2T8q4' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_001.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_002.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_003.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_004.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_005.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_006.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_007.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_008.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_009.jpg' },
+      { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_010.jpg' }
     ]
   },
   'pixelplanet': {
