@@ -114,7 +114,7 @@ section{padding:100px 80px;}
 .freq-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);aspect-ratio:1/1;}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;aspect-ratio:1/1;}
-.freq-item.span-1x2{grid-column:span 1;grid-row:span 2;aspect-ratio:auto;}
+.freq-item.span-2x1{grid-column:span 2;grid-row:span 1;aspect-ratio:2/1;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;aspect-ratio:1/1;}
 @media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);}}
 @media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);}}
@@ -1370,10 +1370,9 @@ function renderFreqViewed() {
   var colCount = w >= 1500 ? 8 : w >= 1200 ? 7 : w >= 900 ? 6 : w >= 600 ? 4 : 3;
   var rows = 4;
   var totalCells = colCount * rows;
-  // 1등(2x2=4칸) + 2등(1x2=2칸) + 3등(1x2=2칸) = 8칸 → 나머지 일반 아이템
-  var specialCells = 4 + 2 + 2;
-  var regularCount = totalCells - specialCells;
-  var totalItems = 3 + regularCount; // 특수3 + 일반
+  // 1등(2x2=4칸) + 2등(2x1=2칸) + 3등(2x1=2칸) = 8칸 → 나머지 일반
+  var regularCount = totalCells - 8;
+  var totalItems = 3 + regularCount;
 
   if (clickItems.length > 0) {
     clickItems.forEach(function(k) {
@@ -1417,7 +1416,7 @@ function renderFreqViewed() {
   grid.innerHTML = selected.map(function(s) {
     var spanClass = 'span-1x1';
     if (s.rank === 0) spanClass = 'span-2x2';
-    else if (s.rank === 1 || s.rank === 2) spanClass = 'span-1x2';
+    else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
     var p = s.item;
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(\'' + p.key + '\',' +
       '\''+p.type+'\',\''+p.projectId+'\','+p.idx+')">' +
