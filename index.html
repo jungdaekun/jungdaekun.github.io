@@ -111,10 +111,10 @@ section{padding:100px 80px;}
 
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
-.freq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+.freq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px;}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);aspect-ratio:1/1;}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;aspect-ratio:1/1;}
-.freq-item.span-1x2{grid-column:span 1;grid-row:span 2;aspect-ratio:1/2;}
+.freq-item.span-1x2{grid-column:span 1;grid-row:span 2;aspect-ratio:auto;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;aspect-ratio:1/1;}
 .freq-item.span-1x1::before,.freq-item.span-2x2::before,.freq-item.span-1x2::before{content:none;}
 .freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
@@ -1338,36 +1338,37 @@ function renderFreqViewed() {
     .sort(function(a,b) { return data[b].count - data[a].count; })
     .slice(0, 5);
 
+  // 화면 너비에 따라 열 수 계산 → 2행 분량 표시
+  var colCount = Math.floor((window.innerWidth - 160) / 224); // 224 = minmax 기준
+  colCount = Math.max(4, Math.min(8, colCount));
+  var totalItems = colCount * 2;
+
   if (clickItems.length > 0) {
-    // 클릭 상위 5개
+    // 클릭 상위
     clickItems.forEach(function(k) {
       var p = pool.find(function(x){ return x.key === k; });
       if (p && !usedKeys[k]) { selected.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: selected.length }); usedKeys[k] = true; }
     });
-
-    // 최신 4개
+    // 최신
     var reversed = pool.slice().reverse();
     reversed.forEach(function(p) {
-      if (selected.length >= 9) return;
+      if (selected.length >= Math.floor(totalItems * 0.6)) return;
       if (usedKeys[p.key]) return;
       selected.push({ item: p, badge: '✦ NEW', rank: -1 }); usedKeys[p.key] = true;
     });
-
-    // 랜덤 5개
+    // 랜덤 나머지
     var rest = shuffle(pool.filter(function(p){ return !usedKeys[p.key]; }));
-    rest.slice(0, 5).forEach(function(p) {
+    rest.forEach(function(p) {
+      if (selected.length >= totalItems) return;
       selected.push({ item: p, badge: '', rank: -1 });
     });
-
   } else {
-    // 데이터 없으면 랜덤 14개
-    shuffle(pool).slice(0, 14).forEach(function(p) {
+    shuffle(pool).slice(0, totalItems).forEach(function(p) {
       selected.push({ item: p, badge: '', rank: -1 });
     });
   }
 
-  // 14개로 고정
-  selected = selected.slice(0, 14);
+  selected = selected.slice(0, totalItems);
 
   // 1등(rank=0), 2등(rank=1) 뽑아서 랜덤 위치에 배치
   var top1 = selected.find(function(s){ return s.rank === 0; });
@@ -1411,8 +1412,9 @@ function freqItemClick(key, type, projectId, idx) {
   else openProfLb(projectId, idx);
 }
 
-// 페이지 로드 시 렌더
+// 페이지 로드 + 리사이즈 시 렌더
 window.addEventListener('load', function() { renderFreqViewed(); });
+window.addEventListener('resize', function() { renderFreqViewed(); });
 
 // ── PROF GRID 스크롤 제어 ──
 (function() {
