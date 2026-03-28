@@ -706,16 +706,28 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
-    <div class="prof-card">
+    <div class="prof-card" onclick="openProfLb('nexon')">
       <div class="lock-badge">// NDA PROTECTED</div>
-      <div class="prof-card-id">// PROJ_003 · 2018</div>
-      <div class="prof-card-title">Ascendant One</div>
-      <div class="prof-card-sub">Nexon Korea · MOBA · PC Online</div>
-      <div class="prof-card-desc">Asset Modeling & Textures 담당, Open Beta 출시</div>
-      <div class="prof-tags">
-        <span class="prof-tag">Unreal 4</span>
-        <span class="prof-tag">Substance</span>
-        <span class="prof-tag">PC</span>
+      <div class="prof-card-media"
+           data-vid="rpDh84e9mk0"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/rpDh84e9mk0/maxresdefault.jpg" alt="Ascendant One thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_003 · 2018</div>
+        <div class="prof-card-title">Ascendant One</div>
+        <div class="prof-card-sub">Nexon Korea · MOBA · PC Online</div>
+        <div class="prof-card-desc">Asset Modeling & Textures 담당, Open Beta 출시</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Unreal 4</span>
+          <span class="prof-tag">Substance</span>
+          <span class="prof-tag">PC</span>
+        </div>
       </div>
     </div>
     <div class="prof-card">
@@ -1071,6 +1083,15 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
+    ]
+  },
+  'nexon': {
+    id: '// PROFESSIONAL · NEXON KOREA · 2018',
+    title: 'Ascendant One',
+    items: [
+      { type: 'video', videoId: 'rpDh84e9mk0' },
+      { type: 'image', src: 'images/Professional/Nexon/AscendantOne_001.jpg' },
+      { type: 'image', src: 'images/Professional/Nexon/AscendantOne_002.jpg' }
     ]
   },
   'changse': {
