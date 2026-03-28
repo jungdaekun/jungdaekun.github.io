@@ -660,6 +660,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="lock-badge">// NDA PROTECTED</div>
       <div class="prof-card-media"
            data-vid="bDXLAaqR_Yg"
+           data-vids="bDXLAaqR_Yg,aMYvommxKiw"
            onmouseenter="profHoverIn(this)"
            onmouseleave="profHoverOut(this)">
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/bDXLAaqR_Yg/maxresdefault.jpg" alt="Project M thumbnail">
@@ -818,11 +819,35 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+    <!-- PureSoft -->
+    <div class="prof-card" onclick="openProfLb('puresoft')">
+      <div class="lock-badge">// NDA PROTECTED</div>
+      <div class="prof-card-media"
+           data-vid="DfN9IJYPGDU"
+           data-vids="DfN9IJYPGDU,94tma-xmxfY,KQiRfYgG4DQ,J7oVZUlpQ1k"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/DfN9IJYPGDU/maxresdefault.jpg" alt="PureSoft thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_008</div>
+        <div class="prof-card-title">Pure Soft</div>
+        <div class="prof-card-sub">Pure Soft · Mobile & People · Outsourcing</div>
+        <div class="prof-card-desc">Modeling, Texturing, Animation & FX, Engine 담당</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Developer : Pure Soft</span>
+          <span class="prof-tag">Publisher : X</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <div id="prof-lb">
-  <div class="prof-lb-wrap">
     <div class="prof-lb-header">
       <div class="prof-lb-title-area">
         <span class="prof-lb-id" id="prof-lb-id"></span>
@@ -1126,6 +1151,16 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 })();
 
 // ── SCROLL REVEAL ANIMATION ──
+// ── PROF CARD 랜덤 썸네일 ──
+document.querySelectorAll('.prof-card-media[data-vids]').forEach(function(el) {
+  var vids = el.dataset.vids.split(',');
+  if (vids.length < 2) return;
+  var picked = vids[Math.floor(Math.random() * vids.length)];
+  el.dataset.vid = picked;
+  var thumb = el.querySelector('.prof-card-thumb');
+  if (thumb) thumb.src = 'https://img.youtube.com/vi/' + picked + '/maxresdefault.jpg';
+});
+
 var profHoverTimer = null;
 function profHoverIn(el) {
   var vid = el.dataset.vid;
@@ -1160,6 +1195,36 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
+    ]
+  },
+  'puresoft': {
+    id: '// PROFESSIONAL · PURE SOFT',
+    title: 'Pure Soft',
+    items: [
+      { type: 'video', videoId: 'DfN9IJYPGDU' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_002.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_003.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_004.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_005.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_006.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_007.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_008.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_009.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_010.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_011.jpg' },
+      { type: 'video', videoId: '94tma-xmxfY' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_013.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_014.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_015.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_016.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_017.jpg' },
+      { type: 'video', videoId: 'KQiRfYgG4DQ' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_018.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_020.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_021.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_022.jpg' },
+      { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_023.jpg' },
+      { type: 'video', videoId: 'J7oVZUlpQ1k' }
     ]
   },
   'puregames': {
