@@ -153,7 +153,10 @@ section{padding:100px 80px;}
 .prof-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
 .prof-tag{font-family:var(--font-mono);font-size:10px;padding:2px 8px;background:rgba(200,168,75,0.07);border:1px solid var(--border2);color:var(--gold-dim);letter-spacing:.05em;}
 .lock-badge{position:absolute;top:16px;right:16px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:var(--bg4);border:1px solid var(--border);color:var(--text3);letter-spacing:.1em;}
-.prof-card-imgs{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:14px;cursor:pointer;}
+.prof-card-videos{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:14px;}
+.prof-card-video-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--border);background:#000;}
+.prof-card-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:auto;}
+.prof-card-imgs{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:4px;cursor:pointer;}
 .prof-card-img-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--border);}
 .prof-card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
 .prof-card-img-wrap:hover img{transform:scale(1.06);}
@@ -611,6 +614,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <span class="prof-tag">PS5</span>
         <span class="prof-tag">Lighting</span>
       </div>
+      <div class="prof-card-videos">
+        <div class="prof-card-video-wrap">
+          <iframe src="https://www.youtube.com/embed/bDXLAaqR_Yg?controls=1&rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="prof-card-video-wrap">
+          <iframe src="https://www.youtube.com/embed/aMYvommxKiw?controls=1&rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+      </div>
       <div class="prof-card-imgs">
         <div class="prof-card-img-wrap" onclick="openLightbox('proj-ncsoft', 0)">
           <img src="images/Professional/Ncsoft/001.jpg" alt="NCSoft 001" loading="lazy">
@@ -618,6 +629,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
         <div class="prof-card-img-wrap" onclick="openLightbox('proj-ncsoft', 1)">
           <img src="images/Professional/Ncsoft/002.jpg" alt="NCSoft 002" loading="lazy">
+          <div class="prof-card-img-hint">VIEW</div>
+        </div>
+        <div class="prof-card-img-wrap" onclick="openLightbox('proj-ncsoft', 2)">
+          <img src="images/Professional/Ncsoft/008.jpg" alt="NCSoft 008" loading="lazy">
+          <div class="prof-card-img-hint">VIEW</div>
+        </div>
+        <div class="prof-card-img-wrap" onclick="openLightbox('proj-ncsoft', 3)">
+          <img src="images/Professional/Ncsoft/009.jpg" alt="NCSoft 009" loading="lazy">
           <div class="prof-card-img-hint">VIEW</div>
         </div>
       </div>
@@ -715,7 +734,9 @@ const projects = {
     title: 'Project M',
     images: [
       'images/Professional/Ncsoft/001.jpg',
-      'images/Professional/Ncsoft/002.jpg'
+      'images/Professional/Ncsoft/002.jpg',
+      'images/Professional/Ncsoft/008.jpg',
+      'images/Professional/Ncsoft/009.jpg'
     ]
   },
   'proj-m4': {
@@ -759,34 +780,53 @@ function openLightbox(projectId, startIdx) {
   currentIdx = startIdx || 0;
   document.getElementById('lb-id').textContent = currentProject.id;
   document.getElementById('lb-title').textContent = currentProject.title;
-  renderLightbox();
-  document.getElementById('lightbox').classList.add('active');
+  renderLightbox(true);
   document.body.style.overflow = 'hidden';
 }
 
-function renderLightbox() {
+function renderLightbox(instant) {
   const imgs = currentProject.images;
   const img = document.getElementById('lb-img');
-  img.classList.remove('lb-img-transition');
-  void img.offsetWidth;
-  img.classList.add('lb-img-transition');
-  img.src = imgs[currentIdx];
 
-  // viewport scroll to top on image change
-  const vp = document.getElementById('lb-img-viewport');
-  if (vp) vp.scrollTop = 0;
-
+  // 카운터 & 도트 즉시 업데이트
   document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + imgs.length;
-
-  // Thumbnails hidden
-
-  // Nav dots
   const dots = document.getElementById('lb-nav-dots');
   if (dots) {
     dots.innerHTML = imgs.map((_, i) =>
       '<div class="lb-nav-dot' + (i === currentIdx ? ' active' : '') + '" onclick="lbGoto(' + i + ')"></div>'
     ).join('');
   }
+
+  const newSrc = imgs[currentIdx];
+
+  if (instant || !img.src || img.src === window.location.href) {
+    img.style.transition = 'none';
+    img.style.opacity = '1';
+    img.src = newSrc;
+    return;
+  }
+
+  // fade out → 프리로드 → src 교체 → fade in
+  img.style.transition = 'opacity 0.18s ease';
+  img.style.opacity = '0';
+
+  const preload = new Image();
+  preload.onload = function() {
+    img.src = newSrc;
+    requestAnimationFrame(function() {
+      img.style.opacity = '1';
+    });
+    isAnimating = false;
+  };
+  preload.onerror = function() {
+    img.src = newSrc;
+    img.style.opacity = '1';
+    isAnimating = false;
+  };
+  preload.src = newSrc;
+
+  const vp = document.getElementById('lb-img-viewport');
+  if (vp) vp.scrollTop = 0;
 }
 
 function lbNext() {
@@ -794,14 +834,12 @@ function lbNext() {
   isAnimating = true;
   currentIdx = (currentIdx + 1) % currentProject.images.length;
   renderLightbox();
-  setTimeout(function(){ isAnimating = false; }, 300);
 }
 function lbPrev() {
   if (isAnimating) return;
   isAnimating = true;
   currentIdx = (currentIdx - 1 + currentProject.images.length) % currentProject.images.length;
   renderLightbox();
-  setTimeout(function(){ isAnimating = false; }, 300);
 }
 function lbGoto(i) {
   currentIdx = i;
