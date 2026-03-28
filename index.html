@@ -794,8 +794,33 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+    <!-- PureGames -->
+    <div class="prof-card" onclick="openProfLb('puregames')">
+      <div class="lock-badge">// NDA PROTECTED</div>
+      <div class="prof-card-media"
+           data-vid="wXyexuEEzXU"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/wXyexuEEzXU/maxresdefault.jpg" alt="PureGames thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_007</div>
+        <div class="prof-card-title">Vendetta</div>
+        <div class="prof-card-sub">Pure Games · MORPG · Mobile · Service</div>
+        <div class="prof-card-desc">Art Direction, Character & Background Creation 담당</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Developer : Pure Games</span>
+          <span class="prof-tag">Publisher : T store, Africa TV</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
 <div id="prof-lb">
   <div class="prof-lb-wrap">
     <div class="prof-lb-header">
@@ -1135,6 +1160,15 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
       { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
+    ]
+  },
+  'puregames': {
+    id: '// PROFESSIONAL · PURE GAMES',
+    title: 'Vendetta',
+    items: [
+      { type: 'video', videoId: 'wXyexuEEzXU' },
+      { type: 'image', src: 'images/Professional/PureGames/CH_01.jpg' },
+      { type: 'image', src: 'images/Professional/PureGames/CH_01_02.jpg' }
     ]
   },
   'neptune': {
