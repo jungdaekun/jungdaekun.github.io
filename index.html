@@ -109,6 +109,20 @@ section{padding:100px 80px;}
 .exp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
 .exp-tag{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border:1px solid var(--border);color:var(--text3);letter-spacing:.06em;}
 
+/* ── FREQUENTLY VIEWED ── */
+#freq-viewed{background:var(--bg2);display:none;}
+#freq-viewed.visible{display:block;}
+.freq-grid{columns:4;column-gap:6px;}
+.freq-item{break-inside:avoid;margin-bottom:6px;position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
+.freq-item img{width:100%;display:block;transition:transform .4s,opacity .3s;}
+.freq-item:hover img{transform:scale(1.05);}
+.freq-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 50%);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:10px 12px;}
+.freq-item:hover .freq-item-overlay{opacity:1;}
+.freq-item-title{font-family:var(--font-title);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);}
+.freq-item-count{font-family:var(--font-mono);font-size:9px;color:var(--gold);letter-spacing:.1em;margin-top:2px;}
+.freq-clear{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:.08em;cursor:pointer;border:1px solid var(--border);padding:4px 12px;background:none;transition:all .2s;margin-left:auto;}
+.freq-clear:hover{color:var(--gold);border-color:var(--border2);}
+
 /* ── PERSONAL WORKS ── */
 #personal{background:var(--bg);}
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
@@ -486,6 +500,17 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
   </div>
+</section>
+
+<!-- FREQUENTLY VIEWED -->
+<section id="freq-viewed">
+  <div class="sec-header">
+    <span class="sec-id">// ★</span>
+    <h2 class="sec-title reveal-up">Frequently Viewed</h2>
+    <div class="sec-line"></div>
+    <button class="freq-clear" onclick="clearFreqViewed()">CLEAR</button>
+  </div>
+  <div class="freq-grid" id="freq-grid"></div>
 </section>
 
 <!-- PERSONAL WORKS -->
@@ -983,6 +1008,11 @@ function openLightbox(projectId, startIdx) {
   renderLightbox(true);
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
+  // 클릭 추적
+  var imgSrc = currentProject.images[currentIdx];
+  var key = projectId + '_' + currentIdx;
+  freqClickMap[key] = { type: 'personal', projectId: projectId, idx: currentIdx };
+  trackFreqClick(key, imgSrc, currentProject.title);
 }
 
 function renderLightbox(instant) {
@@ -1162,6 +1192,70 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 })();
 
 // ── SCROLL REVEAL ANIMATION ──
+// ── FREQUENTLY VIEWED ──
+var FREQ_KEY = 'jdk_freq_viewed';
+var FREQ_MIN = 2; // 최소 2번 이상 클릭해야 노출
+
+function getFreqData() {
+  try { return JSON.parse(localStorage.getItem(FREQ_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveFreqData(data) {
+  try { localStorage.setItem(FREQ_KEY, JSON.stringify(data)); } catch(e) {}
+}
+function trackFreqClick(key, imgSrc, title) {
+  var data = getFreqData();
+  if (!data[key]) data[key] = { count: 0, src: imgSrc, title: title };
+  data[key].count++;
+  data[key].src = imgSrc;
+  data[key].title = title;
+  saveFreqData(data);
+  renderFreqViewed();
+}
+function clearFreqViewed() {
+  localStorage.removeItem(FREQ_KEY);
+  renderFreqViewed();
+}
+function renderFreqViewed() {
+  var data = getFreqData();
+  var section = document.getElementById('freq-viewed');
+  var grid = document.getElementById('freq-grid');
+  if (!section || !grid) return;
+
+  // 최소 클릭 이상인 것만, 클릭 많은 순 정렬
+  var items = Object.entries(data)
+    .filter(function(e) { return e[1].count >= FREQ_MIN; })
+    .sort(function(a, b) { return b[1].count - a[1].count; })
+    .slice(0, 16); // 최대 16개
+
+  if (items.length === 0) {
+    section.classList.remove('visible');
+    return;
+  }
+  section.classList.add('visible');
+
+  grid.innerHTML = items.map(function(e) {
+    var key = e[0], d = e[1];
+    return '<div class="freq-item" onclick="freqItemClick(\'' + key + '\')">' +
+      '<img src="' + d.src + '" alt="' + d.title + '" loading="lazy">' +
+      '<div class="freq-item-overlay">' +
+        '<div class="freq-item-title">' + d.title + '</div>' +
+        '<div class="freq-item-count">▶ ' + d.count + ' views</div>' +
+      '</div></div>';
+  }).join('');
+}
+
+// 클릭 시 해당 프로젝트 팝업 오픈
+var freqClickMap = {};
+function freqItemClick(key) {
+  var info = freqClickMap[key];
+  if (!info) return;
+  if (info.type === 'personal') openLightbox(info.projectId, info.idx);
+  if (info.type === 'prof')    openProfLb(info.projectId, info.idx);
+}
+
+// 페이지 로드 시 렌더
+renderFreqViewed();
+
 // ── PROF GRID 스크롤 제어 ──
 (function() {
   var grid = document.getElementById('prof-grid');
@@ -1201,7 +1295,7 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
       return;
     }
     e.stopPropagation();
-    grid.scrollTop += e.deltaY;
+    grid.scrollTop += e.deltaY * 3;
     e.preventDefault();
   }, { passive: false });
 })();
@@ -1349,6 +1443,12 @@ function openProfLb(key, idx) {
   renderProfLb();
   document.getElementById('prof-lb').classList.add('active');
   document.body.style.overflow = 'hidden';
+  // 클릭 추적
+  var item = profCurrent.items[profIdx];
+  var imgSrc = item.type === 'image' ? item.src : 'https://img.youtube.com/vi/' + item.videoId + '/mqdefault.jpg';
+  var fkey = key + '_' + profIdx;
+  freqClickMap[fkey] = { type: 'prof', projectId: key, idx: profIdx };
+  trackFreqClick(fkey, imgSrc, profCurrent.title);
 }
 
 function closeProfLb() {
