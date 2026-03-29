@@ -124,8 +124,8 @@ section{padding:100px 80px;}
 .freq-item:hover img{transform:scale(1.05);}
 .freq-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 60%);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;}
 .freq-item:hover .freq-item-overlay{opacity:1;}
-.freq-item-title{font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);}
-.freq-item-badge{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.1em;margin-top:3px;}
+.freq-item-title{font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);}
+.freq-item-badge{font-family:var(--font-mono);font-size:12px;color:var(--text2);letter-spacing:.1em;margin-top:3px;}
 .freq-refresh{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:.08em;cursor:pointer;border:1px solid var(--border);padding:4px 12px;background:none;transition:all .2s;margin-left:auto;}
 .freq-refresh:hover{color:var(--gold);border-color:var(--border2);}
 
@@ -984,6 +984,30 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+
+    <!-- April Studio -->
+    <div class="prof-card" onclick="openProfLb('aprilstudio')">
+      <div class="prof-card-media"
+           data-vid="OgDEUY0JS_k"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/OgDEUY0JS_k/mqdefault.jpg" alt="April Studio thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_013 · 2005</div>
+        <div class="prof-card-title">April Studio</div>
+        <div class="prof-card-sub">대한주택공사 / Demo Reel</div>
+        <div class="prof-card-desc">All Background Creation</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Developer : APRIL STUDIO</span>
+          <span class="prof-tag">2005—2005</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1356,14 +1380,7 @@ function renderFreqViewed() {
 
   var pool = getAllImagePool();
   var data = getFreqData();
-  var selected = [];
   var usedKeys = {};
-
-  // 클릭 데이터 있으면: 클릭5 + 최신5 + 랜덤6
-  var clickItems = Object.keys(data)
-    .filter(function(k) { return data[k].count > 0; })
-    .sort(function(a,b) { return data[b].count - data[a].count; })
-    .slice(0, 5);
 
   // 해상도별 열 수
   var w = window.innerWidth;
@@ -1374,33 +1391,57 @@ function renderFreqViewed() {
   var regularCount = totalCells - 8;
   var totalItems = 3 + regularCount;
 
-  if (clickItems.length > 0) {
-    clickItems.forEach(function(k) {
-      var p = pool.find(function(x){ return x.key === k; });
-      if (p && !usedKeys[k]) { selected.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: selected.length }); usedKeys[k] = true; }
-    });
-    var reversed = pool.slice().reverse();
-    reversed.forEach(function(p) {
-      if (selected.length >= Math.floor(totalItems * 0.5)) return;
-      if (usedKeys[p.key]) return;
-      selected.push({ item: p, badge: '✦ NEW', rank: -1 }); usedKeys[p.key] = true;
-    });
-    var rest = shuffle(pool.filter(function(p){ return !usedKeys[p.key]; }));
-    rest.forEach(function(p) {
-      if (selected.length >= totalItems) return;
-      selected.push({ item: p, badge: '', rank: -1 });
-    });
-  } else {
-    shuffle(pool).slice(0, totalItems).forEach(function(p) {
-      selected.push({ item: p, badge: '', rank: -1 });
-    });
-  }
+  // ── 랜덤 10개 ──
+  var randomItems = [];
+  shuffle(pool).forEach(function(p) {
+    if (randomItems.length >= 10 || usedKeys[p.key]) return;
+    randomItems.push({ item: p, badge: '', rank: -1 });
+    usedKeys[p.key] = true;
+  });
 
-  selected = selected.slice(0, totalItems);
+  // ── 최근 10개 (pool 역순) ──
+  var newestItems = [];
+  pool.slice().reverse().forEach(function(p) {
+    if (newestItems.length >= 10 || usedKeys[p.key]) return;
+    newestItems.push({ item: p, badge: '✦ NEW', rank: -1 });
+    usedKeys[p.key] = true;
+  });
+
+  // ── 나머지는 인기순 (클릭 데이터 기반, 부족하면 랜덤 보충) ──
+  var popularKeys = Object.keys(data)
+    .filter(function(k) { return data[k].count > 0; })
+    .sort(function(a,b) { return data[b].count - data[a].count; });
+
+  var popularItems = [];
+  var needed = totalItems - randomItems.length - newestItems.length;
+
+  popularKeys.forEach(function(k) {
+    if (popularItems.length >= needed) return;
+    var p = pool.find(function(x){ return x.key === k; });
+    if (p && !usedKeys[p.key]) {
+      popularItems.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: popularItems.length });
+      usedKeys[p.key] = true;
+    }
+  });
+  // 인기 데이터 부족 시 랜덤 보충
+  shuffle(pool).forEach(function(p) {
+    if (popularItems.length >= needed || usedKeys[p.key]) return;
+    popularItems.push({ item: p, badge: '', rank: -1 });
+    usedKeys[p.key] = true;
+  });
+
+  // rank 0,1,2 → span 크기 결정 (인기 1~3위)
+  if (popularItems.length > 0) popularItems[0].rank = 0;
+  if (popularItems.length > 1) popularItems[1].rank = 1;
+  if (popularItems.length > 2) popularItems[2].rank = 2;
+
+  // 합치기
+  var combined = randomItems.concat(newestItems).concat(popularItems).slice(0, totalItems);
+
   // 1등(rank=0), 2등(rank=1) 뽑아서 랜덤 위치에 배치
-  var top1 = selected.find(function(s){ return s.rank === 0; });
-  var top2 = selected.find(function(s){ return s.rank === 1; });
-  var rest2 = selected.filter(function(s){ return s.rank !== 0 && s.rank !== 1; });
+  var top1 = combined.find(function(s){ return s.rank === 0; });
+  var top2 = combined.find(function(s){ return s.rank === 1; });
+  var rest2 = combined.filter(function(s){ return s.rank !== 0 && s.rank !== 1; });
   rest2 = shuffle(rest2);
 
   // 1등 랜덤 위치 (0~3), 2등은 1등과 다른 위치 (0~5)
@@ -1411,7 +1452,7 @@ function renderFreqViewed() {
   // 위치에 삽입
   if (top1) rest2.splice(pos1, 0, top1);
   if (top2) rest2.splice(pos2, 0, top2);
-  selected = rest2.slice(0, totalItems);
+  var selected = rest2.slice(0, totalItems);
 
   grid.innerHTML = selected.map(function(s) {
     var spanClass = 'span-1x1';
@@ -1520,7 +1561,8 @@ function profHoverIn(el) {
       '?autoplay=1&mute=1&loop=1&playlist=' + vid +
       '&controls=0&rel=0&modestbranding=1&playsinline=1' +
       (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
-      (vid === '7wK8bw_T4Zc' ? '&start=11' : '');
+      (vid === '7wK8bw_T4Zc' ? '&start=11' : '') +
+      (vid === 'zNFNPu2T8q4' ? '&start=72' : '');
   }
   // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
   clearTimeout(profHoverTimer);
@@ -1574,11 +1616,27 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_021.jpg' }
     ]
   },
+  'aprilstudio': {
+    id: '// PROFESSIONAL · APRIL STUDIO · 2005',
+    title: '대한주택공사 / Demo Reel',
+    items: [
+      { type: 'video', videoId: 'OgDEUY0JS_k' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_001.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_002.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_003.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_004.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_005.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_006.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_007.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_008.jpg' },
+      { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_009.jpg' }
+    ]
+  },
   'sunwoo': {
     id: '// PROFESSIONAL · SUNWOO ENTERTAINMENT · 2006',
     title: 'WarRook Episode II',
     items: [
-      { type: 'video', videoId: 'zNFNPu2T8q4' },
+      { type: 'video', videoId: 'zNFNPu2T8q4', start: 5 },
       { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_001.jpg' },
       { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_002.jpg' },
       { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_003.jpg' },
