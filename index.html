@@ -209,7 +209,7 @@ section{padding:100px 80px;}
 .prof-lb-main{flex:1;display:flex;align-items:center;justify-content:center;background:#000;position:relative;overflow:hidden;}
 .prof-lb-video-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .prof-lb-video-wrap iframe{width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;}
-.prof-lb-wheel-overlay{position:absolute;inset:0;z-index:1;cursor:default;}
+.prof-lb-wheel-overlay{display:none;}
 .prof-lb-img-el{display:block;max-width:96vw;max-height:92vh;width:100%;height:100%;object-fit:contain;image-rendering:high-quality;transition:opacity .18s ease;}
 .prof-lb-nav-prev,.prof-lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;}
 .prof-lb-nav-prev{left:16px;}
@@ -839,20 +839,20 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="prof-card" onclick="openProfLb('puregames')">
       <div class="lock-badge">// NDA PROTECTED</div>
       <div class="prof-card-media"
-           data-vid="wXyexuEEzXU"
+           data-vid="UjtP1k8C5yw"
            onmouseenter="profHoverIn(this)"
            onmouseleave="profHoverOut(this)">
-        <img class="prof-card-thumb" src="https://img.youtube.com/vi/wXyexuEEzXU/mqdefault.jpg" alt="PureGames thumbnail">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/UjtP1k8C5yw/mqdefault.jpg" alt="PureGames thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
           <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_007</div>
+        <div class="prof-card-id">// PROJ_007 · 2014—2015</div>
         <div class="prof-card-title">Vendetta</div>
-        <div class="prof-card-sub">Pure Games · MORPG · Mobile · Service</div>
-        <div class="prof-card-desc">Art Direction, Character & Background Creation 담당</div>
+        <div class="prof-card-sub">MORPG / Mobile / Service</div>
+        <div class="prof-card-desc">Art Direction, Character & Background Creation</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : Pure Games</span>
           <span class="prof-tag">Publisher : T store, Africa TV</span>
@@ -1736,12 +1736,34 @@ const profProjects = {
     ]
   },
   'puregames': {
-    id: '// PROFESSIONAL · PURE GAMES',
+    id: '// PROFESSIONAL · PURE GAMES · 2014—2015',
     title: 'Vendetta',
     items: [
-      { type: 'video', videoId: 'wXyexuEEzXU' },
-      { type: 'image', src: 'images/Professional/PureGames/CH_01.jpg' },
-      { type: 'image', src: 'images/Professional/PureGames/CH_01_02.jpg' }
+      { type: 'video', videoId: 'UjtP1k8C5yw' },
+      { type: 'video', videoId: '92aOG3VVKjo' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_001.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_002.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_003.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_004.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_005.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_006.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_007.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_008.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_009.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_010.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_011.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_012.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_013.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_014.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_015.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_016.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_017.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_018.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_019.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_020.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_021.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_022.jpg' },
+      { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_023.jpg' }
     ]
   },
   'neptune': {
@@ -2237,10 +2259,12 @@ document.getElementById('prof-lb').addEventListener('click', function(e) {
   if (e.target === this) closeProfLb();
 });
 
-// 스크롤 넘기기 (prof-lb 활성 시)
+// 스크롤 넘기기 (prof-lb 활성 시, 이미지일 때만)
 var profScrollAcc = 0, profScrollTimer = null;
 document.addEventListener('wheel', function(e) {
   if (!document.getElementById('prof-lb').classList.contains('active')) return;
+  // 영상 재생 중엔 휠을 YouTube에 넘김 (컨트롤 가능)
+  if (profCurrent && profCurrent.items[profIdx] && profCurrent.items[profIdx].type === 'video') return;
   e.preventDefault();
   profScrollAcc += e.deltaY;
   clearTimeout(profScrollTimer);
