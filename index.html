@@ -776,23 +776,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="prof-card" onclick="openProfLb('xlgames')">
       <div class="lock-badge">// NDA PROTECTED</div>
       <div class="prof-card-media"
-           data-vid="7wK8bw_T4Zc"
+           data-vid="behf7twp1bo"
            onmouseenter="profHoverIn(this)"
            onmouseleave="profHoverOut(this)">
-        <img class="prof-card-thumb" src="https://img.youtube.com/vi/7wK8bw_T4Zc/1.jpg" alt="Civilization Online thumbnail">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/behf7twp1bo/mqdefault.jpg" alt="Civilization Online thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
           <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_012 · 2017</div>
-        <div class="prof-card-title">Civilization Online</div>
-        <div class="prof-card-sub">XLGames · MMORPG · PC Online</div>
-        <div class="prof-card-desc">Level Design, Shader, Lighting, Optimization</div>
+        <div class="prof-card-id">// PROJ_012 · 2017—2017</div>
+        <div class="prof-card-title">XLGames</div>
+        <div class="prof-card-sub">Civilization Online · MMORPG / PC Online / Open Beta</div>
+        <div class="prof-card-desc">Level Design, Shader, Lighting</div>
         <div class="prof-tags">
-          <span class="prof-tag">CryEngine 3.x</span>
-          <span class="prof-tag">World Machine</span>
+          <span class="prof-tag">Developer : XLGAMES</span>
+          <span class="prof-tag">Publisher : 2K</span>
         </div>
       </div>
     </div>
@@ -1594,9 +1594,9 @@ function profHoverIn(el) {
       '?autoplay=1&mute=1&loop=1&playlist=' + vid +
       '&controls=0&rel=0&modestbranding=1&playsinline=1' +
       (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
-      (vid === '7wK8bw_T4Zc' ? '&start=11' : '') +
       (vid === '-y3fQ73U-2Q' ? '&start=72' : '') +
-      (vid === 'vdAS1SI1xes' ? '&start=39' : '');
+      (vid === 'vdAS1SI1xes' ? '&start=39' : '') +
+      (vid === 'behf7twp1bo' ? '&start=30' : '');
   }
   // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
   clearTimeout(profHoverTimer);
@@ -1850,19 +1850,82 @@ const profProjects = {
     id: '// PROFESSIONAL · COOKAPPS · OUTSOURCING · 2019—2020',
     title: 'CookApps',
     items: [
-      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_01.jpg' },
-      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_02.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_01.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_02.gif' },
       { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_03.jpg' },
-      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_04.jpg' }
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_04.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_05.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_06.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_07.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_08.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_09.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_10.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_11.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_12.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_13.gif' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_14.gif' }
     ]
   },
   'xlgames': {
-    id: '// PROFESSIONAL · XLGAMES · 2017',
+    id: '// PROFESSIONAL · XLGAMES · 2017—2017',
     title: 'Civilization Online',
     items: [
-      { type: 'video', videoId: '7wK8bw_T4Zc' },
-      { type: 'image', src: 'images/Professional/XLGAMES/X3_003.jpg' },
-      { type: 'image', src: 'images/Professional/XLGAMES/X3_004.jpg' }
+      { type: 'video', videoId: 'behf7twp1bo', start: 30 },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_001.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_002.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_003.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_004.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_005.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_006.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_007.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_008.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_009.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_010.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_011.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_012.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_013.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_014.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_015.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_016.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_017.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_018.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_019.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_020.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_021.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_022.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_023.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_024.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_025.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_026.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_027.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_028.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_029.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_030.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_031.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_032.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_033.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_034.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_035.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_036.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_037.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_038.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_039.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_040.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_041.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_042.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_043.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_044.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_045.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_046.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_047.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_048.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_049.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_050.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_051.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_052.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_053.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_054.jpg' },
+      { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_055.jpg' }
     ]
   },
   'nexon': {
