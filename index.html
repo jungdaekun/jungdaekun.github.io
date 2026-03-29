@@ -223,7 +223,8 @@ section{padding:100px 80px;}
 .prof-lb-type-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:rgba(200,168,75,.15);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:2;}
 
 /* prof-lb 썸네일 스트립 */
-.prof-lb-thumbs{display:flex;gap:6px;padding:10px 16px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;min-height:68px;align-items:center;justify-content:center;}
+.prof-lb-thumbs{display:flex;gap:6px;padding:10px 16px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;min-height:68px;align-items:center;}
+.prof-lb-thumbs-inner{display:flex;gap:6px;margin:0 auto;align-items:center;}
 .prof-lb-thumbs::-webkit-scrollbar{height:4px;}
 .prof-lb-thumbs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
 .prof-lb-thumb-item{flex-shrink:0;width:96px;height:54px;border:1px solid var(--border);cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s,opacity .2s;opacity:.5;}
@@ -2044,7 +2045,7 @@ function renderProfLb() {
 
   // 썸네일 스트립
   var thumbs = document.getElementById('prof-lb-thumbs');
-  thumbs.innerHTML = profCurrent.items.map(function(it, i) {
+  var thumbsHtml = profCurrent.items.map(function(it, i) {
     var thumbSrc = it.type === 'video'
       ? 'https://img.youtube.com/vi/' + it.videoId + '/mqdefault.jpg'
       : it.src;
@@ -2054,6 +2055,7 @@ function renderProfLb() {
       '<img src="' + thumbSrc + '" loading="lazy">' +
       playIcon + '</div>';
   }).join('');
+  thumbs.innerHTML = '<div class="prof-lb-thumbs-inner">' + thumbsHtml + '</div>';
 
   // nav 버튼 표시 여부
   var showNav = profCurrent.items.length > 1;
