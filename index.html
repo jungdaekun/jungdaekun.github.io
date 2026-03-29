@@ -1411,7 +1411,7 @@ function renderFreqViewed() {
   // 위치에 삽입
   if (top1) rest2.splice(pos1, 0, top1);
   if (top2) rest2.splice(pos2, 0, top2);
-  selected = rest2.slice(0, 14);
+  selected = rest2.slice(0, totalItems);
 
   grid.innerHTML = selected.map(function(s) {
     var spanClass = 'span-1x1';
