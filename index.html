@@ -164,7 +164,9 @@ section{padding:100px 80px;}
 .professional-note-icon{font-family:var(--font-mono);font-size:18px;color:var(--gold);}
 .professional-note-text{font-size:13px;color:var(--text2);line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 3 + 24px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid .prof-card:nth-child(-n+4){grid-column:span 3;}
+.prof-grid .prof-card:nth-child(n+5){grid-column:span 2;}
 .prof-grid::-webkit-scrollbar{width:4px;}
 .prof-grid::-webkit-scrollbar-track{background:transparent;}
 .prof-grid::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
@@ -710,7 +712,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_013 · 2021</div>
+        <div class="prof-card-id">// PROJ_015 · 2021</div>
         <div class="prof-card-title">Project M</div>
         <div class="prof-card-sub">NCSoft · Interactive Adventure · PlayStation 5</div>
         <div class="prof-card-desc">Integration & Lighting, Outsourcing & Feedback</div>
@@ -736,7 +738,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_012 · 2020</div>
+        <div class="prof-card-id">// PROJ_014 · 2020</div>
         <div class="prof-card-title">창세기전: 회색의 잔영</div>
         <div class="prof-card-sub">Line Games · SRPG · Nintendo Switch</div>
         <div class="prof-card-desc">Level Design, Modeling, Texture, Optimization</div>
@@ -760,7 +762,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_011 · 2018</div>
+        <div class="prof-card-id">// PROJ_013 · 2018</div>
         <div class="prof-card-title">Ascendant One</div>
         <div class="prof-card-sub">Nexon Korea · MOBA · PC Online</div>
         <div class="prof-card-desc">Asset Modeling & Textures, Open Beta 출시</div>
@@ -784,7 +786,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_010 · 2017</div>
+        <div class="prof-card-id">// PROJ_012 · 2017</div>
         <div class="prof-card-title">Civilization Online</div>
         <div class="prof-card-sub">XLGames · MMORPG · PC Online</div>
         <div class="prof-card-desc">Level Design, Shader, Lighting, Optimization</div>
@@ -804,7 +806,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_009</div>
+        <div class="prof-card-id">// PROJ_011</div>
         <div class="prof-card-title">CookApps</div>
         <div class="prof-card-sub">CookApps · Outsourcing · SNG · Mobile</div>
         <div class="prof-card-desc">Modeling, Textures, Shader, Vray Lighting</div>
@@ -825,13 +827,37 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_008</div>
+        <div class="prof-card-id">// PROJ_010</div>
         <div class="prof-card-title">Neppy Rush</div>
         <div class="prof-card-sub">Neptune · Defence · Mobile · Alpha Version</div>
         <div class="prof-card-desc">Level Design, Shader, Lighting, Modeling, Textures</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : Neptune</span>
           <span class="prof-tag">Publisher : X</span>
+        </div>
+      </div>
+    </div>
+    <!-- Neptune Baseball -->
+    <div class="prof-card" onclick="openProfLb('neptune_baseball')">
+      <div class="lock-badge">// NDA PROTECTED</div>
+      <div class="prof-card-media"
+           data-vid="rvz_QdqN3hU"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/rvz_QdqN3hU/mqdefault.jpg" alt="Neptune Baseball thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">⬜ IMAGES</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id">// PROJ_009 · 2015—2016</div>
+        <div class="prof-card-title">Neptune</div>
+        <div class="prof-card-sub">プロ野球タクティクス · Sport / Mobile / Service</div>
+        <div class="prof-card-desc">All Background Creation</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Developer : Neptune</span>
+          <span class="prof-tag">Publisher : Gloops</span>
         </div>
       </div>
     </div>
@@ -849,7 +875,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_007 · 2014—2015</div>
+        <div class="prof-card-id">// PROJ_008 · 2014—2015</div>
         <div class="prof-card-title">Pure Games</div>
         <div class="prof-card-sub">Vendetta · MORPG / Mobile / Service</div>
         <div class="prof-card-desc">Art Direction, Character & Background Creation</div>
@@ -874,7 +900,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_006 · 2012—2014</div>
+        <div class="prof-card-id">// PROJ_007 · 2012—2014</div>
         <div class="prof-card-title">Pure Soft</div>
         <div class="prof-card-sub">Robokids, 라이스맨 · Mobile & People · Outsourcing</div>
         <div class="prof-card-desc">Modeling, Texturing, Animation & FX, Engine</div>
@@ -899,7 +925,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_005 · 2009 — 2011</div>
+        <div class="prof-card-id">// PROJ_006 · 2009 — 2011</div>
         <div class="prof-card-title">ArtechSoft</div>
         <div class="prof-card-sub">신의하루 · Xkick Online</div>
         <div class="prof-card-desc">All Background Creation<br>SNG · Web · Service · Sport · Online · Service<br>Level Design, Lighting</div>
@@ -925,7 +951,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_004 · 2008 — 2009</div>
+        <div class="prof-card-id">// PROJ_005 · 2008 — 2009</div>
         <div class="prof-card-title">Yeins Soft</div>
         <div class="prof-card-sub">Style Rush · Racing · Online · Alpha Version</div>
         <div class="prof-card-desc">All Background Creation</div>
@@ -950,7 +976,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_003 · 2006 — 2007</div>
+        <div class="prof-card-id">// PROJ_004 · 2006 — 2007</div>
         <div class="prof-card-title">Pixel Planet</div>
         <div class="prof-card-sub">Z-Ranger · TV Animation · Service</div>
         <div class="prof-card-desc">Shader, Lighting, Compositing</div>
@@ -974,7 +1000,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_002 · 2006—2006</div>
+        <div class="prof-card-id">// PROJ_003 · 2006—2006</div>
         <div class="prof-card-title">Sunwoo Entertainment</div>
         <div class="prof-card-sub">WarRook Episode II Cinematic</div>
         <div class="prof-card-desc">Prop Modeling & Textures</div>
@@ -998,7 +1024,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_001 · 2005—2005</div>
+        <div class="prof-card-id">// PROJ_002 · 2005—2005</div>
         <div class="prof-card-title">April Studio</div>
         <div class="prof-card-sub">대한주택공사 / Demo Reel</div>
         <div class="prof-card-desc">All Background Creation</div>
@@ -1502,13 +1528,13 @@ function preloadFreqImages() {
   var fade = document.getElementById('prof-grid-fade');
   if (!grid) return;
 
-  // 첫 카드 높이 기준으로 max-height 동적 계산
+  // 첫 카드 높이 기준으로 max-height 동적 계산 (2열 2줄 + 3열 1줄 = 3줄 표시)
   function calcHeight() {
     var card = grid.querySelector('.prof-card');
     if (!card) return;
     var h = card.offsetHeight;
     var gap = 12;
-    grid.style.maxHeight = (h * 2 + gap) + 'px';
+    grid.style.maxHeight = (h * 3 + gap * 2) + 'px';
   }
   window.addEventListener('load', calcHeight);
   window.addEventListener('resize', calcHeight);
@@ -1732,6 +1758,26 @@ const profProjects = {
       { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_022.jpg' },
       { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_023.jpg' },
       { type: 'video', videoId: 'J7oVZUlpQ1k' }
+    ]
+  },
+  'neptune_baseball': {
+    id: '// PROFESSIONAL · NEPTUNE · 2015—2016',
+    title: 'プロ野球タクティクス',
+    items: [
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_001.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_002.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_003.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_004.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_005.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_006.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_007.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_008.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_009.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_010.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_011.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_012.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_013.jpg' },
+      { type: 'image', src: 'images/Professional/2016_Neptune_Baseball/2016_Neptune_Baseball_014.jpg' }
     ]
   },
   'puregames': {
