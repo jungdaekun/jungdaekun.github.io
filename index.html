@@ -223,7 +223,7 @@ section{padding:100px 80px;}
 .prof-lb-type-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:rgba(200,168,75,.15);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:2;}
 
 /* prof-lb 썸네일 스트립 */
-.prof-lb-thumbs{display:flex;gap:6px;padding:10px 16px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;min-height:68px;align-items:center;}
+.prof-lb-thumbs{display:flex;gap:6px;padding:10px 16px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;min-height:68px;align-items:center;justify-content:center;}
 .prof-lb-thumbs::-webkit-scrollbar{height:4px;}
 .prof-lb-thumbs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
 .prof-lb-thumb-item{flex-shrink:0;width:96px;height:54px;border:1px solid var(--border);cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s,opacity .2s;opacity:.5;}
@@ -351,6 +351,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="logo">JDK</div>
   <nav>
     <a href="#about">About</a>
+    <a href="#freq-viewed">Featured</a>
     <a href="#personal">Personal</a>
     <a href="#relighting">Re:Lighting</a>
     <a href="#professional">Professional</a>
@@ -517,6 +518,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title reveal-up">Featured Works</h2>
     <div class="sec-line"></div>
     <button class="freq-refresh" onclick="renderFreqViewed()">↺ REFRESH</button>
+    <button class="freq-refresh" onclick="resetFreqViewed()" style="margin-left:6px;color:var(--text3);">⊘ RESET</button>
   </div>
   <div class="freq-grid" id="freq-grid"></div>
 </section>
@@ -1396,6 +1398,16 @@ function trackFreqClick(key, src, title) {
 function clearFreqViewed() {
   localStorage.removeItem(FREQ_KEY);
   renderFreqViewed();
+}
+function resetFreqViewed() {
+  var pw = prompt('비밀번호를 입력하세요:');
+  if (pw === null) return;
+  if (pw === '0625') {
+    clearFreqViewed();
+    alert('클릭 데이터가 초기화되었습니다.');
+  } else {
+    alert('비밀번호가 올바르지 않습니다.');
+  }
 }
 
 function shuffle(arr) {
