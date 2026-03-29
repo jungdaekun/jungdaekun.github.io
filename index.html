@@ -799,21 +799,25 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <!-- CookApps -->
     <div class="prof-card" onclick="openProfLb('cookapps')">
       <div class="lock-badge">// NDA PROTECTED</div>
-      <div class="prof-card-media">
-        <img class="prof-card-thumb" src="images/Professional/CookApps/Cookapps_001.gif" alt="CookApps thumbnail">
+      <div class="prof-card-media"
+           data-vid="vdAS1SI1xes"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/vdAS1SI1xes/mqdefault.jpg" alt="CookApps thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_011</div>
+        <div class="prof-card-id">// PROJ_011 · 2019—2020</div>
         <div class="prof-card-title">CookApps</div>
-        <div class="prof-card-sub">CookApps · Outsourcing · SNG · Mobile</div>
+        <div class="prof-card-sub">Outsourcing / SNG / Mobile</div>
         <div class="prof-card-desc">Modeling, Textures, Shader, Vray Lighting</div>
         <div class="prof-tags">
+          <span class="prof-tag">Developer : CookApps</span>
           <span class="prof-tag">Vray</span>
           <span class="prof-tag">3ds Max</span>
-          <span class="prof-tag">Mobile</span>
         </div>
       </div>
     </div>
@@ -1591,7 +1595,8 @@ function profHoverIn(el) {
       '&controls=0&rel=0&modestbranding=1&playsinline=1' +
       (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
       (vid === '7wK8bw_T4Zc' ? '&start=11' : '') +
-      (vid === '-y3fQ73U-2Q' ? '&start=72' : '');
+      (vid === '-y3fQ73U-2Q' ? '&start=72' : '') +
+      (vid === 'vdAS1SI1xes' ? '&start=39' : '');
   }
   // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
   clearTimeout(profHoverTimer);
@@ -1842,13 +1847,13 @@ const profProjects = {
     ]
   },
   'cookapps': {
-    id: '// PROFESSIONAL · COOKAPPS · OUTSOURCING',
+    id: '// PROFESSIONAL · COOKAPPS · OUTSOURCING · 2019—2020',
     title: 'CookApps',
     items: [
-      { type: 'image', src: 'images/Professional/CookApps/Cookapps_001.gif' },
-      { type: 'image', src: 'images/Professional/CookApps/Cookapps_002.gif' },
-      { type: 'image', src: 'images/Professional/CookApps/Cookapps_003.jpg' },
-      { type: 'image', src: 'images/Professional/CookApps/Cookapps_004.jpg' }
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_01.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_02.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_03.jpg' },
+      { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_04.jpg' }
     ]
   },
   'xlgames': {
