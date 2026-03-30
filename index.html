@@ -164,9 +164,11 @@ section{padding:100px 80px;}
 .professional-note-icon{font-family:var(--font-mono);font-size:18px;color:var(--gold);}
 .professional-note-text{font-size:13px;color:var(--text2);line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 3 + 24px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
-.prof-grid .prof-card:nth-child(-n+4){grid-column:span 3;}
-.prof-grid .prof-card:nth-child(n+5){grid-column:span 2;}
+.prof-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 4 + 36px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid .prof-card:nth-child(1){grid-column:span 12;}
+.prof-grid .prof-card:nth-child(2),.prof-grid .prof-card:nth-child(3){grid-column:span 6;}
+.prof-grid .prof-card:nth-child(4),.prof-grid .prof-card:nth-child(5),.prof-grid .prof-card:nth-child(6){grid-column:span 4;}
+.prof-grid .prof-card:nth-child(n+7){grid-column:span 3;}
 .prof-grid::-webkit-scrollbar{width:4px;}
 .prof-grid::-webkit-scrollbar-track{background:transparent;}
 .prof-grid::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
@@ -728,14 +730,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_015 · 2021</div>
-        <div class="prof-card-title">Project M</div>
-        <div class="prof-card-sub">NCSoft · Interactive Adventure · PlayStation 5</div>
-        <div class="prof-card-desc">Integration & Lighting, Outsourcing & Feedback</div>
+        <div class="prof-card-id">// PROJ_015 · 2021—2024</div>
+        <div class="prof-card-title">NCSoft</div>
+        <div class="prof-card-sub">Project M · Interactive Adventure / Console / Alpha Version</div>
+        <div class="prof-card-desc">3D Environment Integration Art</div>
         <div class="prof-tags">
-          <span class="prof-tag">Unreal 5</span>
-          <span class="prof-tag">PS5</span>
-          <span class="prof-tag">Lighting</span>
+          <span class="prof-tag">Developer : Project M</span>
+          <span class="prof-tag">Publisher : NCSOFT</span>
         </div>
       </div>
     </div>
@@ -1560,13 +1561,13 @@ function preloadFreqImages() {
   var fade = document.getElementById('prof-grid-fade');
   if (!grid) return;
 
-  // 첫 카드 높이 기준으로 max-height 동적 계산 (2열 2줄 + 3열 1줄 = 3줄 표시)
+  // 첫 카드 높이 기준으로 max-height 동적 계산 (1+2+3+4 = 4줄 표시)
   function calcHeight() {
     var card = grid.querySelector('.prof-card');
     if (!card) return;
     var h = card.offsetHeight;
     var gap = 12;
-    grid.style.maxHeight = (h * 3 + gap * 2) + 'px';
+    grid.style.maxHeight = (h * 4 + gap * 3) + 'px';
   }
   window.addEventListener('load', calcHeight);
   window.addEventListener('resize', calcHeight);
@@ -1620,7 +1621,8 @@ function profHoverIn(el) {
       (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
       (vid === '-y3fQ73U-2Q' ? '&start=72' : '') +
       (vid === 'vdAS1SI1xes' ? '&start=39' : '') +
-      (vid === 'behf7twp1bo' ? '&start=30' : '');
+      (vid === 'behf7twp1bo' ? '&start=30' : '') +
+      (vid === '2zKdRMch0Us' ? '&start=3' : '');
   }
   // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
   clearTimeout(profHoverTimer);
@@ -1636,15 +1638,47 @@ function profHoverOut(el) {
 // ── PROF LIGHTBOX 데이터 ──
 const profProjects = {
   'ncsoft': {
-    id: '// PROFESSIONAL · NCSOFT · 2021',
+    id: '// PROFESSIONAL · NCSOFT · 2021—2024',
     title: 'Project M',
     items: [
       { type: 'video', videoId: 'bDXLAaqR_Yg' },
       { type: 'video', videoId: 'aMYvommxKiw' },
-      { type: 'image', src: 'images/Professional/Ncsoft/001.jpg' },
-      { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
-      { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
-      { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_001.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_002.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_003.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_004.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_005.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_006.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_007.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_008.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_009.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_010.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_011.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_012.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_013.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_014.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_015.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_016.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_017.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_018.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_019.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_020.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_021.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_022.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_023.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_024.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_025.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_026.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_027.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_028.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_029.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_030.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_031.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_032.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_033.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_034.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_035.jpg' },
+      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_036.jpg' }
     ]
   },
   'artechsoft': {
@@ -2353,20 +2387,6 @@ function profHoverOut(el) {
   el.querySelector('.prof-card-thumb').style.opacity = '1';
 }
 
-// ── PROF MEDIA LIGHTBOX ──
-const profMedia = {
-  'ncsoft': {
-    id: '// NCSOFT · PROJECT M · 2021',
-    title: 'Project M',
-    items: [
-      { type: 'video', videoId: 'bDXLAaqR_Yg' },
-      { type: 'video', videoId: 'aMYvommxKiw' },
-      { type: 'image', src: 'images/Professional/Ncsoft/001.jpg' },
-      { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
-      { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
-      { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
-    ]
-  },
 </script>
 </body>
 </html>
