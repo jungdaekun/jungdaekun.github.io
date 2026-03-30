@@ -2199,6 +2199,9 @@ function renderProfLb() {
   var showNav = profCurrent.items.length > 1;
   main.querySelector('.prof-lb-nav-prev').style.display = showNav ? 'flex' : 'none';
   main.querySelector('.prof-lb-nav-next').style.display = showNav ? 'flex' : 'none';
+
+  // 줌 리셋
+  if (window.profZoomReset) window.profZoomReset();
 }
 
 // 키보드 + 배경 클릭 닫기
@@ -2260,11 +2263,11 @@ document.addEventListener('wheel', function(e) {
     hideProfZoomBadge();
   }
 
-  var origRenderProfLb = renderProfLb;
-  renderProfLb = function() {
+  // renderProfLb 호출 후 외부에서 직접 호출
+  window.profZoomReset = function() {
     resetZoom();
-    origRenderProfLb();
     var main = document.getElementById('prof-lb-main');
+    if (!main) return;
     var img = main.querySelector('.prof-lb-img-el');
     if (img) { currentImg = img; img.style.cursor = 'zoom-in'; }
     else { currentImg = null; }
