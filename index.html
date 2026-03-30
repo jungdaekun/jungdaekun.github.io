@@ -164,7 +164,7 @@ section{padding:100px 80px;}
 .professional-note-icon{font-family:var(--font-mono);font-size:18px;color:var(--gold);}
 .professional-note-text{font-size:13px;color:var(--text2);line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 3 + 24px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
 .prof-grid .prof-card:nth-child(-n+2){grid-column:span 6;}
 .prof-grid .prof-card:nth-child(n+3):nth-child(-n+5){grid-column:span 4;}
 .prof-grid .prof-card:nth-child(n+6){grid-column:span 3;}
@@ -433,7 +433,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="name-big reveal-left">Jung<br>Daekun</div>
       <div class="title-tag reveal-left delay-1">Senior Environment Artist</div>
       <div class="about-contact reveal-left delay-2">
-        Contact: <a href="/cdn-cgi/l/email-protection#fd9788939a999c98968893bd9a909c9491d39e9290"><span class="__cf_email__" data-cfemail="066c7368616267636d736846616b676f6a2865696b">[email&#160;protected]</span></a>
+        Contact: <a href="mailto:jungdaekun@gmail.com">jungdaekun@gmail.com</a>
       </div>
       <div class="skills-grid" id="skills-grid" style="margin-top:32px">
         <div class="skill-item reveal-left">Level Design</div>
@@ -457,7 +457,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="about-right">
       <div class="exp-item reveal-right">
         <div class="exp-year">2021 —</div>
-        <div class="exp-company">NCSoft</div>
+        <div class="exp-company"><a href="#professional" onclick="profLbUnlocked=profLbUnlocked; setTimeout(function(){openProfLb('ncsoft')},300)" style="color:inherit;text-decoration:none;">NCSoft</a></div>
         <div class="exp-role">Senior Environment Artist · Integration & Lighting</div>
         <div class="exp-project">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
         <div class="exp-tags">
@@ -469,7 +469,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2020 —</div>
-        <div class="exp-company">Line Games</div>
+        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('changse')},300)" style="color:inherit;text-decoration:none;">Line Games</a></div>
         <div class="exp-role">Lead Environment Artist</div>
         <div class="exp-project">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
         <div class="exp-tags">
@@ -481,7 +481,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2018 —</div>
-        <div class="exp-company">Nexon Korea</div>
+        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('nexon')},300)" style="color:inherit;text-decoration:none;">Nexon Korea</a></div>
         <div class="exp-role">Senior Environment Artist</div>
         <div class="exp-project">Ascendant One / MOBA · Open Beta / PC Online</div>
         <div class="exp-tags">
@@ -492,7 +492,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2017 —</div>
-        <div class="exp-company">XLGames</div>
+        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('xlgames')},300)" style="color:inherit;text-decoration:none;">XLGames</a></div>
         <div class="exp-role">Environment Artist</div>
         <div class="exp-project">Civilization Online / MMORPG · Open Beta / PC Online</div>
         <div class="exp-tags">
@@ -503,7 +503,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2016 —</div>
-        <div class="exp-company">Neptune</div>
+        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('neptune')},300)" style="color:inherit;text-decoration:none;">Neptune</a></div>
         <div class="exp-role">Lead Environment Artist</div>
         <div class="exp-project">Neppy Project / Simulation · Alpha / Mobile</div>
         <div class="exp-tags">
@@ -514,7 +514,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2013 — 2015</div>
-        <div class="exp-company">Pure Games</div>
+        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('puregames')},300)" style="color:inherit;text-decoration:none;">Pure Games</a></div>
         <div class="exp-role">Art Director</div>
         <div class="exp-project">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
         <div class="exp-tags">
@@ -1130,16 +1130,6 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
-  'proj-ncsoft': {
-    id: '// PROFESSIONAL · NCSOFT · 2021',
-    title: 'Project M',
-    images: [
-      'images/Professional/Ncsoft/001.jpg',
-      'images/Professional/Ncsoft/002.jpg',
-      'images/Professional/Ncsoft/008.jpg',
-      'images/Professional/Ncsoft/009.jpg'
-    ]
-  },
   'proj-m4': {
     id: '// PERSONAL · M4',
     title: 'M4',
@@ -1300,17 +1290,19 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 (function() {
   var img = document.getElementById('lb-img');
   var isZoomed  = false;
+  var isOriginal = false;
   var isDragging = false;
   var didDrag   = false;
   var transX = 0, transY = 0;
   var ZOOM = 1.8;
   var THRESHOLD = 4;
 
-  function applyTransform(tx, ty) {
-    img.style.transform = 'scale(' + ZOOM + ') translate(' + (tx/ZOOM) + 'px, ' + (ty/ZOOM) + 'px)';
+  function applyTransform(scale, tx, ty) {
+    img.style.transform = 'scale(' + scale + ') translate(' + (tx/scale) + 'px, ' + (ty/scale) + 'px)';
   }
   function resetZoom() {
     isZoomed   = false;
+    isOriginal = false;
     isDragging = false;
     didDrag    = false;
     transX = 0; transY = 0;
@@ -1321,23 +1313,38 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
   var origRender = window.renderLightbox;
   window.renderLightbox = function() { resetZoom(); origRender(); };
 
+  // 더블클릭 → 원본 크기
+  img.addEventListener('dblclick', function(e) {
+    e.preventDefault(); e.stopPropagation();
+    if (isOriginal) { resetZoom(); return; }
+    var naturalW = img.naturalWidth;
+    var viewW = img.clientWidth;
+    var scale = naturalW / viewW;
+    isOriginal = true;
+    isZoomed = false;
+    transX = 0; transY = 0;
+    img.style.cursor = 'grab';
+    applyTransform(scale, 0, 0);
+  });
+
   // mousedown → 드래그 시작 준비
   img.addEventListener('mousedown', function(e) {
     if (e.button !== 0) return;
     e.preventDefault(); e.stopPropagation();
     isDragging = true;
     didDrag    = false;
-    if (isZoomed) img.style.cursor = 'grabbing';
+    if (isZoomed || isOriginal) img.style.cursor = 'grabbing';
   });
 
   // mousemove → 줌 상태에서 이동
   document.addEventListener('mousemove', function(e) {
-    if (!isDragging || !isZoomed) return;
+    if (!isDragging || (!isZoomed && !isOriginal)) return;
     var moved = Math.abs(e.movementX) + Math.abs(e.movementY);
     if (moved > 0) didDrag = true;
     transX += e.movementX;
     transY += e.movementY;
-    applyTransform(transX, transY);
+    var scale = isOriginal ? (img.naturalWidth / img.clientWidth) : ZOOM;
+    applyTransform(scale, transX, transY);
   });
 
   // mouseup → 클릭(줌 토글) or 드래그 끝
@@ -1345,24 +1352,23 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.button !== 0 || !isDragging) return;
     isDragging = false;
     if (!didDrag) {
-      // 순수 클릭 → 줌 토글
-      if (!isZoomed) {
+      if (isOriginal) { resetZoom(); }
+      else if (!isZoomed) {
         isZoomed = true;
         img.style.cursor = 'grab';
-        applyTransform(0, 0);
+        applyTransform(ZOOM, 0, 0);
       } else {
         resetZoom();
       }
     } else {
-      // 드래그 끝 → 커서만 복구
-      if (isZoomed) img.style.cursor = 'grab';
+      if (isZoomed || isOriginal) img.style.cursor = 'grab';
     }
     didDrag = false;
   });
 
   img.addEventListener('contextmenu', function(e) { e.preventDefault(); resetZoom(); });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isZoomed) resetZoom();
+    if (e.key === 'Escape' && (isZoomed || isOriginal)) resetZoom();
   });
 })();
 
@@ -1560,14 +1566,14 @@ function preloadFreqImages() {
   var fade = document.getElementById('prof-grid-fade');
   if (!grid) return;
 
-  // 2번째 카드 높이 기준으로 max-height 계산 (3줄 표시)
+  // 2번째 카드 높이 기준으로 max-height 계산 (2줄 표시)
   function calcHeight() {
     var cards = grid.querySelectorAll('.prof-card');
     var card = cards[1] || cards[0];
     if (!card) return;
     var h = card.offsetHeight;
     var gap = 12;
-    grid.style.maxHeight = (h * 3 + gap * 2) + 'px';
+    grid.style.maxHeight = (h * 2 + gap) + 'px';
   }
   window.addEventListener('load', calcHeight);
   window.addEventListener('resize', calcHeight);
@@ -2070,7 +2076,7 @@ function openProfLb(key, idx) {
   if (!profLbUnlocked) {
     var pw = prompt('비밀번호를 입력하세요:');
     if (pw === null) return;
-    if (pw !== '0625') {
+    if (pw !== '!234') {
       alert('비밀번호가 올바르지 않습니다.');
       return;
     }
@@ -2207,37 +2213,46 @@ document.addEventListener('wheel', function(e) {
 
 // ── PROF-LB 이미지 줌 & 드래그 ──
 (function() {
-  var isZoomed = false, isDragging = false, didDrag = false;
+  var isZoomed = false, isOriginal = false, isDragging = false, didDrag = false;
   var transX = 0, transY = 0;
   var ZOOM = 1.8;
   var currentImg = null;
 
-  function applyTransform(img, tx, ty) {
-    img.style.transform = 'scale(' + ZOOM + ') translate(' + (tx/ZOOM) + 'px, ' + (ty/ZOOM) + 'px)';
+  function applyTransform(img, scale, tx, ty) {
+    img.style.transform = 'scale(' + scale + ') translate(' + (tx/scale) + 'px, ' + (ty/scale) + 'px)';
   }
   function resetZoom() {
     if (!currentImg) return;
-    isZoomed = false; isDragging = false; didDrag = false;
+    isZoomed = false; isOriginal = false; isDragging = false; didDrag = false;
     transX = 0; transY = 0;
     currentImg.style.cursor = 'zoom-in';
     currentImg.style.transform = '';
   }
 
-  // renderProfLb 호출 후 이미지가 DOM에 추가될 때 줌 리셋
   var origRenderProfLb = window.renderProfLb;
   window.renderProfLb = function() {
     resetZoom();
     origRenderProfLb();
-    // 이미지면 cursor 설정
     var main = document.getElementById('prof-lb-main');
     var img = main.querySelector('.prof-lb-img-el');
-    if (img) {
-      currentImg = img;
-      img.style.cursor = 'zoom-in';
-    } else {
-      currentImg = null;
-    }
+    if (img) { currentImg = img; img.style.cursor = 'zoom-in'; }
+    else { currentImg = null; }
   };
+
+  // 더블클릭 → 원본 크기
+  document.addEventListener('dblclick', function(e) {
+    var main = document.getElementById('prof-lb-main');
+    if (!main) return;
+    var img = main.querySelector('.prof-lb-img-el');
+    if (!img || e.target !== img) return;
+    e.preventDefault(); e.stopPropagation();
+    if (isOriginal) { resetZoom(); return; }
+    var scale = img.naturalWidth / img.clientWidth;
+    isOriginal = true; isZoomed = false;
+    transX = 0; transY = 0;
+    img.style.cursor = 'grab';
+    applyTransform(img, scale, 0, 0);
+  });
 
   document.addEventListener('mousedown', function(e) {
     var main = document.getElementById('prof-lb-main');
@@ -2247,36 +2262,36 @@ document.addEventListener('wheel', function(e) {
     currentImg = img;
     e.preventDefault(); e.stopPropagation();
     isDragging = true; didDrag = false;
-    if (isZoomed) img.style.cursor = 'grabbing';
+    if (isZoomed || isOriginal) img.style.cursor = 'grabbing';
   });
 
   document.addEventListener('mousemove', function(e) {
-    if (!isDragging || !isZoomed || !currentImg) return;
+    if (!isDragging || (!isZoomed && !isOriginal) || !currentImg) return;
     var moved = Math.abs(e.movementX) + Math.abs(e.movementY);
     if (moved > 0) didDrag = true;
     transX += e.movementX; transY += e.movementY;
-    applyTransform(currentImg, transX, transY);
+    var scale = isOriginal ? (currentImg.naturalWidth / currentImg.clientWidth) : ZOOM;
+    applyTransform(currentImg, scale, transX, transY);
   });
 
   document.addEventListener('mouseup', function(e) {
     if (e.button !== 0 || !isDragging) return;
     isDragging = false;
     if (!didDrag && currentImg) {
-      if (!isZoomed) {
+      if (isOriginal) { resetZoom(); }
+      else if (!isZoomed) {
         isZoomed = true;
         currentImg.style.cursor = 'grab';
-        applyTransform(currentImg, 0, 0);
-      } else {
-        resetZoom();
-      }
+        applyTransform(currentImg, ZOOM, 0, 0);
+      } else { resetZoom(); }
     } else {
-      if (isZoomed && currentImg) currentImg.style.cursor = 'grab';
+      if ((isZoomed || isOriginal) && currentImg) currentImg.style.cursor = 'grab';
     }
     didDrag = false;
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isZoomed) resetZoom();
+    if (e.key === 'Escape' && (isZoomed || isOriginal)) resetZoom();
   });
 })();
 const revealEls = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
