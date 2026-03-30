@@ -744,24 +744,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="prof-card" onclick="openProfLb('changse')">
       <div class="lock-badge">// NDA PROTECTED</div>
       <div class="prof-card-media"
-           data-vid="aiv_rDkXtP8"
+           data-vid="2zKdRMch0Us"
            onmouseenter="profHoverIn(this)"
            onmouseleave="profHoverOut(this)">
-        <img class="prof-card-thumb" src="https://img.youtube.com/vi/aiv_rDkXtP8/mqdefault.jpg" alt="창세기전 thumbnail">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/2zKdRMch0Us/mqdefault.jpg" alt="창세기전 thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
           <div class="prof-card-media-label">▶ VIDEO</div>
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_014 · 2020</div>
-        <div class="prof-card-title">창세기전: 회색의 잔영</div>
-        <div class="prof-card-sub">Line Games · SRPG · Nintendo Switch</div>
-        <div class="prof-card-desc">Level Design, Modeling, Texture, Optimization</div>
+        <div class="prof-card-id">// PROJ_014 · 2018—2020</div>
+        <div class="prof-card-title">Line Games</div>
+        <div class="prof-card-sub">창세기전 : 회색의 잔영 · SRPG / Nintendo Switch</div>
+        <div class="prof-card-desc">Level Design, Modeling, Textures</div>
         <div class="prof-tags">
-          <span class="prof-tag">Unreal 4</span>
-          <span class="prof-tag">Switch</span>
-          <span class="prof-tag">SpeedTree</span>
+          <span class="prof-tag">Developer : ReG Studio</span>
+          <span class="prof-tag">Publisher : LINE GAMES</span>
         </div>
       </div>
     </div>
@@ -2006,10 +2005,10 @@ const profProjects = {
     ]
   },
   'changse': {
-    id: '// PROFESSIONAL · LINE GAMES · 2020',
+    id: '// PROFESSIONAL · LINE GAMES · 2018—2020',
     title: '창세기전: 회색의 잔영',
     items: [
-      { type: 'video', videoId: 'aiv_rDkXtP8' }
+      { type: 'video', videoId: '2zKdRMch0Us' }
     ]
   }
 };
@@ -2368,138 +2367,6 @@ const profMedia = {
       { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
     ]
   },
-  'changse': {
-    id: '// LINE GAMES · 창세기전 · 2020',
-    title: '창세기전: 회색의 잔영',
-    items: [
-      { type: 'video', videoId: 'aiv_rDkXtP8' }
-    ]
-  }
-};
-
-let profCurrent = null;
-let profIdx = 0;
-let profAnimating = false;
-
-function openProfLb(key) {
-  profCurrent = profMedia[key];
-  profIdx = 0;
-  document.getElementById('prof-lb-id').textContent = profCurrent.id;
-  document.getElementById('prof-lb-title').textContent = profCurrent.title;
-  document.getElementById('prof-lb').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  renderProfLb(true);
-}
-
-function renderProfLb(instant) {
-  var item = profCurrent.items[profIdx];
-  var main = document.getElementById('prof-lb-main');
-  var counter = document.getElementById('prof-lb-counter');
-  var dots = document.getElementById('prof-lb-dots');
-  var badge = document.getElementById('prof-lb-type-badge');
-
-  counter.textContent = (profIdx + 1) + ' / ' + profCurrent.items.length;
-  badge.textContent = item.type === 'video' ? '▶ VIDEO' : '◈ IMAGE';
-
-  // 도트
-  dots.innerHTML = profCurrent.items.map(function(it, i) {
-    return '<div class="prof-lb-dot' + (i === profIdx ? ' active' : '') +
-      '" onclick="profLbGoto(' + i + ')">' +
-      (it.type === 'video' ? '▶' : '·') + '</div>';
-  }).join('');
-
-  // 기존 미디어 제거 (prev/next 버튼, dots, badge 제외)
-  var prevBtn = main.querySelector('.prof-lb-nav-prev');
-  var nextBtn = main.querySelector('.prof-lb-nav-next');
-  // 미디어 요소만 제거
-  main.querySelectorAll('.prof-lb-video-wrap, .prof-lb-img-el').forEach(function(el){ el.remove(); });
-
-  if (item.type === 'video') {
-    var wrap = document.createElement('div');
-    wrap.className = 'prof-lb-video-wrap';
-    var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube.com/embed/' + item.videoId +
-      '?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1';
-    iframe.allow = 'autoplay; encrypted-media; fullscreen';
-    iframe.allowFullscreen = true;
-    iframe.frameBorder = '0';
-    var overlay = document.createElement('div');
-    overlay.className = 'prof-lb-wheel-overlay';
-    wrap.appendChild(iframe);
-    wrap.appendChild(overlay);
-    main.insertBefore(wrap, prevBtn);
-  } else {
-    var img = document.createElement('img');
-    img.className = 'prof-lb-img-el';
-    img.style.opacity = instant ? '1' : '0';
-    img.alt = '';
-
-    if (instant) {
-      img.src = item.src;
-    } else {
-      img.style.transition = 'opacity 0.18s ease';
-      var preload = new Image();
-      preload.onload = function() {
-        img.src = item.src;
-        requestAnimationFrame(function(){ img.style.opacity = '1'; });
-        profAnimating = false;
-      };
-      preload.onerror = function() { img.src = item.src; img.style.opacity = '1'; profAnimating = false; };
-      preload.src = item.src;
-    }
-    main.insertBefore(img, prevBtn);
-  }
-
-  // 비디오일 때는 animating 바로 해제 (iframe은 로드 이벤트 없이 진행)
-  if (item.type === 'video') profAnimating = false;
-}
-
-function profLbStep(dir) {
-  if (profAnimating) return;
-  profAnimating = true;
-  profIdx = (profIdx + dir + profCurrent.items.length) % profCurrent.items.length;
-  renderProfLb(false);
-}
-function profLbGoto(i) {
-  profIdx = i;
-  renderProfLb(false);
-}
-function closeProfLb() {
-  document.getElementById('prof-lb').classList.remove('active');
-  document.body.style.overflow = '';
-  // iframe autoplay 정지
-  document.querySelectorAll('#prof-lb iframe').forEach(function(f){ f.src = ''; });
-  profAnimating = false;
-}
-
-// ESC 키
-document.addEventListener('keydown', function(e) {
-  if (!document.getElementById('prof-lb').classList.contains('active')) return;
-  if (e.key === 'Escape') closeProfLb();
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') profLbStep(1);
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') profLbStep(-1);
-});
-
-// 배경 클릭으로 닫기
-document.getElementById('prof-lb').addEventListener('click', function(e) {
-  if (e.target === this) closeProfLb();
-});
-
-// 스크롤 넘기기 (prof-lb 활성 시, 이미지일 때만)
-var profScrollAcc = 0, profScrollTimer = null;
-document.addEventListener('wheel', function(e) {
-  if (!document.getElementById('prof-lb').classList.contains('active')) return;
-  // 영상 재생 중엔 휠을 YouTube에 넘김 (컨트롤 가능)
-  if (profCurrent && profCurrent.items[profIdx] && profCurrent.items[profIdx].type === 'video') return;
-  e.preventDefault();
-  profScrollAcc += e.deltaY;
-  clearTimeout(profScrollTimer);
-  if (Math.abs(profScrollAcc) > 80) {
-    profLbStep(profScrollAcc > 0 ? 1 : -1);
-    profScrollAcc = 0;
-  }
-  profScrollTimer = setTimeout(function(){ profScrollAcc = 0; }, 300);
-}, { passive: false });
 </script>
 </body>
 </html>
