@@ -1661,7 +1661,7 @@ function profHoverOut(el) {
 }
 
 // ── PROF LIGHTBOX 데이터 ──
-const profProjects = {
+var profProjects = {
   'ncsoft': {
     id: '// PROFESSIONAL · NCSOFT · 2021—2024',
     title: 'Project M',
@@ -2072,8 +2072,8 @@ const profProjects = {
   }
 };
 
-let profCurrent = null;
-let profIdx = 0;
+var profCurrent = null;
+var profIdx = 0;
 
 function toggleNav() {
   var nav = document.getElementById('main-nav');
