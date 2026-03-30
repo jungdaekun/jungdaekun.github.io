@@ -1561,9 +1561,10 @@ function preloadFreqImages() {
   var fade = document.getElementById('prof-grid-fade');
   if (!grid) return;
 
-  // 첫 카드 높이 기준으로 max-height 동적 계산 (1+2+3+4 = 4줄 표시)
+  // 2번째 카드(span 6) 높이 기준으로 max-height 계산 (4줄)
   function calcHeight() {
-    var card = grid.querySelector('.prof-card');
+    var cards = grid.querySelectorAll('.prof-card');
+    var card = cards[1] || cards[0];
     if (!card) return;
     var h = card.offsetHeight;
     var gap = 12;
@@ -2063,6 +2064,8 @@ function closeNav() {
   btn.classList.remove('open');
 }
 
+
+var profLbUnlocked = false;
 
 function openProfLb(key, idx) {
   if (!profLbUnlocked) {
