@@ -1071,6 +1071,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="prof-grid-fade" id="prof-grid-fade"></div>
   </div>
 </section>
+
+<div id="prof-lb">
   <div class="prof-lb-wrap">
     <div class="prof-lb-header">
       <div class="prof-lb-title-area">
@@ -1340,15 +1342,13 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
   img.addEventListener('dblclick', function(e) {
     e.preventDefault(); e.stopPropagation();
     if (isOriginal) { resetZoom(); return; }
-    var naturalW = img.naturalWidth;
-    var viewW = img.clientWidth;
-    var scale = naturalW / viewW;
+    var scale = 1;
     isOriginal = true;
     isZoomed = false;
     transX = 0; transY = 0;
     img.style.cursor = 'grab';
     applyTransform(scale, 0, 0);
-    showZoomBadge(scale * 100);
+    showZoomBadge(100);
   });
 
   // mousedown → 드래그 시작 준비
@@ -1367,7 +1367,7 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     if (moved > 0) didDrag = true;
     transX += e.movementX;
     transY += e.movementY;
-    var scale = isOriginal ? (img.naturalWidth / img.clientWidth) : ZOOM;
+    var scale = isOriginal ? 1 : ZOOM;
     applyTransform(scale, transX, transY);
   });
 
@@ -2260,8 +2260,8 @@ document.addEventListener('wheel', function(e) {
     hideProfZoomBadge();
   }
 
-  var origRenderProfLb = window.renderProfLb;
-  window.renderProfLb = function() {
+  var origRenderProfLb = renderProfLb;
+  renderProfLb = function() {
     resetZoom();
     origRenderProfLb();
     var main = document.getElementById('prof-lb-main');
@@ -2278,12 +2278,12 @@ document.addEventListener('wheel', function(e) {
     if (!img || e.target !== img) return;
     e.preventDefault(); e.stopPropagation();
     if (isOriginal) { resetZoom(); return; }
-    var scale = img.naturalWidth / img.clientWidth;
+    var scale = 1;
     isOriginal = true; isZoomed = false;
     transX = 0; transY = 0;
     img.style.cursor = 'grab';
     applyTransform(img, scale, 0, 0);
-    showProfZoomBadge(scale * 100);
+    showProfZoomBadge(100);
   });
 
   document.addEventListener('mousedown', function(e) {
@@ -2302,7 +2302,7 @@ document.addEventListener('wheel', function(e) {
     var moved = Math.abs(e.movementX) + Math.abs(e.movementY);
     if (moved > 0) didDrag = true;
     transX += e.movementX; transY += e.movementY;
-    var scale = isOriginal ? (currentImg.naturalWidth / currentImg.clientWidth) : ZOOM;
+    var scale = isOriginal ? 1 : ZOOM;
     applyTransform(currentImg, scale, transX, transY);
   });
 
