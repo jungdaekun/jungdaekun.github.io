@@ -336,6 +336,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   section{padding:60px 24px;}
   #topbar{padding:0 20px;}
   nav{display:none;}
+  nav.open{display:flex;flex-direction:column;position:fixed;top:56px;left:0;right:0;background:rgba(8,10,13,.98);border-bottom:1px solid var(--border);z-index:99;padding:8px 0;}
+  nav.open a{height:48px;padding:0 24px;border-bottom:none;border-left:2px solid transparent;}
+  nav.open a:hover,nav.open a.active{border-left-color:var(--gold);border-bottom:none;}
+  .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:auto;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--text2);transition:all .3s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .topbar-right{display:none;}
   .hero-inner{padding:0 24px;}
   .hero-stats{display:none;}
   .about-grid,.works-grid,.relight-grid,.prof-grid,.sketch-grid{grid-template-columns:1fr;}
@@ -343,6 +352,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   footer{flex-direction:column;gap:16px;padding:30px 24px;text-align:center;}
   .footer-links{justify-content:center;}
 }
+.hamburger{display:none;}
 </style>
 </head>
 <body>
@@ -350,17 +360,20 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- TOPBAR -->
 <header id="topbar">
   <div class="logo">JDK</div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#freq-viewed">Featured</a>
-    <a href="#personal">Personal</a>
-    <a href="#relighting">Re:Lighting</a>
-    <a href="#professional">Professional</a>
-    <a href="#sketch">Sketch Note</a>
+  <nav id="main-nav">
+    <a href="#about" onclick="closeNav()">About</a>
+    <a href="#freq-viewed" onclick="closeNav()">Featured</a>
+    <a href="#personal" onclick="closeNav()">Personal</a>
+    <a href="#relighting" onclick="closeNav()">Re:Lighting</a>
+    <a href="#professional" onclick="closeNav()">Professional</a>
+    <a href="#sketch" onclick="closeNav()">Sketch Note</a>
   </nav>
   <div class="topbar-right">
     <div class="online-dot"></div>
     Environment Artist
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
   </div>
 </header>
 
@@ -755,24 +768,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="prof-card" onclick="openProfLb('nexon')">
       <div class="lock-badge">// NDA PROTECTED</div>
       <div class="prof-card-media"
-           data-vid="rpDh84e9mk0"
+           data-vid="NOZ51TUyemo"
            onmouseenter="profHoverIn(this)"
            onmouseleave="profHoverOut(this)">
-        <img class="prof-card-thumb" src="https://img.youtube.com/vi/rpDh84e9mk0/mqdefault.jpg" alt="Ascendant One thumbnail">
+        <img class="prof-card-thumb" src="https://img.youtube.com/vi/NOZ51TUyemo/mqdefault.jpg" alt="Ascendant One thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
           <div class="prof-card-media-label">▶ VIDEO + IMAGES</div>
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_013 · 2018</div>
-        <div class="prof-card-title">Ascendant One</div>
-        <div class="prof-card-sub">Nexon Korea · MOBA · PC Online</div>
-        <div class="prof-card-desc">Asset Modeling & Textures, Open Beta 출시</div>
+        <div class="prof-card-id">// PROJ_013 · 2017—2018</div>
+        <div class="prof-card-title">Nexon Korea</div>
+        <div class="prof-card-sub">Ascendant One · MOBA / PC Online / Open Beta</div>
+        <div class="prof-card-desc">Asset Modeling / Textures</div>
         <div class="prof-tags">
-          <span class="prof-tag">Unreal 4</span>
-          <span class="prof-tag">Substance</span>
-          <span class="prof-tag">PC</span>
+          <span class="prof-tag">Developer : devCAT</span>
+          <span class="prof-tag">Publisher : Nexon Korea</span>
         </div>
       </div>
     </div>
@@ -1942,12 +1954,55 @@ const profProjects = {
     ]
   },
   'nexon': {
-    id: '// PROFESSIONAL · NEXON KOREA · 2018',
+    id: '// PROFESSIONAL · NEXON KOREA · 2017—2018',
     title: 'Ascendant One',
     items: [
-      { type: 'video', videoId: 'rpDh84e9mk0' },
-      { type: 'image', src: 'images/Professional/Nexon/AscendantOne_001.jpg' },
-      { type: 'image', src: 'images/Professional/Nexon/AscendantOne_002.jpg' }
+      { type: 'video', videoId: 'NOZ51TUyemo' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_001.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_002.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_003.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_004.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_005.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_006.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_007.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_008.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_009.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_010.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_011.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_012.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_013.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_014.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_015.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_016.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_017.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_018.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_019.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_020.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_021.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_022.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_023.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_024.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_025.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_026.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_027.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_028.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_029.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_030.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_031.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_032.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_033.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_034.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_035.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_036.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_037.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_038.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_039.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_040.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_041.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_042.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_043.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_044.jpg' },
+      { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_045.jpg' }
     ]
   },
   'changse': {
@@ -1962,7 +2017,30 @@ const profProjects = {
 let profCurrent = null;
 let profIdx = 0;
 
+function toggleNav() {
+  var nav = document.getElementById('main-nav');
+  var btn = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeNav() {
+  var nav = document.getElementById('main-nav');
+  var btn = document.getElementById('hamburger');
+  nav.classList.remove('open');
+  btn.classList.remove('open');
+}
+
+
 function openProfLb(key, idx) {
+  if (!profLbUnlocked) {
+    var pw = prompt('비밀번호를 입력하세요:');
+    if (pw === null) return;
+    if (pw !== '0625') {
+      alert('비밀번호가 올바르지 않습니다.');
+      return;
+    }
+    profLbUnlocked = true;
+  }
   profCurrent = profProjects[key];
   if (!profCurrent) return;
   profIdx = idx || 0;
