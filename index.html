@@ -328,9 +328,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 
 /* ── SCROLL ANIMATIONS ── */
-.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
-.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
-.reveal-up{opacity:0;transform:translateY(40px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
+.reveal-left{opacity:1;transform:translateX(0);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal-right{opacity:1;transform:translateX(0);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal-up{opacity:1;transform:translateY(0);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
+.js-reveal .reveal-left{opacity:0;transform:translateX(-60px);}
+.js-reveal .reveal-right{opacity:0;transform:translateX(60px);}
+.js-reveal .reveal-up{opacity:0;transform:translateY(40px);}
 .revealed{opacity:1!important;transform:translate(0)!important;}
 
 /* stagger delays */
@@ -1555,12 +1558,6 @@ function renderFreqViewed() {
 }
 
 function freqItemClick(key, type, projectId, idx) {
-  var data = getFreqData();
-  var pool = getAllImagePool();
-  var p = pool.find(function(x){ return x.key === key; });
-  var src = p ? p.src : '';
-  var title = p ? p.title : '';
-  trackFreqClick(key, src, title);
   if (type === 'personal') openLightbox(projectId, idx);
   else openProfLb(projectId, idx);
 }
@@ -2331,6 +2328,7 @@ document.addEventListener('wheel', function(e) {
   });
 })();
 const revealEls = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+document.body.classList.add('js-reveal');
 
 const revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
@@ -2356,12 +2354,20 @@ revealEls.forEach(function(el) {
   revealObserver.observe(el);
 });
 
-// 샌드박스/미리보기 환경 폴백: 1초 후에도 안 보이면 전부 강제 표시
+// 폴백: IntersectionObserver 미작동 환경에서 즉시 표시
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(function(el) {
+      if (!el.classList.contains('revealed')) el.classList.add('revealed');
+    });
+  }, 100);
+});
+// 이미 로드된 경우
 setTimeout(function() {
   document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(function(el) {
-    el.classList.add('revealed');
+    if (!el.classList.contains('revealed')) el.classList.add('revealed');
   });
-}, 800);
+}, 100);
 
 // 특정 섹션 애니메이션 리셋 + 재생
 function replaySectionAnimation(sectionId) {
