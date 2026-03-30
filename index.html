@@ -103,7 +103,10 @@ section{padding:100px 80px;}
 .exp-item{padding:20px 0;border-bottom:1px solid var(--border);position:relative;}
 .exp-item:first-child{padding-top:0;}
 .exp-year{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:6px;}
-.exp-company{font-family:var(--font-title);font-size:20px;font-weight:600;letter-spacing:.06em;color:var(--text);text-transform:uppercase;margin-bottom:4px;}
+.exp-company a{color:inherit;text-decoration:none;cursor:pointer;transition:color .2s;}
+.exp-company a:hover{color:var(--gold);}
+.exp-company a::after{content:'';font-size:10px;margin-left:6px;opacity:0;transition:opacity .2s;}
+.exp-company a:hover::after{content:'▶';opacity:1;}
 .exp-role{font-size:13px;color:var(--gold);margin-bottom:6px;}
 .exp-project{font-size:12px;color:var(--text2);line-height:1.6;}
 .exp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
@@ -461,7 +464,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="about-right">
       <div class="exp-item reveal-right">
         <div class="exp-year">2021 —</div>
-        <div class="exp-company"><a href="#professional" onclick="profLbUnlocked=profLbUnlocked; setTimeout(function(){openProfLb('ncsoft')},300)" style="color:inherit;text-decoration:none;">NCSoft</a></div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('ncsoft')">NCSoft</a></div>
         <div class="exp-role">Senior Environment Artist · Integration & Lighting</div>
         <div class="exp-project">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
         <div class="exp-tags">
@@ -473,7 +476,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2020 —</div>
-        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('changse')},300)" style="color:inherit;text-decoration:none;">Line Games</a></div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('changse')">Line Games</a></div>
         <div class="exp-role">Lead Environment Artist</div>
         <div class="exp-project">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
         <div class="exp-tags">
@@ -485,7 +488,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2018 —</div>
-        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('nexon')},300)" style="color:inherit;text-decoration:none;">Nexon Korea</a></div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('nexon')">Nexon Korea</a></div>
         <div class="exp-role">Senior Environment Artist</div>
         <div class="exp-project">Ascendant One / MOBA · Open Beta / PC Online</div>
         <div class="exp-tags">
@@ -496,7 +499,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2017 —</div>
-        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('xlgames')},300)" style="color:inherit;text-decoration:none;">XLGames</a></div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('xlgames')">XLGames</a></div>
         <div class="exp-role">Environment Artist</div>
         <div class="exp-project">Civilization Online / MMORPG · Open Beta / PC Online</div>
         <div class="exp-tags">
@@ -507,7 +510,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2016 —</div>
-        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('neptune')},300)" style="color:inherit;text-decoration:none;">Neptune</a></div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('neptune')">Neptune</a></div>
         <div class="exp-role">Lead Environment Artist</div>
         <div class="exp-project">Neppy Project / Simulation · Alpha / Mobile</div>
         <div class="exp-tags">
@@ -518,7 +521,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2013 — 2015</div>
-        <div class="exp-company"><a href="#professional" onclick="setTimeout(function(){openProfLb('puregames')},300)" style="color:inherit;text-decoration:none;">Pure Games</a></div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('puregames')">Pure Games</a></div>
         <div class="exp-role">Art Director</div>
         <div class="exp-project">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
         <div class="exp-tags">
@@ -1060,10 +1063,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+    <div class="prof-grid-fade" id="prof-grid-fade"></div>
   </div>
 </section>
-
-<div id="prof-lb">
   <div class="prof-lb-wrap">
     <div class="prof-lb-header">
       <div class="prof-lb-title-area">
