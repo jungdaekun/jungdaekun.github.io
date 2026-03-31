@@ -251,7 +251,7 @@ section{padding:100px 80px;}
 .project-strip-thumb:hover{opacity:1;border-color:var(--gold);}
 #sketch{background:var(--bg2);}
 .sketch-desc{font-size:13px;color:var(--text2);line-height:1.8;max-width:600px;margin-bottom:40px;}
-.sketch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;}
 .sketch-item{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
 .sketch-item:hover{border-color:var(--border2);}
 .sketch-label{font-family:var(--font-mono);font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
@@ -2433,7 +2433,7 @@ const navLinks = document.querySelectorAll('nav a');
 // 네비게이션 클릭 시 애니메이션 재생
 navLinks.forEach(function(a) {
   a.addEventListener('click', function() {
-    const targetId = a.getAttribute('hre    const targetId = a.getAttribute('href').replace('#', '');
+    const targetId = a.getAttribute('href').replace('#', '');
     setTimeout(function() { replaySectionAnimation(targetId); }, 300);
   });
 });
