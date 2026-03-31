@@ -258,6 +258,10 @@ section{padding:100px 80px;}
 .sketch-clickable{cursor:pointer;}
 .sketch-hover-arrow{position:absolute;bottom:12px;right:12px;font-size:16px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .2s,transform .2s;}
 .sketch-clickable:hover .sketch-hover-arrow{opacity:1;transform:translateX(0);}
+/* 스케치 줌 오버레이 */
+#sketch-zoom{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out;}
+#sketch-zoom.active{display:flex;}
+#sketch-zoom img{max-width:90vw;max-height:90vh;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8);}
 
 /* ── FOOTER ── */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px;display:flex;align-items:center;justify-content:space-between;}
@@ -1110,8 +1114,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
   <p class="sketch-desc">개인 스케치 및 드로잉 노트. 환경 디자인 아이디어와 콘셉트 작업물을 기록합니다.</p>
   <div class="sketch-grid">
-    <div class="sketch-item sketch-clickable"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-arrow">▶</div></div>
-    <div class="sketch-item sketch-clickable"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-arrow">▶</div></div>
+    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Prop_Final.jpg')"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-arrow">▶</div></div>
+    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Stone_final.jpg')"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-arrow">▶</div></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_003</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_004</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_005</span></div>
@@ -2449,6 +2453,24 @@ const navObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.3 });
 
 sections.forEach(function(s) { navObserver.observe(s); });
+</script>
+<!-- SKETCH ZOOM OVERLAY -->
+<div id="sketch-zoom" onclick="closeSketchZoom()">
+  <img id="sketch-zoom-img" src="" alt="">
+</div>
+<script>
+function openSketchZoom(src) {
+  document.getElementById('sketch-zoom-img').src = src;
+  document.getElementById('sketch-zoom').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeSketchZoom() {
+  document.getElementById('sketch-zoom').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSketchZoom();
+});
 </script>
 </body>
 </html>
