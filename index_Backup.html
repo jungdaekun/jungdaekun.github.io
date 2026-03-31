@@ -104,10 +104,6 @@ section{padding:100px 80px;}
 .exp-item:first-child{padding-top:0;}
 .exp-year{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:6px;}
 .exp-company{font-family:var(--font-title);font-size:20px;font-weight:600;letter-spacing:.06em;color:var(--text);text-transform:uppercase;margin-bottom:4px;}
-.exp-company a{color:inherit;text-decoration:none;cursor:pointer;transition:color .2s;display:inline-flex;align-items:center;gap:6px;line-height:1;}
-.exp-company a:hover{color:var(--gold);}
-.exp-company a::after{content:'▶';font-size:9px;opacity:0;transform:translateX(-4px);transition:opacity .2s, transform .2s;display:inline-block;vertical-align:middle;position:relative;top:2px;}
-.exp-company a:hover::after{opacity:1;transform:translateX(3px);}
 .exp-role{font-size:13px;color:var(--gold);margin-bottom:6px;}
 .exp-project{font-size:12px;color:var(--text2);line-height:1.6;}
 .exp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
@@ -168,11 +164,9 @@ section{padding:100px 80px;}
 .professional-note-icon{font-family:var(--font-mono);font-size:18px;color:var(--gold);}
 .professional-note-text{font-size:13px;color:var(--text2);line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(60,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
-.prof-grid .prof-card:nth-child(-n+2){grid-column:span 30;}
-.prof-grid .prof-card:nth-child(n+3):nth-child(-n+5){grid-column:span 20;}
-.prof-grid .prof-card:nth-child(n+6):nth-child(-n+9){grid-column:span 15;}
-.prof-grid .prof-card:nth-child(n+10){grid-column:span 12;}
+.prof-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 3 + 24px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid .prof-card:nth-child(-n+4){grid-column:span 3;}
+.prof-grid .prof-card:nth-child(n+5){grid-column:span 2;}
 .prof-grid::-webkit-scrollbar{width:4px;}
 .prof-grid::-webkit-scrollbar-track{background:transparent;}
 .prof-grid::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
@@ -227,10 +221,6 @@ section{padding:100px 80px;}
 .prof-lb-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .2s;}
 .prof-lb-dot.active{background:var(--gold);transform:scale(1.4);}
 .prof-lb-type-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:rgba(200,168,75,.15);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:2;}
-.prof-lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
-.prof-lb-zoom-badge.visible{opacity:1;}
-.lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
-.lb-zoom-badge.visible{opacity:1;}
 
 /* prof-lb 썸네일 스트립 */
 .prof-lb-thumbs{display:flex;gap:6px;padding:10px 16px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;min-height:68px;align-items:center;}
@@ -251,31 +241,10 @@ section{padding:100px 80px;}
 .project-strip-thumb:hover{opacity:1;border-color:var(--gold);}
 #sketch{background:var(--bg2);}
 .sketch-desc{font-size:13px;color:var(--text2);line-height:1.8;max-width:600px;margin-bottom:40px;}
-.sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;}
+.sketch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
 .sketch-item{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
 .sketch-item:hover{border-color:var(--border2);}
 .sketch-label{font-family:var(--font-mono);font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
-.sketch-clickable{cursor:pointer;}
-.sketch-clickable img{transition:transform .4s;}
-.sketch-clickable:hover img{transform:scale(1.05);}
-.sketch-hover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 60%);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;pointer-events:none;}
-.sketch-clickable:hover .sketch-hover-overlay{opacity:1;}
-.sketch-hover-title{font-family:var(--font-title);font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);}
-.sketch-hover-sub{font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:.1em;margin-top:3px;}
-/* 스케치 줌 오버레이 */
-#sketch-zoom{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-in;}
-#sketch-zoom.active{display:flex;}
-#sketch-zoom.zoomed{cursor:grab;}
-#sketch-zoom.zoomed.dragging{cursor:grabbing;}
-#sketch-zoom img{max-width:90vw;max-height:85vh;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8);transition:transform .25s cubic-bezier(.25,.46,.45,.94);transform-origin:center center;user-select:none;}
-/* 키 힌트 HUD */
-#sketch-zoom-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:16px;align-items:center;}
-.sz-hint{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;}
-.sz-key{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:20px;padding:0 5px;border:1px solid rgba(255,255,255,.2);border-radius:3px;font-size:10px;color:rgba(255,255,255,.45);background:rgba(255,255,255,.05);}
-.sz-icon{font-size:13px;color:rgba(255,255,255,.35);}
-/* 줌 배지 */
-#sketch-zoom-badge{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 14px;background:rgba(8,10,13,.85);border:1px solid rgba(200,168,75,.25);color:var(--gold);letter-spacing:.1em;opacity:0;transition:opacity .2s;pointer-events:none;}
-#sketch-zoom-badge.visible{opacity:1;}
 
 /* ── FOOTER ── */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px;display:flex;align-items:center;justify-content:space-between;}
@@ -349,12 +318,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 
 /* ── SCROLL ANIMATIONS ── */
-.reveal-left{opacity:1;transform:translateX(0);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
-.reveal-right{opacity:1;transform:translateX(0);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
-.reveal-up{opacity:1;transform:translateY(0);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
-.js-reveal .reveal-left{opacity:0;transform:translateX(-60px);}
-.js-reveal .reveal-right{opacity:0;transform:translateX(60px);}
-.js-reveal .reveal-up{opacity:0;transform:translateY(40px);}
+.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal-up{opacity:0;transform:translateY(40px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
 .revealed{opacity:1!important;transform:translate(0)!important;}
 
 /* stagger delays */
@@ -433,25 +399,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       Level Design · Integration & Lighting · Texturing<br>
       Unreal Engine · 3ds Max · Substance Painter
     </p>
-    <div class="hero-cta" style="flex-direction:column;align-items:flex-start;">
+    <div class="hero-cta">
       <a href="#about" class="btn-primary">View Profile</a>
-      <div style="font-family:var(--font-title);font-size:14px;margin-top:4px;line-height:2;letter-spacing:.06em;">
-        <div style="color:var(--text3);">├─ <a href="#personal" style="color:var(--text2);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Works</a></div>
-        <div style="color:var(--text3);">└─ <a href="#professional" style="color:var(--text2);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Professional</a></div>
-      </div>
+      <a href="#personal" class="btn-ghost">Works</a>
     </div>
   </div>
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num">15+</div>
+      <div class="stat-num">10+</div>
       <div class="stat-label">Years Exp</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">10+</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Studios</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">6</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">Shipped Titles</div>
     </div>
   </div>
@@ -469,7 +432,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="name-big reveal-left">Jung<br>Daekun</div>
       <div class="title-tag reveal-left delay-1">Senior Environment Artist</div>
       <div class="about-contact reveal-left delay-2">
-        Contact: <a href="/cdn-cgi/l/email-protection#adc7d8c3cac9ccc8c6d8c3edcac0ccc4c183cec2c0"><span class="__cf_email__" data-cfemail="83e9f6ede4e7e2e6e8f6edc3e4eee2eaefade0ecee">[email&#160;protected]</span></a>
+        Contact: <a href="/cdn-cgi/l/email-protection#fd9788939a999c98968893bd9a909c9491d39e9290"><span class="__cf_email__" data-cfemail="066c7368616267636d736846616b676f6a2865696b">[email&#160;protected]</span></a>
       </div>
       <div class="skills-grid" id="skills-grid" style="margin-top:32px">
         <div class="skill-item reveal-left">Level Design</div>
@@ -492,10 +455,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
     <div class="about-right">
       <div class="exp-item reveal-right">
-        <div class="exp-year">2021 — 2024</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('ncsoft')">NCSoft</a></div>
-        <div class="exp-role">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
-        <div class="exp-project">Senior Environment Artist · Integration & Lighting</div>
+        <div class="exp-year">2021 —</div>
+        <div class="exp-company">NCSoft</div>
+        <div class="exp-role">Senior Environment Artist · Integration & Lighting</div>
+        <div class="exp-project">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
         <div class="exp-tags">
           <span class="exp-tag">Unreal 5</span>
           <span class="exp-tag">Outsourcing</span>
@@ -504,10 +467,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="exp-item reveal-right">
-        <div class="exp-year">2018 — 2020</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('changse')">Line Games</a></div>
-        <div class="exp-role">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
-        <div class="exp-project">Lead Environment Artist</div>
+        <div class="exp-year">2020 —</div>
+        <div class="exp-company">Line Games</div>
+        <div class="exp-role">Lead Environment Artist</div>
+        <div class="exp-project">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
         <div class="exp-tags">
           <span class="exp-tag">Unreal 4</span>
           <span class="exp-tag">Level Design</span>
@@ -516,10 +479,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="exp-item reveal-right">
-        <div class="exp-year">2017 — 2018</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('nexon')">Nexon Korea</a></div>
-        <div class="exp-role">Ascendant One / MOBA · Open Beta / PC Online</div>
-        <div class="exp-project">Senior Environment Artist</div>
+        <div class="exp-year">2018 —</div>
+        <div class="exp-company">Nexon Korea</div>
+        <div class="exp-role">Senior Environment Artist</div>
+        <div class="exp-project">Ascendant One / MOBA · Open Beta / PC Online</div>
         <div class="exp-tags">
           <span class="exp-tag">Unreal 4</span>
           <span class="exp-tag">Substance</span>
@@ -527,10 +490,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="exp-item reveal-right">
-        <div class="exp-year">2017 — 2017</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('xlgames')">XLGames</a></div>
-        <div class="exp-role">Civilization Online / MMORPG · Open Beta / PC Online</div>
-        <div class="exp-project">Senior Environment Artist</div>
+        <div class="exp-year">2017 —</div>
+        <div class="exp-company">XLGames</div>
+        <div class="exp-role">Environment Artist</div>
+        <div class="exp-project">Civilization Online / MMORPG · Open Beta / PC Online</div>
         <div class="exp-tags">
           <span class="exp-tag">CryEngine 3.x</span>
           <span class="exp-tag">World Machine</span>
@@ -538,10 +501,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="exp-item reveal-right">
-        <div class="exp-year">2015 — 2016</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('neptune')">Neptune</a></div>
-        <div class="exp-role">Neppy Project / Simulation · Alpha / Mobile</div>
-        <div class="exp-project">Lead Environment Artist</div>
+        <div class="exp-year">2016 —</div>
+        <div class="exp-company">Neptune</div>
+        <div class="exp-role">Lead Environment Artist</div>
+        <div class="exp-project">Neppy Project / Simulation · Alpha / Mobile</div>
         <div class="exp-tags">
           <span class="exp-tag">Unity 5.x</span>
           <span class="exp-tag">Vray</span>
@@ -550,9 +513,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="exp-item reveal-right">
         <div class="exp-year">2013 — 2015</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('puregames')">Pure Games</a></div>
-        <div class="exp-role">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
-        <div class="exp-project">Art Director</div>
+        <div class="exp-company">Pure Games</div>
+        <div class="exp-role">Art Director</div>
+        <div class="exp-project">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
         <div class="exp-tags">
           <span class="exp-tag">Unity 4.x</span>
           <span class="exp-tag">Art Direction</span>
@@ -691,7 +654,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
         <img id="lb-img" class="lb-img" src="" alt="">
-        <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
         <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
         <button class="lb-nav-next" onclick="lbNext()">›</button>
         <div class="lb-nav-indicator" id="lb-nav-dots"></div>
@@ -746,7 +708,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="professional-note-icon">🔒</div>
     <div class="professional-note-text">
       회사 작업물은 NDA 계약으로 인해 공개가 제한됩니다.<br>
-      열람을 원하시면 별도 문의 부탁드립니다 — <a href="/cdn-cgi/l/email-protection#e68c9388818287838d9388a6818b878f8ac885898b" style="color:var(--gold);text-decoration:none;"><span class="__cf_email__" data-cfemail="503a253e373431353b253e10373d31393c7e333f3d">[email&#160;protected]</span></a>
+      열람을 원하시면 별도 문의 부탁드립니다 — <a href="/cdn-cgi/l/email-protection#dab0afb4bdbebbbfb1afb49abdb7bbb3b6f4b9b5b7" style="color:var(--gold);text-decoration:none;"><span class="__cf_email__" data-cfemail="2f455a41484b4e4a445a416f48424e4643014c4042">[email&#160;protected]</span></a>
     </div>
   </div>
   <div class="prof-grid-wrap">
@@ -766,13 +728,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id">// PROJ_015 · 2021—2024</div>
-        <div class="prof-card-title">NCSoft</div>
-        <div class="prof-card-sub">Project M · Interactive Adventure / Console / Alpha Version</div>
-        <div class="prof-card-desc">3D Environment Integration Art</div>
+        <div class="prof-card-id">// PROJ_015 · 2021</div>
+        <div class="prof-card-title">Project M</div>
+        <div class="prof-card-sub">NCSoft · Interactive Adventure · PlayStation 5</div>
+        <div class="prof-card-desc">Integration & Lighting, Outsourcing & Feedback</div>
         <div class="prof-tags">
-          <span class="prof-tag">Developer : Project M</span>
-          <span class="prof-tag">Publisher : NCSOFT</span>
+          <span class="prof-tag">Unreal 5</span>
+          <span class="prof-tag">PS5</span>
+          <span class="prof-tag">Lighting</span>
         </div>
       </div>
     </div>
@@ -1092,7 +1055,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
-    <div class="prof-grid-fade" id="prof-grid-fade"></div>
   </div>
 </section>
 
@@ -1112,7 +1074,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <button class="prof-lb-nav-prev" onclick="profLbStep(-1)">‹</button>
       <button class="prof-lb-nav-next" onclick="profLbStep(1)">›</button>
       <div class="prof-lb-dots" id="prof-lb-dots"></div>
-      <div class="prof-lb-zoom-badge" id="prof-lb-zoom-badge">🔍 100%</div>
       <div class="prof-lb-type-badge" id="prof-lb-type-badge"></div>
     </div>
     <div class="prof-lb-thumbs" id="prof-lb-thumbs"></div>
@@ -1128,21 +1089,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
   <p class="sketch-desc">개인 스케치 및 드로잉 노트. 환경 디자인 아이디어와 콘셉트 작업물을 기록합니다.</p>
   <div class="sketch-grid">
-<<<<<<< Updated upstream
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Box.gif')"><img src="images/SketchNote/Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Box</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Lava_Field.gif')"><img src="images/SketchNote/Lava_Field.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Lava Field</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Jewelry_Box.gif')"><img src="images/SketchNote/Jewelry_Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Jewelry Box</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Stone_final.jpg')"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Stone Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Prop_Final.jpg')"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Prop Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/village.JPG')"><img src="images/SketchNote/village.JPG" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Village</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-=======
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Prop_Final.jpg')"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Prop Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Stone_final.jpg')"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Stone Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
+    <div class="sketch-item"><span class="sketch-label">// SKETCH_001</span></div>
+    <div class="sketch-item"><span class="sketch-label">// SKETCH_002</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_003</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_004</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_005</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_006</span></div>
->>>>>>> Stashed changes
+    <div class="sketch-item"><span class="sketch-label">// SKETCH_007</span></div>
+    <div class="sketch-item"><span class="sketch-label">// SKETCH_008</span></div>
   </div>
 </section>
 
@@ -1151,12 +1105,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="footer-logo">Jung Daekun</div>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
   <div class="footer-links">
-    <a href="/cdn-cgi/l/email-protection#6d0718030a090c080618032d0a000c0401430e0200">Email</a>
+    <a href="/cdn-cgi/l/email-protection#a1cbd4cfc6c5c0c4cad4cfe1c6ccc0c8cd8fc2cecc">Email</a>
     <a href="https://jungdaekun.blogspot.com" target="_blank">Blog</a>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+</footer>
+
+<script>
 // ── RANDOM YOUTUBE BACKGROUND ──
 const bgVideos = [
   'bDXLAaqR_Yg',
@@ -1174,6 +1130,16 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
+  'proj-ncsoft': {
+    id: '// PROFESSIONAL · NCSOFT · 2021',
+    title: 'Project M',
+    images: [
+      'images/Professional/Ncsoft/001.jpg',
+      'images/Professional/Ncsoft/002.jpg',
+      'images/Professional/Ncsoft/008.jpg',
+      'images/Professional/Ncsoft/009.jpg'
+    ]
+  },
   'proj-m4': {
     id: '// PERSONAL · M4',
     title: 'M4',
@@ -1200,23 +1166,6 @@ const projects = {
       'images/personal/2019-2020/2DNormal_007.jpg',
       'images/personal/2019-2020/2DNormal_008.jpg',
       'images/personal/2019-2020/2DNormal_009.jpg'
-    ]
-  },
-  'proj-sketch': {
-    id: '// SKETCH NOTE',
-    title: 'Sketch Note',
-    images: [
-<<<<<<< Updated upstream
-      'images/SketchNote/Box.gif',
-      'images/SketchNote/Lava_Field.gif',
-      'images/SketchNote/Jewelry_Box.gif',
-      'images/SketchNote/Stone_final.jpg',
-      'images/SketchNote/Prop_Final.jpg',
-      'images/SketchNote/village.JPG'
-=======
-      'images/SketchNote/Prop_Final.jpg',
-      'images/SketchNote/Stone_final.jpg'
->>>>>>> Stashed changes
     ]
   }
 };
@@ -1351,53 +1300,26 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 (function() {
   var img = document.getElementById('lb-img');
   var isZoomed  = false;
-  var isOriginal = false;
   var isDragging = false;
   var didDrag   = false;
   var transX = 0, transY = 0;
-  var ZOOM = 2.0;
+  var ZOOM = 1.8;
   var THRESHOLD = 4;
 
-  function showZoomBadge(pct) {
-    var badge = document.getElementById('lb-zoom-badge');
-    if (!badge) return;
-    badge.textContent = '🔍 ' + Math.round(pct) + '%';
-    badge.classList.add('visible');
-  }
-  function hideZoomBadge() {
-    var badge = document.getElementById('lb-zoom-badge');
-    if (badge) badge.classList.remove('visible');
-  }
-
-  function applyTransform(scale, tx, ty) {
-    img.style.transform = 'scale(' + scale + ') translate(' + (tx/scale) + 'px, ' + (ty/scale) + 'px)';
+  function applyTransform(tx, ty) {
+    img.style.transform = 'scale(' + ZOOM + ') translate(' + (tx/ZOOM) + 'px, ' + (ty/ZOOM) + 'px)';
   }
   function resetZoom() {
     isZoomed   = false;
-    isOriginal = false;
     isDragging = false;
     didDrag    = false;
     transX = 0; transY = 0;
     img.style.cursor    = 'zoom-in';
     img.style.transform = '';
-    hideZoomBadge();
   }
 
   var origRender = window.renderLightbox;
   window.renderLightbox = function() { resetZoom(); origRender(); };
-
-  // 더블클릭 → 원본 크기
-  img.addEventListener('dblclick', function(e) {
-    e.preventDefault(); e.stopPropagation();
-    if (isOriginal) { resetZoom(); return; }
-    var scale = 1;
-    isOriginal = true;
-    isZoomed = false;
-    transX = 0; transY = 0;
-    img.style.cursor = 'grab';
-    applyTransform(scale, 0, 0);
-    showZoomBadge(100);
-  });
 
   // mousedown → 드래그 시작 준비
   img.addEventListener('mousedown', function(e) {
@@ -1405,18 +1327,17 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     e.preventDefault(); e.stopPropagation();
     isDragging = true;
     didDrag    = false;
-    if (isZoomed || isOriginal) img.style.cursor = 'grabbing';
+    if (isZoomed) img.style.cursor = 'grabbing';
   });
 
   // mousemove → 줌 상태에서 이동
   document.addEventListener('mousemove', function(e) {
-    if (!isDragging || (!isZoomed && !isOriginal)) return;
+    if (!isDragging || !isZoomed) return;
     var moved = Math.abs(e.movementX) + Math.abs(e.movementY);
     if (moved > 0) didDrag = true;
     transX += e.movementX;
     transY += e.movementY;
-    var scale = isOriginal ? 1 : ZOOM;
-    applyTransform(scale, transX, transY);
+    applyTransform(transX, transY);
   });
 
   // mouseup → 클릭(줌 토글) or 드래그 끝
@@ -1424,24 +1345,24 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.button !== 0 || !isDragging) return;
     isDragging = false;
     if (!didDrag) {
-      if (isOriginal) { resetZoom(); }
-      else if (!isZoomed) {
+      // 순수 클릭 → 줌 토글
+      if (!isZoomed) {
         isZoomed = true;
         img.style.cursor = 'grab';
-        applyTransform(ZOOM, 0, 0);
-        showZoomBadge(ZOOM * 100);
+        applyTransform(0, 0);
       } else {
         resetZoom();
       }
     } else {
-      if (isZoomed || isOriginal) img.style.cursor = 'grab';
+      // 드래그 끝 → 커서만 복구
+      if (isZoomed) img.style.cursor = 'grab';
     }
     didDrag = false;
   });
 
   img.addEventListener('contextmenu', function(e) { e.preventDefault(); resetZoom(); });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && (isZoomed || isOriginal)) resetZoom();
+    if (e.key === 'Escape' && isZoomed) resetZoom();
   });
 })();
 
@@ -1606,6 +1527,12 @@ function renderFreqViewed() {
 }
 
 function freqItemClick(key, type, projectId, idx) {
+  var data = getFreqData();
+  var pool = getAllImagePool();
+  var p = pool.find(function(x){ return x.key === key; });
+  var src = p ? p.src : '';
+  var title = p ? p.title : '';
+  trackFreqClick(key, src, title);
   if (type === 'personal') openLightbox(projectId, idx);
   else openProfLb(projectId, idx);
 }
@@ -1633,14 +1560,13 @@ function preloadFreqImages() {
   var fade = document.getElementById('prof-grid-fade');
   if (!grid) return;
 
-  // 2번째 카드 높이 기준으로 max-height 계산 (2줄 표시)
+  // 첫 카드 높이 기준으로 max-height 동적 계산 (2열 2줄 + 3열 1줄 = 3줄 표시)
   function calcHeight() {
-    var cards = grid.querySelectorAll('.prof-card');
-    var card = cards[1] || cards[0];
+    var card = grid.querySelector('.prof-card');
     if (!card) return;
     var h = card.offsetHeight;
     var gap = 12;
-    grid.style.maxHeight = (h * 2 + gap) + 'px';
+    grid.style.maxHeight = (h * 3 + gap * 2) + 'px';
   }
   window.addEventListener('load', calcHeight);
   window.addEventListener('resize', calcHeight);
@@ -1694,8 +1620,7 @@ function profHoverIn(el) {
       (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
       (vid === '-y3fQ73U-2Q' ? '&start=72' : '') +
       (vid === 'vdAS1SI1xes' ? '&start=39' : '') +
-      (vid === 'behf7twp1bo' ? '&start=30' : '') +
-      (vid === '2zKdRMch0Us' ? '&start=3' : '');
+      (vid === 'behf7twp1bo' ? '&start=30' : '');
   }
   // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
   clearTimeout(profHoverTimer);
@@ -1709,49 +1634,17 @@ function profHoverOut(el) {
 }
 
 // ── PROF LIGHTBOX 데이터 ──
-var profProjects = {
+const profProjects = {
   'ncsoft': {
-    id: '// PROFESSIONAL · NCSOFT · 2021—2024',
+    id: '// PROFESSIONAL · NCSOFT · 2021',
     title: 'Project M',
     items: [
       { type: 'video', videoId: 'bDXLAaqR_Yg' },
       { type: 'video', videoId: 'aMYvommxKiw' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_001.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_002.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_003.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_004.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_005.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_006.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_007.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_008.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_009.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_010.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_011.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_012.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_013.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_014.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_015.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_016.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_017.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_018.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_019.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_020.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_021.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_022.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_023.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_024.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_025.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_026.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_027.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_028.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_029.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_030.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_031.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_032.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_033.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_034.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_035.jpg' },
-      { type: 'image', src: 'images/Professional/2021_NCSOFT/2021_NCSOFT_ProjectM_036.jpg' }
+      { type: 'image', src: 'images/Professional/Ncsoft/001.jpg' },
+      { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
+      { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
+      { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
     ]
   },
   'artechsoft': {
@@ -2120,8 +2013,8 @@ var profProjects = {
   }
 };
 
-var profCurrent = null;
-var profIdx = 0;
+let profCurrent = null;
+let profIdx = 0;
 
 function toggleNav() {
   var nav = document.getElementById('main-nav');
@@ -2137,20 +2030,16 @@ function closeNav() {
 }
 
 
-var profLbUnlocked = false;
-
 function openProfLb(key, idx) {
-  /* 🔐 비번 임시 비활성화 (완성 후 재활성화 예정)
   if (!profLbUnlocked) {
     var pw = prompt('비밀번호를 입력하세요:');
     if (pw === null) return;
-    if (pw !== '!234') {
+    if (pw !== '0625') {
       alert('비밀번호가 올바르지 않습니다.');
       return;
     }
     profLbUnlocked = true;
   }
-  */
   profCurrent = profProjects[key];
   if (!profCurrent) return;
   profIdx = idx || 0;
@@ -2249,9 +2138,6 @@ function renderProfLb() {
   var showNav = profCurrent.items.length > 1;
   main.querySelector('.prof-lb-nav-prev').style.display = showNav ? 'flex' : 'none';
   main.querySelector('.prof-lb-nav-next').style.display = showNav ? 'flex' : 'none';
-
-  // 줌 리셋
-  if (window.profZoomReset) window.profZoomReset();
 }
 
 // 키보드 + 배경 클릭 닫기
@@ -2285,59 +2171,37 @@ document.addEventListener('wheel', function(e) {
 
 // ── PROF-LB 이미지 줌 & 드래그 ──
 (function() {
-  var isZoomed = false, isOriginal = false, isDragging = false, didDrag = false;
+  var isZoomed = false, isDragging = false, didDrag = false;
   var transX = 0, transY = 0;
-  var ZOOM = 2.0;
+  var ZOOM = 1.8;
   var currentImg = null;
 
-  function showProfZoomBadge(pct) {
-    var badge = document.getElementById('prof-lb-zoom-badge');
-    if (!badge) return;
-    badge.textContent = '🔍 ' + Math.round(pct) + '%';
-    badge.classList.add('visible');
-  }
-  function hideProfZoomBadge() {
-    var badge = document.getElementById('prof-lb-zoom-badge');
-    if (badge) badge.classList.remove('visible');
-  }
-
-  function applyTransform(img, scale, tx, ty) {
-    img.style.transform = 'scale(' + scale + ') translate(' + (tx/scale) + 'px, ' + (ty/scale) + 'px)';
+  function applyTransform(img, tx, ty) {
+    img.style.transform = 'scale(' + ZOOM + ') translate(' + (tx/ZOOM) + 'px, ' + (ty/ZOOM) + 'px)';
   }
   function resetZoom() {
     if (!currentImg) return;
-    isZoomed = false; isOriginal = false; isDragging = false; didDrag = false;
+    isZoomed = false; isDragging = false; didDrag = false;
     transX = 0; transY = 0;
     currentImg.style.cursor = 'zoom-in';
     currentImg.style.transform = '';
-    hideProfZoomBadge();
   }
 
-  // renderProfLb 호출 후 외부에서 직접 호출
-  window.profZoomReset = function() {
+  // renderProfLb 호출 후 이미지가 DOM에 추가될 때 줌 리셋
+  var origRenderProfLb = window.renderProfLb;
+  window.renderProfLb = function() {
     resetZoom();
+    origRenderProfLb();
+    // 이미지면 cursor 설정
     var main = document.getElementById('prof-lb-main');
-    if (!main) return;
     var img = main.querySelector('.prof-lb-img-el');
-    if (img) { currentImg = img; img.style.cursor = 'zoom-in'; }
-    else { currentImg = null; }
+    if (img) {
+      currentImg = img;
+      img.style.cursor = 'zoom-in';
+    } else {
+      currentImg = null;
+    }
   };
-
-  // 더블클릭 → 원본 크기
-  document.addEventListener('dblclick', function(e) {
-    var main = document.getElementById('prof-lb-main');
-    if (!main) return;
-    var img = main.querySelector('.prof-lb-img-el');
-    if (!img || e.target !== img) return;
-    e.preventDefault(); e.stopPropagation();
-    if (isOriginal) { resetZoom(); return; }
-    var scale = 1;
-    isOriginal = true; isZoomed = false;
-    transX = 0; transY = 0;
-    img.style.cursor = 'grab';
-    applyTransform(img, scale, 0, 0);
-    showProfZoomBadge(100);
-  });
 
   document.addEventListener('mousedown', function(e) {
     var main = document.getElementById('prof-lb-main');
@@ -2347,41 +2211,39 @@ document.addEventListener('wheel', function(e) {
     currentImg = img;
     e.preventDefault(); e.stopPropagation();
     isDragging = true; didDrag = false;
-    if (isZoomed || isOriginal) img.style.cursor = 'grabbing';
+    if (isZoomed) img.style.cursor = 'grabbing';
   });
 
   document.addEventListener('mousemove', function(e) {
-    if (!isDragging || (!isZoomed && !isOriginal) || !currentImg) return;
+    if (!isDragging || !isZoomed || !currentImg) return;
     var moved = Math.abs(e.movementX) + Math.abs(e.movementY);
     if (moved > 0) didDrag = true;
     transX += e.movementX; transY += e.movementY;
-    var scale = isOriginal ? 1 : ZOOM;
-    applyTransform(currentImg, scale, transX, transY);
+    applyTransform(currentImg, transX, transY);
   });
 
   document.addEventListener('mouseup', function(e) {
     if (e.button !== 0 || !isDragging) return;
     isDragging = false;
     if (!didDrag && currentImg) {
-      if (isOriginal) { resetZoom(); }
-      else if (!isZoomed) {
+      if (!isZoomed) {
         isZoomed = true;
         currentImg.style.cursor = 'grab';
-        applyTransform(currentImg, ZOOM, 0, 0);
-        showProfZoomBadge(ZOOM * 100);
-      } else { resetZoom(); }
+        applyTransform(currentImg, 0, 0);
+      } else {
+        resetZoom();
+      }
     } else {
-      if ((isZoomed || isOriginal) && currentImg) currentImg.style.cursor = 'grab';
+      if (isZoomed && currentImg) currentImg.style.cursor = 'grab';
     }
     didDrag = false;
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && (isZoomed || isOriginal)) resetZoom();
+    if (e.key === 'Escape' && isZoomed) resetZoom();
   });
 })();
 const revealEls = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
-document.body.classList.add('js-reveal');
 
 const revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
@@ -2406,21 +2268,6 @@ const revealObserver = new IntersectionObserver(function(entries) {
 revealEls.forEach(function(el) {
   revealObserver.observe(el);
 });
-
-// 폴백: IntersectionObserver 미작동 환경에서 즉시 표시
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(function(el) {
-      if (!el.classList.contains('revealed')) el.classList.add('revealed');
-    });
-  }, 100);
-});
-// 이미 로드된 경우
-setTimeout(function() {
-  document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(function(el) {
-    if (!el.classList.contains('revealed')) el.classList.add('revealed');
-  });
-}, 100);
 
 // 특정 섹션 애니메이션 리셋 + 재생
 function replaySectionAnimation(sectionId) {
@@ -2470,114 +2317,56 @@ const navLinks = document.querySelectorAll('nav a');
 navLinks.forEach(function(a) {
   a.addEventListener('click', function() {
     const targetId = a.getAttribute('href').replace('#', '');
-    setTimeout(function() { replaySectionAnimation(targetId); }, 300);
+    setTimeout(function() {
+      replaySectionAnimation(targetId);
+    }, 600);
   });
 });
 
-const navObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (!entry.isIntersecting) return;
-    navLinks.forEach(function(l) { l.classList.remove('active'); });
-    var id = entry.target.getAttribute('id');
-    var active = document.querySelector('nav a[href="#' + id + '"]');
-    if (active) active.classList.add('active');
+window.addEventListener('scroll', function() {
+  let current = '';
+  sections.forEach(function(s) {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
   });
-}, { threshold: 0.3 });
-
-sections.forEach(function(s) { navObserver.observe(s); });
+  navLinks.forEach(function(a) {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
 </script>
-<!-- SKETCH ZOOM OVERLAY -->
-<div id="sketch-zoom" onclick="sketchZoomClick(event)">
-  <img id="sketch-zoom-img" src="" alt="" draggable="false">
-  <div id="sketch-zoom-badge">🔍 200%</div>
-  <div id="sketch-zoom-hud">
-<<<<<<< Updated upstream
-    <div class="sz-hint"><span class="sz-icon">🖱</span> Click zoom in/out</div>
-=======
-    <div class="sz-hint"><span class="sz-icon">🖱</span> Click <span style="color:rgba(200,168,75,.6)">×2</span> zoom</div>
->>>>>>> Stashed changes
-    <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
-    <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
-  </div>
-</div>
+
 <script>
-var szZoomed = false, szDragging = false, szDidDrag = false;
-var szTx = 0, szTy = 0;
-var szStartX, szStartY;
-
-function openSketchZoom(src) {
-  var oz = document.getElementById('sketch-zoom');
-  var img = document.getElementById('sketch-zoom-img');
-  img.src = src;
-  img.style.transform = 'translate(0,0) scale(1)';
-  szZoomed = false; szTx = 0; szTy = 0;
-  oz.classList.remove('zoomed','dragging');
-  oz.classList.add('active');
-  hideSzBadge();
-  document.body.style.overflow = 'hidden';
+// ── PROF CARD HOVER VIDEO ──
+function profHoverIn(el) {
+  var vid = el.dataset.vid;
+  var iframe = el.querySelector('.prof-card-hover-iframe');
+  iframe.src = 'https://www.youtube.com/embed/' + vid +
+    '?autoplay=1&mute=1&loop=1&playlist=' + vid +
+    '&controls=0&rel=0&modestbranding=1&playsinline=1';
+  iframe.style.opacity = '1';
+  iframe.style.pointerEvents = 'none';
+  el.querySelector('.prof-card-thumb').style.opacity = '0';
 }
-function closeSketchZoom() {
-  document.getElementById('sketch-zoom').classList.remove('active','zoomed','dragging');
-  document.body.style.overflow = '';
-  szZoomed = false; szTx = 0; szTy = 0;
-}
-function sketchZoomClick(e) {
-  var img = document.getElementById('sketch-zoom-img');
-  if (szDidDrag) { szDidDrag = false; return; }
-  if (!szZoomed) {
-    szZoomed = true;
-    szTx = 0; szTy = 0;
-    img.style.transform = 'translate(0px,0px) scale(2)';
-    document.getElementById('sketch-zoom').classList.add('zoomed');
-    showSzBadge();
-  } else {
-<<<<<<< Updated upstream
-    // 200% → 100% 로 복귀 (닫지 않음)
-    szZoomed = false;
-    szTx = 0; szTy = 0;
-    img.style.transform = 'translate(0,0) scale(1)';
-    document.getElementById('sketch-zoom').classList.remove('zoomed');
-    hideSzBadge();
-=======
-    closeSketchZoom();
->>>>>>> Stashed changes
-  }
-}
-function showSzBadge() {
-  var b = document.getElementById('sketch-zoom-badge');
-  b.classList.add('visible');
-  clearTimeout(b._t);
-  b._t = setTimeout(function(){ b.classList.remove('visible'); }, 1500);
-}
-function hideSzBadge() {
-  document.getElementById('sketch-zoom-badge').classList.remove('visible');
+function profHoverOut(el) {
+  var iframe = el.querySelector('.prof-card-hover-iframe');
+  iframe.style.opacity = '0';
+  iframe.src = '';
+  el.querySelector('.prof-card-thumb').style.opacity = '1';
 }
 
-// 드래그
-var szOverlay = document.getElementById('sketch-zoom');
-szOverlay.addEventListener('mousedown', function(e) {
-  if (!szZoomed) return;
-  szDragging = true; szDidDrag = false;
-  szStartX = e.clientX - szTx;
-  szStartY = e.clientY - szTy;
-  szOverlay.classList.add('dragging');
-  e.preventDefault();
-});
-window.addEventListener('mousemove', function(e) {
-  if (!szDragging) return;
-  var dx = e.clientX - szStartX;
-  var dy = e.clientY - szStartY;
-  if (Math.abs(dx - szTx) > 2 || Math.abs(dy - szTy) > 2) szDidDrag = true;
-  szTx = dx; szTy = dy;
-  document.getElementById('sketch-zoom-img').style.transform = 'translate('+szTx+'px,'+szTy+'px) scale(2)';
-});
-window.addEventListener('mouseup', function() {
-  szDragging = false;
-  szOverlay.classList.remove('dragging');
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeSketchZoom();
-});
+// ── PROF MEDIA LIGHTBOX ──
+const profMedia = {
+  'ncsoft': {
+    id: '// NCSOFT · PROJECT M · 2021',
+    title: 'Project M',
+    items: [
+      { type: 'video', videoId: 'bDXLAaqR_Yg' },
+      { type: 'video', videoId: 'aMYvommxKiw' },
+      { type: 'image', src: 'images/Professional/Ncsoft/001.jpg' },
+      { type: 'image', src: 'images/Professional/Ncsoft/002.jpg' },
+      { type: 'image', src: 'images/Professional/Ncsoft/008.jpg' },
+      { type: 'image', src: 'images/Professional/Ncsoft/009.jpg' }
+    ]
+  },
 </script>
 </body>
 </html>
