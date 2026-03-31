@@ -412,9 +412,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       Level Design · Integration & Lighting · Texturing<br>
       Unreal Engine · 3ds Max · Substance Painter
     </p>
-    <div class="hero-cta">
-      <a href="#about" class="btn-primary">View Profile</a>
-      <a href="#personal" class="btn-ghost">Works</a>
+    <div class="hero-cta" style="flex-direction:column;align-items:flex-start;">
+      <a href="#about" class="btn-primary" id="btn-vp">View Profile</a>
+      <div style="font-family:var(--font-title);font-size:14px;margin-top:4px;line-height:2;letter-spacing:.06em;">
+        <div style="color:var(--text3);">├─ <a href="#personal" style="color:var(--gold);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">Works</a></div>
+        <div style="color:var(--text3);">└─ <a href="#professional" style="color:var(--gold);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">Professional</a></div>
+      </div>
     </div>
   </div>
   <div class="hero-stats">
@@ -445,7 +448,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="name-big reveal-left">Jung<br>Daekun</div>
       <div class="title-tag reveal-left delay-1">Senior Environment Artist</div>
       <div class="about-contact reveal-left delay-2">
-        Contact: <a href="mailto:jungdaekun@gmail.com">jungdaekun@gmail.com</a>
+        Contact: <a href="/cdn-cgi/l/email-protection#09637c676e6d686c627c67496e64686065276a6664"><span class="__cf_email__" data-cfemail="9ff5eaf1f8fbfefaf4eaf1dff8f2fef6f3b1fcf0f2">[email&#160;protected]</span></a>
       </div>
       <div class="skills-grid" id="skills-grid" style="margin-top:32px">
         <div class="skill-item reveal-left">Level Design</div>
@@ -722,7 +725,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="professional-note-icon">🔒</div>
     <div class="professional-note-text">
       회사 작업물은 NDA 계약으로 인해 공개가 제한됩니다.<br>
-      열람을 원하시면 별도 문의 부탁드립니다 — <a href="mailto:jungdaekun@gmail.com" style="color:var(--gold);text-decoration:none;">jungdaekun@gmail.com</a>
+      열람을 원하시면 별도 문의 부탁드립니다 — <a href="/cdn-cgi/l/email-protection#fa908f949d9e9b9f918f94ba9d979b9396d4999597" style="color:var(--gold);text-decoration:none;"><span class="__cf_email__" data-cfemail="1c7669727b787d797769725c7b717d7570327f7371">[email&#160;protected]</span></a>
     </div>
   </div>
   <div class="prof-grid-wrap">
@@ -1104,8 +1107,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
   <p class="sketch-desc">개인 스케치 및 드로잉 노트. 환경 디자인 아이디어와 콘셉트 작업물을 기록합니다.</p>
   <div class="sketch-grid">
-    <div class="sketch-item"><span class="sketch-label">// SKETCH_001</span></div>
-    <div class="sketch-item"><span class="sketch-label">// SKETCH_002</span></div>
+    <div class="sketch-item"><img src="images/sketch/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div class="sketch-item"><img src="images/sketch/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_003</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_004</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_005</span></div>
@@ -1120,12 +1123,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="footer-logo">Jung Daekun</div>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
   <div class="footer-links">
-    <a href="mailto:jungdaekun@gmail.com">Email</a>
+    <a href="/cdn-cgi/l/email-protection#18726d767f7c797d736d76587f75797174367b7775">Email</a>
     <a href="https://jungdaekun.blogspot.com" target="_blank">Blog</a>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── RANDOM YOUTUBE BACKGROUND ──
 const bgVideos = [
   'bDXLAaqR_Yg',
@@ -2092,6 +2095,7 @@ function closeNav() {
 var profLbUnlocked = false;
 
 function openProfLb(key, idx) {
+  /* 🔐 비번 임시 비활성화 (완성 후 재활성화 예정)
   if (!profLbUnlocked) {
     var pw = prompt('비밀번호를 입력하세요:');
     if (pw === null) return;
@@ -2101,6 +2105,7 @@ function openProfLb(key, idx) {
     }
     profLbUnlocked = true;
   }
+  */
   profCurrent = profProjects[key];
   if (!profCurrent) return;
   profIdx = idx || 0;
@@ -2419,23 +2424,4 @@ const navLinks = document.querySelectorAll('nav a');
 // 네비게이션 클릭 시 애니메이션 재생
 navLinks.forEach(function(a) {
   a.addEventListener('click', function() {
-    const targetId = a.getAttribute('href').replace('#', '');
-    setTimeout(function() {
-      replaySectionAnimation(targetId);
-    }, 600);
-  });
-});
-
-window.addEventListener('scroll', function() {
-  let current = '';
-  sections.forEach(function(s) {
-    if (window.scrollY >= s.offsetTop - 80) current = s.id;
-  });
-  navLinks.forEach(function(a) {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
-});
-</script>
-
-</body>
-</html>
+    const targetId = a.getAttribute('hre
