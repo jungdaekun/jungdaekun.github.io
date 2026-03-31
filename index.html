@@ -259,9 +259,19 @@ section{padding:100px 80px;}
 .sketch-hover-arrow{position:absolute;bottom:12px;right:12px;font-size:16px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .2s,transform .2s;}
 .sketch-clickable:hover .sketch-hover-arrow{opacity:1;transform:translateX(0);}
 /* 스케치 줌 오버레이 */
-#sketch-zoom{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out;}
+#sketch-zoom{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-in;}
 #sketch-zoom.active{display:flex;}
-#sketch-zoom img{max-width:90vw;max-height:90vh;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8);}
+#sketch-zoom.zoomed{cursor:grab;}
+#sketch-zoom.zoomed.dragging{cursor:grabbing;}
+#sketch-zoom img{max-width:90vw;max-height:85vh;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8);transition:transform .25s cubic-bezier(.25,.46,.45,.94);transform-origin:center center;user-select:none;}
+/* 키 힌트 HUD */
+#sketch-zoom-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:16px;align-items:center;}
+.sz-hint{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;}
+.sz-key{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:20px;padding:0 5px;border:1px solid rgba(255,255,255,.2);border-radius:3px;font-size:10px;color:rgba(255,255,255,.45);background:rgba(255,255,255,.05);}
+.sz-icon{font-size:13px;color:rgba(255,255,255,.35);}
+/* 줌 배지 */
+#sketch-zoom-badge{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 14px;background:rgba(8,10,13,.85);border:1px solid rgba(200,168,75,.25);color:var(--gold);letter-spacing:.1em;opacity:0;transition:opacity .2s;pointer-events:none;}
+#sketch-zoom-badge.visible{opacity:1;}
 
 /* ── FOOTER ── */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px;display:flex;align-items:center;justify-content:space-between;}
@@ -2455,19 +2465,81 @@ const navObserver = new IntersectionObserver(function(entries) {
 sections.forEach(function(s) { navObserver.observe(s); });
 </script>
 <!-- SKETCH ZOOM OVERLAY -->
-<div id="sketch-zoom" onclick="closeSketchZoom()">
-  <img id="sketch-zoom-img" src="" alt="">
+<div id="sketch-zoom" onclick="sketchZoomClick(event)">
+  <img id="sketch-zoom-img" src="" alt="" draggable="false">
+  <div id="sketch-zoom-badge">🔍 200%</div>
+  <div id="sketch-zoom-hud">
+    <div class="sz-hint"><span class="sz-icon">🖱</span> Click <span style="color:rgba(200,168,75,.6)">×2</span> zoom</div>
+    <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
+    <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+  </div>
 </div>
 <script>
+var szZoomed = false, szDragging = false, szDidDrag = false;
+var szTx = 0, szTy = 0;
+var szStartX, szStartY;
+
 function openSketchZoom(src) {
-  document.getElementById('sketch-zoom-img').src = src;
-  document.getElementById('sketch-zoom').classList.add('active');
+  var oz = document.getElementById('sketch-zoom');
+  var img = document.getElementById('sketch-zoom-img');
+  img.src = src;
+  img.style.transform = 'translate(0,0) scale(1)';
+  szZoomed = false; szTx = 0; szTy = 0;
+  oz.classList.remove('zoomed','dragging');
+  oz.classList.add('active');
+  hideSzBadge();
   document.body.style.overflow = 'hidden';
 }
 function closeSketchZoom() {
-  document.getElementById('sketch-zoom').classList.remove('active');
+  document.getElementById('sketch-zoom').classList.remove('active','zoomed','dragging');
   document.body.style.overflow = '';
+  szZoomed = false; szTx = 0; szTy = 0;
 }
+function sketchZoomClick(e) {
+  var img = document.getElementById('sketch-zoom-img');
+  if (szDidDrag) { szDidDrag = false; return; }
+  if (!szZoomed) {
+    szZoomed = true;
+    szTx = 0; szTy = 0;
+    img.style.transform = 'translate(0px,0px) scale(2)';
+    document.getElementById('sketch-zoom').classList.add('zoomed');
+    showSzBadge();
+  } else {
+    closeSketchZoom();
+  }
+}
+function showSzBadge() {
+  var b = document.getElementById('sketch-zoom-badge');
+  b.classList.add('visible');
+  clearTimeout(b._t);
+  b._t = setTimeout(function(){ b.classList.remove('visible'); }, 1500);
+}
+function hideSzBadge() {
+  document.getElementById('sketch-zoom-badge').classList.remove('visible');
+}
+
+// 드래그
+var szOverlay = document.getElementById('sketch-zoom');
+szOverlay.addEventListener('mousedown', function(e) {
+  if (!szZoomed) return;
+  szDragging = true; szDidDrag = false;
+  szStartX = e.clientX - szTx;
+  szStartY = e.clientY - szTy;
+  szOverlay.classList.add('dragging');
+  e.preventDefault();
+});
+window.addEventListener('mousemove', function(e) {
+  if (!szDragging) return;
+  var dx = e.clientX - szStartX;
+  var dy = e.clientY - szStartY;
+  if (Math.abs(dx - szTx) > 2 || Math.abs(dy - szTy) > 2) szDidDrag = true;
+  szTx = dx; szTy = dy;
+  document.getElementById('sketch-zoom-img').style.transform = 'translate('+szTx+'px,'+szTy+'px) scale(2)';
+});
+window.addEventListener('mouseup', function() {
+  szDragging = false;
+  szOverlay.classList.remove('dragging');
+});
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeSketchZoom();
 });
