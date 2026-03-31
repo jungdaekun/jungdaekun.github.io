@@ -1128,21 +1128,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
   <p class="sketch-desc">개인 스케치 및 드로잉 노트. 환경 디자인 아이디어와 콘셉트 작업물을 기록합니다.</p>
   <div class="sketch-grid">
-<<<<<<< Updated upstream
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Box.gif')"><img src="images/SketchNote/Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Box</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Lava_Field.gif')"><img src="images/SketchNote/Lava_Field.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Lava Field</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Jewelry_Box.gif')"><img src="images/SketchNote/Jewelry_Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Jewelry Box</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Stone_final.jpg')"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Stone Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Prop_Final.jpg')"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Prop Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/village.JPG')"><img src="images/SketchNote/village.JPG" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Village</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-=======
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Prop_Final.jpg')"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Prop Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Stone_final.jpg')"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Stone Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
-    <div class="sketch-item"><span class="sketch-label">// SKETCH_003</span></div>
-    <div class="sketch-item"><span class="sketch-label">// SKETCH_004</span></div>
-    <div class="sketch-item"><span class="sketch-label">// SKETCH_005</span></div>
-    <div class="sketch-item"><span class="sketch-label">// SKETCH_006</span></div>
->>>>>>> Stashed changes
   </div>
 </section>
 
@@ -1206,17 +1197,12 @@ const projects = {
     id: '// SKETCH NOTE',
     title: 'Sketch Note',
     images: [
-<<<<<<< Updated upstream
       'images/SketchNote/Box.gif',
       'images/SketchNote/Lava_Field.gif',
       'images/SketchNote/Jewelry_Box.gif',
       'images/SketchNote/Stone_final.jpg',
       'images/SketchNote/Prop_Final.jpg',
       'images/SketchNote/village.JPG'
-=======
-      'images/SketchNote/Prop_Final.jpg',
-      'images/SketchNote/Stone_final.jpg'
->>>>>>> Stashed changes
     ]
   }
 };
@@ -2491,11 +2477,7 @@ sections.forEach(function(s) { navObserver.observe(s); });
   <img id="sketch-zoom-img" src="" alt="" draggable="false">
   <div id="sketch-zoom-badge">🔍 200%</div>
   <div id="sketch-zoom-hud">
-<<<<<<< Updated upstream
     <div class="sz-hint"><span class="sz-icon">🖱</span> Click zoom in/out</div>
-=======
-    <div class="sz-hint"><span class="sz-icon">🖱</span> Click <span style="color:rgba(200,168,75,.6)">×2</span> zoom</div>
->>>>>>> Stashed changes
     <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
     <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
   </div>
@@ -2531,16 +2513,12 @@ function sketchZoomClick(e) {
     document.getElementById('sketch-zoom').classList.add('zoomed');
     showSzBadge();
   } else {
-<<<<<<< Updated upstream
     // 200% → 100% 로 복귀 (닫지 않음)
     szZoomed = false;
     szTx = 0; szTy = 0;
     img.style.transform = 'translate(0,0) scale(1)';
     document.getElementById('sketch-zoom').classList.remove('zoomed');
     hideSzBadge();
-=======
-    closeSketchZoom();
->>>>>>> Stashed changes
   }
 }
 function showSzBadge() {
