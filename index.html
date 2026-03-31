@@ -1593,8 +1593,10 @@ function renderFreqViewed() {
 }
 
 function freqItemClick(key, type, projectId, idx) {
-  if (type === 'personal') openLightbox(projectId, idx);
-  else openProfLb(projectId, idx);
+  // Featured Works는 클릭한 이미지 단일 뷰로 표시
+  var pool = getAllImagePool();
+  var item = pool.find(function(p) { return p.key === key; });
+  if (item) openSketchZoom(item.src);
 }
 
 // 페이지 로드 + 리사이즈 시 렌더
