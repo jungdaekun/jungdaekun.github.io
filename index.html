@@ -1130,6 +1130,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="sketch-grid">
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Prop_Final.jpg')"><img src="images/SketchNote/Prop_Final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Prop Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Stone_final.jpg')"><img src="images/SketchNote/Stone_final.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Stone Final</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
+    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Jewelry_Box.gif')"><img src="images/SketchNote/Jewelry_Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Jewelry Box</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
+    <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Lava_Field.gif')"><img src="images/SketchNote/Lava_Field.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Lava Field</div><div class="sketch-hover-sub">// SKETCH NOTE</div></div></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_003</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_004</span></div>
     <div class="sketch-item"><span class="sketch-label">// SKETCH_005</span></div>
@@ -1198,7 +1200,9 @@ const projects = {
     title: 'Sketch Note',
     images: [
       'images/SketchNote/Prop_Final.jpg',
-      'images/SketchNote/Stone_final.jpg'
+      'images/SketchNote/Stone_final.jpg',
+      'images/SketchNote/Jewelry_Box.gif',
+      'images/SketchNote/Lava_Field.gif'
     ]
   }
 };
@@ -2473,7 +2477,7 @@ sections.forEach(function(s) { navObserver.observe(s); });
   <img id="sketch-zoom-img" src="" alt="" draggable="false">
   <div id="sketch-zoom-badge">🔍 200%</div>
   <div id="sketch-zoom-hud">
-    <div class="sz-hint"><span class="sz-icon">🖱</span> Click <span style="color:rgba(200,168,75,.6)">×2</span> zoom</div>
+    <div class="sz-hint"><span class="sz-icon">🖱</span> Click zoom in/out</div>
     <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
     <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
   </div>
@@ -2509,7 +2513,12 @@ function sketchZoomClick(e) {
     document.getElementById('sketch-zoom').classList.add('zoomed');
     showSzBadge();
   } else {
-    closeSketchZoom();
+    // 200% → 100% 로 복귀 (닫지 않음)
+    szZoomed = false;
+    szTx = 0; szTy = 0;
+    img.style.transform = 'translate(0,0) scale(1)';
+    document.getElementById('sketch-zoom').classList.remove('zoomed');
+    hideSzBadge();
   }
 }
 function showSzBadge() {
