@@ -203,6 +203,9 @@ section{padding:100px 80px;}
 .prof-card-media-overlay{position:absolute;inset:0;background:rgba(8,10,13,.45);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;transition:opacity .3s;}
 .prof-card-media-label{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);}
 .prof-card-info{padding:16px 20px 20px;}
+.prof-card-info .prof-card-sub,
+.prof-card-info .prof-card-desc,
+.prof-card-info .prof-tags{display:none;}
 
 /* ── PROF MEDIA LIGHTBOX ── */
 #prof-lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.97);flex-direction:column;}
@@ -1119,10 +1122,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="prof-lb-title-area">
         <span class="prof-lb-id" id="prof-lb-id"></span>
         <span class="prof-lb-title" id="prof-lb-title"></span>
+        <span class="prof-lb-sub" id="prof-lb-sub" style="font-size:12px;color:var(--gold);font-family:var(--font-mono);letter-spacing:.06em;"></span>
       </div>
-      <div class="prof-lb-controls">
-        <span class="prof-lb-counter" id="prof-lb-counter"></span>
-        <button class="prof-lb-btn" onclick="closeProfLb()">✕</button>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+        <div class="prof-lb-controls">
+          <span class="prof-lb-counter" id="prof-lb-counter"></span>
+          <button class="prof-lb-btn" onclick="closeProfLb()">✕</button>
+        </div>
+        <div id="prof-lb-tags" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;"></div>
       </div>
     </div>
     <div class="prof-lb-main" id="prof-lb-main">
@@ -1747,6 +1754,8 @@ var profProjects = {
   'ncsoft': {
     id: '// PROFESSIONAL · NCSOFT · 2021—2024',
     title: 'Project M',
+    sub: 'Interactive Adventure / Console / Alpha Version',
+    tags: ['3D Environment Integration Art', 'Developer : Project M', 'Publisher : NCSOFT'],
     items: [
       { type: 'video', videoId: 'bDXLAaqR_Yg' },
       { type: 'video', videoId: 'aMYvommxKiw' },
@@ -1791,6 +1800,8 @@ var profProjects = {
   'artechsoft': {
     id: '// PROFESSIONAL · ARTECHSOFT · 2009—2011',
     title: 'ArtechSoft',
+    sub: '신의하루 · Xkick Online · SNG / Web / Sport / Online',
+    tags: ['All Background Creation', 'Level Design', 'Lighting'],
     items: [
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_001.jpg' },
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_002.jpg' },
@@ -1818,6 +1829,8 @@ var profProjects = {
   'aprilstudio': {
     id: '// PROFESSIONAL · APRIL STUDIO · 2005',
     title: '대한주택공사 / Demo Reel',
+    sub: 'Demo Reel · Architectural Visualization',
+    tags: ['Developer : April Studio'],
     items: [
       { type: 'video', videoId: 'OgDEUY0JS_k' },
       { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_001.jpg' },
@@ -1834,6 +1847,8 @@ var profProjects = {
   'sunwoo': {
     id: '// PROFESSIONAL · SUNWOO ENTERTAINMENT · 2006',
     title: 'WarRook Episode II',
+    sub: 'WarRook Episode II · TV Animation / Service',
+    tags: ['Shader', 'Lighting', 'Compositing', 'Developer : Sunwoo Ent.'],
     items: [
       { type: 'video', videoId: '-y3fQ73U-2Q', start: 5 },
       { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_001.jpg' },
@@ -1851,6 +1866,8 @@ var profProjects = {
   'pixelplanet': {
     id: '// PROFESSIONAL · PIXEL PLANET · 2006—2007',
     title: 'Z-Ranger',
+    sub: 'Z-Ranger · TV Animation / Service',
+    tags: ['Shader', 'Lighting', 'Compositing', 'Developer : Pixel Planet'],
     items: [
       { type: 'video', videoId: 'q5VgiNs5ZpE', start: 10 },
       { type: 'image', src: 'images/Professional/2006_PixelPlanet/2006_PixelPlanet_001.jpg' },
@@ -1874,6 +1891,8 @@ var profProjects = {
   'yeinssoft': {
     id: '// PROFESSIONAL · YEINS SOFT · 2008—2009',
     title: 'Style Rush',
+    sub: 'Style Rush · Racing / Online / Alpha Version',
+    tags: ['All Background Creation', 'Developer : Yeins Soft'],
     items: [
       { type: 'image', src: 'images/Professional/2008_YeinsSoft/2008_YeinsSoft_001.jpg' },
       { type: 'image', src: 'images/Professional/2008_YeinsSoft/2008_YeinsSoft_002.jpg' },
@@ -1907,6 +1926,8 @@ var profProjects = {
   'puresoft': {
     id: '// PROFESSIONAL · PURE SOFT',
     title: 'Pure Soft',
+    sub: 'Robokids, 라이스맨 · Mobile & PC / Outsourcing',
+    tags: ['Modeling', 'Texturing', 'Animation & FX', 'Engine'],
     items: [
       { type: 'video', videoId: 'DfN9IJYPGDU' },
       { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_002.jpg' },
@@ -1937,6 +1958,8 @@ var profProjects = {
   'neptune_baseball': {
     id: '// PROFESSIONAL · NEPTUNE · 2015—2016',
     title: 'プロ野球タクティクス',
+    sub: 'プロ野球タクティクス · Sport / Mobile / Service',
+    tags: ['All Background Creation', 'Developer : Neptune', 'Publisher : Gloops'],
     items: [
       { type: 'image', src: 'images/Professional/2016_Neptune/2016_Neptune_Baseball_001.jpg' },
       { type: 'image', src: 'images/Professional/2016_Neptune/2016_Neptune_Baseball_002.jpg' },
@@ -1957,6 +1980,8 @@ var profProjects = {
   'puregames': {
     id: '// PROFESSIONAL · PURE GAMES · 2014—2015',
     title: 'Vendetta',
+    sub: 'Vendetta · MORPG / Mobile / Service',
+    tags: ['Art Direction', 'Character & Background Creation', 'Developer : Pure Games'],
     items: [
       { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_001.jpg' },
       { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_002.jpg' },
@@ -1987,6 +2012,8 @@ var profProjects = {
   'neptune': {
     id: '// PROFESSIONAL · NEPTUNE · 2015—2016',
     title: 'Neppy Rush',
+    sub: 'Neppy Rush · Defence / Mobile / Alpha Version',
+    tags: ['Level Design', 'Shader', 'Lighting', 'Modeling', 'Textures'],
     items: [
       { type: 'image', src: 'images/Professional/2015_Neptune/2015_Neptune_NeppyRush_001.jpg' },
       { type: 'image', src: 'images/Professional/2015_Neptune/2015_Neptune_NeppyRush_002.jpg' },
@@ -2014,6 +2041,8 @@ var profProjects = {
   'cookapps': {
     id: '// PROFESSIONAL · COOKAPPS · OUTSOURCING · 2019—2020',
     title: 'CookApps',
+    sub: 'Outsourcing / SNG / Mobile',
+    tags: ['Modeling', 'Textures', 'Shader', 'Vray Lighting', 'Developer : CookApps'],
     items: [
       { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_01.gif' },
       { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_02.gif' },
@@ -2034,6 +2063,8 @@ var profProjects = {
   'xlgames': {
     id: '// PROFESSIONAL · XLGAMES · 2017—2017',
     title: 'Civilization Online',
+    sub: 'Civilization Online · MMORPG / PC Online / Open Beta',
+    tags: ['Level Design', 'Shader', 'Lighting', 'Developer : XLGAMES', 'Publisher : 2K'],
     items: [
       { type: 'video', videoId: 'behf7twp1bo', start: 30 },
       { type: 'image', src: 'images/Professional/2017_XLGAMES/2017_XLGAMES_X3_001.jpg' },
@@ -2096,6 +2127,8 @@ var profProjects = {
   'nexon': {
     id: '// PROFESSIONAL · NEXON KOREA · 2017—2018',
     title: 'Ascendant One',
+    sub: 'Ascendant One · MOBA / PC Online / Open Beta',
+    tags: ['Asset Modeling', 'Textures', 'Developer : devCAT', 'Publisher : Nexon Korea'],
     items: [
       { type: 'video', videoId: 'NOZ51TUyemo' },
       { type: 'image', src: 'images/Professional/2018_NexonKorea/2018_Nexon_AscendantOne_001.jpg' },
@@ -2148,6 +2181,8 @@ var profProjects = {
   'changse': {
     id: '// PROFESSIONAL · LINE GAMES · 2018—2020',
     title: '창세기전: 회색의 잔영',
+    sub: '창세기전: 회색의 잔영 · SRPG / Nintendo Switch',
+    tags: ['Level Design', 'Modeling', 'Textures', 'Developer : ReG Studio', 'Publisher : LINE GAMES'],
     items: [
       { type: 'video', videoId: '2zKdRMch0Us' }
     ]
@@ -2190,6 +2225,13 @@ function openProfLb(key, idx) {
   profIdx = idx || 0;
   document.getElementById('prof-lb-id').textContent = profCurrent.id;
   document.getElementById('prof-lb-title').textContent = profCurrent.title;
+  // sub/desc/tags
+  var subEl = document.getElementById('prof-lb-sub');
+  subEl.textContent = profCurrent.sub || '';
+  var tagsEl = document.getElementById('prof-lb-tags');
+  tagsEl.innerHTML = (profCurrent.tags || []).map(function(t) {
+    return '<span style="font-family:var(--font-mono);font-size:10px;padding:2px 8px;background:rgba(200,168,75,.07);border:1px solid rgba(200,168,75,.25);color:rgba(200,168,75,.6);letter-spacing:.05em;">' + t + '</span>';
+  }).join('');
   renderProfLb();
   document.getElementById('prof-lb').classList.add('active');
   document.body.style.overflow = 'hidden';
