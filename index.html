@@ -253,6 +253,7 @@ section{padding:100px 80px;}
 .project-strip-thumb:hover{opacity:1;border-color:var(--gold);}
 #sketch{background:var(--bg2);}
 .sketch-desc{font-size:13px;color:var(--text2);line-height:1.8;max-width:600px;margin-bottom:40px;}
+@keyframes starPulse{0%,100%{opacity:.3;transform:scale(.85);}50%{opacity:1;transform:scale(1.2);}}
 .sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;}
 .sketch-item{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
 .sketch-item:hover{border-color:var(--border2);}
@@ -285,10 +286,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 /* 푸터 스크롤탑 */
 .footer-logo{font-family:var(--font-title);font-size:16px;font-weight:700;letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px;text-decoration:none;transition:color .2s;}
 .footer-logo:hover{color:var(--gold);}
-.footer-logo-arrow{display:flex;flex-direction:column;align-items:center;position:relative;width:14px;height:18px;animation:arrowBounce 1.6s ease-in-out infinite;}
-.footer-logo-arrow .arr1{position:absolute;bottom:0;font-size:14px;color:var(--gold);line-height:1;}
-.footer-logo-arrow .arr2{position:absolute;bottom:6px;font-size:10px;color:rgba(200,168,75,.35);line-height:1;}
-@keyframes arrowBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+.footer-logo-arrow{display:flex;align-items:center;}
+.footer-logo-arrow svg .ch1{animation:chevFlow 1.8s ease-in-out infinite 0s;}
+.footer-logo-arrow svg .ch2{animation:chevFlow 1.8s ease-in-out infinite 0.3s;}
+.footer-logo-arrow svg .ch3{animation:chevFlow 1.8s ease-in-out infinite 0.6s;}
+@keyframes chevFlow{0%,100%{opacity:0.12;}50%{opacity:1;}}
 .footer-text{font-family:var(--font-mono);font-size:11px;color:var(--text3);letter-spacing:.08em;}
 .footer-links{display:flex;gap:20px;}
 .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:.08em;}
@@ -1141,7 +1143,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title reveal-up">Sketch Note</h2>
     <div class="sec-line"></div>
   </div>
-  <p class="sketch-desc">개인 스케치 및 작업 노트. 환경 디자인 아이디어부터 공간을 구성하기 위한 모든 시도와 흔적들을 기록합니다.</p>
+  <p class="sketch-desc"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개인 스케치 및 작업 노트. 환경 디자인 아이디어부터 공간을 구성하기 위한 모든 시도와 흔적들을 기록합니다.</p>
   <div class="sketch-grid">
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Box.gif')"><img src="images/SketchNote/Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Box</div><div class="sketch-hover-sub">2026.04.01</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Lava_Field.gif')"><img src="images/SketchNote/Lava_Field.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Lava Field</div><div class="sketch-hover-sub">2026.04.01</div></div></div>
@@ -1155,7 +1157,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- FOOTER -->
 <footer>
   <a class="footer-logo" href="#hero" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-    <div class="footer-logo-arrow"><span class="arr2">▲</span><span class="arr1">▲</span></div>
+    <div class="footer-logo-arrow">
+      <svg width="13" height="18" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="ch1" d="M2 18L8 13L14 18" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="ch2" d="M2 13L8 8L14 13" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="ch3" d="M2 8L8 3L14 8" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
     Jung Daekun
   </a>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
