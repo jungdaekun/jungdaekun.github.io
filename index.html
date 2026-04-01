@@ -718,8 +718,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         Modeling Source: <span>Sketchfab</span><br>
         Background Source: <span>Quixel MegaScan</span>
       </div>
-      <div class="relight-img-placeholder">
-        <span>// IMAGE PLACEHOLDER</span>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_03.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_03.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_04.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_04.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_05.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;grid-column:span 2;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_05.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
       </div>
     </div>
     <div class="relight-card">
@@ -729,8 +733,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         Modeling Source: <span>SQUIR 3D</span><br>
         Background Source: <span>Quixel MegaScan</span>
       </div>
-      <div class="relight-img-placeholder">
-        <span>// IMAGE PLACEHOLDER</span>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+        <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_02.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/BMW_M4GTS/BMW_M4GTS_02.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_03.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;grid-column:span 2;" onclick="openSketchZoom('images/ReLighting/BMW_M4GTS/BMW_M4GTS_03.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
       </div>
     </div>
   </div>
@@ -1204,6 +1210,26 @@ const projects = {
       'images/SketchNote/Stone_final.jpg',
       'images/SketchNote/Prop_Final.jpg',
       'images/SketchNote/village.JPG'
+    ]
+  },
+  'proj-genesis': {
+    id: '// RELIGHT · GENESIS G70',
+    title: 'Genesis G70',
+    images: [
+      'images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg',
+      'images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg',
+      'images/ReLighting/GENESIS_G70/GENESIS_G70_03.jpg',
+      'images/ReLighting/GENESIS_G70/GENESIS_G70_04.jpg',
+      'images/ReLighting/GENESIS_G70/GENESIS_G70_05.jpg'
+    ]
+  },
+  'proj-bmw': {
+    id: '// RELIGHT · BMW M4 GTS',
+    title: 'BMW M4 GTS',
+    images: [
+      'images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg',
+      'images/ReLighting/BMW_M4GTS/BMW_M4GTS_02.jpg',
+      'images/ReLighting/BMW_M4GTS/BMW_M4GTS_03.jpg'
     ]
   }
 };
