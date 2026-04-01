@@ -203,9 +203,6 @@ section{padding:100px 80px;}
 .prof-card-media-overlay{position:absolute;inset:0;background:rgba(8,10,13,.45);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;transition:opacity .3s;}
 .prof-card-media-label{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);}
 .prof-card-info{padding:16px 20px 20px;}
-.prof-card-info .prof-card-sub,
-.prof-card-info .prof-card-desc,
-.prof-card-info .prof-tags{display:none;}
 
 /* ── PROF MEDIA LIGHTBOX ── */
 #prof-lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.97);flex-direction:column;}
@@ -1122,14 +1119,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="prof-lb-title-area">
         <span class="prof-lb-id" id="prof-lb-id"></span>
         <span class="prof-lb-title" id="prof-lb-title"></span>
-        <span class="prof-lb-sub" id="prof-lb-sub" style="font-size:12px;color:var(--gold);font-family:var(--font-mono);letter-spacing:.06em;"></span>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-        <div class="prof-lb-controls">
-          <span class="prof-lb-counter" id="prof-lb-counter"></span>
-          <button class="prof-lb-btn" onclick="closeProfLb()">✕</button>
-        </div>
-        <div id="prof-lb-tags" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;"></div>
+      <div class="prof-lb-controls">
+        <span class="prof-lb-counter" id="prof-lb-counter"></span>
+        <button class="prof-lb-btn" onclick="closeProfLb()">✕</button>
       </div>
     </div>
     <div class="prof-lb-main" id="prof-lb-main">
@@ -2225,13 +2218,6 @@ function openProfLb(key, idx) {
   profIdx = idx || 0;
   document.getElementById('prof-lb-id').textContent = profCurrent.id;
   document.getElementById('prof-lb-title').textContent = profCurrent.title;
-  // sub/desc/tags
-  var subEl = document.getElementById('prof-lb-sub');
-  subEl.textContent = profCurrent.sub || '';
-  var tagsEl = document.getElementById('prof-lb-tags');
-  tagsEl.innerHTML = (profCurrent.tags || []).map(function(t) {
-    return '<span style="font-family:var(--font-mono);font-size:10px;padding:2px 8px;background:rgba(200,168,75,.07);border:1px solid rgba(200,168,75,.25);color:rgba(200,168,75,.6);letter-spacing:.05em;">' + t + '</span>';
-  }).join('');
   renderProfLb();
   document.getElementById('prof-lb').classList.add('active');
   document.body.style.overflow = 'hidden';
