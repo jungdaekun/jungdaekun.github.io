@@ -282,7 +282,14 @@ section{padding:100px 80px;}
 
 /* ── FOOTER ── */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px;display:flex;align-items:center;justify-content:space-between;}
-.footer-logo{font-family:var(--font-title);font-size:16px;font-weight:700;letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase;}
+/* 푸터 스크롤탑 */
+.footer-logo{font-family:var(--font-title);font-size:16px;font-weight:700;letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px;text-decoration:none;transition:color .2s;}
+.footer-logo:hover{color:var(--gold);}
+.footer-logo-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.footer-logo-arrow span{display:block;width:8px;height:8px;border-left:1px solid var(--gold-dim);border-top:1px solid var(--gold-dim);transform:rotate(45deg);animation:arrowBounce 1.4s ease-in-out infinite;}
+.footer-logo-arrow span:nth-child(2){animation-delay:.2s;opacity:.6;}
+.footer-logo-arrow span:nth-child(3){animation-delay:.4s;opacity:.3;}
+@keyframes arrowBounce{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(-4px);}}
 .footer-text{font-family:var(--font-mono);font-size:11px;color:var(--text3);letter-spacing:.08em;}
 .footer-links{display:flex;gap:20px;}
 .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:.08em;}
@@ -721,9 +728,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         Background Source: <span>Quixel MegaScan</span>
       </div>
       <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
-        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
+        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
         <div style="position:absolute;inset:0;background:rgba(8,10,13,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;" class="relight-hover-hint">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;">VIEW IMAGES</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
         </div>
       </div>
     </div>
@@ -737,7 +744,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
         <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
         <div style="position:absolute;inset:0;background:rgba(8,10,13,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;" class="relight-hover-hint">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;">VIEW IMAGES</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
         </div>
       </div>
     </div>
@@ -1148,7 +1155,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Jung Daekun</div>
+  <a class="footer-logo" href="#hero" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <div class="footer-logo-arrow">
+      <span></span><span></span><span></span>
+    </div>
+    Jung Daekun
+  </a>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
   <div class="footer-links">
     <a href="/cdn-cgi/l/email-protection#6d0718030a090c080618032d0a000c0401430e0200">Email</a>
