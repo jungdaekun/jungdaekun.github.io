@@ -285,8 +285,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 /* 푸터 스크롤탑 */
 .footer-logo{font-family:var(--font-title);font-size:16px;font-weight:700;letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px;text-decoration:none;transition:color .2s;}
 .footer-logo:hover{color:var(--gold);}
-.footer-logo-arrow{font-size:18px;color:var(--gold);animation:arrowBounce 1.4s ease-in-out infinite;line-height:1;}
-@keyframes arrowBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.footer-logo-arrow{display:flex;flex-direction:column;align-items:center;position:relative;width:14px;height:18px;animation:arrowBounce 1.6s ease-in-out infinite;}
+.footer-logo-arrow .arr1{position:absolute;bottom:0;font-size:14px;color:var(--gold);line-height:1;}
+.footer-logo-arrow .arr2{position:absolute;bottom:6px;font-size:10px;color:rgba(200,168,75,.35);line-height:1;}
+@keyframes arrowBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
 .footer-text{font-family:var(--font-mono);font-size:11px;color:var(--text3);letter-spacing:.08em;}
 .footer-links{display:flex;gap:20px;}
 .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:.08em;}
@@ -1153,7 +1155,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- FOOTER -->
 <footer>
   <a class="footer-logo" href="#hero" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-    <div class="footer-logo-arrow">▲</div>
+    <div class="footer-logo-arrow"><span class="arr2">▲</span><span class="arr1">▲</span></div>
     Jung Daekun
   </a>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
