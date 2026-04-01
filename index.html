@@ -710,35 +710,52 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title reveal-up">Re:Lighting</h2>
     <div class="sec-line"></div>
   </div>
-  <div class="relight-grid">
-    <div class="relight-card">
-      <div class="relight-num">// RELIGHT_001</div>
-      <div class="relight-title">Genesis G70</div>
-      <div class="relight-source">
-        Modeling Source: <span>Sketchfab</span><br>
-        Background Source: <span>Quixel MegaScan</span>
+  <div class="project-grid">
+
+    <!-- Genesis G70 -->
+    <div class="project-card" onclick="openLightbox('proj-genesis', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg" alt="Genesis G70">
+        <div class="project-count-badge">5 images</div>
+        <div class="project-open-hint">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>
+          VIEW IMAGES
+        </div>
       </div>
-      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_03.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_03.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_04.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_04.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-        <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_05.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;grid-column:span 2;" onclick="openSketchZoom('images/ReLighting/GENESIS_G70/GENESIS_G70_05.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-      </div>
-    </div>
-    <div class="relight-card">
-      <div class="relight-num">// RELIGHT_002</div>
-      <div class="relight-title">BMW M4 GTS</div>
-      <div class="relight-source">
-        Modeling Source: <span>SQUIR 3D</span><br>
-        Background Source: <span>Quixel MegaScan</span>
-      </div>
-      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-        <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-        <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_02.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;" onclick="openSketchZoom('images/ReLighting/BMW_M4GTS/BMW_M4GTS_02.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-        <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_03.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;cursor:pointer;border:1px solid var(--border);transition:opacity .2s;grid-column:span 2;" onclick="openSketchZoom('images/ReLighting/BMW_M4GTS/BMW_M4GTS_03.jpg')" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+      <div class="project-info">
+        <div class="project-year reveal-left">// RE:LIGHTING_001</div>
+        <div class="project-title reveal-left delay-1">Genesis G70</div>
+        <div class="project-desc reveal-up delay-2">Modeling Source: Sketchfab · Background Source: Quixel MegaScan</div>
+        <div class="project-tags reveal-up delay-3">
+          <span class="proj-tag">3ds Max</span>
+          <span class="proj-tag">V-Ray</span>
+          <span class="proj-tag">Lighting</span>
+        </div>
       </div>
     </div>
+
+    <!-- BMW M4 GTS -->
+    <div class="project-card" onclick="openLightbox('proj-bmw', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg" alt="BMW M4 GTS">
+        <div class="project-count-badge">3 images</div>
+        <div class="project-open-hint">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>
+          VIEW IMAGES
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-year reveal-left">// RE:LIGHTING_002</div>
+        <div class="project-title reveal-left delay-1">BMW M4 GTS</div>
+        <div class="project-desc reveal-up delay-2">Modeling Source: SQUIR 3D · Background Source: Quixel MegaScan</div>
+        <div class="project-tags reveal-up delay-3">
+          <span class="proj-tag">3ds Max</span>
+          <span class="proj-tag">V-Ray</span>
+          <span class="proj-tag">Lighting</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
