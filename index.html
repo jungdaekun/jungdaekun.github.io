@@ -764,7 +764,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="professional-note-text">
       상업 프로젝트는 보안 유지 계약(NDA)에 따라 온라인 공개가 제한되어 있습니다.<br>
       상세한 작업 내역 및 포트폴리오 열람을 원하시면 아래 메일로 문의 부탁드립니다.<br>
-      email : <a href="mailto:jungdaekun@gmail.com" style="color:var(--gold);text-decoration:none;">jungdaekun@gmail.com</a>
+      <span id="email-copy-btn" onclick="copyEmail()" style="color:var(--gold);cursor:pointer;font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;transition:color .2s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">Email <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.7;flex-shrink:0;"><rect x="5" y="1" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="4" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="var(--bg)"/></svg></span>
+      <span id="email-copy-msg" style="font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0;transition:opacity .3s;margin-left:8px;">✓ copied!</span>
     </div>
   </div>
   <div class="prof-grid-wrap">
@@ -2634,6 +2635,16 @@ window.addEventListener('mouseup', function() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeSketchZoom();
 });
+</script>
+<!-- COPY EMAIL -->
+<script>
+function copyEmail() {
+  navigator.clipboard.writeText('jungdaekun@gmail.com').then(function() {
+    var msg = document.getElementById('email-copy-msg');
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+  });
+}
 </script>
 </body>
 </html>
