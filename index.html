@@ -163,6 +163,7 @@ section{padding:100px 80px;}
 .relight-img-placeholder span{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:.1em;}
 .relight-card:hover .relight-img-placeholder img{transform:scale(1.05);}
 .relight-card:hover .relight-hover-hint{opacity:1!important;}
+.relight-card:hover .sketch-hover-title,.relight-card:hover .sketch-hover-sub{transform:translateX(0);opacity:1;}
 
 /* ── PROFESSIONAL ── */
 #professional{background:var(--bg);position:relative;}
@@ -719,6 +720,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
         <img id="lb-img" class="lb-img" src="" alt="">
+        <div id="lb-caption" style="position:absolute;bottom:0;left:0;right:0;padding:12px 20px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.1em;pointer-events:none;opacity:0;transition:opacity .3s;"></div>
         <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
         <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
         <button class="lb-nav-next" onclick="lbNext()">›</button>
@@ -741,29 +743,27 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="relight-grid">
     <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-genesis', 0)">
       <div class="relight-num">// RELIGHT_001</div>
-      <div class="relight-title">Genesis G70</div>
-      <div class="relight-source">
-        Modeling Source: <span>Sketchfab</span><br>
-        Background Source: <span>Quixel MegaScan</span>
-      </div>
       <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
         <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
-        <div style="position:absolute;inset:0;background:rgba(8,10,13,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;" class="relight-hover-hint">
+        <div class="relight-hover-hint" style="position:absolute;inset:0;background:rgba(8,10,13,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;">
           <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
+        </div>
+        <div class="sketch-hover-overlay">
+          <div class="sketch-hover-title">Genesis G70</div>
+          <div class="sketch-hover-sub">Sketchfab · Quixel MegaScan</div>
         </div>
       </div>
     </div>
     <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-bmw', 0)">
       <div class="relight-num">// RELIGHT_002</div>
-      <div class="relight-title">BMW M4 GTS</div>
-      <div class="relight-source">
-        Modeling Source: <span>SQUIR 3D</span><br>
-        Background Source: <span>Quixel MegaScan</span>
-      </div>
       <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
         <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
-        <div style="position:absolute;inset:0;background:rgba(8,10,13,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;" class="relight-hover-hint">
+        <div class="relight-hover-hint" style="position:absolute;inset:0;background:rgba(8,10,13,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;">
           <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
+        </div>
+        <div class="sketch-hover-overlay">
+          <div class="sketch-hover-title">BMW M4 GTS</div>
+          <div class="sketch-hover-sub">SQUIR 3D · Quixel MegaScan</div>
         </div>
       </div>
     </div>
@@ -1253,6 +1253,7 @@ const projects = {
   'proj-genesis': {
     id: '// RELIGHT · GENESIS G70',
     title: 'Genesis G70',
+    captions: ['GENESIS G70  ·  Modeling Source : Sketchfab  ·  Background Source : Quixel MegaScan'],
     images: [
       'images/ReLighting/GENESIS_G70/GENESIS_G70_01.jpg',
       'images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg',
@@ -1264,6 +1265,7 @@ const projects = {
   'proj-bmw': {
     id: '// RELIGHT · BMW M4 GTS',
     title: 'BMW M4 GTS',
+    captions: ['BMW M4 GTS  ·  Modeling Source : SQUIR 3D  ·  Background Source : Quixel MegaScan'],
     images: [
       'images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg',
       'images/ReLighting/BMW_M4GTS/BMW_M4GTS_02.jpg',
@@ -1298,6 +1300,14 @@ function renderLightbox(instant) {
 
   // 카운터 & 도트 즉시 업데이트
   document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + imgs.length;
+
+  // 캡션 처리
+  var capEl = document.getElementById('lb-caption');
+  if (capEl) {
+    var cap = (currentProject.captions && currentProject.captions[currentIdx]) || '';
+    capEl.textContent = cap;
+    capEl.style.opacity = cap ? '1' : '0';
+  }
   const dots = document.getElementById('lb-nav-dots');
   if (dots) {
     dots.innerHTML = imgs.map((_, i) =>

@@ -11,14 +11,14 @@
   --bg2: #0d1017;
   --bg3: #121620;
   --bg4: #181d28;
-  --gold: #c8a84b;
-  --gold2: #e8c96a;
-  --gold-dim: #7a6330;
-  --gold-glow: rgba(200,168,75,0.12);
+  --gold: #d4b355;
+  --gold2: #f0d47a;
+  --gold-dim: #a8893f;
+  --gold-glow: rgba(212,179,85,0.12);
   --blue: #4a8fe0;
   --text: #dde0e8;
-  --text2: #7a8090;
-  --text3: #3a3f4a;
+  --text2: #9aa0b0;
+  --text3: #666d80;
   --border: #1e2330;
   --border2: rgba(200,168,75,0.25);
   --font-title: 'Rajdhani', sans-serif;
@@ -169,7 +169,7 @@ section{padding:100px 80px;}
 .professional-note{background:rgba(200,168,75,0.06);border:1px solid var(--border2);padding:20px 24px;margin-bottom:40px;display:flex;align-items:center;gap:16px;}
 .professional-note-icon{font-family:var(--font-mono);font-size:18px;color:var(--gold);}
 @keyframes lockBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}60%{transform:translateY(-3px);}}
-.professional-note-text{font-size:13px;color:#adb3c0;line-height:1.6;}
+.professional-note-text{font-size:13px;color:#bdc3d0;line-height:1.6;}
 .prof-grid-wrap{position:relative;}
 .prof-grid{display:grid;grid-template-columns:repeat(60,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
 .prof-grid .prof-card:nth-child(-n+2){grid-column:span 30;}
@@ -253,7 +253,7 @@ section{padding:100px 80px;}
 .project-strip-thumb{flex-shrink:0;width:56px;height:36px;object-fit:cover;border:1px solid var(--border);cursor:pointer;opacity:.55;transition:opacity .2s,border-color .2s;}
 .project-strip-thumb:hover{opacity:1;border-color:var(--gold);}
 #sketch{background:var(--bg2);}
-.sketch-desc{font-size:14px;color:#adb3c0;line-height:1.8;max-width:900px;margin-bottom:40px;}
+.sketch-desc{font-size:14px;color:#bdc3d0;line-height:1.8;max-width:900px;margin-bottom:40px;}
 @keyframes starPulse{0%,100%{opacity:.3;transform:scale(.85);}50%{opacity:1;transform:scale(1.2);}}
 .sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;}
 .sketch-item{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
@@ -441,9 +441,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <span class="role">Daekun</span>
     </h1>
     <p class="hero-desc">
-      환경 아티스트 / Senior Environment Artist<br>
-      Level Design · Integration & Lighting · Texturing<br>
-      Unreal Engine · 3ds Max · Substance Painter
+      <span style="color:var(--gold-dim);">World Building</span> · Level Art · Engine Integration · Set Dressing<br>
+      <span style="color:var(--gold-dim);">Artistic Core</span> · 3D Asset Creation · High/Low Poly · Texturing<br>
+      <span style="color:var(--gold-dim);">Environment Setup</span> · Look-dev · Shader & Lighting · Optimization<br>
+      <span style="color:var(--gold-dim);">Management</span> · Outsourcing · Schedule · Art Feedback & Review<br>
+      <span style="color:var(--gold-dim);">Documentation</span> · Technical Guideline · Finalization & Polishing
     </p>
     <div class="hero-cta" style="flex-direction:column;align-items:flex-start;">
       <a href="#about" class="btn-primary">View Profile</a>
@@ -484,28 +486,30 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         Contact: <span id="about-email-btn" onclick="copyAboutEmail()" style="color:var(--gold);cursor:pointer;font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;transition:color .2s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">Email <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.7;flex-shrink:0;"><rect x="5" y="1" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="4" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="var(--bg)"/></svg></span><span id="about-email-copy-msg" style="font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0;transition:opacity .3s;margin-left:4px;">✓ copied!</span>
       </div>
       <div class="skills-grid" id="skills-grid" style="margin-top:32px">
-        <div class="skill-item reveal-left">Level Design</div>
-        <div class="skill-item reveal-right">Integration</div>
-        <div class="skill-item reveal-left">Modeling & Mapping</div>
-        <div class="skill-item reveal-right">Shader & Lighting</div>
-        <div class="skill-item reveal-left">Optimization</div>
-        <div class="skill-item reveal-right">Outsourcing</div>
         <div class="skill-item reveal-left">3ds Max</div>
-        <div class="skill-item reveal-right">Substance Painter</div>
-        <div class="skill-item reveal-left">Substance Designer</div>
-        <div class="skill-item reveal-right">Z-Brush</div>
-        <div class="skill-item reveal-left">Unreal Engine 4/5</div>
-        <div class="skill-item reveal-right">Photoshop</div>
+        <div class="skill-item reveal-right">Level Art & World Building</div>
+        <div class="skill-item reveal-left">Photoshop</div>
+        <div class="skill-item reveal-right">Engine Integration (Unreal/Unity)</div>
+        <div class="skill-item reveal-left">ZBrush</div>
+        <div class="skill-item reveal-right">3D Asset Creation (High/Low Poly)</div>
         <div class="skill-item reveal-left">SpeedTree</div>
-        <div class="skill-item reveal-right">CryEngine 3.x</div>
-        <div class="skill-item reveal-left">Unity</div>
-        <div class="skill-item reveal-right">Quixel Megascan</div>
+        <div class="skill-item reveal-right">Look-dev & Environment Lighting</div>
+        <div class="skill-item reveal-left">World Creator</div>
+        <div class="skill-item reveal-right">Technical Optimization</div>
+        <div class="skill-item reveal-left">Substance Painter</div>
+        <div class="skill-item reveal-right">Outsourcing Management (OS)</div>
+        <div class="skill-item reveal-left">Substance Designer</div>
+        <div class="skill-item reveal-right">Technical Documentation / Guideline</div>
+        <div class="skill-item reveal-left">Unreal Engine 4/5</div>
+        <div class="skill-item reveal-right">Post-Production & Polishing</div>
+        <div class="skill-item reveal-left">CryEngine · Unity</div>
+        <div class="skill-item reveal-right">Art Direction & Review</div>
       </div>
       <div class="about-bio reveal-left delay-3" style="margin-top:32px;">
         <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:14px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">15년 이상의 풍부한 경험을 바탕으로, 유연한 사고와 완성도 높은 배경을 만듭니다.</p>
-        <p style="font-size:14px;color:#adb3c0;line-height:1.85;margin-bottom:10px;">안녕하세요, 방문해 주셔서 감사합니다. 3D 배경 디자이너 <strong style="color:#dde0e8;">정대근</strong> 입니다.</p>
-        <p style="font-size:14px;color:#adb3c0;line-height:1.85;margin-bottom:10px;">저는 단순히 보기 좋은 배경을 넘어, 플레이어가 몰입하고 숨 쉴 수 있는 세계를 구축해 왔습니다. 개별 에셋 제작부터 깊이감 있는 레벨링, 그리고 프로젝트의 효율을 극대화하는 환경 세팅(Environment Setup)까지 배경 제작 전 공정의 전문성을 보유하고 있습니다.</p>
-        <p style="font-size:14px;color:#adb3c0;line-height:1.85;margin-bottom:24px;">긍정적인 태도와 팀원 간의 화합을 최우선으로 생각하며, 서로의 부족함을 채워가며 함께 성장하는 든든한 동료가 되겠습니다.</p>
+        <p style="font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">안녕하세요, 방문해 주셔서 감사합니다. 3D 배경 디자이너 <strong style="color:#dde0e8;">정대근</strong> 입니다.</p>
+        <p style="font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">저는 단순히 보기 좋은 배경을 넘어, 플레이어가 몰입하고 숨 쉴 수 있는 세계를 구축해 왔습니다. 개별 에셋 제작부터 깊이감 있는 레벨링, 그리고 프로젝트의 효율을 극대화하는 환경 세팅(Environment Setup)까지 배경 제작 전 공정의 전문성을 보유하고 있습니다.</p>
+        <p style="font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:24px;">긍정적인 태도와 팀원 간의 화합을 최우선으로 생각하며, 서로의 부족함을 채워가며 함께 성장하는 든든한 동료가 되겠습니다.</p>
         <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:13px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">Building high-quality environments through flexible thinking and over 15 years of extensive experience.</p>
         <p style="font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:10px;">Hello, and thank you for visiting. I am <strong style="color:var(--text2);">Jung Daekun</strong>, a 3D Environment Designer.</p>
         <p style="font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:10px;">Beyond creating visually pleasing backgrounds, I strive to build worlds where players can truly breathe and immerse themselves. I possess expertise across the entire production pipeline—from individual asset creation and deep-level design to optimizing environment setups for maximum project efficiency.</p>
@@ -1174,12 +1178,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <a class="footer-logo" href="#hero" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
     <div class="footer-logo-arrow">
       <svg width="13" height="18" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="ch1" d="M2 18L8 13L14 18" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="ch2" d="M2 13L8 8L14 13" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="ch3" d="M2 8L8 3L14 8" stroke="#c8a84b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="ch1" d="M2 18L8 13L14 18" stroke="#d4b355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="ch2" d="M2 13L8 8L14 13" stroke="#d4b355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="ch3" d="M2 8L8 3L14 8" stroke="#d4b355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    Jung Daekun
+    BACK TO TOP
   </a>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
   <div class="footer-links">
