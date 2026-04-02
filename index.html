@@ -83,7 +83,7 @@ h1.hero-title .role{color:var(--gold);display:block;}
 
 /* ── SECTION COMMON ── */
 section{padding:100px 80px;}
-.sec-header{display:flex;align-items:center;gap:20px;margin-bottom:60px;}
+.sec-header{display:flex;align-items:center;gap:20px;margin-bottom:32px;}
 .sec-id{font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.15em;}
 .sec-title{font-family:var(--font-title);font-size:32px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);}
 .sec-line{flex:1;height:1px;background:var(--border);}
@@ -253,7 +253,7 @@ section{padding:100px 80px;}
 .project-strip-thumb{flex-shrink:0;width:56px;height:36px;object-fit:cover;border:1px solid var(--border);cursor:pointer;opacity:.55;transition:opacity .2s,border-color .2s;}
 .project-strip-thumb:hover{opacity:1;border-color:var(--gold);}
 #sketch{background:var(--bg2);}
-.sketch-desc{font-size:13px;color:var(--text2);line-height:1.8;max-width:900px;margin-bottom:40px;}
+.sketch-desc{font-size:14px;color:#adb3c0;line-height:1.8;max-width:900px;margin-bottom:40px;}
 @keyframes starPulse{0%,100%{opacity:.3;transform:scale(.85);}50%{opacity:1;transform:scale(1.2);}}
 .sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;}
 .sketch-item{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
@@ -589,7 +589,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <button class="freq-refresh" onclick="renderFreqViewed()">↺ REFRESH</button>
     <button class="freq-refresh" onclick="resetFreqViewed()" style="margin-left:6px;color:var(--text3);">⊘ RESET</button>
   </div>
-  <p class="sketch-desc" style="max-width:900px;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>정해진 순서 없이 무작위로 제안되는 대표 작업물들입니다. 배경 디자이너로서 탐구해온 공간의 조각들을 자유롭게 탐색해 보세요. (새로고침 시 다른 작업물을 확인하실 수 있습니다.)</p>
+  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>무작위로 제안되는 작업물들입니다. 제가 탐구해온 공간의 조각들을 자유롭게 탐색해 보세요. <span style="color:#a89050;">↺ 새로고침 시 목록이 바뀝니다.</span><br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Works presented in random order. Freely explore the spatial fragments I've crafted as an environment designer. <span style="color:var(--gold-dim);">(Refresh to see a different selection.)</span></span></p>
   <div class="freq-grid" id="freq-grid"></div>
 </section>
 
@@ -600,7 +600,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title reveal-up">Personal Works</h2>
     <div class="sec-line"></div>
   </div>
-  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개별 프랍 제작(Prop Work)부터 이를 활용한 공간 구성(Level Art), 그리고 환경의 감도를 결정짓는 라이팅 작업까지 3D 배경 디자인의 핵심 역량을 집중한 개인 프로젝트입니다. 완성도 높은 에셋 배치를 통해 깊이 있는 공간감을 구현하는 것을 목표로 합니다.</p>
+  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개별 프랍 제작(Prop Work)부터 이를 활용한 공간 구성(Level Art), 그리고 환경의 감도를 결정짓는 라이팅 작업까지 3D 배경 디자인의 핵심 역량을 집중한 개인 프로젝트입니다. 완성도 높은 에셋 배치를 통해 깊이 있는 공간감을 구현하는 것을 목표로 합니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Personal projects spanning prop creation, level art, and lighting — covering the full pipeline of 3D environment design. The goal is achieving a deep sense of space through refined asset placement.</span></p>
   <!-- 프로젝트 카드 그리드 -->
   <div class="project-grid">
 
@@ -729,7 +729,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title reveal-up">Re:Lighting</h2>
     <div class="sec-line"></div>
   </div>
-  <p class="sketch-desc" style="max-width:none;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>마켓 리소스를 베이스로 한 레벨 구성 및 환경 셋팅 작업물입니다. 단순히 에셋을 배치하는 것에 그치지 않고, 독창적인 라이팅 셋업과 포스트 프로세싱을 통해 공간의 밀도와 분위기를 재창조하는 과정을 담았습니다.</p>
+  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>마켓 리소스를 베이스로 한 레벨 구성 및 환경 셋팅 작업물입니다. 단순히 에셋을 배치하는 것에 그치지 않고, 독창적인 라이팅 셋업과 포스트 프로세싱을 통해 공간의 밀도와 분위기를 재창조하는 과정을 담았습니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Level composition and environment setup built on market assets. Beyond simple placement, these works document the process of recreating spatial density and mood through original lighting and post-processing.</span></p>
   <div class="relight-grid">
     <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-genesis', 0)">
       <div class="relight-num">// RELIGHT_001</div>
@@ -1154,7 +1154,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <h2 class="sec-title reveal-up">Sketch Note</h2>
     <div class="sec-line"></div>
   </div>
-  <p class="sketch-desc"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개인 스케치 및 작업 노트. 환경 디자인 아이디어부터 공간을 구성하기 위한 모든 시도와 흔적들을 기록합니다.</p>
+  <p class="sketch-desc" style="white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개인 스케치 및 작업 노트. 환경 디자인 아이디어부터 공간을 구성하기 위한 모든 시도와 흔적들을 기록합니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Personal sketches and working notes. A record of every attempt and trace made in the process of composing environments — from early ideas to spatial structure.</span></p>
   <div class="sketch-grid">
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Box.gif')"><img src="images/SketchNote/Box.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Box</div><div class="sketch-hover-sub">2026.04.01</div></div></div>
     <div class="sketch-item sketch-clickable" onclick="openSketchZoom('images/SketchNote/Lava_Field.gif')"><img src="images/SketchNote/Lava_Field.gif" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="sketch-hover-overlay"><div class="sketch-hover-title">Lava Field</div><div class="sketch-hover-sub">2026.04.01</div></div></div>
