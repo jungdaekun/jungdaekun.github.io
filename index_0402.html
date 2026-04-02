@@ -590,11 +590,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- PERSONAL WORKS -->
 <section id="personal">
   <div class="sec-header">
-    <span class="sec-id">// 03</span>
+    <span class="sec-id">// 06</span>
     <h2 class="sec-title reveal-up">Personal Works</h2>
     <div class="sec-line"></div>
   </div>
-  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개별 프랍 제작(Prop Work)부터 이를 활용한 공간 구성(Level Art), 그리고 환경의 감도를 결정짓는 라이팅 작업까지 3D 배경 디자인의 핵심 역량을 집중한 개인 프로젝트입니다. 완성도 높은 에셋 배치를 통해 깊이 있는 공간감을 구현하는 것을 목표로 합니다.</p>
+  <p class="sketch-desc" style="max-width:900px;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>개별 프랍 제작(Prop Work)부터 이를 활용한 공간 구성(Level Art), 그리고 환경의 감도를 결정짓는 라이팅 작업까지 3D 배경 디자인의 핵심 역량을 집중한 개인 프로젝트입니다. 완성도 높은 에셋 배치를 통해 깊이 있는 공간감을 구현하는 것을 목표로 합니다.</p>
   <!-- 프로젝트 카드 그리드 -->
   <div class="project-grid">
 
@@ -719,7 +719,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- RE:LIGHTING -->
 <section id="relighting">
   <div class="sec-header">
-    <span class="sec-id">// 04</span>
+    <span class="sec-id">// 06</span>
     <h2 class="sec-title reveal-up">Re:Lighting</h2>
     <div class="sec-line"></div>
   </div>
@@ -759,7 +759,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- PROFESSIONAL -->
 <section id="professional">
   <div class="sec-header">
-    <span class="sec-id">// 05</span>
+    <span class="sec-id">// 06</span>
     <h2 class="sec-title reveal-up">Professional</h2>
     <div class="sec-line"></div>
   </div>
@@ -1173,12 +1173,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </a>
   <div class="footer-text">© 2024 Jung Daekun · All Rights Reserved · Environment Artist</div>
   <div class="footer-links">
-    <a href="/cdn-cgi/l/email-protection#bcd6c9d2dbd8ddd9d7c9d2fcdbd1ddd5d092dfd3d1">Email</a>
+    <a href="mailto:jungdaekun@gmail.com">Email</a>
     <a href="https://jungdaekun.blogspot.com" target="_blank">Blog</a>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── RANDOM YOUTUBE BACKGROUND ──
 const bgVideos = [
   'bDXLAaqR_Yg',
@@ -2643,4 +2643,11 @@ document.addEventListener('keydown', function(e) {
 <script>
 function copyEmail() {
   navigator.clipboard.writeText('jungdaekun@gmail.com').then(function() {
-    var msg = document.getElemen
+    var msg = document.getElementById('email-copy-msg');
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
