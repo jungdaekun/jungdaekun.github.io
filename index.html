@@ -40,7 +40,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 nav{display:flex;gap:0;position:absolute;left:50%;transform:translateX(-50%);}
 nav a{font-family:var(--font-title);font-size:13px;font-weight:500;letter-spacing:.1em;color:var(--text2);text-decoration:none;padding:0 18px;height:56px;display:flex;align-items:center;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .2s;}
 nav a:hover,nav a.active{color:var(--gold);border-bottom-color:var(--gold);}
-.topbar-right{font-family:var(--font-mono);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:8px;}
+.topbar-right{font-family:var(--font-mono);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:8px;margin-left:auto;}
 .online-dot{width:5px;height:5px;border-radius:50%;background:#4ae87a;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 
@@ -317,7 +317,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .empty-thumb{background:var(--bg4);display:flex;align-items:center;justify-content:center;}
 .empty-label{font-family:var(--font-mono);font-size:12px;color:var(--text3);letter-spacing:.15em;}
 .project-count-badge{position:absolute;top:12px;right:12px;font-family:var(--font-mono);font-size:10px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);padding:3px 10px;letter-spacing:.1em;}
-.project-open-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-title);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;opacity:0;transition:opacity .2s;pointer-events:none;}
+.project-open-hint{position:absolute;inset:0;background:rgba(8,10,13,.6);display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-title);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;opacity:0;transition:opacity .2s;pointer-events:none;}
 .project-card:hover .project-open-hint{opacity:1;}
 .project-hover-overlay{position:absolute;inset:0;background:rgba(8,10,13,.5);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;pointer-events:none;}
 .project-card:hover .project-hover-overlay{opacity:1;}
@@ -518,11 +518,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="skill-item reveal-right">Art Direction & Review</div>
       </div>
       <div class="about-bio reveal-left delay-3" style="margin-top:32px;">
-        <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:14px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">15년 이상의 풍부한 경험을 바탕으로, 유연한 사고와 완성도 높은 배경을 만듭니다.</p>
-        <p style="font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">안녕하세요, 방문해 주셔서 감사합니다. 3D 배경 디자이너 <strong style="color:#dde0e8;">정대근</strong> 입니다.</p>
-        <p style="font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">저는 단순히 보기 좋은 배경을 넘어, 플레이어가 몰입하고 숨 쉴 수 있는 세계를 구축해 왔습니다. 개별 에셋 제작부터 깊이감 있는 레벨링, 그리고 프로젝트의 효율을 극대화하는 환경 세팅(Environment Setup)까지 배경 제작 전 공정의 전문성을 보유하고 있습니다.</p>
-        <p style="font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:24px;">긍정적인 태도와 팀원 간의 화합을 최우선으로 생각하며, 서로의 부족함을 채워가며 함께 성장하는 든든한 동료가 되겠습니다.</p>
-        <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:13px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">Building high-quality environments through flexible thinking and over 15 years of extensive experience.</p>
+        <p class="about-bio-headline" style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--gold);letter-spacing:.04em;margin-bottom:14px;">15년 이상의 풍부한 경험을 바탕으로, 유연한 사고와 완성도 높은 배경을 만듭니다.</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">안녕하세요, 방문해 주셔서 감사합니다. 3D 배경 디자이너 <strong style="color:#dde0e8;">정대근</strong> 입니다.</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">저는 단순히 보기 좋은 배경을 넘어, 플레이어가 몰입하고 숨 쉴 수 있는 세계를 구축해 왔습니다. 개별 에셋 제작부터 깊이감 있는 레벨링, 그리고 프로젝트의 효율을 극대화하는 환경 세팅(Environment Setup)까지 배경 제작 전 공정의 전문성을 보유하고 있습니다.</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:24px;">긍정적인 태도와 팀원 간의 화합을 최우선으로 생각하며, 서로의 부족함을 채워가며 함께 성장하는 든든한 동료가 되겠습니다.</p>
+        <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:14px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">Building high-quality environments through flexible thinking and over 15 years of extensive experience.</p>
         <p style="font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:10px;">Hello, and thank you for visiting. I am <strong style="color:var(--text2);">Jung Daekun</strong>, a 3D Environment Designer.</p>
         <p style="font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:10px;">Beyond creating visually pleasing backgrounds, I strive to build worlds where players can truly breathe and immerse themselves. I possess expertise across the entire production pipeline—from individual asset creation and deep-level design to optimizing environment setups for maximum project efficiency.</p>
         <p style="font-size:13px;color:var(--text2);line-height:1.85;">Prioritizing a positive attitude and team harmony, I aim to be a reliable colleague who grows alongside others by filling in the gaps and evolving together.</p>
@@ -726,7 +726,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
         <img id="lb-img" class="lb-img" src="" alt="">
-        <div id="lb-caption" style="position:absolute;top:0;left:0;right:0;padding:14px 20px;background:linear-gradient(rgba(0,0,0,.75),transparent);font-family:var(--font-mono);font-size:13px;color:var(--text2);letter-spacing:.08em;line-height:1.8;pointer-events:auto;opacity:0;transition:opacity .3s;"></div>
+        <div id="lb-caption" style="position:absolute;top:0;left:0;right:0;padding:14px 20px;background:linear-gradient(rgba(0,0,0,.75),transparent);font-family:'Noto Sans KR',var(--font-mono);font-size:14px;color:#bdc3d0;letter-spacing:.04em;line-height:1.8;pointer-events:auto;opacity:0;transition:opacity .3s;"></div>
         <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
         <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
         <button class="lb-nav-next" onclick="lbNext()">›</button>
@@ -1224,20 +1224,20 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 // ── LIGHTBOX ──
 const projects = {
   'proj-oldwork': {
-    id: '// PERSONAL · 2000s',
+    id: '// PERSONAL',
     title: 'Old Work Memories',
-    captions: ['배경 디자이너로서 첫발을 내디뎠던 소중한 기록과 추억들입니다.<br><span style="font-size:12px;color:var(--text2);">Cherished records and memories from my early days as an environment designer.</span>'],
+    captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">3D 그래픽 작업의 첫발을 내디뎠던 소중한 기록과 추억들입니다.</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">Cherished records and memories from my early days as a 3D designer.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : Maya · Photoshop · Mental Ray</span>'],
     images: [
-      'images/Personal/2000_OldWork/Apache_001.jpg',
-      'images/Personal/2000_OldWork/Apache_002.jpg',
-      'images/Personal/2000_OldWork/Apache_003.jpg',
-      'images/Personal/2000_OldWork/Apache_004.jpg',
       'images/Personal/2000_OldWork/Ferrari_001.jpg',
       'images/Personal/2000_OldWork/Ferrari_002.jpg',
       'images/Personal/2000_OldWork/Ferrari_003.jpg',
       'images/Personal/2000_OldWork/Ferrari_004.jpg',
       'images/Personal/2000_OldWork/Ferrari_005.jpg',
       'images/Personal/2000_OldWork/Ferrari_006.jpg',
+      'images/Personal/2000_OldWork/Apache_001.jpg',
+      'images/Personal/2000_OldWork/Apache_002.jpg',
+      'images/Personal/2000_OldWork/Apache_003.jpg',
+      'images/Personal/2000_OldWork/Apache_004.jpg',
       'images/Personal/2000_OldWork/Truck_001.jpg',
       'images/Personal/2000_OldWork/Truck_002.jpg'
     ]
