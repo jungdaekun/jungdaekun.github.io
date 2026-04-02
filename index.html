@@ -693,7 +693,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
         <img id="lb-img" class="lb-img" src="" alt="">
-        <div id="lb-caption" style="position:absolute;top:0;left:0;right:0;padding:14px 20px;background:linear-gradient(rgba(0,0,0,.75),transparent);font-family:'Noto Sans KR',var(--font-mono);font-size:14px;color:#bdc3d0;letter-spacing:.04em;line-height:1.8;pointer-events:auto;opacity:0;transition:opacity .3s;"></div>
+        <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div id="lb-caption" style="position:absolute;top:0;left:0;right:0;padding:14px 20px;background:none;font-family:'Noto Sans KR',var(--font-mono);font-size:14px;color:#bdc3d0;letter-spacing:.04em;line-height:1.8;pointer-events:auto;opacity:0;transition:opacity .3s;"></div>
         <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
         <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
         <button class="lb-nav-next" onclick="lbNext()">›</button>
@@ -1192,9 +1193,10 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 const projects = {
   'proj-hmmwv': {
     id: '// PERSONAL · 2005',
-    title: 'HMMWV',
-    captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">처음으로 폐허가 된 도로와 험비를 표현했던 소중한 기록입니다.</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">My first attempt at expressing a ruined road and an HMMWV.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Photoshop · Unreal 2.5</span>'],
+    title: 'My First Diorama: HMMWV!',
+    captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">처음으로 폐허가 된 도로와 험비를 표현했던 소중한 기록입니다.</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">My first attempt at expressing a ruined road and an HMMWV.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Photoshop · Unreal 2.5</span>', '', '', '', '', '', '', ''],
     images: [
+      { type: 'youtube', id: 'WehIUseB8FQ', thumb: 'images/Personal/2005_HMMWV/2005_HMMWV_004.jpg' },
       'images/Personal/2005_HMMWV/2005_HMMWV_001.jpg',
       'images/Personal/2005_HMMWV/2005_HMMWV_002.jpg',
       'images/Personal/2005_HMMWV/2005_HMMWV_003.jpg',
@@ -1330,15 +1332,34 @@ function renderLightbox(instant) {
     ).join('');
   }
 
-  // 썸네일 스트립
-  const thumbs = document.getElementById('lb-thumbnails');
   if (thumbs) {
-    thumbs.innerHTML = imgs.map((src, i) =>
-      '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + src + '" loading="lazy" onclick="lbGoto(' + i + ')">'
-    ).join('');
+    thumbs.innerHTML = imgs.map((src, i) => {
+      var thumbSrc = (typeof src === 'object' && src.thumb) ? src.thumb : src;
+      var isYt = typeof src === 'object' && src.type === 'youtube';
+      return '<div style="position:relative;display:inline-block;flex-shrink:0;">' +
+        '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + thumbSrc + '" loading="lazy" onclick="lbGoto(' + i + ')">' +
+        (isYt ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;"><span style="font-size:16px;">▶</span></div>' : '') +
+        '</div>';
+    }).join('');
   }
 
   const newSrc = imgs[currentIdx];
+  var isYoutube = newSrc && typeof newSrc === 'object' && newSrc.type === 'youtube';
+  var lbImg = document.getElementById('lb-img');
+  var lbYtWrap = document.getElementById('lb-youtube-wrap');
+  var lbYtIframe = document.getElementById('lb-youtube-iframe');
+
+  if (isYoutube) {
+    lbImg.style.display = 'none';
+    lbYtWrap.style.display = 'block';
+    lbYtIframe.src = 'https://www.youtube.com/embed/' + newSrc.id + '?autoplay=1';
+    if (thumbs) { const t = thumbs.children[currentIdx]; if(t) t.scrollIntoView({block:'nearest',inline:'center'}); }
+    return;
+  } else {
+    lbYtWrap.style.display = 'none';
+    lbYtIframe.src = '';
+    lbImg.style.display = 'block';
+  }
 
   if (instant || !img.src || img.src === window.location.href) {
     img.style.transition = 'none';
@@ -1391,6 +1412,12 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
   document.body.style.overflow = '';
   scrollAcc = 0;
+  var iframe = document.getElementById('lb-youtube-iframe');
+  if (iframe) iframe.src = '';
+  var ytWrap = document.getElementById('lb-youtube-wrap');
+  if (ytWrap) ytWrap.style.display = 'none';
+  var lbImg = document.getElementById('lb-img');
+  if (lbImg) lbImg.style.display = 'block';
 }
 
 // 스크롤 이미지 넘기기
