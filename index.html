@@ -1606,7 +1606,10 @@ function getAllImagePool() {
   Object.keys(projects).forEach(function(pid) {
     var proj = projects[pid];
     proj.images.forEach(function(src, idx) {
-      pool.push({ key: pid + '_' + idx, src: src, title: proj.title, type: 'personal', projectId: pid, idx: idx });
+      // youtube 타입은 thumb 이미지 사용
+      var imgSrc = (typeof src === 'object' && src.thumb) ? src.thumb : src;
+      if (typeof src === 'object' && src.type === 'youtube') return; // 유튜브는 제외
+      pool.push({ key: pid + '_' + idx, src: imgSrc, title: proj.title, type: 'personal', projectId: pid, idx: idx });
     });
   });
   // Professional (이미지 타입만)
