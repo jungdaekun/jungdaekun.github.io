@@ -317,7 +317,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .empty-thumb{background:var(--bg4);display:flex;align-items:center;justify-content:center;}
 .empty-label{font-family:var(--font-mono);font-size:12px;color:var(--text3);letter-spacing:.15em;}
 .project-count-badge{position:absolute;top:12px;right:12px;font-family:var(--font-mono);font-size:10px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold2);padding:3px 10px;letter-spacing:.1em;}
-.project-open-hint{position:absolute;inset:0;background:rgba(8,10,13,.45);display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;text-shadow:0 0 8px rgba(200,168,75,.4);opacity:0;transition:opacity .2s;pointer-events:none;}
+.project-open-hint{position:absolute;inset:0;background:rgba(8,10,13,.45);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .2s;pointer-events:none;}
+.project-open-hint-label{font-family:var(--font-mono);font-size:11px;color:var(--gold2);letter-spacing:.15em;text-shadow:0 0 8px rgba(200,168,75,.4);background:rgba(8,10,13,.8);border:1px solid rgba(212,179,85,.3);padding:6px 14px;display:flex;align-items:center;gap:8px;}
 .project-card:hover .project-open-hint{opacity:1;}
 .project-hover-overlay{position:absolute;inset:0;background:rgba(8,10,13,.5);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;pointer-events:none;}
 .project-card:hover .project-hover-overlay{opacity:1;}
@@ -629,7 +630,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="project-thumb-wrap">
         <img class="project-thumb" src="images/personal/2019-2020/2DNormal_001.jpg" alt="2D Normal Building Assets">
         <div class="project-count-badge">9 images</div>
-        <div class="project-open-hint"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-title">2D Normal Building Assets</div>
         </div>
@@ -641,7 +642,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="project-thumb-wrap">
         <img class="project-thumb" src="images/personal/M4/shot_01.jpg" alt="M4">
         <div class="project-count-badge">7 images</div>
-        <div class="project-open-hint"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-title">M4</div>
         </div>
@@ -653,7 +654,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="project-thumb-wrap">
         <img class="project-thumb" src="images/Personal/2005_HMMWV/2005_HMMWV_004.jpg" alt="HMMWV" style="transform:scale(2);transform-origin:center center;">
         <div class="project-count-badge">7 images</div>
-        <div class="project-open-hint"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-title">My First Diorama: HMMWV!</div>
         </div>
@@ -665,7 +666,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="project-thumb-wrap">
         <img class="project-thumb" src="images/Personal/2000_OldWork/Apache_001.jpg" alt="Old Work Memories">
         <div class="project-count-badge">12 images</div>
-        <div class="project-open-hint"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-title">Old Work Memories</div>
         </div>
@@ -724,7 +725,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img src="images/ReLighting/GENESIS_G70/GENESIS_G70_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
         <div class="project-count-badge">5 images</div>
         <div class="relight-hover-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
         </div>
         <div class="relight-hover-overlay">
           <div class="relight-hover-title">Genesis G70</div>
@@ -738,7 +739,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img src="images/ReLighting/BMW_M4GTS/BMW_M4GTS_01.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
         <div class="project-count-badge">3 images</div>
         <div class="relight-hover-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
         </div>
         <div class="relight-hover-overlay">
           <div class="relight-hover-title">BMW M4 GTS</div>
@@ -872,7 +873,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/vdAS1SI1xes/mqdefault.jpg" alt="CookApps thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
+          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       </div>
       <div class="prof-card-info">
@@ -897,7 +898,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/k4VzC93T00g/mqdefault.jpg" alt="Neptune thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
+          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       </div>
       <div class="prof-card-info">
@@ -921,7 +922,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/rvz_QdqN3hU/mqdefault.jpg" alt="Neptune Baseball thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
+          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       </div>
       <div class="prof-card-info">
@@ -995,7 +996,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/14KuNCN-Pgs/mqdefault.jpg" alt="ArtechSoft thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
+          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       </div>
       <div class="prof-card-info">
@@ -1021,7 +1022,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/-VcKdsviGI4/mqdefault.jpg" alt="YeinsSoft thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
+          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       </div>
       <div class="prof-card-info">
@@ -1046,7 +1047,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img class="prof-card-thumb" src="https://img.youtube.com/vi/q5VgiNs5ZpE/mqdefault.jpg" alt="PixelPlanet thumbnail">
         <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
         <div class="prof-card-media-overlay">
-          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div>
+          <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       </div>
       <div class="prof-card-info">
