@@ -46,7 +46,7 @@ nav a:hover,nav a.active{color:var(--gold);border-bottom-color:var(--gold);}
 
 /* ── HERO VIDEO ── */
 .hero-video-wrap{position:absolute;inset:0;overflow:hidden;z-index:0;}
-.hero-video-overlay{position:absolute;inset:0;background:rgba(8,10,13,0.72);z-index:1;}
+.hero-video-overlay{position:absolute;inset:0;background:rgba(8,10,13,0.55);z-index:1;}
 .hero-video-iframe{
   position:absolute;
   top:50%;left:50%;
@@ -319,7 +319,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .project-count-badge{position:absolute;top:12px;right:12px;font-family:var(--font-mono);font-size:10px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);padding:3px 10px;letter-spacing:.1em;}
 .project-open-hint{position:absolute;inset:0;background:rgba(8,10,13,.7);display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-title);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;opacity:0;transition:opacity .2s;}
 .project-card:hover .project-open-hint{opacity:1;}
-.project-info{padding:16px 18px;}
+.project-info{display:none;}
 .project-year{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:6px;}
 .project-title{font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:4px;}
 .project-desc{font-size:12px;color:var(--text2);margin-bottom:10px;}
@@ -1224,6 +1224,7 @@ const projects = {
   'proj-m4': {
     id: '// PERSONAL · M4',
     title: 'M4',
+    captions: ['M4 &nbsp;·&nbsp; 개인 작업물'],
     images: [
       'images/personal/M4/shot_01.jpg',
       'images/personal/M4/shot_02.jpg',
@@ -1237,6 +1238,7 @@ const projects = {
   'proj-2019': {
     id: '// PERSONAL · 2019—2020',
     title: '2D Normal Building Assets',
+    captions: ['2019 — 2020 &nbsp;·&nbsp; 2D Normal Building Assets &nbsp;·&nbsp; 2D 노말맵을 이용한 건물 에셋 작업<br>Substance Designer &nbsp;·&nbsp; 3ds Max &nbsp;·&nbsp; Normal Map'],
     images: [
       'images/personal/2019-2020/2DNormal_001.jpg',
       'images/personal/2019-2020/2DNormal_002.jpg',
