@@ -648,6 +648,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
 
+    <!-- 2000 Old Work -->
+    <div class="project-card" onclick="openLightbox('proj-oldwork', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/Personal/2000_OldWork/Apache_001.jpg" alt="Old Work Memories">
+        <div class="project-count-badge">12 images</div>
+        <div class="project-open-hint"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-title">Old Work Memories</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 2017-2018 (이미지 추가 예정) -->
     <div class="project-card project-card-empty">
       <div class="project-thumb-wrap empty-thumb">
@@ -1211,6 +1223,25 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
+  'proj-oldwork': {
+    id: '// PERSONAL · 2000s',
+    title: 'Old Work Memories',
+    captions: ['배경 디자이너로서 첫발을 내디뎠던 소중한 기록과 추억들입니다.<br><span style="font-size:12px;color:var(--text2);">Cherished records and memories from my early days as an environment designer.</span>'],
+    images: [
+      'images/Personal/2000_OldWork/Apache_001.jpg',
+      'images/Personal/2000_OldWork/Apache_002.jpg',
+      'images/Personal/2000_OldWork/Apache_003.jpg',
+      'images/Personal/2000_OldWork/Apache_004.jpg',
+      'images/Personal/2000_OldWork/Ferrari_001.jpg',
+      'images/Personal/2000_OldWork/Ferrari_002.jpg',
+      'images/Personal/2000_OldWork/Ferrari_003.jpg',
+      'images/Personal/2000_OldWork/Ferrari_004.jpg',
+      'images/Personal/2000_OldWork/Ferrari_005.jpg',
+      'images/Personal/2000_OldWork/Ferrari_006.jpg',
+      'images/Personal/2000_OldWork/Truck_001.jpg',
+      'images/Personal/2000_OldWork/Truck_002.jpg'
+    ]
+  },
   'proj-m4': {
     id: '// PERSONAL · M4',
     title: 'M4',
