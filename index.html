@@ -1121,8 +1121,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
-    <div class="prof-grid-fade" id="prof-grid-fade"></div>
   </div>
+  <div class="prof-grid-fade" id="prof-grid-fade"></div>
 </section>
 
 <div id="prof-lb">
@@ -1439,6 +1439,18 @@ function lbPrev() {
   var prevId = lbProjectOrder[(idx - 1 + lbProjectOrder.length) % lbProjectOrder.length];
   openLightbox(prevId, 0);
 }
+function lbNextImg() {
+  if (isAnimating) return;
+  isAnimating = true;
+  currentIdx = (currentIdx + 1) % currentProject.images.length;
+  renderLightbox();
+}
+function lbPrevImg() {
+  if (isAnimating) return;
+  isAnimating = true;
+  currentIdx = (currentIdx - 1 + currentProject.images.length) % currentProject.images.length;
+  renderLightbox();
+}
 function lbGoto(i) {
   currentIdx = i;
   renderLightbox();
@@ -1464,8 +1476,8 @@ document.addEventListener('wheel', function(e) {
   clearTimeout(scrollTimer);
 
   if (Math.abs(scrollAcc) > 80) {
-    if (scrollAcc > 0) lbNext();
-    else lbPrev();
+    if (scrollAcc > 0) lbNextImg();
+    else lbPrevImg();
     scrollAcc = 0;
   }
 
@@ -1475,8 +1487,8 @@ document.addEventListener('wheel', function(e) {
 // 키보드 지원
 document.addEventListener('keydown', function(e) {
   if (!document.getElementById('lightbox').classList.contains('active')) return;
-  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') lbNext();
-  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') lbPrev();
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') lbNextImg();
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') lbPrevImg();
   if (e.key === 'Escape') closeLightbox();
 });
 
