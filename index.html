@@ -145,13 +145,16 @@ section{padding:100px 80px;}
 .freq-lb-btn{display:none;}
 .freq-lb-main{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#000;position:relative;overflow:hidden;}
 /* 이미지 위 오버레이 정보 */
-.freq-lb-overlay-info{position:absolute;top:0;left:0;right:0;padding:20px 28px;background:linear-gradient(to bottom,rgba(8,10,13,.75) 0%,transparent 100%);pointer-events:none;z-index:3;}
-.freq-lb-overlay-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:5px;}
-.freq-lb-overlay-title{font-family:var(--font-title);font-size:20px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}
 .freq-lb-overlay-counter{display:none;}
 /* 닫기 버튼 오버레이 */
 .freq-lb-close{position:absolute;top:20px;right:20px;background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:36px;height:36px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:4;}
 .freq-lb-close:hover{border-color:var(--border2);color:var(--gold);}
+.freq-lb-zoom-badge{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 14px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;opacity:0;transition:opacity .2s;pointer-events:none;z-index:4;}
+.freq-lb-zoom-badge.visible{opacity:1;}
+.freq-lb-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:20px;align-items:center;z-index:4;pointer-events:none;}
+.freq-lb-overlay-info{position:absolute;top:0;left:0;right:0;padding:20px 28px;background:linear-gradient(to bottom,rgba(8,10,13,.75) 0%,transparent 100%);pointer-events:none;z-index:3;}
+.freq-lb-overlay-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:5px;}
+.freq-lb-overlay-title{font-family:var(--font-title);font-size:20px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}
 .freq-lb-img{display:block;max-width:96vw;max-height:92vh;width:100%;height:100%;object-fit:contain;transition:opacity .18s ease;}
 .freq-lb-nav-prev,.freq-lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;}
 .freq-lb-nav-prev{left:16px;}
@@ -639,11 +642,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <div id="freq-lb" onclick="if(event.target===this)closeFreqLb()">
   <div class="freq-lb-wrap">
     <div class="freq-lb-main">
-      <img id="freq-lb-img" class="freq-lb-img" src="" alt="">
+      <img id="freq-lb-img" class="freq-lb-img" src="" alt="" style="cursor:zoom-in;">
       <button class="freq-lb-nav-prev" onclick="freqLbPrev()">‹</button>
       <button class="freq-lb-nav-next" onclick="freqLbNext()">›</button>
-      <span id="freq-lb-title" style="display:none"></span>
+      <!-- 좌상단 타이틀 -->
+      <div class="freq-lb-overlay-info">
+        <div class="freq-lb-overlay-id">// FEATURED</div>
+        <div class="freq-lb-overlay-title" id="freq-lb-title"></div>
+      </div>
       <span id="freq-lb-counter" style="display:none"></span>
+      <!-- 줌 배지 -->
+      <div class="freq-lb-zoom-badge" id="freq-lb-zoom-badge">🔍 200%</div>
+      <!-- HUD -->
+      <div class="freq-lb-hud">
+        <div class="sz-hint"><span class="sz-icon">🖱</span> Click zoom in/out</div>
+        <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
+        <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+      </div>
       <button class="freq-lb-close" onclick="closeFreqLb()">✕</button>
     </div>
   </div>
@@ -1882,12 +1897,14 @@ function openFreqLb(idx) {
   img.src = s.item.src;
   img.onload = function() { img.style.opacity = '1'; };
   document.getElementById('freq-lb-title').textContent = s.item.title;
+  freqZoomReset();
   document.getElementById('freq-lb-counter').textContent = (idx + 1) + ' / ' + freqCurrentItems.length;
   lb.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function closeFreqLb() {
+  freqZoomReset();
   document.getElementById('freq-lb').classList.remove('active');
   document.getElementById('freq-lb-img').src = '';
   document.body.style.overflow = '';
@@ -1908,8 +1925,66 @@ document.addEventListener('keydown', function(e) {
   if (!lb || !lb.classList.contains('active')) return;
   if (e.key === 'ArrowLeft') freqLbPrev();
   else if (e.key === 'ArrowRight') freqLbNext();
-  else if (e.key === 'Escape') closeFreqLb();
+  else if (e.key === 'Escape') { if (freqZoomed) freqZoomReset(); else closeFreqLb(); }
 });
+
+// Featured Works 줌 기능
+var freqZoomed = false, freqDragging = false, freqDidDrag = false;
+var freqTx = 0, freqTy = 0, freqStartX, freqStartY;
+
+function freqZoomReset() {
+  var img = document.getElementById('freq-lb-img');
+  if (!img) return;
+  freqZoomed = false; freqTx = 0; freqTy = 0;
+  img.style.transform = '';
+  img.style.cursor = 'zoom-in';
+  var badge = document.getElementById('freq-lb-zoom-badge');
+  if (badge) badge.classList.remove('visible');
+}
+
+(function() {
+  document.addEventListener('click', function(e) {
+    var lb = document.getElementById('freq-lb');
+    if (!lb || !lb.classList.contains('active')) return;
+    var img = document.getElementById('freq-lb-img');
+    if (!img || !img.contains(e.target)) return;
+    if (freqDidDrag) { freqDidDrag = false; return; }
+    if (!freqZoomed) {
+      freqZoomed = true; freqTx = 0; freqTy = 0;
+      img.style.transform = 'scale(2)';
+      img.style.cursor = 'grab';
+      var badge = document.getElementById('freq-lb-zoom-badge');
+      if (badge) { badge.classList.add('visible'); clearTimeout(badge._t); badge._t = setTimeout(function(){ badge.classList.remove('visible'); }, 1500); }
+    } else {
+      freqZoomReset();
+    }
+  });
+  document.addEventListener('mousedown', function(e) {
+    var lb = document.getElementById('freq-lb');
+    if (!lb || !lb.classList.contains('active')) return;
+    var img = document.getElementById('freq-lb-img');
+    if (!img || !img.contains(e.target) || !freqZoomed) return;
+    freqDragging = true; freqDidDrag = false;
+    freqStartX = e.clientX - freqTx;
+    freqStartY = e.clientY - freqTy;
+    img.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!freqDragging || !freqZoomed) return;
+    var dx = e.clientX - freqStartX, dy = e.clientY - freqStartY;
+    if (Math.abs(dx - freqTx) > 2 || Math.abs(dy - freqTy) > 2) freqDidDrag = true;
+    freqTx = dx; freqTy = dy;
+    var img = document.getElementById('freq-lb-img');
+    if (img) img.style.transform = 'scale(2) translate(' + (freqTx/2) + 'px,' + (freqTy/2) + 'px)';
+  });
+  document.addEventListener('mouseup', function() {
+    if (!freqDragging) return;
+    freqDragging = false;
+    var img = document.getElementById('freq-lb-img');
+    if (img && freqZoomed) img.style.cursor = 'grab';
+  });
+})();
 
 // Featured Works 휠 스크롤로 이미지 넘기기
 var freqScrollAcc = 0, freqScrollTimer = null, freqIsAnimating = false;
