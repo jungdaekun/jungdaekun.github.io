@@ -1404,7 +1404,7 @@ const projects = {
     title: 'AK-74u',
     captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">하드 서페이스 : 기계적 디테일과 리얼리티 구현 및 재질감 표현.</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">Hard-Surface : Focused on mechanical detail, realism, and material definition.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Photoshop · Marmoset</span>', '', '', '', '', '', '', '', ''],
     images: [
-      'images/Personal/2011_AK-74u/AK-74u_Final_Thumbnail.jpg',
+      'images/Personal/2011_AK-74u/AK-74u_Final_001.jpg',
       'images/Personal/2011_AK-74u/AK-74u_Final_002.jpg',
       'images/Personal/2011_AK-74u/AK-74u_Final_003.jpg',
       'images/Personal/2011_AK-74u/AK-74u_Final_004.jpg',
@@ -1597,13 +1597,16 @@ function renderLightbox(instant) {
       lbYtWrap.appendChild(ytOverlay);
     }
     if (thumbs) {
-      setTimeout(function() {
-        var t = thumbs.children[currentIdx];
-        if (!t) return;
-        var itemW = t.offsetWidth + 5; // 아이템 너비 + gap
-        var paddingL = 14;
-        thumbs.scrollLeft = paddingL + (currentIdx * itemW) - (thumbs.clientWidth / 2) + (t.offsetWidth / 2);
-      }, 30);
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var t = thumbs.children[currentIdx];
+          if (!t) return;
+          var tRect = t.getBoundingClientRect();
+          var cRect = thumbs.getBoundingClientRect();
+          var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+          thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+        });
+      });
     }
     return;
   } else {
@@ -1618,13 +1621,16 @@ function renderLightbox(instant) {
     img.src = newSrc;
     // 썸네일 active 스크롤
     if (thumbs) {
-      setTimeout(function() {
-        var t = thumbs.children[currentIdx];
-        if (!t) return;
-        var itemW = t.offsetWidth + 5; // 아이템 너비 + gap
-        var paddingL = 14;
-        thumbs.scrollLeft = paddingL + (currentIdx * itemW) - (thumbs.clientWidth / 2) + (t.offsetWidth / 2);
-      }, 30);
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var t = thumbs.children[currentIdx];
+          if (!t) return;
+          var tRect = t.getBoundingClientRect();
+          var cRect = thumbs.getBoundingClientRect();
+          var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+          thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+        });
+      });
     }
     return;
   }
@@ -1639,13 +1645,16 @@ function renderLightbox(instant) {
     requestAnimationFrame(function() { img.style.opacity = '1'; });
     isAnimating = false;
     if (thumbs) {
-      setTimeout(function() {
-        var t = thumbs.children[currentIdx];
-        if (!t) return;
-        var itemW = t.offsetWidth + 5; // 아이템 너비 + gap
-        var paddingL = 14;
-        thumbs.scrollLeft = paddingL + (currentIdx * itemW) - (thumbs.clientWidth / 2) + (t.offsetWidth / 2);
-      }, 30);
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var t = thumbs.children[currentIdx];
+          if (!t) return;
+          var tRect = t.getBoundingClientRect();
+          var cRect = thumbs.getBoundingClientRect();
+          var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+          thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+        });
+      });
     }
   };
   preload.onerror = function() {
@@ -2825,14 +2834,16 @@ function renderProfLb() {
   thumbs.innerHTML = '<div class="prof-lb-thumbs-inner">' + thumbsHtml + '</div>';
 
   // 활성 썸네일 가운데 정렬
-  setTimeout(function() {
-    var activeThumb = thumbs.querySelector('.prof-lb-thumb-item.active');
-    if (!activeThumb) return;
-    var idx = Array.from(thumbs.querySelectorAll('.prof-lb-thumb-item')).indexOf(activeThumb);
-    var itemW = activeThumb.offsetWidth + 6; // 아이템 너비 + gap
-    var paddingL = 16;
-    thumbs.scrollLeft = paddingL + (idx * itemW) - (thumbs.clientWidth / 2) + (activeThumb.offsetWidth / 2);
-  }, 30);
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      var activeThumb = thumbs.querySelector('.prof-lb-thumb-item.active');
+      if (!activeThumb) return;
+      var tRect = activeThumb.getBoundingClientRect();
+      var cRect = thumbs.getBoundingClientRect();
+      var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+      thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+    });
+  });
 
   // nav 버튼 표시 여부
   var showNav = profCurrent.items.length > 1;
