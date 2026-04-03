@@ -690,6 +690,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
 
+    <!-- 2011 PPSh-41 -->
+    <div class="project-card" onclick="openLightbox('proj-ppsh41', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/Personal/2011_PPSh-41/2011_PPSH41_001.jpg" alt="PPSh-41">
+        <div class="project-count-badge">1 image</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-title">PPSh-41: The Classic Soviet SMG</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 2011 CX-420 Cybernetic Micro-Uzi -->
     <div class="project-card" onclick="openLightbox('proj-cx420', 0)">
       <div class="project-thumb-wrap">
@@ -1268,6 +1280,14 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
+  'proj-ppsh41': {
+    id: '// PERSONAL · 2011',
+    title: 'PPSh-41: The Classic Soviet SMG',
+    captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">PPSh-41 (Hard-Surface): 클래식한 실루엣 재현과 금속·목재의 리얼한 질감 대비 구현</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">PPSh-41 (Hard-Surface): Classic silhouette recreation with realistic metal and wood texture contrast.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Photoshop · Marmoset</span>'],
+    images: [
+      'images/Personal/2011_PPSh-41/2011_PPSH41_001.jpg'
+    ]
+  },
   'proj-cx420': {
     id: '// PERSONAL · 2011',
     title: 'Cybernetic Micro-Uzi',
@@ -1514,7 +1534,7 @@ function renderLightbox(instant) {
 }
 
 // 개인작업 + 리라이팅 프로젝트 순서
-var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
+var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
 
 function lbNext() {
   var idx = lbProjectOrder.indexOf(currentProjectId);
