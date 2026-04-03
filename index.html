@@ -197,7 +197,7 @@ section{padding:100px 80px;}
 @keyframes lockBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}60%{transform:translateY(-3px);}}
 .professional-note-text{font-size:13px;color:#bdc3d0;line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(60,1fr);gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
 .prof-grid .prof-card:nth-child(-n+2){grid-column:span 30;}
 .prof-grid .prof-card:nth-child(n+3):nth-child(-n+5){grid-column:span 20;}
 .prof-grid .prof-card:nth-child(n+6):nth-child(-n+9){grid-column:span 15;}
@@ -1188,8 +1188,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
     </div>
     <div class="prof-lb-main" id="prof-lb-main">
-      <button class="prof-lb-nav-prev" onclick="profLbStep(-1)">‹</button>
-      <button class="prof-lb-nav-next" onclick="profLbStep(1)">›</button>
+      <button class="prof-lb-nav-prev" onclick="profLbPrevProject()">‹</button>
+      <button class="prof-lb-nav-next" onclick="profLbNextProject()">›</button>
       <div class="prof-lb-dots" id="prof-lb-dots"></div>
       <div class="prof-lb-zoom-badge" id="prof-lb-zoom-badge">🔍 100%</div>
       <div class="prof-lb-type-badge" id="prof-lb-type-badge"></div>
@@ -2472,6 +2472,16 @@ function profLbStep(dir) {
   // 이미지 순환 (끝에서 처음으로)
   profIdx = (profIdx + dir + profCurrent.items.length) % profCurrent.items.length;
   renderProfLb();
+}
+function profLbNextProject() {
+  var idx = profProjectOrder.indexOf(currentProfId);
+  var nextId = profProjectOrder[(idx + 1) % profProjectOrder.length];
+  openProfLb(nextId, 0);
+}
+function profLbPrevProject() {
+  var idx = profProjectOrder.indexOf(currentProfId);
+  var prevId = profProjectOrder[(idx - 1 + profProjectOrder.length) % profProjectOrder.length];
+  openProfLb(prevId, 0);
 }
 
 function renderProfLb() {
