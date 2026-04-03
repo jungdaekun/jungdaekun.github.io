@@ -1598,7 +1598,10 @@ function renderLightbox(instant) {
     if (thumbs) {
       setTimeout(function() {
         var t = thumbs.children[currentIdx];
-        if (t) thumbs.scrollLeft = t.offsetLeft - (thumbs.clientWidth - t.offsetWidth) / 2;
+        if (!t) return;
+        var itemW = t.offsetWidth + 5; // 아이템 너비 + gap
+        var paddingL = 14;
+        thumbs.scrollLeft = paddingL + (currentIdx * itemW) - (thumbs.clientWidth / 2) + (t.offsetWidth / 2);
       }, 30);
     }
     return;
@@ -1616,7 +1619,10 @@ function renderLightbox(instant) {
     if (thumbs) {
       setTimeout(function() {
         var t = thumbs.children[currentIdx];
-        if (t) thumbs.scrollLeft = t.offsetLeft - (thumbs.clientWidth - t.offsetWidth) / 2;
+        if (!t) return;
+        var itemW = t.offsetWidth + 5; // 아이템 너비 + gap
+        var paddingL = 14;
+        thumbs.scrollLeft = paddingL + (currentIdx * itemW) - (thumbs.clientWidth / 2) + (t.offsetWidth / 2);
       }, 30);
     }
     return;
@@ -1634,7 +1640,10 @@ function renderLightbox(instant) {
     if (thumbs) {
       setTimeout(function() {
         var t = thumbs.children[currentIdx];
-        if (t) thumbs.scrollLeft = t.offsetLeft - (thumbs.clientWidth - t.offsetWidth) / 2;
+        if (!t) return;
+        var itemW = t.offsetWidth + 5; // 아이템 너비 + gap
+        var paddingL = 14;
+        thumbs.scrollLeft = paddingL + (currentIdx * itemW) - (thumbs.clientWidth / 2) + (t.offsetWidth / 2);
       }, 30);
     }
   };
@@ -2814,7 +2823,11 @@ function renderProfLb() {
   // 활성 썸네일 가운데 정렬
   setTimeout(function() {
     var activeThumb = thumbs.querySelector('.prof-lb-thumb-item.active');
-    if (activeThumb) thumbs.scrollLeft = activeThumb.offsetLeft - thumbs.clientWidth / 2 + activeThumb.offsetWidth / 2;
+    if (!activeThumb) return;
+    var idx = Array.from(thumbs.querySelectorAll('.prof-lb-thumb-item')).indexOf(activeThumb);
+    var itemW = activeThumb.offsetWidth + 6; // 아이템 너비 + gap
+    var paddingL = 16;
+    thumbs.scrollLeft = paddingL + (idx * itemW) - (thumbs.clientWidth / 2) + (activeThumb.offsetWidth / 2);
   }, 30);
 
   // nav 버튼 표시 여부
