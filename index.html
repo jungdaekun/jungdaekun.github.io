@@ -310,16 +310,14 @@ section{padding:100px 80px;}
 #sketch-zoom-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:20px;align-items:center;}
 .sz-hint{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11px;color:rgba(200,168,75,.75);letter-spacing:.1em;}
 /* 휠 힌트 센터 오버레이 */
-.wheel-hint-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:none;opacity:0;transition:opacity .5s ease;}
+.wheel-hint-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;display:flex;align-items:center;gap:16px;pointer-events:none;opacity:0;transition:opacity .6s ease;background:rgba(8,10,13,.6);padding:14px 24px;border:1px solid rgba(200,168,75,.2);}
 .wheel-hint-overlay.visible{opacity:1;}
-.wheel-hint-icon{font-size:36px;animation:wheelBounce 1.2s ease-in-out infinite;}
-@keyframes wheelBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-.wheel-hint-arrows{display:flex;flex-direction:column;align-items:center;gap:2px;}
-.wheel-hint-arrow{font-family:var(--font-mono);font-size:13px;color:var(--gold);opacity:0;animation:arrowFade 1.2s ease-in-out infinite;}
+.wheel-hint-mouse{flex-shrink:0;}
+.wheel-hint-arrow{font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0;animation:arrowFade 1s ease-in-out infinite;}
 .wheel-hint-arrow.up{animation-delay:0s;}
-.wheel-hint-arrow.down{animation-delay:.3s;}
-@keyframes arrowFade{0%,100%{opacity:.2;}50%{opacity:1;}}
-.wheel-hint-text{font-family:var(--font-mono);font-size:11px;color:rgba(200,168,75,.8);letter-spacing:.12em;text-transform:uppercase;background:rgba(8,10,13,.65);padding:6px 16px;border:1px solid rgba(200,168,75,.25);}
+.wheel-hint-arrow.down{animation-delay:.35s;}
+@keyframes arrowFade{0%,100%{opacity:.15;}50%{opacity:1;}}
+.wheel-hint-text{font-family:var(--font-mono);font-size:11px;color:rgba(200,168,75,.85);letter-spacing:.14em;text-transform:uppercase;}
 .sz-key{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:22px;padding:0 7px;border:1px solid rgba(200,168,75,.5);border-radius:3px;font-size:11px;color:var(--gold);background:rgba(200,168,75,.12);}
 .sz-icon{font-size:14px;color:rgba(200,168,75,.55);}
 /* 줌 배지 */
@@ -656,14 +654,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <img id="freq-lb-img" class="freq-lb-img" src="" alt="" style="cursor:zoom-in;">
       <!-- 휠 힌트 오버레이 -->
       <div class="wheel-hint-overlay" id="freq-wheel-hint">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div class="wheel-hint-arrows">
-            <div class="wheel-hint-arrow up">▲</div>
-            <div class="wheel-hint-icon">🖱</div>
-            <div class="wheel-hint-arrow down">▼</div>
-          </div>
-          <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
-        </div>
+        <div class="wheel-hint-arrow up">▲</div>
+        <div class="wheel-hint-mouse"><svg width="32" height="46" viewBox="0 0 32 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="30" height="44" rx="15" stroke="rgba(200,168,75,0.6)" stroke-width="1.5"/>
+              <line x1="16" y1="1" x2="16" y2="22" stroke="rgba(200,168,75,0.3)" stroke-width="1"/>
+              <rect x="13" y="8" width="6" height="10" rx="3" fill="none" stroke="#d4b355" stroke-width="1.5" id="wheel-scroll-bar" style="animation:wheelScroll 1s ease-in-out infinite;"/>
+            </svg>
+            <style>@keyframes wheelScroll{0%,100%{transform:translateY(-3px);opacity:.3;}50%{transform:translateY(3px);opacity:1;}}</style></div>
+        <div class="wheel-hint-arrow down">▼</div>
+        <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
       </div>
       <button class="freq-lb-nav-prev" onclick="freqLbPrev()">‹</button>
       <button class="freq-lb-nav-next" onclick="freqLbNext()">›</button>
@@ -717,6 +716,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-title">M4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2013 Bulldozer -->
+    <div class="project-card" onclick="openLightbox('proj-bulldozer', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/Personal/2013_Bulldozer/2013_Bulldozer_Thumbnail.jpg" alt="MD-EX Iron Clad Bulldozer">
+        <div class="project-count-badge">5 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-title">MD-EX "Iron Clad" Bulldozer</div>
         </div>
       </div>
     </div>
@@ -815,14 +826,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <img id="lb-img" class="lb-img" src="" alt="">
         <!-- 휠 힌트 오버레이 -->
         <div class="wheel-hint-overlay" id="lb-wheel-hint">
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div class="wheel-hint-arrows">
-              <div class="wheel-hint-arrow up">▲</div>
-              <div class="wheel-hint-icon">🖱</div>
-              <div class="wheel-hint-arrow down">▼</div>
-            </div>
-            <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
-          </div>
+          <div class="wheel-hint-arrow up">▲</div>
+          <div class="wheel-hint-mouse"><svg width="32" height="46" viewBox="0 0 32 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="30" height="44" rx="15" stroke="rgba(200,168,75,0.6)" stroke-width="1.5"/>
+              <line x1="16" y1="1" x2="16" y2="22" stroke="rgba(200,168,75,0.3)" stroke-width="1"/>
+              <rect x="13" y="8" width="6" height="10" rx="3" fill="none" stroke="#d4b355" stroke-width="1.5" id="wheel-scroll-bar" style="animation:wheelScroll 1s ease-in-out infinite;"/>
+            </svg>
+            <style>@keyframes wheelScroll{0%,100%{transform:translateY(-3px);opacity:.3;}50%{transform:translateY(3px);opacity:1;}}</style></div>
+          <div class="wheel-hint-arrow down">▼</div>
+          <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
         </div>
         <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div id="lb-caption" style="position:absolute;top:0;left:0;right:0;padding:14px 20px;background:none;font-family:'Noto Sans KR',var(--font-mono);font-size:14px;color:#bdc3d0;letter-spacing:.04em;line-height:1.8;pointer-events:auto;opacity:0;transition:opacity .3s;"></div>
@@ -1316,6 +1328,18 @@ heroIframe.src = 'https://www.youtube.com/embed/' + randomVideoId +
 <script>
 // ── LIGHTBOX ──
 const projects = {
+  'proj-bulldozer': {
+    id: '// PERSONAL · 2013',
+    title: 'MD-EX "Iron Clad" Bulldozer',
+    captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">장갑화된 불도저의 복잡한 기계적 구조를 하드서피스로 정교하게 모델링하였으며, 쉐입의 볼륨감과 디테일한 파츠 구성에 집중했습니다.</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">MD-EX \"Iron Clad\": Hard-surface modeling of an armored bulldozer, with a focus on mechanical volume and intricate part composition.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Photoshop · Vray</span>', '', '', '', ''],
+    images: [
+      'images/Personal/2013_Bulldozer/2013_Bulldozer_001.jpg',
+      'images/Personal/2013_Bulldozer/2013_Bulldozer_002.jpg',
+      'images/Personal/2013_Bulldozer/2013_Bulldozer_003.jpg',
+      'images/Personal/2013_Bulldozer/2013_Bulldozer_004.jpg',
+      'images/Personal/2013_Bulldozer/2013_Bulldozer_005.jpg'
+    ]
+  },
   'proj-ppsh41': {
     id: '// PERSONAL · 2011',
     title: 'PPSh-41: The Classic Soviet SMG',
@@ -1497,7 +1521,7 @@ function openLightbox(projectId, startIdx) {
   if (lbHint) {
     clearTimeout(lbHint._t);
     lbHint.classList.add('visible');
-    lbHint._t = setTimeout(function(){ lbHint.classList.remove('visible'); }, 5000);
+    lbHint._t = setTimeout(function(){ lbHint.classList.remove('visible'); }, 3000);
   }
   document.body.style.overflow = 'hidden';
   // 트래킹 - 이미지 단위로
@@ -1558,7 +1582,13 @@ function renderLightbox(instant) {
       ytOverlay.style.cssText = 'position:absolute;inset:0;z-index:1;background:transparent;cursor:default;';
       lbYtWrap.appendChild(ytOverlay);
     }
-    if (thumbs) { const t = thumbs.children[currentIdx]; if(t) t.scrollIntoView({block:'nearest',inline:'center'}); }
+    if (thumbs) {
+      var t = thumbs.children[currentIdx];
+      if (t) {
+        var tr = t.getBoundingClientRect(), cr = thumbs.getBoundingClientRect();
+        thumbs.scrollLeft += (tr.left + tr.width / 2) - (cr.left + cr.width / 2);
+      }
+    }
     return;
   } else {
     lbYtWrap.style.display = 'none';
@@ -1571,7 +1601,13 @@ function renderLightbox(instant) {
     img.style.opacity = '1';
     img.src = newSrc;
     // 썸네일 active 스크롤
-    if (thumbs) { const t = thumbs.children[currentIdx]; if(t) t.scrollIntoView({block:'nearest',inline:'center'}); }
+    if (thumbs) {
+      var t = thumbs.children[currentIdx];
+      if (t) {
+        var tr = t.getBoundingClientRect(), cr = thumbs.getBoundingClientRect();
+        thumbs.scrollLeft += (tr.left + tr.width / 2) - (cr.left + cr.width / 2);
+      }
+    }
     return;
   }
 
@@ -1584,7 +1620,13 @@ function renderLightbox(instant) {
     img.src = newSrc;
     requestAnimationFrame(function() { img.style.opacity = '1'; });
     isAnimating = false;
-    if (thumbs) { const t = thumbs.children[currentIdx]; if(t) t.scrollIntoView({block:'nearest',inline:'center'}); }
+    if (thumbs) {
+      var t = thumbs.children[currentIdx];
+      if (t) {
+        var tr = t.getBoundingClientRect(), cr = thumbs.getBoundingClientRect();
+        thumbs.scrollLeft += (tr.left + tr.width / 2) - (cr.left + cr.width / 2);
+      }
+    }
   };
   preload.onerror = function() {
     img.src = newSrc;
@@ -1598,7 +1640,7 @@ function renderLightbox(instant) {
 }
 
 // 개인작업 + 리라이팅 프로젝트 순서
-var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
+var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
 
 function lbNext() {
   var idx = lbProjectOrder.indexOf(currentProjectId);
@@ -1958,7 +2000,7 @@ function openFreqLb(idx) {
   if (freqHint) {
     clearTimeout(freqHint._t);
     freqHint.classList.add('visible');
-    freqHint._t = setTimeout(function(){ freqHint.classList.remove('visible'); }, 5000);
+    freqHint._t = setTimeout(function(){ freqHint.classList.remove('visible'); }, 3000);
   }
 }
 
