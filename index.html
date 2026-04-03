@@ -1244,7 +1244,7 @@ const projects = {
   'proj-ak74u': {
     id: '// PERSONAL · 2011',
     title: 'AK-74u',
-    captions: [],
+    captions: ['<span style="font-family:\'Noto Sans KR\',sans-serif;">AK-74u — Hard-Surface, 기계적 디테일과 리얼리티 구현을 목표로 제작하였습니다.</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">Created with a focus on mechanical detail and realistic hard-surface modeling.</span><br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Photoshop · Marmoset</span>', '', '', '', '', '', '', '', ''],
     images: [
       'images/Personal/2011_AK-74u/AK-74u_Final_001.jpg',
       'images/Personal/2011_AK-74u/AK-74u_Final_002.jpg',
@@ -1423,6 +1423,14 @@ function renderLightbox(instant) {
     lbImg.style.display = 'none';
     lbYtWrap.style.display = 'block';
     lbYtIframe.src = 'https://www.youtube.com/embed/' + newSrc.id + '?autoplay=1';
+    // 휠 이벤트 캡처용 투명 오버레이
+    var existOverlay = lbYtWrap.querySelector('.lb-yt-wheel-overlay');
+    if (!existOverlay) {
+      var ytOverlay = document.createElement('div');
+      ytOverlay.className = 'lb-yt-wheel-overlay';
+      ytOverlay.style.cssText = 'position:absolute;inset:0;z-index:1;background:transparent;cursor:default;';
+      lbYtWrap.appendChild(ytOverlay);
+    }
     if (thumbs) { const t = thumbs.children[currentIdx]; if(t) t.scrollIntoView({block:'nearest',inline:'center'}); }
     return;
   } else {
@@ -1781,14 +1789,15 @@ function renderFreqViewed() {
   if (top2) rest2.splice(pos2, 0, top2);
   var selected = rest2.slice(0, totalItems);
 
-  grid.innerHTML = selected.map(function(s) {
+  freqCurrentItems = selected;
+  grid.innerHTML = selected.map(function(s, listIdx) {
     var spanClass = 'span-1x1';
     if (s.rank === 0) spanClass = 'span-2x2';
     else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
     var p = s.item;
-    return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(\'' + p.key + '\',' +
-      '\''+p.type+'\',\''+p.projectId+'\','+p.idx+')">' +
+    return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
+      '<div class="freq-item-name">' + p.title + '</div>' +
       '<div class="freq-item-overlay">' +
         '<div class="freq-item-title">' + p.title + '</div>' +
         (s.badge ? '<div class="freq-item-badge">' + s.badge + '</div>' : '') +
