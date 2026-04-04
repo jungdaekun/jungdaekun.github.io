@@ -271,7 +271,8 @@ section{padding:100px 80px;}
 .prof-lb-dots{position:absolute;bottom:16px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:2;}
 .prof-lb-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .2s;}
 .prof-lb-dot.active{background:var(--gold);transform:scale(1.4);}
-.prof-lb-type-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:9px;padding:3px 8px;background:rgba(200,168,75,.15);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:2;}
+.prof-lb-type-badge{position:absolute;top:16px;right:20px;font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(8,10,13,.75);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;z-index:4;}
+.prof-lb-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:20px;align-items:center;z-index:4;pointer-events:none;}
 .prof-lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
 .prof-lb-zoom-badge.visible{opacity:1;}
 .lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
@@ -1285,6 +1286,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <div class="prof-lb-dots" id="prof-lb-dots"></div>
       <div class="prof-lb-zoom-badge" id="prof-lb-zoom-badge">🔍 100%</div>
       <div class="prof-lb-type-badge" id="prof-lb-type-badge"></div>
+      <!-- 휠 힌트 오버레이 -->
+      <div class="wheel-hint-overlay" id="prof-wheel-hint">
+        <div class="wheel-hint-arrow up">▲</div>
+        <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
+            </svg></div>
+        <div class="wheel-hint-arrow down">▼</div>
+      </div>
+      <!-- HUD -->
+      <div class="prof-lb-hud">
+        <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/><line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/><rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/></svg> Click zoom in/out</div>
+        <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
+        <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+      </div>
     </div>
     <div class="prof-lb-thumbs" id="prof-lb-thumbs"></div>
   </div>
@@ -2861,6 +2878,13 @@ function renderProfLb() {
 
   // 줌 리셋
   if (window.profZoomReset) window.profZoomReset();
+  // 휠 힌트
+  var profHint = document.getElementById('prof-wheel-hint');
+  if (profHint) {
+    clearTimeout(profHint._t);
+    profHint.classList.add('visible');
+    profHint._t = setTimeout(function(){ profHint.classList.remove('visible'); }, 2000);
+  }
 }
 
 // 키보드 + 배경 클릭 닫기
