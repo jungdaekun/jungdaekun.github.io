@@ -382,7 +382,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.96);align-items:stretch;justify-content:center;flex-direction:column;}
 .lightbox.active{display:flex;}
 .lb-wrap{width:100vw;height:100vh;background:#000;display:flex;flex-direction:column;}
-.lb-header{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(8,10,13,.9);border-bottom:1px solid var(--border);flex-shrink:0;position:relative;z-index:2;}
+.lb-header{display:none;}
 .lb-title-area{display:flex;align-items:center;gap:14px;}
 .lb-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;}
 .lb-title{font-family:var(--font-title);font-size:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}
@@ -392,7 +392,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .lb-scroll-hint::before{content:'↕';color:var(--gold-dim);}
 .lb-btn{background:none;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .lb-btn:hover{border-color:var(--border2);color:var(--gold);}
-.lb-img-viewport{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;position:relative;}
+.lb-img-viewport{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;position:relative;height:100%;}
 .lb-img-viewport::-webkit-scrollbar{width:6px;height:6px;}
 .lb-img-viewport::-webkit-scrollbar-track{background:#000;}
 .lb-img-viewport::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
@@ -838,6 +838,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
+        <!-- 좌상단 고정 타이틀 -->
+        <div style="position:absolute;top:0;left:0;right:0;padding:18px 24px;pointer-events:none;z-index:3;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:5px;" id="lb-id-overlay"></div>
+          <div style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);" id="lb-title-overlay"></div>
+        </div>
+        <!-- 우상단 카운터 + 닫기 -->
+        <div style="position:absolute;top:16px;right:20px;display:flex;align-items:center;gap:12px;z-index:4;">
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="lb-counter-overlay"></span>
+          <button onclick="closeLightbox()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
+        </div>
         <img id="lb-img" class="lb-img" src="" alt="">
         <!-- 휠 힌트 오버레이 -->
         <div class="wheel-hint-overlay" id="lb-wheel-hint">
@@ -1553,6 +1563,12 @@ function openLightbox(projectId, startIdx) {
   currentProjectId = projectId;
   currentIdx = startIdx || 0;
   document.getElementById('lb-id').textContent = currentProject.id;
+  // 오버레이 업데이트
+  var idOv = document.getElementById('lb-id-overlay');
+  var titleOv = document.getElementById('lb-title-overlay');
+  var counterOv = document.getElementById('lb-counter-overlay');
+  if (idOv) idOv.textContent = currentProject.id;
+  if (titleOv) titleOv.textContent = currentProject.title;
   document.getElementById('lb-title').textContent = currentProject.title;
   renderLightbox(true);
   document.getElementById('lightbox').classList.add('active');
@@ -1576,6 +1592,8 @@ function renderLightbox(instant) {
 
   // 카운터 & 도트 즉시 업데이트
   document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + imgs.length;
+  var counterOv2 = document.getElementById('lb-counter-overlay');
+  if (counterOv2) counterOv2.textContent = (currentIdx + 1) + ' / ' + imgs.length;
 
   // 캡션 처리
   var capEl = document.getElementById('lb-caption');
@@ -2826,7 +2844,7 @@ function renderProfLb() {
     wrap.appendChild(iframe);
     wrap.appendChild(overlay);
     main.insertBefore(wrap, main.querySelector('.prof-lb-nav-prev'));
-    document.getElementById('prof-lb-type-badge').textContent = 'VID';
+    document.getElementById('prof-lb-type-badge').textContent = '▶ VIDEO';
   } else {
     var img = document.createElement('img');
     img.className = 'prof-lb-img-el';
@@ -2835,7 +2853,7 @@ function renderProfLb() {
     img.style.transition = 'opacity 0.18s ease';
     main.insertBefore(img, main.querySelector('.prof-lb-nav-prev'));
     requestAnimationFrame(function() { img.style.opacity = '1'; });
-    document.getElementById('prof-lb-type-badge').textContent = 'IMG';
+    document.getElementById('prof-lb-type-badge').textContent = '▪ IMAGE';
   }
 
   // 카운터
