@@ -880,7 +880,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       </div>
       <div class="lb-img-viewport" id="lb-img-viewport">
         <!-- 좌상단 고정 타이틀 -->
-        <div style="position:absolute;top:16px;left:0;right:0;padding:0 24px;pointer-events:none;z-index:3;">
+        <div id="lb-title-wrap" style="position:absolute;top:16px;left:0;right:0;padding:0 24px;pointer-events:none;z-index:3;transition:opacity .2s;">
           <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:.15em;margin-bottom:5px;" id="lb-id-overlay"></div>
           <div style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);" id="lb-title-overlay"></div>
         </div>
@@ -1724,7 +1724,16 @@ function renderLightbox(instant) {
   if (isYoutube) {
     lbImg.style.display = 'none';
     lbYtWrap.style.display = 'block';
-    lbYtIframe.src = 'https://www.youtube.com/embed/' + newSrc.id + '?autoplay=1&mute=1&rel=0&modestbranding=1';
+    // src 초기화 후 재설정 → 두 번째 오픈에서도 autoplay 보장
+    lbYtIframe.src = '';
+    var ytUrl = 'https://www.youtube.com/embed/' + newSrc.id + '?autoplay=1&mute=1&rel=0&modestbranding=1';
+    requestAnimationFrame(function() { lbYtIframe.src = ytUrl; });
+    // 좌상단 텍스트 숨김
+    var titleWrap = document.getElementById('lb-title-wrap');
+    if (titleWrap) titleWrap.style.opacity = '0';
+    // 우상단 배지 숨김
+    var tbadge = document.getElementById('lb-type-badge');
+    if (tbadge) tbadge.style.opacity = '0';
     // 뷰포트 전체를 덮는 휠 캡처 오버레이
     var vp = document.getElementById('lb-img-viewport');
     var existOverlay = vp ? vp.querySelector('.lb-yt-wheel-overlay') : null;
@@ -1753,6 +1762,11 @@ function renderLightbox(instant) {
     lbYtWrap.style.display = 'none';
     lbYtIframe.src = '';
     lbImg.style.display = 'block';
+    // 좌상단 텍스트 복원
+    var titleWrap2 = document.getElementById('lb-title-wrap');
+    if (titleWrap2) titleWrap2.style.opacity = '';
+    var tbadge2 = document.getElementById('lb-type-badge');
+    if (tbadge2) tbadge2.style.opacity = '';
     // 휠 오버레이 제거
     var vp2 = document.getElementById('lb-img-viewport');
     if (vp2) { var ov = vp2.querySelector('.lb-yt-wheel-overlay'); if (ov) ov.style.display = 'none'; }
