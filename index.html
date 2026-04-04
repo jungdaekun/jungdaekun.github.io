@@ -1282,6 +1282,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
   <div class="prof-grid-fade" id="prof-grid-fade"></div>
 </section>
+<script>
+(function() {
+  var cards = document.querySelectorAll('#prof-grid .prof-card');
+  var spans = [30,30,20,20,20,15,15,15,15,12,12,12,12,12];
+  cards.forEach(function(card, i){ card.style.gridColumn = 'span ' + (spans[i] || 12); });
+})();
+</script>
 
 <div id="prof-lb">
   <div class="prof-lb-wrap">
