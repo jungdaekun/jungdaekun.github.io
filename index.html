@@ -2808,13 +2808,13 @@ function closeProfLb() {
 // prof-grid 카드 span 직접 적용
 function applyProfGridSpans() {
   var cards = document.querySelectorAll('#prof-grid .prof-card');
-  // 2+3+4+5 패턴 (14장)
   var spans = [30,30, 20,20,20, 15,15,15,15, 12,12,12,12,12];
   cards.forEach(function(card, i) {
     card.style.gridColumn = 'span ' + (spans[i] || 12);
   });
 }
 document.addEventListener('DOMContentLoaded', applyProfGridSpans);
+window.addEventListener('load', applyProfGridSpans);
 
 var profProjectOrder = ['ncsoft', 'changse', 'nexon', 'xlgames', 'cookapps', 'neptune', 'neptune_baseball', 'puregames', 'puresoft', 'artechsoft', 'yeinssoft', 'pixelplanet', 'sunwoo', 'aprilstudio'];
 var currentProfId = null;
