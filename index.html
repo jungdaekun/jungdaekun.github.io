@@ -2080,58 +2080,6 @@ function freqItemClick(listIdx) {
   openFreqLb(listIdx);
 }
 
-function openFreqLb(idx) {
-  var s = freqCurrentItems[idx];
-  if (!s) return;
-  // 팝업에서 이미지 볼 때마다 카운트 추가
-  trackFreqClick(s.item.key, s.item.src, s.item.title);
-  var lb = document.getElementById('freq-lb');
-  var img = document.getElementById('freq-lb-img');
-  img.style.opacity = '0';
-  img.src = s.item.src;
-  img.onload = function() { img.style.opacity = '1'; };
-  var yearM = s.item.src.match(/\/(\d{4})_/);
-  var yearStr = yearM ? ' · ' + yearM[1] : '';
-  document.getElementById('freq-lb-overlay-id').textContent = '// FEATURED' + yearStr;
-  document.getElementById('freq-lb-title').textContent = s.item.title;
-  freqZoomReset();
-  document.getElementById('freq-lb-counter').textContent = (idx + 1) + ' / ' + freqCurrentItems.length;
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  // 휠 힌트 5초 표시
-  var freqHint = document.getElementById('freq-wheel-hint');
-  if (freqHint) {
-    clearTimeout(freqHint._t);
-    freqHint.classList.add('visible');
-    freqHint._t = setTimeout(function(){ freqHint.classList.remove('visible'); }, 2000);
-  }
-}
-
-function closeFreqLb() {
-  freqZoomReset();
-  document.getElementById('freq-lb').classList.remove('active');
-  document.getElementById('freq-lb-img').src = '';
-  document.body.style.overflow = '';
-}
-
-function freqLbPrev() {
-  freqLbIdx = (freqLbIdx - 1 + freqCurrentItems.length) % freqCurrentItems.length;
-  openFreqLb(freqLbIdx);
-}
-
-function freqLbNext() {
-  freqLbIdx = (freqLbIdx + 1) % freqCurrentItems.length;
-  openFreqLb(freqLbIdx);
-}
-
-document.addEventListener('keydown', function(e) {
-  var lb = document.getElementById('freq-lb');
-  if (!lb || !lb.classList.contains('active')) return;
-  if (e.key === 'ArrowLeft') freqLbPrev();
-  else if (e.key === 'ArrowRight') freqLbNext();
-  else if (e.key === 'Escape') { if (freqZoomed) freqZoomReset(); else closeFreqLb(); }
-});
-
 // Featured Works 줌 기능
 var freqZoomed = false, freqDragging = false, freqDidDrag = false;
 var freqTx = 0, freqTy = 0, freqStartX, freqStartY;
@@ -2189,6 +2137,60 @@ function freqZoomReset() {
     if (img && freqZoomed) img.style.cursor = 'grab';
   });
 })();
+
+
+function openFreqLb(idx) {
+  var s = freqCurrentItems[idx];
+  if (!s) return;
+  // 팝업에서 이미지 볼 때마다 카운트 추가
+  trackFreqClick(s.item.key, s.item.src, s.item.title);
+  var lb = document.getElementById('freq-lb');
+  var img = document.getElementById('freq-lb-img');
+  img.style.opacity = '0';
+  img.src = s.item.src;
+  img.onload = function() { img.style.opacity = '1'; };
+  var yearM = s.item.src.match(/\/(\d{4})_/);
+  var yearStr = yearM ? ' · ' + yearM[1] : '';
+  document.getElementById('freq-lb-overlay-id').textContent = '// FEATURED' + yearStr;
+  document.getElementById('freq-lb-title').textContent = s.item.title;
+  freqZoomReset();
+  document.getElementById('freq-lb-counter').textContent = (idx + 1) + ' / ' + freqCurrentItems.length;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  // 휠 힌트 5초 표시
+  var freqHint = document.getElementById('freq-wheel-hint');
+  if (freqHint) {
+    clearTimeout(freqHint._t);
+    freqHint.classList.add('visible');
+    freqHint._t = setTimeout(function(){ freqHint.classList.remove('visible'); }, 2000);
+  }
+}
+
+function closeFreqLb() {
+  freqZoomReset();
+  document.getElementById('freq-lb').classList.remove('active');
+  document.getElementById('freq-lb-img').src = '';
+  document.body.style.overflow = '';
+}
+
+function freqLbPrev() {
+  freqLbIdx = (freqLbIdx - 1 + freqCurrentItems.length) % freqCurrentItems.length;
+  openFreqLb(freqLbIdx);
+}
+
+function freqLbNext() {
+  freqLbIdx = (freqLbIdx + 1) % freqCurrentItems.length;
+  openFreqLb(freqLbIdx);
+}
+
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('freq-lb');
+  if (!lb || !lb.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') freqLbPrev();
+  else if (e.key === 'ArrowRight') freqLbNext();
+  else if (e.key === 'Escape') { if (freqZoomed) freqZoomReset(); else closeFreqLb(); }
+});
+
 
 // Featured Works 휠 스크롤로 이미지 넘기기
 var freqScrollAcc = 0, freqScrollTimer = null, freqIsAnimating = false;
