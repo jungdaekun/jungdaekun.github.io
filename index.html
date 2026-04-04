@@ -140,8 +140,8 @@ section{padding:100px 80px;}
 .freq-item-badge{font-family:var(--font-mono);font-size:12px;color:var(--gold);letter-spacing:.1em;margin-top:3px;transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94) .06s,opacity .3s .06s;}
 .freq-item:hover .freq-item-title,.freq-item:hover .freq-item-badge{transform:translateX(0);opacity:1;}
 .freq-item-name{display:none;}
-.freq-item-year{position:absolute;bottom:10px;left:10px;font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.12em;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.8);z-index:3;transform:translateY(8px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94),opacity .3s;display:flex;align-items:center;gap:6px;}
-.freq-item:hover .freq-item-year{transform:translateY(0);opacity:1;}
+.freq-item-year{position:absolute;bottom:10px;left:10px;font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.12em;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.8);z-index:3;transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94),opacity .3s;display:flex;align-items:center;gap:6px;line-height:1;}
+.freq-item:hover .freq-item-year{transform:translateX(0);opacity:1;}
 /* freq lightbox */
 #freq-lb{display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.97);flex-direction:column;}
 #freq-lb.active{display:flex;}
@@ -752,6 +752,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-title">Afternoon Break</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2014 The Urban Hideout -->
+    <div class="project-card" onclick="openLightbox('proj-hideout', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="https://img.youtube.com/vi/mcTm2DmXd3Y/hqdefault.jpg" alt="The Urban Hideout">
+        <div class="project-count-badge">▶ + 4 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label">▶ VIDEO + IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-title">The Urban Hideout</div>
         </div>
       </div>
     </div>
@@ -1420,6 +1432,23 @@ const projects = {
       'images/Personal/2014_Afternoon_Break/2014_Afternoon_Break_004.jpg'
     ]
   },
+  'proj-hideout': {
+    id: '// PERSONAL · 2014',
+    title: 'The Urban Hideout',
+    captions: [
+      '<span style="font-family: Noto Sans KR, sans-serif;">개인적인 취향과 소품들로 채워진 아지트를 컨셉으로, V-Ray를 이용한 사실적인 실내 광원 처리와 질감 구현에 집중.</span>' +
+      '<br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">The Urban Hideout: Focused on realistic interior lighting and texture rendering using V-Ray to create a personal sanctuary filled with curated objects.</span>' +
+      '<br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · V-Ray · Photoshop</span>',
+      '', '', '', ''
+    ],
+    images: [
+      { type: 'youtube', id: 'mcTm2DmXd3Y', thumb: 'https://img.youtube.com/vi/mcTm2DmXd3Y/hqdefault.jpg' },
+      'images/Personal/2014_Hideout/2014_Hideout_001.jpg',
+      'images/Personal/2014_Hideout/2014_Hideout_002.jpg',
+      'images/Personal/2014_Hideout/2014_Hideout_003.jpg',
+      'images/Personal/2014_Hideout/2014_Hideout_004.jpg'
+    ]
+  },
   'proj-bulldozer': {
     id: '// PERSONAL · 2013',
     title: 'MD-EX “Iron Clad” Bulldozer',
@@ -1773,7 +1802,7 @@ function renderLightbox(instant) {
 }
 
 // 개인작업 + 리라이팅 프로젝트 순서
-var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-afternoon', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
+var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-afternoon', 'proj-hideout', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
 
 function lbNext() {
   var idx = lbProjectOrder.indexOf(currentProjectId);
@@ -2545,7 +2574,7 @@ function renderFreqViewed() {
     var yearMatch = p.src.match(/\/(\d{4})_/);
     var yearStr = yearMatch ? yearMatch[1] : '';
     var viewCount = data[p.key] ? data[p.key].count : 0;
-    var yearInner = (yearStr ? '<span>' + yearStr + '</span>' : '') + (viewCount > 0 ? '<span style="color:var(--gold);">\u{1f525} ' + viewCount + '</span>' : '');
+    var yearInner = (yearStr ? '<span style="vertical-align:middle;">' + yearStr + '</span>' : '') + (viewCount > 0 ? '<span style="color:var(--gold);vertical-align:middle;font-style:normal;">🔥 ' + viewCount + '</span>' : '');
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
       (yearInner ? '<div class="freq-item-year">' + yearInner + '</div>' : '') +
