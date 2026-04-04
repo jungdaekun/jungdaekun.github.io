@@ -678,7 +678,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <button class="freq-lb-nav-next" onclick="freqLbNext()">›</button>
       <!-- 좌상단 타이틀 -->
       <div class="freq-lb-overlay-info">
-        <div class="freq-lb-overlay-id">// FEATURED</div>
+        <div class="freq-lb-overlay-id" id="freq-lb-overlay-id">// FEATURED</div>
         <div class="freq-lb-overlay-title" id="freq-lb-title"></div>
       </div>
       <span id="freq-lb-counter" style="display:none"></span>
@@ -2054,6 +2054,9 @@ function openFreqLb(idx) {
   img.style.opacity = '0';
   img.src = s.item.src;
   img.onload = function() { img.style.opacity = '1'; };
+  var yearM = s.item.src.match(/\/(\d{4})_/);
+  var yearStr = yearM ? ' · ' + yearM[1] : '';
+  document.getElementById('freq-lb-overlay-id').textContent = '// FEATURED' + yearStr;
   document.getElementById('freq-lb-title').textContent = s.item.title;
   freqZoomReset();
   document.getElementById('freq-lb-counter').textContent = (idx + 1) + ' / ' + freqCurrentItems.length;
@@ -2822,7 +2825,7 @@ function renderProfLb() {
     wrap.appendChild(iframe);
     wrap.appendChild(overlay);
     main.insertBefore(wrap, main.querySelector('.prof-lb-nav-prev'));
-    document.getElementById('prof-lb-type-badge').textContent = '▶ VIDEO';
+    document.getElementById('prof-lb-type-badge').textContent = 'VID';
   } else {
     var img = document.createElement('img');
     img.className = 'prof-lb-img-el';
@@ -2831,7 +2834,7 @@ function renderProfLb() {
     img.style.transition = 'opacity 0.18s ease';
     main.insertBefore(img, main.querySelector('.prof-lb-nav-prev'));
     requestAnimationFrame(function() { img.style.opacity = '1'; });
-    document.getElementById('prof-lb-type-badge').textContent = '⬜ IMAGE';
+    document.getElementById('prof-lb-type-badge').textContent = 'IMG';
   }
 
   // 카운터
