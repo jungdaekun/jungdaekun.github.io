@@ -1732,8 +1732,8 @@ function renderLightbox(instant) {
   };
   preload.src = newSrc;
 
-  const vp = document.getElementById('lb-img-viewport');
-  if (vp) vp.scrollTop = 0;
+  var vpScroll = document.getElementById('lb-img-viewport');
+  if (vpScroll) vpScroll.scrollTop = 0;
 }
 
 // 개인작업 + 리라이팅 프로젝트 순서
@@ -3262,19 +3262,19 @@ document.addEventListener('keydown', function(e) {
 <!-- COPY EMAIL -->
 <script>
 function copyFooterEmail() {
-  navigator.clipboard.writeText('jungdaekun@gmail.com').then(function() {
+  navigator.clipboard.writeText('jungdaekun' + '@' + 'gmail.com').then(function() {
     var msg = document.getElementById('footer-email-copy-msg');
     msg.style.opacity = '1';
     setTimeout(function(){ msg.style.opacity = '0'; }, 2000);
   });
 }
 function copyAboutEmail() {
-  navigator.clipboard.writeText('jungdaekun@gmail.com').then(function() {
+  navigator.clipboard.writeText('jungdaekun' + '@' + 'gmail.com').then(function() {
     var msg = document.getElementById('about-email-copy-msg');
     msg.style.opacity = '1';
     setTimeout(function(){ msg.style.opacity = '0'; }, 2000);
   });
 }
 function copyEmail() {
-  navigator.clipboard.writeText('jungdaekun@gmail.com').then(function() {
+  navigator.clipboard.writeText('jungdaekun' + '@' + 'gmail.com').then(function() {
     var msg = document.getElemen
