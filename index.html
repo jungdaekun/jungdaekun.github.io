@@ -2005,8 +2005,9 @@ function renderFreqViewed() {
     if (s.rank === 0) spanClass = 'span-2x2';
     else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
     var p = s.item;
-    var projData = (p.type === 'personal' && projects[p.projectId]) ? projects[p.projectId] : null;
-    var yearStr = projData ? (projData.id || '').replace('// PERSONAL · ', '').replace('// PERSONAL · ', '') : '';
+    // 연도 추출: 이미지 경로 앞 4자리 숫자
+    var yearMatch = p.src.match(/\/(\d{4})_/);
+    var yearStr = yearMatch ? yearMatch[1] : '';
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
       (yearStr ? '<div class="freq-item-year">' + yearStr + '</div>' : '') +
