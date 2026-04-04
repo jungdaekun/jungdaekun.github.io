@@ -865,7 +865,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
           <div class="wheel-hint-arrow down">▼</div>
           <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
         </div>
-        <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><div id="lb-yt-wheel-overlay" style="position:absolute;inset:0;z-index:1;background:transparent;cursor:default;"></div><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div id="lb-caption" style="position:absolute;top:68px;left:0;right:0;padding:4px 24px;background:none;font-family:'Noto Sans KR',var(--font-mono);font-size:13px;color:#bdc3d0;letter-spacing:.04em;line-height:1.5;pointer-events:auto;opacity:0;transition:opacity .3s;z-index:3;"></div>
         <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
         <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
@@ -1604,7 +1604,7 @@ function renderLightbox(instant) {
   var typeBadge = document.getElementById('lb-type-badge');
   if (typeBadge) {
     var isYt = typeof imgs[currentIdx] === 'object' && imgs[currentIdx].type === 'youtube';
-    typeBadge.textContent = isYt ? '▶ VIDEO' : '▪ IMAGE';
+    typeBadge.textContent = isYt ? '▶ VIDEO' : '■ IMAGE';
     typeBadge.style.display = '';
   }
   var capEl = document.getElementById('lb-caption');
@@ -1643,13 +1643,16 @@ function renderLightbox(instant) {
     lbImg.style.display = 'none';
     lbYtWrap.style.display = 'block';
     lbYtIframe.src = 'https://www.youtube.com/embed/' + newSrc.id + '?autoplay=1';
-    // 휠 이벤트 캡처용 투명 오버레이
-    var existOverlay = lbYtWrap.querySelector('.lb-yt-wheel-overlay');
-    if (!existOverlay) {
+    // 뷰포트 전체를 덮는 휠 캡처 오버레이
+    var vp = document.getElementById('lb-img-viewport');
+    var existOverlay = vp ? vp.querySelector('.lb-yt-wheel-overlay') : null;
+    if (!existOverlay && vp) {
       var ytOverlay = document.createElement('div');
       ytOverlay.className = 'lb-yt-wheel-overlay';
-      ytOverlay.style.cssText = 'position:absolute;inset:0;z-index:1;background:transparent;cursor:default;';
-      lbYtWrap.appendChild(ytOverlay);
+      ytOverlay.style.cssText = 'position:absolute;inset:0;z-index:2;background:transparent;cursor:default;pointer-events:auto;';
+      vp.appendChild(ytOverlay);
+    } else if (existOverlay) {
+      existOverlay.style.display = 'block';
     }
     if (thumbs) {
       requestAnimationFrame(function() {
@@ -1668,6 +1671,9 @@ function renderLightbox(instant) {
     lbYtWrap.style.display = 'none';
     lbYtIframe.src = '';
     lbImg.style.display = 'block';
+    // 휠 오버레이 제거
+    var vp2 = document.getElementById('lb-img-viewport');
+    if (vp2) { var ov = vp2.querySelector('.lb-yt-wheel-overlay'); if (ov) ov.style.display = 'none'; }
   }
 
   if (instant || !img.src || img.src === window.location.href) {
@@ -2864,7 +2870,7 @@ function renderProfLb() {
     img.style.transition = 'opacity 0.18s ease';
     main.insertBefore(img, main.querySelector('.prof-lb-nav-prev'));
     requestAnimationFrame(function() { img.style.opacity = '1'; });
-    document.getElementById('prof-lb-type-badge').textContent = '▪ IMAGE';
+    document.getElementById('prof-lb-type-badge').textContent = '■ IMAGE';
   }
 
   // 카운터
