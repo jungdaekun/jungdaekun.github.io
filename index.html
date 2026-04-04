@@ -1975,348 +1975,6 @@ function shuffle(arr) {
   return a;
 }
 
-function renderFreqViewed() {
-  var grid = document.getElementById('freq-grid');
-  if (!grid) return;
-
-  var pool = getAllImagePool();
-  var data = getFreqData();
-  var usedKeys = {};
-
-  // 해상도별 열 수
-  var w = window.innerWidth;
-  var colCount = w >= 1500 ? 8 : w >= 1200 ? 7 : w >= 900 ? 6 : w >= 600 ? 4 : 3;
-  var rows = 5;
-  var totalCells = colCount * rows;
-  // 1등(2x2=4칸) + 2등(2x1=2칸) + 3등(2x1=2칸) = 8칸 → 나머지 일반
-  var regularCount = totalCells - 8;
-  var totalItems = 3 + regularCount;
-
-  // ── 랜덤 10개 ──
-  var randomItems = [];
-  shuffle(pool).forEach(function(p) {
-    if (randomItems.length >= 10 || usedKeys[p.key]) return;
-    randomItems.push({ item: p, badge: '', rank: -1 });
-    usedKeys[p.key] = true;
-  });
-
-  // ── 최근 10개 (pool 역순) ──
-  var newestItems = [];
-  pool.slice().reverse().forEach(function(p) {
-    if (newestItems.length >= 10 || usedKeys[p.key]) return;
-    newestItems.push({ item: p, badge: '✦ NEW', rank: -1 });
-    usedKeys[p.key] = true;
-  });
-
-  // ── 나머지는 인기순 (클릭 데이터 기반, 부족하면 랜덤 보충) ──
-  var popularKeys = Object.keys(data)
-    .filter(function(k) { return data[k].count > 0; })
-    .sort(function(a,b) { return data[b].count - data[a].count; });
-
-  var popularItems = [];
-  var needed = totalItems - randomItems.length - newestItems.length;
-
-  popularKeys.forEach(function(k) {
-    if (popularItems.length >= needed) return;
-    var p = pool.find(function(x){ return x.key === k; });
-    if (p && !usedKeys[p.key]) {
-      popularItems.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: popularItems.length });
-      usedKeys[p.key] = true;
-    }
-  });
-  // 인기 데이터 부족 시 랜덤 보충
-  shuffle(pool).forEach(function(p) {
-    if (popularItems.length >= needed || usedKeys[p.key]) return;
-    popularItems.push({ item: p, badge: '', rank: -1 });
-    usedKeys[p.key] = true;
-  });
-
-  // rank 0,1,2 → span 크기 결정 (인기 1~3위)
-  if (popularItems.length > 0) popularItems[0].rank = 0;
-  if (popularItems.length > 1) popularItems[1].rank = 1;
-  if (popularItems.length > 2) popularItems[2].rank = 2;
-
-  // 합치기
-  var combined = randomItems.concat(newestItems).concat(popularItems).slice(0, totalItems);
-
-  // 1등(rank=0), 2등(rank=1), 3등(rank=2) 랜덤 위치 배치
-  var top1 = combined.find(function(s){ return s.rank === 0; });
-  var top2 = combined.find(function(s){ return s.rank === 1; });
-  var top3 = combined.find(function(s){ return s.rank === 2; });
-  var rest2 = combined.filter(function(s){ return s.rank !== 0 && s.rank !== 1 && s.rank !== 2; });
-  rest2 = shuffle(rest2);
-
-  // 각각 겹치지 않는 랜덤 위치
-  var pos1 = Math.floor(Math.random() * 4);
-  var pos2 = pos1;
-  while (pos2 === pos1) pos2 = Math.floor(Math.random() * 6);
-  var pos3 = pos1;
-  while (pos3 === pos1 || pos3 === pos2) pos3 = Math.floor(Math.random() * 8);
-
-  // 위치에 삽입
-  if (top1) rest2.splice(pos1, 0, top1);
-  if (top2) rest2.splice(pos2, 0, top2);
-  if (top3) rest2.splice(pos3, 0, top3);
-  var selected = rest2.slice(0, totalItems);
-
-  freqCurrentItems = selected;
-  grid.innerHTML = selected.map(function(s, listIdx) {
-    var spanClass = 'span-1x1';
-    if (s.rank === 0) spanClass = 'span-2x2';
-    else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
-    var p = s.item;
-    // 연도 추출: 이미지 경로 앞 4자리 숫자
-    var yearMatch = p.src.match(/\/(\d{4})_/);
-    var yearStr = yearMatch ? yearMatch[1] : '';
-    return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
-      '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
-      (yearStr ? '<div class="freq-item-year">' + yearStr + '</div>' : '') +
-      '<div class="freq-item-name">' + p.title + '</div>' +
-      '<div class="freq-item-overlay">' +
-        '<div class="freq-item-title">' + p.title + '</div>' +
-        (s.badge ? '<div class="freq-item-badge">' + s.badge + '</div>' : '') +
-      '</div></div>';
-  }).join('');
-}
-
-var freqCurrentItems = [];
-var freqLbIdx = 0;
-
-function freqItemClick(listIdx) {
-  freqLbIdx = listIdx;
-  openFreqLb(listIdx);
-}
-
-// Featured Works 줌 기능
-var freqZoomed = false, freqDragging = false, freqDidDrag = false;
-var freqTx = 0, freqTy = 0, freqStartX, freqStartY;
-
-function freqZoomReset() {
-  var img = document.getElementById('freq-lb-img');
-  if (!img) return;
-  freqZoomed = false; freqTx = 0; freqTy = 0;
-  img.style.transform = '';
-  img.style.cursor = 'zoom-in';
-  var badge = document.getElementById('freq-lb-zoom-badge');
-  if (badge) badge.classList.remove('visible');
-}
-
-(function() {
-  document.addEventListener('click', function(e) {
-    var lb = document.getElementById('freq-lb');
-    if (!lb || !lb.classList.contains('active')) return;
-    var img = document.getElementById('freq-lb-img');
-    if (!img || !img.contains(e.target)) return;
-    if (freqDidDrag) { freqDidDrag = false; return; }
-    if (!freqZoomed) {
-      freqZoomed = true; freqTx = 0; freqTy = 0;
-      img.style.transform = 'scale(2)';
-      img.style.cursor = 'grab';
-      var badge = document.getElementById('freq-lb-zoom-badge');
-      if (badge) { badge.classList.add('visible'); clearTimeout(badge._t); badge._t = setTimeout(function(){ badge.classList.remove('visible'); }, 1500); }
-    } else {
-      freqZoomReset();
-    }
-  });
-  document.addEventListener('mousedown', function(e) {
-    var lb = document.getElementById('freq-lb');
-    if (!lb || !lb.classList.contains('active')) return;
-    var img = document.getElementById('freq-lb-img');
-    if (!img || !img.contains(e.target) || !freqZoomed) return;
-    freqDragging = true; freqDidDrag = false;
-    freqStartX = e.clientX - freqTx;
-    freqStartY = e.clientY - freqTy;
-    img.style.cursor = 'grabbing';
-    e.preventDefault();
-  });
-  document.addEventListener('mousemove', function(e) {
-    if (!freqDragging || !freqZoomed) return;
-    var dx = e.clientX - freqStartX, dy = e.clientY - freqStartY;
-    if (Math.abs(dx - freqTx) > 2 || Math.abs(dy - freqTy) > 2) freqDidDrag = true;
-    freqTx = dx; freqTy = dy;
-    var img = document.getElementById('freq-lb-img');
-    if (img) img.style.transform = 'scale(2) translate(' + (freqTx/2) + 'px,' + (freqTy/2) + 'px)';
-  });
-  document.addEventListener('mouseup', function() {
-    if (!freqDragging) return;
-    freqDragging = false;
-    var img = document.getElementById('freq-lb-img');
-    if (img && freqZoomed) img.style.cursor = 'grab';
-  });
-})();
-
-
-function openFreqLb(idx) {
-  var s = freqCurrentItems[idx];
-  if (!s) return;
-  // 팝업에서 이미지 볼 때마다 카운트 추가
-  trackFreqClick(s.item.key, s.item.src, s.item.title);
-  var lb = document.getElementById('freq-lb');
-  var img = document.getElementById('freq-lb-img');
-  img.style.opacity = '0';
-  img.src = s.item.src;
-  img.onload = function() { img.style.opacity = '1'; };
-  var yearM = s.item.src.match(/\/(\d{4})_/);
-  var yearStr = yearM ? ' · ' + yearM[1] : '';
-  document.getElementById('freq-lb-overlay-id').textContent = '// FEATURED' + yearStr;
-  document.getElementById('freq-lb-title').textContent = s.item.title;
-  freqZoomReset();
-  document.getElementById('freq-lb-counter').textContent = (idx + 1) + ' / ' + freqCurrentItems.length;
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  // 휠 힌트 5초 표시
-  var freqHint = document.getElementById('freq-wheel-hint');
-  if (freqHint) {
-    clearTimeout(freqHint._t);
-    freqHint.classList.add('visible');
-    freqHint._t = setTimeout(function(){ freqHint.classList.remove('visible'); }, 2000);
-  }
-}
-
-function closeFreqLb() {
-  freqZoomReset();
-  document.getElementById('freq-lb').classList.remove('active');
-  document.getElementById('freq-lb-img').src = '';
-  document.body.style.overflow = '';
-}
-
-function freqLbPrev() {
-  freqLbIdx = (freqLbIdx - 1 + freqCurrentItems.length) % freqCurrentItems.length;
-  openFreqLb(freqLbIdx);
-}
-
-function freqLbNext() {
-  freqLbIdx = (freqLbIdx + 1) % freqCurrentItems.length;
-  openFreqLb(freqLbIdx);
-}
-
-document.addEventListener('keydown', function(e) {
-  var lb = document.getElementById('freq-lb');
-  if (!lb || !lb.classList.contains('active')) return;
-  if (e.key === 'ArrowLeft') freqLbPrev();
-  else if (e.key === 'ArrowRight') freqLbNext();
-  else if (e.key === 'Escape') { if (freqZoomed) freqZoomReset(); else closeFreqLb(); }
-});
-
-
-// Featured Works 휠 스크롤로 이미지 넘기기
-var freqScrollAcc = 0, freqScrollTimer = null, freqIsAnimating = false;
-document.addEventListener('wheel', function(e) {
-  if (!document.getElementById('freq-lb').classList.contains('active')) return;
-  e.preventDefault();
-  freqScrollAcc += e.deltaY;
-  clearTimeout(freqScrollTimer);
-  if (Math.abs(freqScrollAcc) > 80) {
-    if (!freqIsAnimating) {
-      freqIsAnimating = true;
-      if (freqScrollAcc > 0) freqLbNext();
-      else freqLbPrev();
-      setTimeout(function() { freqIsAnimating = false; }, 350);
-    }
-    freqScrollAcc = 0;
-  }
-  freqScrollTimer = setTimeout(function() { freqScrollAcc = 0; }, 300);
-}, { passive: false });
-
-// 페이지 로드 + 리사이즈 시 렌더
-window.addEventListener('load', function() {
-  renderFreqViewed();
-  preloadFreqImages();
-});
-window.addEventListener('resize', function() { renderFreqViewed(); });
-
-// Featured Works 이미지 프리로드
-function preloadFreqImages() {
-  var pool = getAllImagePool();
-  // 전체 풀 중 앞쪽 60개만 미리 로드 (너무 많으면 역효과)
-  shuffle(pool).slice(0, 60).forEach(function(p) {
-    var img = new Image();
-    img.src = p.src;
-  });
-}
-
-// ── PROF GRID 스크롤 제어 ──
-(function() {
-  var grid = document.getElementById('prof-grid');
-  var fade = document.getElementById('prof-grid-fade');
-  if (!grid) return;
-
-  // 2번째 카드 높이 기준으로 max-height 계산 (2줄 표시)
-  function calcHeight() {
-    var cards = grid.querySelectorAll('.prof-card');
-    var card = cards[1] || cards[0];
-    if (!card) return;
-    var h = card.offsetHeight;
-    var gap = 12;
-    grid.style.maxHeight = (h * 2 + gap) + 'px';
-  }
-  window.addEventListener('load', calcHeight);
-  window.addEventListener('resize', calcHeight);
-
-  // 페이드 표시 여부
-  function updateFade() {
-    if (!fade) return;
-    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 4;
-    fade.classList.toggle('hidden', atBottom);
-  }
-  grid.addEventListener('scroll', updateFade);
-  setTimeout(updateFade, 300);
-
-  // 휠: 그리드 안에서 스크롤 → 끝 도달하면 페이지로 넘김
-  grid.addEventListener('wheel', function(e) {
-    // 팝업 열려있으면 무시
-    if (document.getElementById('prof-lb').classList.contains('active')) return;
-
-    var atTop    = grid.scrollTop <= 0;
-    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 2;
-
-    if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
-      // 끝에 도달 → 페이지 스크롤로 넘김
-      return;
-    }
-    e.stopPropagation();
-    grid.scrollTop += e.deltaY * 3;
-    e.preventDefault();
-  }, { passive: false });
-})();
-
-// ── PROF CARD 랜덤 썸네일 ──
-document.querySelectorAll('.prof-card-media[data-vids]').forEach(function(el) {
-  var vids = el.dataset.vids.split(',');
-  if (vids.length < 2) return;
-  var picked = vids[Math.floor(Math.random() * vids.length)];
-  el.dataset.vid = picked;
-  var thumb = el.querySelector('.prof-card-thumb');
-  if (thumb) thumb.src = 'https://img.youtube.com/vi/' + picked + '/mqdefault.jpg';
-});
-
-var profHoverTimer = null;
-function profHoverIn(el) {
-  var vid = el.dataset.vid;
-  var iframe = el.querySelector('.prof-card-hover-iframe');
-  // src 아직 없으면 로드 시작
-  if (!iframe.getAttribute('src')) {
-    iframe.src = 'https://www.youtube.com/embed/' + vid +
-      '?autoplay=1&mute=1&loop=1&playlist=' + vid +
-      '&controls=0&rel=0&modestbranding=1&playsinline=1' +
-      (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
-      (vid === '-y3fQ73U-2Q' ? '&start=72' : '') +
-      (vid === 'vdAS1SI1xes' ? '&start=39' : '') +
-      (vid === 'behf7twp1bo' ? '&start=30' : '') +
-      (vid === '2zKdRMch0Us' ? '&start=3' : '');
-  }
-  // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
-  clearTimeout(profHoverTimer);
-  profHoverTimer = setTimeout(function() {
-    el.classList.add('hovered');
-  }, 200);
-}
-function profHoverOut(el) {
-  clearTimeout(profHoverTimer);
-  el.classList.remove('hovered');
-}
-
-// ── PROF LIGHTBOX 데이터 ──
 var profProjects = {
   'ncsoft': {
     id: '// PROFESSIONAL · NCSOFT · 2021—2024',
@@ -2755,6 +2413,350 @@ var profProjects = {
     ]
   }
 };
+
+
+function renderFreqViewed() {
+  var grid = document.getElementById('freq-grid');
+  if (!grid) return;
+
+  var pool = getAllImagePool();
+  var data = getFreqData();
+  var usedKeys = {};
+
+  // 해상도별 열 수
+  var w = window.innerWidth;
+  var colCount = w >= 1500 ? 8 : w >= 1200 ? 7 : w >= 900 ? 6 : w >= 600 ? 4 : 3;
+  var rows = 5;
+  var totalCells = colCount * rows;
+  // 1등(2x2=4칸) + 2등(2x1=2칸) + 3등(2x1=2칸) = 8칸 → 나머지 일반
+  var regularCount = totalCells - 8;
+  var totalItems = 3 + regularCount;
+
+  // ── 랜덤 10개 ──
+  var randomItems = [];
+  shuffle(pool).forEach(function(p) {
+    if (randomItems.length >= 10 || usedKeys[p.key]) return;
+    randomItems.push({ item: p, badge: '', rank: -1 });
+    usedKeys[p.key] = true;
+  });
+
+  // ── 최근 10개 (pool 역순) ──
+  var newestItems = [];
+  pool.slice().reverse().forEach(function(p) {
+    if (newestItems.length >= 10 || usedKeys[p.key]) return;
+    newestItems.push({ item: p, badge: '✦ NEW', rank: -1 });
+    usedKeys[p.key] = true;
+  });
+
+  // ── 나머지는 인기순 (클릭 데이터 기반, 부족하면 랜덤 보충) ──
+  var popularKeys = Object.keys(data)
+    .filter(function(k) { return data[k].count > 0; })
+    .sort(function(a,b) { return data[b].count - data[a].count; });
+
+  var popularItems = [];
+  var needed = totalItems - randomItems.length - newestItems.length;
+
+  popularKeys.forEach(function(k) {
+    if (popularItems.length >= needed) return;
+    var p = pool.find(function(x){ return x.key === k; });
+    if (p && !usedKeys[p.key]) {
+      popularItems.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: popularItems.length });
+      usedKeys[p.key] = true;
+    }
+  });
+  // 인기 데이터 부족 시 랜덤 보충
+  shuffle(pool).forEach(function(p) {
+    if (popularItems.length >= needed || usedKeys[p.key]) return;
+    popularItems.push({ item: p, badge: '', rank: -1 });
+    usedKeys[p.key] = true;
+  });
+
+  // rank 0,1,2 → span 크기 결정 (인기 1~3위)
+  if (popularItems.length > 0) popularItems[0].rank = 0;
+  if (popularItems.length > 1) popularItems[1].rank = 1;
+  if (popularItems.length > 2) popularItems[2].rank = 2;
+
+  // 합치기
+  var combined = randomItems.concat(newestItems).concat(popularItems).slice(0, totalItems);
+
+  // 1등(rank=0), 2등(rank=1), 3등(rank=2) 랜덤 위치 배치
+  var top1 = combined.find(function(s){ return s.rank === 0; });
+  var top2 = combined.find(function(s){ return s.rank === 1; });
+  var top3 = combined.find(function(s){ return s.rank === 2; });
+  var rest2 = combined.filter(function(s){ return s.rank !== 0 && s.rank !== 1 && s.rank !== 2; });
+  rest2 = shuffle(rest2);
+
+  // 각각 겹치지 않는 랜덤 위치
+  var pos1 = Math.floor(Math.random() * 4);
+  var pos2 = pos1;
+  while (pos2 === pos1) pos2 = Math.floor(Math.random() * 6);
+  var pos3 = pos1;
+  while (pos3 === pos1 || pos3 === pos2) pos3 = Math.floor(Math.random() * 8);
+
+  // 위치에 삽입
+  if (top1) rest2.splice(pos1, 0, top1);
+  if (top2) rest2.splice(pos2, 0, top2);
+  if (top3) rest2.splice(pos3, 0, top3);
+  var selected = rest2.slice(0, totalItems);
+
+  freqCurrentItems = selected;
+  grid.innerHTML = selected.map(function(s, listIdx) {
+    var spanClass = 'span-1x1';
+    if (s.rank === 0) spanClass = 'span-2x2';
+    else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
+    var p = s.item;
+    // 연도 추출: 이미지 경로 앞 4자리 숫자
+    var yearMatch = p.src.match(/\/(\d{4})_/);
+    var yearStr = yearMatch ? yearMatch[1] : '';
+    return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
+      '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
+      (yearStr ? '<div class="freq-item-year">' + yearStr + '</div>' : '') +
+      '<div class="freq-item-name">' + p.title + '</div>' +
+      '<div class="freq-item-overlay">' +
+        '<div class="freq-item-title">' + p.title + '</div>' +
+        (s.badge ? '<div class="freq-item-badge">' + s.badge + '</div>' : '') +
+      '</div></div>';
+  }).join('');
+}
+
+var freqCurrentItems = [];
+var freqLbIdx = 0;
+
+function freqItemClick(listIdx) {
+  freqLbIdx = listIdx;
+  openFreqLb(listIdx);
+}
+
+// Featured Works 줌 기능
+var freqZoomed = false, freqDragging = false, freqDidDrag = false;
+var freqTx = 0, freqTy = 0, freqStartX, freqStartY;
+
+function freqZoomReset() {
+  var img = document.getElementById('freq-lb-img');
+  if (!img) return;
+  freqZoomed = false; freqTx = 0; freqTy = 0;
+  img.style.transform = '';
+  img.style.cursor = 'zoom-in';
+  var badge = document.getElementById('freq-lb-zoom-badge');
+  if (badge) badge.classList.remove('visible');
+}
+
+(function() {
+  document.addEventListener('click', function(e) {
+    var lb = document.getElementById('freq-lb');
+    if (!lb || !lb.classList.contains('active')) return;
+    var img = document.getElementById('freq-lb-img');
+    if (!img || !img.contains(e.target)) return;
+    if (freqDidDrag) { freqDidDrag = false; return; }
+    if (!freqZoomed) {
+      freqZoomed = true; freqTx = 0; freqTy = 0;
+      img.style.transform = 'scale(2)';
+      img.style.cursor = 'grab';
+      var badge = document.getElementById('freq-lb-zoom-badge');
+      if (badge) { badge.classList.add('visible'); clearTimeout(badge._t); badge._t = setTimeout(function(){ badge.classList.remove('visible'); }, 1500); }
+    } else {
+      freqZoomReset();
+    }
+  });
+  document.addEventListener('mousedown', function(e) {
+    var lb = document.getElementById('freq-lb');
+    if (!lb || !lb.classList.contains('active')) return;
+    var img = document.getElementById('freq-lb-img');
+    if (!img || !img.contains(e.target) || !freqZoomed) return;
+    freqDragging = true; freqDidDrag = false;
+    freqStartX = e.clientX - freqTx;
+    freqStartY = e.clientY - freqTy;
+    img.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!freqDragging || !freqZoomed) return;
+    var dx = e.clientX - freqStartX, dy = e.clientY - freqStartY;
+    if (Math.abs(dx - freqTx) > 2 || Math.abs(dy - freqTy) > 2) freqDidDrag = true;
+    freqTx = dx; freqTy = dy;
+    var img = document.getElementById('freq-lb-img');
+    if (img) img.style.transform = 'scale(2) translate(' + (freqTx/2) + 'px,' + (freqTy/2) + 'px)';
+  });
+  document.addEventListener('mouseup', function() {
+    if (!freqDragging) return;
+    freqDragging = false;
+    var img = document.getElementById('freq-lb-img');
+    if (img && freqZoomed) img.style.cursor = 'grab';
+  });
+})();
+
+
+function openFreqLb(idx) {
+  var s = freqCurrentItems[idx];
+  if (!s) return;
+  // 팝업에서 이미지 볼 때마다 카운트 추가
+  trackFreqClick(s.item.key, s.item.src, s.item.title);
+  var lb = document.getElementById('freq-lb');
+  var img = document.getElementById('freq-lb-img');
+  img.style.opacity = '0';
+  img.src = s.item.src;
+  img.onload = function() { img.style.opacity = '1'; };
+  var yearM = s.item.src.match(/\/(\d{4})_/);
+  var yearStr = yearM ? ' · ' + yearM[1] : '';
+  document.getElementById('freq-lb-overlay-id').textContent = '// FEATURED' + yearStr;
+  document.getElementById('freq-lb-title').textContent = s.item.title;
+  freqZoomReset();
+  document.getElementById('freq-lb-counter').textContent = (idx + 1) + ' / ' + freqCurrentItems.length;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  // 휠 힌트 5초 표시
+  var freqHint = document.getElementById('freq-wheel-hint');
+  if (freqHint) {
+    clearTimeout(freqHint._t);
+    freqHint.classList.add('visible');
+    freqHint._t = setTimeout(function(){ freqHint.classList.remove('visible'); }, 2000);
+  }
+}
+
+function closeFreqLb() {
+  freqZoomReset();
+  document.getElementById('freq-lb').classList.remove('active');
+  document.getElementById('freq-lb-img').src = '';
+  document.body.style.overflow = '';
+}
+
+function freqLbPrev() {
+  freqLbIdx = (freqLbIdx - 1 + freqCurrentItems.length) % freqCurrentItems.length;
+  openFreqLb(freqLbIdx);
+}
+
+function freqLbNext() {
+  freqLbIdx = (freqLbIdx + 1) % freqCurrentItems.length;
+  openFreqLb(freqLbIdx);
+}
+
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('freq-lb');
+  if (!lb || !lb.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') freqLbPrev();
+  else if (e.key === 'ArrowRight') freqLbNext();
+  else if (e.key === 'Escape') { if (freqZoomed) freqZoomReset(); else closeFreqLb(); }
+});
+
+
+// Featured Works 휠 스크롤로 이미지 넘기기
+var freqScrollAcc = 0, freqScrollTimer = null, freqIsAnimating = false;
+document.addEventListener('wheel', function(e) {
+  if (!document.getElementById('freq-lb').classList.contains('active')) return;
+  e.preventDefault();
+  freqScrollAcc += e.deltaY;
+  clearTimeout(freqScrollTimer);
+  if (Math.abs(freqScrollAcc) > 80) {
+    if (!freqIsAnimating) {
+      freqIsAnimating = true;
+      if (freqScrollAcc > 0) freqLbNext();
+      else freqLbPrev();
+      setTimeout(function() { freqIsAnimating = false; }, 350);
+    }
+    freqScrollAcc = 0;
+  }
+  freqScrollTimer = setTimeout(function() { freqScrollAcc = 0; }, 300);
+}, { passive: false });
+
+// 페이지 로드 + 리사이즈 시 렌더
+window.addEventListener('load', function() {
+  renderFreqViewed();
+  preloadFreqImages();
+});
+window.addEventListener('resize', function() { renderFreqViewed(); });
+
+// Featured Works 이미지 프리로드
+function preloadFreqImages() {
+  var pool = getAllImagePool();
+  // 전체 풀 중 앞쪽 60개만 미리 로드 (너무 많으면 역효과)
+  shuffle(pool).slice(0, 60).forEach(function(p) {
+    var img = new Image();
+    img.src = p.src;
+  });
+}
+
+// ── PROF GRID 스크롤 제어 ──
+(function() {
+  var grid = document.getElementById('prof-grid');
+  var fade = document.getElementById('prof-grid-fade');
+  if (!grid) return;
+
+  // 2번째 카드 높이 기준으로 max-height 계산 (2줄 표시)
+  function calcHeight() {
+    var cards = grid.querySelectorAll('.prof-card');
+    var card = cards[1] || cards[0];
+    if (!card) return;
+    var h = card.offsetHeight;
+    var gap = 12;
+    grid.style.maxHeight = (h * 2 + gap) + 'px';
+  }
+  window.addEventListener('load', calcHeight);
+  window.addEventListener('resize', calcHeight);
+
+  // 페이드 표시 여부
+  function updateFade() {
+    if (!fade) return;
+    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 4;
+    fade.classList.toggle('hidden', atBottom);
+  }
+  grid.addEventListener('scroll', updateFade);
+  setTimeout(updateFade, 300);
+
+  // 휠: 그리드 안에서 스크롤 → 끝 도달하면 페이지로 넘김
+  grid.addEventListener('wheel', function(e) {
+    // 팝업 열려있으면 무시
+    if (document.getElementById('prof-lb').classList.contains('active')) return;
+
+    var atTop    = grid.scrollTop <= 0;
+    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 2;
+
+    if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+      // 끝에 도달 → 페이지 스크롤로 넘김
+      return;
+    }
+    e.stopPropagation();
+    grid.scrollTop += e.deltaY * 3;
+    e.preventDefault();
+  }, { passive: false });
+})();
+
+// ── PROF CARD 랜덤 썸네일 ──
+document.querySelectorAll('.prof-card-media[data-vids]').forEach(function(el) {
+  var vids = el.dataset.vids.split(',');
+  if (vids.length < 2) return;
+  var picked = vids[Math.floor(Math.random() * vids.length)];
+  el.dataset.vid = picked;
+  var thumb = el.querySelector('.prof-card-thumb');
+  if (thumb) thumb.src = 'https://img.youtube.com/vi/' + picked + '/mqdefault.jpg';
+});
+
+var profHoverTimer = null;
+function profHoverIn(el) {
+  var vid = el.dataset.vid;
+  var iframe = el.querySelector('.prof-card-hover-iframe');
+  // src 아직 없으면 로드 시작
+  if (!iframe.getAttribute('src')) {
+    iframe.src = 'https://www.youtube.com/embed/' + vid +
+      '?autoplay=1&mute=1&loop=1&playlist=' + vid +
+      '&controls=0&rel=0&modestbranding=1&playsinline=1' +
+      (vid === 'q5VgiNs5ZpE' ? '&start=10' : '') +
+      (vid === '-y3fQ73U-2Q' ? '&start=72' : '') +
+      (vid === 'vdAS1SI1xes' ? '&start=39' : '') +
+      (vid === 'behf7twp1bo' ? '&start=30' : '') +
+      (vid === '2zKdRMch0Us' ? '&start=3' : '');
+  }
+  // 로드 시간 주고 클래스 추가 (즉시 추가하면 영상 뜨기 전에 썸네일이 사라짐)
+  clearTimeout(profHoverTimer);
+  profHoverTimer = setTimeout(function() {
+    el.classList.add('hovered');
+  }, 200);
+}
+function profHoverOut(el) {
+  clearTimeout(profHoverTimer);
+  el.classList.remove('hovered');
+}
+
+// ── PROF LIGHTBOX 데이터 ──
 
 var profCurrent = null;
 var profIdx = 0;
