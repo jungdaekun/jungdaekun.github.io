@@ -124,7 +124,7 @@ section{padding:100px 80px;}
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
 .freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;}
-.freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
+.freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);aspect-ratio:1/1;}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
 .freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;}
@@ -208,6 +208,8 @@ section{padding:100px 80px;}
 .relight-card:hover .relight-hover-overlay{opacity:1;}
 .relight-hover-title{font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94),opacity .3s;}
 .relight-hover-sub{font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.12em;text-shadow:0 1px 4px rgba(0,0,0,.8);margin-bottom:2px;transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94) .06s,opacity .3s .06s;}
+.relight-hover-desc{font-family:var(--font-mono);font-size:11px;color:var(--text2);letter-spacing:.1em;margin-top:3px;transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94) .06s,opacity .3s .06s;}
+.relight-card:hover .relight-hover-desc{transform:translateX(0);opacity:1;}
 .relight-card:hover .relight-hover-title,.relight-card:hover .relight-hover-sub{transform:translateX(0);opacity:1;}
 
 /* ── PROFESSIONAL ── */
@@ -998,7 +1000,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="relight-hover-overlay">
           <div class="relight-hover-sub" translate="no">2024.10.27</div>
           <div class="relight-hover-title">Genesis G70</div>
-          <div class="relight-hover-sub" translate="no">Set Dressing · Look-dev · Shader & Lighting</div>
+          <div class="relight-hover-desc">Set Dressing · Look-dev · Shader & Lighting</div>
         </div>
       </div>
     </div>
@@ -1013,7 +1015,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="relight-hover-overlay">
           <div class="relight-hover-sub" translate="no">2024.09.12</div>
           <div class="relight-hover-title">BMW M4 GTS</div>
-          <div class="relight-hover-sub" translate="no">Set Dressing · Look-dev · Shader & Lighting</div>
+          <div class="relight-hover-desc">Set Dressing · Look-dev · Shader & Lighting</div>
         </div>
       </div>
     </div>
@@ -2956,8 +2958,6 @@ function setFreqRowHeight() {
   var gap = 4;
   var rowH = Math.floor((w - (cols - 1) * gap) / cols);
   grid.style.gridAutoRows = rowH + 'px';
-  grid.style.gridTemplateRows = 'repeat(5, ' + rowH + 'px)';
-  grid.style.overflow = 'hidden';
 }
 window.addEventListener('load', function() {
   renderFreqViewed();
