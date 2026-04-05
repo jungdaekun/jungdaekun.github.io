@@ -1852,12 +1852,13 @@ const projects = {
     id: '// SKETCH NOTE',
     title: 'Sketch Note',
     images: [
-      'images/SketchNote/Box.gif',
-      'images/SketchNote/Lava_Field.gif',
-      'images/SketchNote/Jewelry_Box.gif',
-      'images/SketchNote/Stone_final.jpg',
-      'images/SketchNote/Prop_Final.jpg',
-      'images/SketchNote/village.JPG'
+      'https://img.youtube.com/vi/pN8D77P5_3A/mqdefault.jpg',
+      'images/SketchNote/20160602_Box.gif',
+      'images/SketchNote/20151129_Lava_Field.gif',
+      'images/SketchNote/20140912_Jewelry_Box.gif',
+      'images/SketchNote/20130315_Stone_final.jpg',
+      'images/SketchNote/20110721_Prop_Final.jpg',
+      'images/SketchNote/20050401_village.JPG'
     ]
   },
   'proj-genesis': {
@@ -2785,7 +2786,7 @@ function renderFreqViewed() {
   var randomProjCount = {};
   shuffle(pool).forEach(function(p) {
     if (randomItems.length >= 10 || usedKeys[p.key]) return;
-    if ((randomProjCount[p.projectId] || 0) >= 3) return;
+    if ((randomProjCount[p.projectId] || 0) >= 2) return;
     randomItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
     randomProjCount[p.projectId] = (randomProjCount[p.projectId] || 0) + 1;
@@ -2796,7 +2797,7 @@ function renderFreqViewed() {
   var newestProjCount = {};
   pool.slice().reverse().forEach(function(p) {
     if (newestItems.length >= 10 || usedKeys[p.key]) return;
-    if ((newestProjCount[p.projectId] || 0) >= 3) return;
+    if ((newestProjCount[p.projectId] || 0) >= 2) return;
     newestItems.push({ item: p, badge: '✦ NEW', rank: -1 });
     usedKeys[p.key] = true;
     newestProjCount[p.projectId] = (newestProjCount[p.projectId] || 0) + 1;
@@ -2814,7 +2815,7 @@ function renderFreqViewed() {
   popularKeys.forEach(function(k) {
     if (popularItems.length >= needed) return;
     var p = pool.find(function(x){ return x.key === k; });
-    if (p && !usedKeys[p.key] && (popularProjCount[p.projectId] || 0) < 3) {
+    if (p && !usedKeys[p.key] && (popularProjCount[p.projectId] || 0) < 2) {
       popularItems.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: popularItems.length });
       usedKeys[p.key] = true;
       popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
@@ -2823,7 +2824,7 @@ function renderFreqViewed() {
   // 인기 데이터 부족 시 랜덤 보충 (프로젝트 제한 있음)
   shuffle(pool).forEach(function(p) {
     if (popularItems.length >= needed || usedKeys[p.key]) return;
-    if ((popularProjCount[p.projectId] || 0) >= 3) return;
+    if ((popularProjCount[p.projectId] || 0) >= 2) return;
     popularItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
     popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
@@ -2883,7 +2884,7 @@ function renderFreqViewed() {
     else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
     var p = s.item;
     // 연도 추출: 이미지 경로 앞 4자리 숫자
-    var yearMatch = p.src.match(/\/(\d{4})_/);
+    var yearMatch = p.src.match(/\/(\d{4})\d*_/);
     var yearStr = yearMatch ? yearMatch[1] : '';
     var viewCount = data[p.key] ? data[p.key].count : 0;
     var viewIcon, viewColor, viewWeight = 'normal', viewSize = '11px';
@@ -2897,7 +2898,10 @@ function renderFreqViewed() {
     else if (viewCount >= 100)  { viewIcon = '🔥'; viewColor = '#e79c16'; }
     else if (viewCount >= 50)   { viewIcon = '🙏'; viewColor = '#d4b355'; }
     else                        { viewIcon = '✔️'; viewColor = '#d0cbbe'; }
-    var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (viewCount > 0 ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + viewIcon + ' ' + viewCount + '</span>' : '');
+    // rank 아이콘은 항상 표시, 일반은 viewCount > 0일 때만
+    var showIcon = s.rank >= 0 || viewCount > 0;
+    var iconText = s.rank >= 0 ? viewIcon : (viewCount > 0 ? viewIcon + ' ' + viewCount : '');
+    var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
       '<div class="freq-item-name">' + p.title + '</div>' +
