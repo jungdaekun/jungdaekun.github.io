@@ -123,17 +123,16 @@ section{padding:100px 80px;}
 
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
-.freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;grid-template-rows:repeat(5,calc((100vw - 188px) / 8));height:calc(5 * (100vw - 188px) / 8 + 16px);}
+.freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
 .freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;}
 .freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(5,calc((100vw - 184px) / 7));height:calc(5 * (100vw - 184px) / 7 + 16px);}}
-@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(5,calc((100vw - 180px) / 6));height:calc(5 * (100vw - 180px) / 6 + 16px);}}
-@media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(5,calc((100vw - 60px) / 4));height:calc(5 * (100vw - 60px) / 4 + 16px);}}
-@media(max-width:600px){.freq-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(5,calc((100vw - 56px) / 3));height:calc(5 * (100vw - 56px) / 3 + 16px);}}
-.freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);}}
+@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);}}
+@media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:600px){.freq-grid{grid-template-columns:repeat(3,1fr);}}
 .freq-item:hover img{transform:scale(1.05);}
 .freq-item-overlay{position:absolute;inset:0;background:rgba(8,10,13,.5);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;}
 .freq-item:hover .freq-item-overlay{opacity:1;}
@@ -2718,7 +2717,7 @@ function renderFreqViewed() {
   var randomProjCount = {};
   shuffle(pool).forEach(function(p) {
     if (randomItems.length >= 10 || usedKeys[p.key]) return;
-    if ((randomProjCount[p.projectId] || 0) >= 2) return;
+    if ((randomProjCount[p.projectId] || 0) >= 3) return;
     randomItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
     randomProjCount[p.projectId] = (randomProjCount[p.projectId] || 0) + 1;
@@ -2729,7 +2728,7 @@ function renderFreqViewed() {
   var newestProjCount = {};
   pool.slice().reverse().forEach(function(p) {
     if (newestItems.length >= 10 || usedKeys[p.key]) return;
-    if ((newestProjCount[p.projectId] || 0) >= 2) return;
+    if ((newestProjCount[p.projectId] || 0) >= 3) return;
     newestItems.push({ item: p, badge: '✦ NEW', rank: -1 });
     usedKeys[p.key] = true;
     newestProjCount[p.projectId] = (newestProjCount[p.projectId] || 0) + 1;
@@ -2747,7 +2746,7 @@ function renderFreqViewed() {
   popularKeys.forEach(function(k) {
     if (popularItems.length >= needed) return;
     var p = pool.find(function(x){ return x.key === k; });
-    if (p && !usedKeys[p.key] && (popularProjCount[p.projectId] || 0) < 2) {
+    if (p && !usedKeys[p.key] && (popularProjCount[p.projectId] || 0) < 3) {
       popularItems.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: popularItems.length });
       usedKeys[p.key] = true;
       popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
@@ -2756,7 +2755,7 @@ function renderFreqViewed() {
   // 인기 데이터 부족 시 랜덤 보충 (프로젝트 제한 있음)
   shuffle(pool).forEach(function(p) {
     if (popularItems.length >= needed || usedKeys[p.key]) return;
-    if ((popularProjCount[p.projectId] || 0) >= 2) return;
+    if ((popularProjCount[p.projectId] || 0) >= 3) return;
     popularItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
     popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
@@ -2989,13 +2988,22 @@ document.addEventListener('wheel', function(e) {
 function setFreqRowHeight() {
   var grid = document.getElementById('freq-grid');
   if (!grid) return;
-  var w = grid.offsetWidth;
-  if (w === 0) { setTimeout(setFreqRowHeight, 100); return; }
+  var w = grid.getBoundingClientRect().width;
+  if (w <= 10) { setTimeout(setFreqRowHeight, 100); return; }
   var cols = window.innerWidth >= 1500 ? 8 : window.innerWidth >= 1200 ? 7 : window.innerWidth >= 900 ? 6 : window.innerWidth >= 600 ? 4 : 3;
   var gap = 4;
   var rowH = (w - (cols - 1) * gap) / cols;
-  grid.style.gridTemplateRows = 'repeat(5, ' + rowH + 'px)';
-  grid.style.height = (5 * rowH + 4 * gap) + 'px';
+  var h = 5 * rowH + 4 * gap;
+  grid.style.gridTemplateRows = 'repeat(5,' + rowH.toFixed(2) + 'px)';
+  grid.style.height = h.toFixed(2) + 'px';
+}
+// ResizeObserver로 실시간 감지
+if (window.ResizeObserver) {
+  var _freqRO = new ResizeObserver(function(){ setFreqRowHeight(); });
+  document.addEventListener('DOMContentLoaded', function(){
+    var g = document.getElementById('freq-grid');
+    if (g) _freqRO.observe(g);
+  });
 }
 window.addEventListener('load', function() {
   renderFreqViewed();
