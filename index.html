@@ -2644,28 +2644,40 @@ function renderFreqViewed() {
   if (popularItems.length > 1) popularItems[1].rank = 1;
   if (popularItems.length > 2) popularItems[2].rank = 2;
   if (popularItems.length > 3) popularItems[3].rank = 3;
+  if (popularItems.length > 4) popularItems[4].rank = 4;
 
   // 합치기
   var combined = randomItems.concat(newestItems).concat(popularItems).slice(0, totalItems);
 
-  // 1등(rank=0), 2등(rank=1), 3등(rank=2) 랜덤 위치 배치
+  // 1~5등 랜덤 위치 배치
   var top1 = combined.find(function(s){ return s.rank === 0; });
   var top2 = combined.find(function(s){ return s.rank === 1; });
   var top3 = combined.find(function(s){ return s.rank === 2; });
-  var rest2 = combined.filter(function(s){ return s.rank !== 0 && s.rank !== 1 && s.rank !== 2; });
+  var top4 = combined.find(function(s){ return s.rank === 3; });
+  var top5 = combined.find(function(s){ return s.rank === 4; });
+  var rest2 = combined.filter(function(s){ return s.rank < 0; });
   rest2 = shuffle(rest2);
 
   // 각각 겹치지 않는 랜덤 위치
-  var pos1 = Math.floor(Math.random() * 4);
-  var pos2 = pos1;
-  while (pos2 === pos1) pos2 = Math.floor(Math.random() * 6);
-  var pos3 = pos1;
-  while (pos3 === pos1 || pos3 === pos2) pos3 = Math.floor(Math.random() * 8);
+  function uniquePos(used, max) {
+    var p; do { p = Math.floor(Math.random() * max); } while(used.indexOf(p) !== -1); used.push(p); return p;
+  }
+  var usedPos = [];
+  var pos1 = uniquePos(usedPos, 4);
+  var pos2 = uniquePos(usedPos, 6);
+  var pos3 = uniquePos(usedPos, 8);
+  var pos4 = uniquePos(usedPos, 10);
+  var pos5 = uniquePos(usedPos, 12);
 
-  // 위치에 삽입
-  if (top1) rest2.splice(pos1, 0, top1);
-  if (top2) rest2.splice(pos2, 0, top2);
-  if (top3) rest2.splice(pos3, 0, top3);
+  // 위치에 삽입 (뒤에서부터 삽입해야 인덱스 안 밀림)
+  var inserts = [];
+  if (top1) inserts.push([pos1, top1]);
+  if (top2) inserts.push([pos2, top2]);
+  if (top3) inserts.push([pos3, top3]);
+  if (top4) inserts.push([pos4, top4]);
+  if (top5) inserts.push([pos5, top5]);
+  inserts.sort(function(a,b){ return a[0]-b[0]; });
+  inserts.forEach(function(ins){ rest2.splice(ins[0], 0, ins[1]); });
   var selected = rest2.slice(0, totalItems);
 
   freqCurrentItems = selected;
@@ -2679,10 +2691,11 @@ function renderFreqViewed() {
     var yearStr = yearMatch ? yearMatch[1] : '';
     var viewCount = data[p.key] ? data[p.key].count : 0;
     var viewIcon, viewColor, viewWeight = 'normal', viewSize = '11px';
-    if      (s.rank === 0)      { viewIcon = '❤️'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
-    else if (s.rank === 1)      { viewIcon = '⭐'; viewColor = '#db3535'; }
-    else if (s.rank === 2)      { viewIcon = '🔥'; viewColor = '#e79c16'; }
+    if      (s.rank === 0)      { viewIcon = '🔥'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
+    else if (s.rank === 1)      { viewIcon = '❤️'; viewColor = '#db3535'; }
+    else if (s.rank === 2)      { viewIcon = '⭐'; viewColor = '#e79c16'; }
     else if (s.rank === 3)      { viewIcon = '🙏'; viewColor = '#d4b355'; }
+    else if (s.rank === 4)      { viewIcon = '✔️'; viewColor = '#d0cbbe'; }
     else if (viewCount >= 1000) { viewIcon = '❤️'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
     else if (viewCount >= 500)  { viewIcon = '⭐'; viewColor = '#db3535'; }
     else if (viewCount >= 100)  { viewIcon = '🔥'; viewColor = '#e79c16'; }
