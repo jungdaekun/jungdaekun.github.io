@@ -124,10 +124,10 @@ section{padding:100px 80px;}
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
 .freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;}
-.freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);aspect-ratio:1/1;}
-.freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
-.freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
-.freq-item.span-1x1{grid-column:span 1;grid-row:span 1;}
+.freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
+.freq-item.span-2x2{grid-column:span 2;grid-row:span 2;aspect-ratio:1/1;}
+.freq-item.span-2x1{grid-column:span 2;grid-row:span 1;aspect-ratio:2/1;}
+.freq-item.span-1x1{grid-column:span 1;grid-row:span 1;aspect-ratio:1/1;}
 @media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);}}
 @media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);}}
 @media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);}}
@@ -1000,7 +1000,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="relight-hover-overlay">
           <div class="relight-hover-sub" translate="no">2024.10.27</div>
           <div class="relight-hover-title">Genesis G70</div>
-          <div class="relight-hover-desc">Set Dressing · Look-dev · Shader & Lighting</div>
+          <div class="relight-hover-desc">Unreal 5 · Set Dressing · Look-dev · Shader & Lighting</div>
         </div>
       </div>
     </div>
@@ -1015,7 +1015,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         <div class="relight-hover-overlay">
           <div class="relight-hover-sub" translate="no">2024.09.12</div>
           <div class="relight-hover-title">BMW M4 GTS</div>
-          <div class="relight-hover-desc">Set Dressing · Look-dev · Shader & Lighting</div>
+          <div class="relight-hover-desc">Unreal 5 · Set Dressing · Look-dev · Shader & Lighting</div>
         </div>
       </div>
     </div>
@@ -1766,7 +1766,7 @@ const projects = {
   'proj-genesis': {
     id: '// RELIGHT · 2024.10.27',
     title: 'Genesis G70',
-    captions: ['<span style="font-size:12px;color:var(--text2);font-family:var(--font-mono);letter-spacing:.1em;">Set Dressing &nbsp;·&nbsp; Look-dev &nbsp;·&nbsp; Shader & Lighting</span><br>GENESIS G70 · Modeling Source : <a href="https://sketchfab.com/3d-models/genesis-g70-2022-64b1b58d849d4bdfbeb527ff56fbdeff" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">Sketchfab <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><br>Background Source : <a href="https://quixel.com/megascans" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">Quixel MegaScan <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>'],
+    captions: ['<span style="font-family: Noto Sans KR, sans-serif;">Unreal 5 &nbsp;·&nbsp; Set Dressing &nbsp;·&nbsp; Look-dev &nbsp;·&nbsp; Shader & Lighting</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">GENESIS G70 · Modeling Source : <a href="https://sketchfab.com/3d-models/genesis-g70-2022-64b1b58d849d4bdfbeb527ff56fbdeff" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">Sketchfab <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><br>Background Source : <a href="https://quixel.com/megascans" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">Quixel MegaScan <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></span>'],
     images: [
       'images/ReLighting/20241027_GENESIS_G70/GENESIS_G70_01.jpg',
       'images/ReLighting/20241027_GENESIS_G70/GENESIS_G70_02.jpg',
@@ -1778,7 +1778,7 @@ const projects = {
   'proj-bmw': {
     id: '// RELIGHT · 2024.09.12',
     title: 'BMW M4 GTS',
-    captions: ['<span style="font-size:12px;color:var(--text2);font-family:var(--font-mono);letter-spacing:.1em;">Set Dressing &nbsp;·&nbsp; Look-dev &nbsp;·&nbsp; Shader & Lighting</span><br>BMW M4 GTS · Modeling Source : <a href="https://squir.com/bmw-m4-gts-2016.html" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">SQUIR 3D <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><br>Background Source : <a href="https://quixel.com/megascans" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">Quixel MegaScan <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>'],
+    captions: ['<span style="font-family: Noto Sans KR, sans-serif;">Unreal 5 &nbsp;·&nbsp; Set Dressing &nbsp;·&nbsp; Look-dev &nbsp;·&nbsp; Shader & Lighting</span><br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">BMW M4 GTS · Modeling Source : <a href="https://squir.com/bmw-m4-gts-2016.html" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">SQUIR 3D <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><br>Background Source : <a href="https://quixel.com/megascans" target="_blank" style="color:var(--gold);text-decoration:none;" onmouseover="this.style.color=\'var(--gold2)\'" onmouseout="this.style.color=\'var(--gold)\'">Quixel MegaScan <svg style="display:inline;vertical-align:middle;" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M6 3H3v10h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="3" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></span>'],
     images: [
       'images/ReLighting/20240912_BMW_M4GTS/BMW_M4GTS_01.jpg',
       'images/ReLighting/20240912_BMW_M4GTS/BMW_M4GTS_02.jpg',
@@ -2723,13 +2723,19 @@ function renderFreqViewed() {
       popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
     }
   });
-  // 인기 데이터 부족 시 랜덤 보충
+  // 인기 데이터 부족 시 랜덤 보충 (프로젝트 제한 있음)
   shuffle(pool).forEach(function(p) {
     if (popularItems.length >= needed || usedKeys[p.key]) return;
     if ((popularProjCount[p.projectId] || 0) >= 2) return;
     popularItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
     popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
+  });
+  // 그래도 부족하면 프로젝트 제한 없이 추가 (풀 채우기)
+  shuffle(pool).forEach(function(p) {
+    if (popularItems.length >= needed || usedKeys[p.key]) return;
+    popularItems.push({ item: p, badge: '', rank: -1 });
+    usedKeys[p.key] = true;
   });
 
   // rank 0,1,2 → span 크기 결정 (인기 1~3위)
