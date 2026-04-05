@@ -788,7 +788,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="project-card" onclick="openLightbox('proj-stylized', 0)">
       <div class="project-thumb-wrap">
         <img class="project-thumb" src="images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_Thumbnail.jpg" alt="Stylized Dungeon">
-        <div class="project-count-badge">9 images</div>
+        <div class="project-count-badge">13 images</div>
         <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
         <div class="project-hover-overlay">
           <div class="project-hover-sub" translate="no">2017.03.07</div>
@@ -1564,7 +1564,7 @@ const projects = {
     captions: [
       '<span style="font-family: Noto Sans KR, sans-serif;">스타일라이즈드 던전 컨셉의 모델링 텍스처링 작업 진행중...</span>' +
       '<br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">An ongoing stylized dungeon environment, exploring low-poly modeling and hand-painted texturing techniques.</span>',
-      '', '', '', '', '', '', '', ''
+      '', '', '', '', '', '', '', '', '', '', '', ''
     ],
     images: [
       'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_001.jpg',
@@ -1575,7 +1575,11 @@ const projects = {
       'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_006.jpg',
       'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_007.jpg',
       'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_008.jpg',
-      'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_009.jpg'
+      'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_009.jpg',
+      'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_010.jpg',
+      'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_011.jpg',
+      'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_012.jpg',
+      'images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_013.jpg'
     ]
   },
   'proj-zbrushtile': {
@@ -2767,14 +2771,9 @@ function renderFreqViewed() {
   var data = getFreqData();
   var usedKeys = {};
 
-  // 실제 CSS 열 수 읽기 (window.innerWidth와 media query 불일치 방지)
-  var gridTemp = document.getElementById('freq-grid');
-  var colCount = 8;
-  if (gridTemp) {
-    var gtc = window.getComputedStyle(gridTemp).gridTemplateColumns;
-    colCount = gtc ? gtc.split(' ').length : 8;
-    if (colCount < 1) colCount = 8;
-  }
+  // clientWidth = 스크롤바 제외 뷰포트 너비 (CSS media query와 동일)
+  var vw = document.documentElement.clientWidth;
+  var colCount = vw >= 1500 ? 8 : vw >= 1200 ? 7 : vw >= 900 ? 6 : vw >= 600 ? 4 : 3;
   var rows = 5;
   var totalCells = colCount * rows;
   // 1등(2x2=4칸) + 2등(2x1=2칸) + 3등(2x1=2칸) + 4등(1x1=1칸) + 5등(1x1=1칸) = 10칸
@@ -3068,9 +3067,8 @@ function setFreqRowHeight() {
     gridW = grid.getBoundingClientRect().width;
   }
   if (gridW <= 10) { setTimeout(setFreqRowHeight, 100); return; }
-  var gtcS = window.getComputedStyle(grid).gridTemplateColumns;
-  var cols = gtcS ? gtcS.split(' ').length : 8;
-  if (cols < 1) cols = 8;
+  var vw2 = document.documentElement.clientWidth;
+  var cols = vw2 >= 1500 ? 8 : vw2 >= 1200 ? 7 : vw2 >= 900 ? 6 : vw2 >= 600 ? 4 : 3;
   var gap = 4;
   var rowH = (gridW - (cols - 1) * gap) / cols;
   var h = 5 * rowH + 4 * gap;
