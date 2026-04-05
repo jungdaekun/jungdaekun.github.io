@@ -123,15 +123,16 @@ section{padding:100px 80px;}
 
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
-.freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;}
+.freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;grid-template-rows:repeat(5,calc((100vw - 188px) / 8));height:calc(5 * (100vw - 188px) / 8 + 16px);}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
-.freq-item.span-2x2{grid-column:span 2;grid-row:span 2;aspect-ratio:1/1;}
-.freq-item.span-2x1{grid-column:span 2;grid-row:span 1;aspect-ratio:2/1;}
-.freq-item.span-1x1{grid-column:span 1;grid-row:span 1;aspect-ratio:1/1;}
-@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);}}
-@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);}}
-@media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);}}
-@media(max-width:600px){.freq-grid{grid-template-columns:repeat(3,1fr);}}
+.freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
+.freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
+.freq-item.span-1x1{grid-column:span 1;grid-row:span 1;}
+.freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(5,calc((100vw - 184px) / 7));height:calc(5 * (100vw - 184px) / 7 + 16px);}}
+@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(5,calc((100vw - 180px) / 6));height:calc(5 * (100vw - 180px) / 6 + 16px);}}
+@media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(5,calc((100vw - 60px) / 4));height:calc(5 * (100vw - 60px) / 4 + 16px);}}
+@media(max-width:600px){.freq-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(5,calc((100vw - 56px) / 3));height:calc(5 * (100vw - 56px) / 3 + 16px);}}
 .freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
 .freq-item:hover img{transform:scale(1.05);}
 .freq-item-overlay{position:absolute;inset:0;background:rgba(8,10,13,.5);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;}
@@ -730,6 +731,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>프랍 제작부터 셋드레싱, 환경 셋업과 라이팅까지—배경 디자인의 전 과정을 밀도 있게 담아낸 개인 프로젝트입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">A personal project capturing the full spectrum of 3D environment design—from prop creation and set dressing to environment setup and lighting.</span></p>
   <!-- 프로젝트 카드 그리드 -->
   <div class="project-grid">
+
+    <!-- 2020 Rock Study -->
+    <div class="project-card" onclick="openLightbox('proj-rock', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" src="images/Personal/20201124_RockStudy/Rock_Final_004.jpg" alt="Modular Rock Study">
+        <div class="project-count-badge">5 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2020.11.24</div>
+          <div class="project-hover-title">Modular Rock Study - Single Asset Composition</div>
+        </div>
+      </div>
+    </div>
 
     <!-- M4 Carbine -->
     <div class="project-card" onclick="openLightbox('proj-m4', 0)">
@@ -1472,7 +1486,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     var src = 'images/SketchNote/' + s.file;
     return '<div class="sketch-item sketch-clickable" onclick="openSketchZoom(\'' + src + '\')">' +
       '<img src="' + src + '" style="width:100%;height:100%;object-fit:cover;display:block;">' +
-      '<div class="sketch-open-hint"><div class="sketch-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW</div></div>' +
       '<div class="sketch-hover-overlay">' +
         '<div class="sketch-hover-sub" translate="no">' + dateStr + '</div>' +
         '<div class="sketch-hover-title">' + title + '</div>' +
@@ -1700,6 +1713,23 @@ const projects = {
       'images/Personal/2000_OldWork/Apache_004.jpg',
       'images/Personal/2000_OldWork/Truck_001.jpg',
       'images/Personal/2000_OldWork/Truck_002.jpg'
+    ]
+  },
+  'proj-rock': {
+    id: '// PERSONAL · 2020.11.24',
+    title: 'Modular Rock Study - Single Asset Composition',
+    captions: [
+      '<span style="font-family: Noto Sans KR, sans-serif;">지브러시로 제작한 단일 바위를 활용하여, 효율적인 배치와 컴포지션을 통해 풍성한 지형을 구현하는 워크플로우를 연구.</span>' +
+      '<br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">Explored efficient terrain composition using a single ZBrush rock asset through modular placement and arrangement.</span>' +
+      '<br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · ZBrush · Substance Painter · Marmoset</span>',
+      '', '', '', ''
+    ],
+    images: [
+      'images/Personal/20201124_RockStudy/Rock_Final_001.jpg',
+      'images/Personal/20201124_RockStudy/Rock_Final_002.jpg',
+      'images/Personal/20201124_RockStudy/Rock_Final_003.jpg',
+      'images/Personal/20201124_RockStudy/Rock_Final_004.jpg',
+      'images/Personal/20201124_RockStudy/Rock_Final_005.jpg'
     ]
   },
   'proj-m4': {
@@ -1988,7 +2018,7 @@ function renderLightbox(instant) {
 }
 
 // 개인작업 + 리라이팅 프로젝트 순서
-var lbProjectOrder = ['proj-m4', 'proj-2019', 'proj-zbrushtile', 'proj-forsaken', 'proj-afternoon', 'proj-hideout', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
+var lbProjectOrder = ['proj-rock', 'proj-m4', 'proj-2019', 'proj-zbrushtile', 'proj-forsaken', 'proj-afternoon', 'proj-hideout', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
 
 function lbNext() {
   var idx = lbProjectOrder.indexOf(currentProjectId);
@@ -2960,11 +2990,12 @@ function setFreqRowHeight() {
   var grid = document.getElementById('freq-grid');
   if (!grid) return;
   var w = grid.offsetWidth;
-  if (w === 0) { setTimeout(setFreqRowHeight, 50); return; }
+  if (w === 0) { setTimeout(setFreqRowHeight, 100); return; }
   var cols = window.innerWidth >= 1500 ? 8 : window.innerWidth >= 1200 ? 7 : window.innerWidth >= 900 ? 6 : window.innerWidth >= 600 ? 4 : 3;
   var gap = 4;
-  var rowH = Math.floor((w - (cols - 1) * gap) / cols);
-  grid.style.gridAutoRows = rowH + 'px';
+  var rowH = (w - (cols - 1) * gap) / cols;
+  grid.style.gridTemplateRows = 'repeat(5, ' + rowH + 'px)';
+  grid.style.height = (5 * rowH + 4 * gap) + 'px';
 }
 window.addEventListener('load', function() {
   renderFreqViewed();
@@ -3497,6 +3528,17 @@ sections.forEach(function(s) { navObserver.observe(s); });
   </div>
   <button onclick="event.stopPropagation();sketchZoomPrev();" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">‹</button>
   <button onclick="event.stopPropagation();sketchZoomNext();" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">›</button>
+  <!-- 휠 힌트 -->
+  <div class="wheel-hint-overlay" id="sketch-wheel-hint">
+    <div class="wheel-hint-arrow up">▲</div>
+    <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
+        <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+        <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
+      </svg></div>
+    <div class="wheel-hint-arrow down">▼</div>
+    <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
+  </div>
   <div id="sketch-zoom-badge">🔍 200%</div>
   <div id="sketch-zoom-hud">
     <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
@@ -3584,6 +3626,8 @@ function _openSketchImageInner(src) {
   oz.classList.add('active');
   hideSzBadge();
   updateSketchZoomInfo();
+  var szHint = document.getElementById('sketch-wheel-hint');
+  if (szHint) { clearTimeout(szHint._t); szHint.classList.add('visible'); szHint._t = setTimeout(function(){ szHint.classList.remove('visible'); }, 2000); }
   document.body.style.overflow = 'hidden';
 }
 function openSketchVideo(videoId) {
