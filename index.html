@@ -2643,6 +2643,7 @@ function renderFreqViewed() {
   if (popularItems.length > 0) popularItems[0].rank = 0;
   if (popularItems.length > 1) popularItems[1].rank = 1;
   if (popularItems.length > 2) popularItems[2].rank = 2;
+  if (popularItems.length > 3) popularItems[3].rank = 3;
 
   // 합치기
   var combined = randomItems.concat(newestItems).concat(popularItems).slice(0, totalItems);
@@ -2678,11 +2679,15 @@ function renderFreqViewed() {
     var yearStr = yearMatch ? yearMatch[1] : '';
     var viewCount = data[p.key] ? data[p.key].count : 0;
     var viewIcon, viewColor, viewWeight = 'normal', viewSize = '11px';
-    if (viewCount >= 1000) { viewIcon = '❤️'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
-    else if (viewCount >= 500) { viewIcon = '⭐'; viewColor = '#db3535'; }
-    else if (viewCount >= 100) { viewIcon = '🔥'; viewColor = '#e79c16'; }
-    else if (viewCount >= 50)  { viewIcon = '🙏'; viewColor = '#d4b355'; }
-    else                       { viewIcon = '✔️'; viewColor = '#d0cbbe'; }
+    if      (s.rank === 0)      { viewIcon = '❤️'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
+    else if (s.rank === 1)      { viewIcon = '⭐'; viewColor = '#db3535'; }
+    else if (s.rank === 2)      { viewIcon = '🔥'; viewColor = '#e79c16'; }
+    else if (s.rank === 3)      { viewIcon = '🙏'; viewColor = '#d4b355'; }
+    else if (viewCount >= 1000) { viewIcon = '❤️'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
+    else if (viewCount >= 500)  { viewIcon = '⭐'; viewColor = '#db3535'; }
+    else if (viewCount >= 100)  { viewIcon = '🔥'; viewColor = '#e79c16'; }
+    else if (viewCount >= 50)   { viewIcon = '🙏'; viewColor = '#d4b355'; }
+    else                        { viewIcon = '✔️'; viewColor = '#d0cbbe'; }
     var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (viewCount > 0 ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + viewIcon + ' ' + viewCount + '</span>' : '');
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
