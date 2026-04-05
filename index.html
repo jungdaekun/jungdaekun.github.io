@@ -375,6 +375,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .project-thumb-video{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .4s;pointer-events:none;}
 .project-thumb-video iframe{width:100%;height:100%;border:0;display:block;}
 .project-card:hover .project-thumb-video{opacity:1;}
+.sketch-item-video{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .4s;pointer-events:none;}
+.sketch-item-video iframe{width:100%;height:100%;border:0;display:block;}
+.sketch-item:hover .sketch-item-video{opacity:1;}
 .project-hover-title{font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94),opacity .3s;}
 .project-hover-sub{font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.12em;margin-bottom:2px;text-shadow:0 1px 4px rgba(0,0,0,.8);transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94) .06s,opacity .3s .06s;}
 .project-card:hover .project-hover-title,.project-card:hover .project-hover-sub{transform:translateX(0);opacity:1;}
@@ -1452,14 +1455,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     if (s.url) {
       var ytId = s.url.match(/(?:youtu\.be\/|v=)([\w-]+)/);
       var videoId = ytId ? ytId[1] : '';
-      return '<div class="sketch-item sketch-clickable" onclick="openSketchVideo(\'' + videoId + '\')">' +
+      var ytSrc = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&mute=1&loop=1&playlist=' + videoId + '&controls=0&rel=0&modestbranding=1';
+      return '<div class="sketch-item sketch-clickable"' +
+        ' onclick="openSketchVideo(\'' + videoId + '\')"' +
+        ' onmouseenter="(function(c){var v=c.querySelector(\'.sketch-item-video iframe\');if(v&&(!v.src||v.src===\'about:blank\'||v.src===location.href)){v.src=v.dataset.src;v.onload=function(){c.classList.add(\'video-loaded\');};}else if(v&&v.src&&v.src!==\'about:blank\'){c.classList.add(\'video-loaded\');};})(this)">' +
         '<img src="' + s.thumb + '" style="width:100%;height:100%;object-fit:cover;display:block;">' +
+        '<div class="sketch-item-video"><iframe data-src="' + ytSrc + '" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>' +
         '<div class="sketch-hover-overlay">' +
           '<div class="sketch-hover-sub">' + dateStr + '</div>' +
           '<div class="sketch-hover-title">' + title + '</div>' +
-        '</div>' +
-        '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;opacity:.7;pointer-events:none;">▶</div>' +
-        '</div>';
+        '</div></div>';
     }
     var src = 'images/SketchNote/' + s.file;
     return '<div class="sketch-item sketch-clickable" onclick="openSketchZoom(\'' + src + '\')">' +
@@ -1697,8 +1702,8 @@ const projects = {
     id: '// PERSONAL · 2019.09.02',
     title: 'M4 Carbine with M203 Grenade Launcher',
     captions: [
-      'Baked the complex hard-surface geometry of the M4 carbine and used Substance Painter to achieve realistic material definition and wear details.' +
-      '<br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">M4 소총의 복잡한 하드서피스 구조를 베이킹하고, SP를 활용하여 사실적인 재질감과 마모 디테일을 표현.</span>' +
+      '<span style="font-family: Noto Sans KR, sans-serif;">M4 소총의 복잡한 하드서피스 구조를 베이킹하고, SP를 활용하여 사실적인 재질감과 마모 디테일을 표현.</span>' +
+      '<br><span style="font-size:13px;color:var(--text2);font-family:var(--font-mono);">Baked the complex hard-surface geometry of the M4 carbine and used Substance Painter to achieve realistic material definition and wear details.</span>' +
       '<br><span style="font-size:13px;color:var(--gold);font-family:var(--font-mono);">Software : 3ds Max · Substance Painter · Marmoset</span>',
       '', '', '', '', '', '', '', '', '', '', '', '', ''
     ],
@@ -1979,7 +1984,7 @@ function renderLightbox(instant) {
 }
 
 // 개인작업 + 리라이팅 프로젝트 순서
-var lbProjectOrder = ['proj-2019', 'proj-m4', 'proj-zbrushtile', 'proj-forsaken', 'proj-afternoon', 'proj-hideout', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
+var lbProjectOrder = ['proj-m4', 'proj-2019', 'proj-zbrushtile', 'proj-forsaken', 'proj-afternoon', 'proj-hideout', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
 
 function lbNext() {
   var idx = lbProjectOrder.indexOf(currentProjectId);
@@ -2794,6 +2799,7 @@ function renderFreqViewed() {
         '<div class="freq-item-title">' + p.title + '</div>' +
       '</div></div>';
   }).join('');
+  requestAnimationFrame(function() { if (typeof setFreqRowHeight === 'function') setFreqRowHeight(); });
 }
 
 var freqCurrentItems = [];
