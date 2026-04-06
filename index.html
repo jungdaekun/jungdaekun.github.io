@@ -220,7 +220,7 @@ section{padding:100px 80px;}
 @keyframes lockBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}60%{transform:translateY(-3px);}}
 .professional-note-text{font-size:13px;color:#bdc3d0;line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;scroll-behavior:smooth;}
+.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;}
 .prof-grid::-webkit-scrollbar{display:none;}
 /* grid-column은 JS로 직접 적용 */
 .prof-grid::-webkit-scrollbar{width:4px;}
@@ -3304,6 +3304,12 @@ function preloadFreqImages() {
   setTimeout(calcHeight, 600);
   window.addEventListener('load', function() { setTimeout(calcHeight, 100); });
   window.addEventListener('resize', function() { setTimeout(calcHeight, 100); });
+
+  // 휠 스크롤 차단 — 페이지 스크롤로 넘김
+  grid.addEventListener('wheel', function(e) {
+    if (document.getElementById('prof-lb').classList.contains('active')) return;
+    e.preventDefault();
+  }, { passive: false });
 })();
 
 // ── PERSONAL WORKS 그리드 페이지네이션 ──
@@ -3372,6 +3378,9 @@ function preloadFreqImages() {
 
   window.projGridPrev = function() { setPage(currentPage - 1); };
   window.projGridNext = function() { setPage(currentPage + 1); };
+
+  // 휠 스크롤 차단 — 페이지 스크롤로 넘김
+  vp.addEventListener('wheel', function(e) { e.preventDefault(); }, { passive: false });
 
   setTimeout(init, 200);
   setTimeout(init, 500);
