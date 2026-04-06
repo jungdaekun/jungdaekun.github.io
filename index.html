@@ -2928,7 +2928,7 @@ function renderFreqViewed() {
     else                        { viewIcon = '✔️'; viewColor = '#d0cbbe'; }
     // rank 아이콘은 항상 표시, 일반은 viewCount > 0일 때만
     var showIcon = s.rank >= 0 || viewCount > 0;
-    var iconText = s.rank >= 0 ? viewIcon : (viewCount > 0 ? viewIcon + ' ' + viewCount : '');
+    var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (s.rank >= 0 ? viewIcon : '');
     var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
