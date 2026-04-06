@@ -2891,48 +2891,56 @@ function renderFreqViewed() {
     newestProjCount[p.projectId] = (newestProjCount[p.projectId] || 0) + 1;
   });
 
-  // ── 나머지는 인기순 (클릭 데이터 기반, 부족하면 랜덤 보충) ──
+  // ── 나머지 채우기 (인기순 → 랜덤 보충) ──
   var popularKeys = Object.keys(data)
     .filter(function(k) { return data[k].count > 0; })
     .sort(function(a,b) { return data[b].count - data[a].count; });
 
-  var popularItems = [];
-  var needed = totalItems - randomItems.length - newestItems.length;
+  var fillItems = [];
+  var fillProjCount = {};
 
-  var popularProjCount = {};
+  // 1단계: 인기 데이터 기반
   popularKeys.forEach(function(k) {
-    if (popularItems.length >= needed) return;
+    if (fillItems.length >= totalItems) return;
     var p = pool.find(function(x){ return x.key === k; });
-    if (p && !usedKeys[p.key] && (popularProjCount[p.projectId] || 0) < 2) {
-      popularItems.push({ item: p, badge: '🔥 ' + data[k].count + ' views', rank: popularItems.length });
+    if (p && !usedKeys[p.key]) {
+      fillItems.push({ item: p, badge: '', rank: -1 });
       usedKeys[p.key] = true;
-      popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
+      fillProjCount[p.projectId] = (fillProjCount[p.projectId] || 0) + 1;
     }
   });
-  // 인기 데이터 부족 시 랜덤 보충 (프로젝트 제한 있음)
+  // 2단계: 랜덤 보충 (프로젝트당 3장 제한)
   shuffle(pool).forEach(function(p) {
-    if (popularItems.length >= needed || usedKeys[p.key]) return;
-    if ((popularProjCount[p.projectId] || 0) >= 3) return;
-    popularItems.push({ item: p, badge: '', rank: -1 });
+    if (fillItems.length >= totalItems || usedKeys[p.key]) return;
+    if ((fillProjCount[p.projectId] || 0) >= 3) return;
+    fillItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
-    popularProjCount[p.projectId] = (popularProjCount[p.projectId] || 0) + 1;
+    fillProjCount[p.projectId] = (fillProjCount[p.projectId] || 0) + 1;
   });
-  // 그래도 부족하면 프로젝트 제한 없이 추가 (풀 채우기)
+  // 3단계: 그래도 부족하면 제한 없이 완전 채우기
   shuffle(pool).forEach(function(p) {
-    if (popularItems.length >= needed || usedKeys[p.key]) return;
-    popularItems.push({ item: p, badge: '', rank: -1 });
+    if (fillItems.length >= totalItems || usedKeys[p.key]) return;
+    fillItems.push({ item: p, badge: '', rank: -1 });
     usedKeys[p.key] = true;
   });
 
-  // rank 0,1,2 → span 크기 결정 (인기 1~3위)
-  if (popularItems.length > 0) popularItems[0].rank = 0;
-  if (popularItems.length > 1) popularItems[1].rank = 1;
-  if (popularItems.length > 2) popularItems[2].rank = 2;
-  if (popularItems.length > 3) popularItems[3].rank = 3;
-  if (popularItems.length > 4) popularItems[4].rank = 4;
+  // 인기 상위 5개에 rank 부여
+  var rankCount = 0;
+  popularKeys.forEach(function(k) {
+    if (rankCount >= 5) return;
+    var found = fillItems.find(function(s){ return s.item.key === k; });
+    if (!found) found = randomItems.find(function(s){ return s.item.key === k; });
+    if (!found) found = newestItems.find(function(s){ return s.item.key === k; });
+    if (found && found.rank === -1) { found.rank = rankCount++; }
+  });
+  // rank가 5개 미만이면 fillItems 앞에서 채우기
+  fillItems.forEach(function(s) {
+    if (rankCount >= 5) return;
+    if (s.rank === -1) { s.rank = rankCount++; }
+  });
 
-  // 합치기
-  var combined = randomItems.concat(newestItems).concat(popularItems).slice(0, totalItems);
+  // 합치기 — randomItems + newestItems + fillItems, totalItems만큼
+  var combined = randomItems.concat(newestItems).concat(fillItems).slice(0, totalItems);
 
   // 1~5등 랜덤 위치 배치
   var top1 = combined.find(function(s){ return s.rank === 0; });
