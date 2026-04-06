@@ -220,8 +220,8 @@ section{padding:100px 80px;}
 @keyframes lockBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}60%{transform:translateY(-3px);}}
 .professional-note-text{font-size:13px;color:#bdc3d0;line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;}
-.prof-grid::-webkit-scrollbar{display:none;}
+.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;overflow:visible;}
+.prof-grid-wrap{position:relative;overflow:hidden;}
 /* grid-column은 JS로 직접 적용 */
 .prof-grid::-webkit-scrollbar{width:4px;}
 .prof-grid::-webkit-scrollbar-track{background:transparent;}
@@ -572,7 +572,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <span style="font-size:13px;color:var(--text2);letter-spacing:.06em;">Due to <span style="color:var(--gold);">NDA</span> restrictions, detailed portfolios for commercial projects are available upon request via email.</span>
     </div>
   </div>
-  <div class="prof-grid-wrap">
+  <div class="prof-grid-wrap" id="prof-grid-wrap" style="overflow:hidden;">
+    <div id="prof-grid-inner">
     <div class="prof-grid" id="prof-grid">
     <!-- LIONHEART STUDIO -->
     <div class="prof-card" onclick="openProfLb('lionheart')">
@@ -934,7 +935,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
-  </div>
+  </div><!-- end prof-grid -->
+  </div><!-- end prof-grid-inner -->
   <div class="prof-grid-fade" id="prof-grid-fade"></div>
   <div class="prof-grid-nav" id="prof-grid-nav">
     <button class="prof-grid-nav-btn" id="prof-grid-prev" onclick="profGridPrev()" title="이전">‹</button>
@@ -1201,8 +1203,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>프랍 제작부터 셋드레싱, 환경 셋업과 라이팅까지—배경 디자인의 전 과정을 밀도 있게 담아낸 개인 프로젝트입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">A personal project capturing the full spectrum of 3D environment design—from prop creation and set dressing to environment setup and lighting.</span></p>
   <!-- 프로젝트 카드 그리드 -->
   <div class="proj-grid-wrap">
-  <div class="proj-grid-viewport" id="proj-grid-viewport" style="overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;">
-  <style>#proj-grid-viewport::-webkit-scrollbar{display:none;}</style>
+  <div class="proj-grid-viewport" id="proj-grid-viewport" style="overflow:hidden;">
+  <div id="proj-grid-inner">
   <div class="project-grid">
 
     <!-- 2020 Rock Study -->
@@ -1427,6 +1429,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <!-- 2017-2018 (이미지 추가 예정) -->
 
   </div><!-- end project-grid-4 -->
+  </div><!-- end proj-grid-inner -->
   </div><!-- end proj-grid-viewport -->
   <div class="proj-grid-nav">
     <button class="proj-grid-nav-btn" id="proj-nav-prev" onclick="projGridPrev()" title="이전">‹</button>
@@ -3250,122 +3253,127 @@ function preloadFreqImages() {
 
 // ── PROF GRID 버튼 페이지네이션 ──
 (function() {
+  var wrap = document.getElementById('prof-grid-wrap');
+  var inner = document.getElementById('prof-grid-inner');
   var grid = document.getElementById('prof-grid');
   var fade = document.getElementById('prof-grid-fade');
   var prevBtn = document.getElementById('prof-grid-prev');
   var nextBtn = document.getElementById('prof-grid-next');
   var info = document.getElementById('prof-grid-nav-info');
-  if (!grid) return;
+  if (!grid || !inner || !wrap) return;
 
   var currentPage = 0;
+  var pageOffsets = [0];
+  var pageHeight = 0;
 
-  function getRowHeight() {
+  function calcPages() {
+    // 전체 펼치기
+    wrap.style.height = 'auto';
+    inner.style.transform = '';
+
     var cards = Array.from(grid.querySelectorAll('.prof-card'));
-    // 가장 큰 카드 높이 기준
+    if (!cards.length) return false;
+
     var maxH = 0;
     cards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
-    return maxH || 320;
-  }
+    if (maxH < 10) return false;
 
-  function getTotalPages() {
-    var h = getRowHeight();
     var gap = 12;
-    var pageH = h * 2 + gap;
-    return Math.max(1, Math.ceil(grid.scrollHeight / pageH));
+    pageHeight = maxH * 2 + gap;
+    var totalH = grid.offsetHeight;
+    var totalPages = Math.max(1, Math.ceil(totalH / pageHeight));
+
+    pageOffsets = [];
+    for (var i = 0; i < totalPages; i++) {
+      pageOffsets.push(i * pageHeight);
+    }
+    wrap.style.height = pageHeight + 'px';
+    return true;
   }
 
   function setPage(page) {
-    var h = getRowHeight();
-    var gap = 12;
-    var pageH = h * 2 + gap;
-    var totalPages = getTotalPages();
+    var totalPages = pageOffsets.length;
     currentPage = Math.max(0, Math.min(page, totalPages - 1));
-    grid.scrollTop = currentPage * pageH;
+    inner.style.transform = 'translateY(-' + pageOffsets[currentPage] + 'px)';
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
     if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
     if (fade) fade.classList.toggle('hidden', currentPage >= totalPages - 1);
   }
 
-  function calcHeight() {
-    var h = getRowHeight();
-    if (h < 10) { setTimeout(calcHeight, 200); return; }
-    var gap = 12;
-    grid.style.maxHeight = (h * 2 + gap) + 'px';
+  function init() {
+    if (!calcPages()) { setTimeout(init, 200); return; }
     setPage(0);
   }
 
   window.profGridPrev = function() { setPage(currentPage - 1); };
   window.profGridNext = function() { setPage(currentPage + 1); };
 
-  // 여러 타이밍에 재시도
-  setTimeout(calcHeight, 100);
-  setTimeout(calcHeight, 300);
-  setTimeout(calcHeight, 600);
-  window.addEventListener('load', function() { setTimeout(calcHeight, 100); });
-  window.addEventListener('resize', function() { setTimeout(calcHeight, 100); });
-
-  // 휠 스크롤 차단 — 페이지 스크롤로 넘김
-  grid.addEventListener('wheel', function(e) {
-    if (document.getElementById('prof-lb').classList.contains('active')) return;
-    e.preventDefault();
-  }, { passive: false });
+  setTimeout(init, 100);
+  setTimeout(init, 400);
+  window.addEventListener('load', function() { setTimeout(init, 100); });
+  window.addEventListener('resize', function() { currentPage = 0; setTimeout(init, 100); });
 })();
 
 // ── PERSONAL WORKS 그리드 페이지네이션 ──
 (function() {
   var vp = document.getElementById('proj-grid-viewport');
+  var inner = document.getElementById('proj-grid-inner');
   var prevBtn = document.getElementById('proj-nav-prev');
   var nextBtn = document.getElementById('proj-nav-next');
   var info = document.getElementById('proj-nav-info');
-  if (!vp) return;
+  if (!vp || !inner) return;
 
   var ROWS_PER_PAGE = 3;
   var currentPage = 0;
-  var pageTops = []; // 각 페이지 시작 scrollTop
-  var fixedHeight = 0;
+  var pageOffsets = [0];
+  var pageHeights = [];
 
   function buildPages() {
-    // maxHeight 제거 후 전체 펼쳐서 측정
-    vp.style.maxHeight = 'none';
-    vp.scrollTop = 0;
+    vp.style.height = 'auto';
+    inner.style.transform = '';
 
-    var cards = Array.from(vp.querySelectorAll('.project-card'));
+    var cards = Array.from(inner.querySelectorAll('.project-card'));
     if (!cards.length) return false;
 
-    // 행 시작 Y 수집 (offsetTop 기준)
+    // offsetTop 기준으로 행 경계 수집
     var rowTops = [];
-    var lastTop = -999;
+    var rowBottoms = [];
+    var lastTop = -999, lastBottom = 0;
     cards.forEach(function(c) {
       var t = c.offsetTop;
-      if (t - lastTop > 5) { rowTops.push(t); lastTop = t; }
+      var b = t + c.offsetHeight;
+      if (t - lastTop > 5) {
+        rowTops.push(t);
+        if (rowTops.length > 1) rowBottoms.push(lastBottom);
+        lastTop = t;
+        lastBottom = b;
+      } else {
+        lastBottom = Math.max(lastBottom, b);
+      }
     });
+    rowBottoms.push(lastBottom);
+
     if (!rowTops.length) return false;
 
-    // 페이지별 scrollTop 계산
-    pageTops = [];
+    pageOffsets = [];
+    pageHeights = [];
     for (var i = 0; i < rowTops.length; i += ROWS_PER_PAGE) {
-      pageTops.push(rowTops[i]);
+      var startTop = rowTops[i];
+      var endBottom = rowBottoms[Math.min(i + ROWS_PER_PAGE - 1, rowBottoms.length - 1)];
+      pageOffsets.push(startTop);
+      pageHeights.push(endBottom - startTop);
     }
 
-    // 고정 높이: 0페이지의 ROWS_PER_PAGE번째 행 시작점 기준
-    var nextPageRow = rowTops[ROWS_PER_PAGE];
-    if (nextPageRow !== undefined) {
-      fixedHeight = nextPageRow - rowTops[0];
-    } else {
-      // 전체가 3행 이하
-      var lastCard = cards[cards.length - 1];
-      fixedHeight = lastCard.offsetTop + lastCard.offsetHeight - rowTops[0];
-    }
-
-    vp.style.maxHeight = fixedHeight + 'px';
+    vp.style.height = pageHeights[0] + 'px';
     return true;
   }
 
   function setPage(page) {
-    var totalPages = pageTops.length;
+    var totalPages = pageOffsets.length;
     currentPage = Math.max(0, Math.min(page, totalPages - 1));
-    vp.scrollTop = pageTops[currentPage] || 0;
+    inner.style.transform = 'translateY(-' + pageOffsets[currentPage] + 'px)';
+    vp.style.height = pageHeights[currentPage] + 'px';
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
     if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
@@ -3378,9 +3386,6 @@ function preloadFreqImages() {
 
   window.projGridPrev = function() { setPage(currentPage - 1); };
   window.projGridNext = function() { setPage(currentPage + 1); };
-
-  // 휠 스크롤 차단 — 페이지 스크롤로 넘김
-  vp.addEventListener('wheel', function(e) { e.preventDefault(); }, { passive: false });
 
   setTimeout(init, 200);
   setTimeout(init, 500);
