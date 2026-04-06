@@ -2966,7 +2966,7 @@ function renderFreqViewed() {
   var selected = rest2.slice(0, totalItems);
 
   freqCurrentItems = selected;
-  grid.innerHTML = selected.map(function(s, listIdx) {
+  var html = selected.map(function(s, listIdx) {
     var spanClass = 'span-1x1';
     if (s.rank === 0) spanClass = 'span-2x2';
     else if (s.rank === 1 || s.rank === 2) spanClass = 'span-2x1';
@@ -2998,6 +2998,12 @@ function renderFreqViewed() {
         '<div class="freq-item-title">' + p.title + '</div>' +
       '</div></div>';
   }).join('');
+  // 부족한 칸 placeholder로 채우기
+  var remaining = totalItems - selected.length;
+  for (var pi = 0; pi < remaining; pi++) {
+    html += '<div class="freq-item span-1x1" style="background:var(--bg3);border-color:var(--border);"></div>';
+  }
+  grid.innerHTML = html;
   requestAnimationFrame(function() { if (typeof setFreqRowHeight === 'function') setFreqRowHeight(); });
 }
 
