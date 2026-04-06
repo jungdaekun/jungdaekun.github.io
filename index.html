@@ -1201,7 +1201,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>프랍 제작부터 셋드레싱, 환경 셋업과 라이팅까지—배경 디자인의 전 과정을 밀도 있게 담아낸 개인 프로젝트입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">A personal project capturing the full spectrum of 3D environment design—from prop creation and set dressing to environment setup and lighting.</span></p>
   <!-- 프로젝트 카드 그리드 -->
   <div class="proj-grid-wrap">
-  <div class="proj-grid-viewport" id="proj-grid-viewport" style="overflow:hidden;">
+  <div class="proj-grid-viewport" id="proj-grid-viewport" style="overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;">
+  <style>#proj-grid-viewport::-webkit-scrollbar{display:none;}</style>
   <div class="project-grid">
 
     <!-- 2020 Rock Study -->
@@ -3313,54 +3314,69 @@ function preloadFreqImages() {
   var info = document.getElementById('proj-nav-info');
   if (!vp) return;
 
+  var ROWS_PER_PAGE = 3;
   var currentPage = 0;
-  var ROWS = 3; // 한 페이지에 보여줄 줄 수
+  var pageTops = []; // 각 페이지 시작 scrollTop
+  var fixedHeight = 0;
 
-  function getRowHeight() {
+  function buildPages() {
+    // maxHeight 제거 후 전체 펼쳐서 측정
+    vp.style.maxHeight = 'none';
+    vp.scrollTop = 0;
+
     var cards = Array.from(vp.querySelectorAll('.project-card'));
-    var maxH = 0;
-    cards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
-    return maxH || 240;
-  }
+    if (!cards.length) return false;
 
-  function getGap() { return 20; }
+    // 행 시작 Y 수집 (offsetTop 기준)
+    var rowTops = [];
+    var lastTop = -999;
+    cards.forEach(function(c) {
+      var t = c.offsetTop;
+      if (t - lastTop > 5) { rowTops.push(t); lastTop = t; }
+    });
+    if (!rowTops.length) return false;
 
-  function getTotalPages() {
-    var h = getRowHeight();
-    var gap = getGap();
-    var pageH = h * ROWS + gap * (ROWS - 1);
-    return Math.max(1, Math.ceil(vp.scrollHeight / pageH));
+    // 페이지별 scrollTop 계산
+    pageTops = [];
+    for (var i = 0; i < rowTops.length; i += ROWS_PER_PAGE) {
+      pageTops.push(rowTops[i]);
+    }
+
+    // 고정 높이: 0페이지의 ROWS_PER_PAGE번째 행 시작점 기준
+    var nextPageRow = rowTops[ROWS_PER_PAGE];
+    if (nextPageRow !== undefined) {
+      fixedHeight = nextPageRow - rowTops[0];
+    } else {
+      // 전체가 3행 이하
+      var lastCard = cards[cards.length - 1];
+      fixedHeight = lastCard.offsetTop + lastCard.offsetHeight - rowTops[0];
+    }
+
+    vp.style.maxHeight = fixedHeight + 'px';
+    return true;
   }
 
   function setPage(page) {
-    var h = getRowHeight();
-    var gap = getGap();
-    var pageH = h * ROWS + gap * (ROWS - 1);
-    var totalPages = getTotalPages();
+    var totalPages = pageTops.length;
     currentPage = Math.max(0, Math.min(page, totalPages - 1));
-    vp.scrollTop = currentPage * pageH;
+    vp.scrollTop = pageTops[currentPage] || 0;
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
     if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
   }
 
-  function calcHeight() {
-    var h = getRowHeight();
-    if (h < 10) { setTimeout(calcHeight, 200); return; }
-    var gap = getGap();
-    var pageH = h * ROWS + gap * (ROWS - 1);
-    vp.style.maxHeight = pageH + 'px';
+  function init() {
+    if (!buildPages()) { setTimeout(init, 200); return; }
     setPage(0);
   }
 
   window.projGridPrev = function() { setPage(currentPage - 1); };
   window.projGridNext = function() { setPage(currentPage + 1); };
 
-  setTimeout(calcHeight, 100);
-  setTimeout(calcHeight, 300);
-  setTimeout(calcHeight, 600);
-  window.addEventListener('load', function() { setTimeout(calcHeight, 100); });
-  window.addEventListener('resize', function() { setTimeout(calcHeight, 100); });
+  setTimeout(init, 200);
+  setTimeout(init, 500);
+  window.addEventListener('load', function() { setTimeout(init, 200); });
+  window.addEventListener('resize', function() { currentPage = 0; setTimeout(init, 150); });
 })();
 
 // ── PROF CARD 랜덤 썸네일 ──
