@@ -220,7 +220,7 @@ section{padding:100px 80px;}
 @keyframes lockBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}60%{transform:translateY(-3px);}}
 .professional-note-text{font-size:13px;color:#bdc3d0;line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;scroll-behavior:smooth;}
+.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow:hidden;}
 /* grid-column은 JS로 직접 적용 */
 .prof-grid::-webkit-scrollbar{width:4px;}
 .prof-grid::-webkit-scrollbar-track{background:transparent;}
@@ -228,6 +228,11 @@ section{padding:100px 80px;}
 .prof-grid::-webkit-scrollbar-thumb:hover{background:var(--gold-dim);}
 .prof-grid-fade{position:absolute;bottom:0;left:0;right:4px;height:60px;background:linear-gradient(to top,var(--bg) 0%,transparent 100%);pointer-events:none;transition:opacity .3s;}
 .prof-grid-fade.hidden{opacity:0;}
+.prof-grid-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;}
+.prof-grid-nav-btn{background:none;border:1px solid var(--border);color:var(--text2);width:36px;height:36px;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;}
+.prof-grid-nav-btn:hover{border-color:var(--border2);color:var(--gold);}
+.prof-grid-nav-btn:disabled{opacity:0.25;cursor:default;border-color:var(--border);}
+.prof-grid-nav-info{font-family:var(--font-mono);font-size:11px;color:var(--text3);letter-spacing:.1em;min-width:60px;text-align:center;}
 .prof-card{background:var(--bg3);border:1px solid var(--border);padding:20px 24px;position:relative;}
 .prof-card:hover{border-color:var(--border2);}
 .prof-card-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:8px;}
@@ -924,6 +929,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
   </div>
   <div class="prof-grid-fade" id="prof-grid-fade"></div>
+  <div class="prof-grid-nav" id="prof-grid-nav">
+    <button class="prof-grid-nav-btn" id="prof-grid-prev" onclick="profGridPrev()" title="이전">‹</button>
+    <span class="prof-grid-nav-info" id="prof-grid-nav-info" translate="no"></span>
+    <button class="prof-grid-nav-btn" id="prof-grid-next" onclick="profGridNext()" title="다음">›</button>
+  </div>
 </section>
 <script>
 (function() {
@@ -3219,49 +3229,59 @@ function preloadFreqImages() {
   });
 }
 
-// ── PROF GRID 스크롤 제어 ──
+// ── PROF GRID 버튼 페이지네이션 ──
 (function() {
   var grid = document.getElementById('prof-grid');
   var fade = document.getElementById('prof-grid-fade');
+  var prevBtn = document.getElementById('prof-grid-prev');
+  var nextBtn = document.getElementById('prof-grid-next');
+  var info = document.getElementById('prof-grid-nav-info');
   if (!grid) return;
 
-  // 2번째 카드 높이 기준으로 max-height 계산 (2줄 표시)
-  function calcHeight() {
+  var currentPage = 0; // 0-based
+
+  function getRowHeight() {
     var cards = grid.querySelectorAll('.prof-card');
     var card = cards[1] || cards[0];
-    if (!card) return;
-    var h = card.offsetHeight;
+    return card ? card.offsetHeight : 320;
+  }
+
+  function getTotalPages() {
+    var h = getRowHeight();
+    var gap = 12;
+    var totalH = grid.scrollHeight;
+    var pageH = h * 2 + gap;
+    return Math.ceil(totalH / pageH);
+  }
+
+  function setPage(page) {
+    var h = getRowHeight();
+    var gap = 12;
+    var pageH = h * 2 + gap;
+    var totalPages = getTotalPages();
+    currentPage = Math.max(0, Math.min(page, totalPages - 1));
+    grid.scrollTo({ top: currentPage * pageH, behavior: 'smooth' });
+    // 버튼 상태
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage >= totalPages - 1;
+    if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
+    // 페이드
+    if (fade) fade.classList.toggle('hidden', currentPage >= totalPages - 1);
+  }
+
+  function calcHeight() {
+    var h = getRowHeight();
     var gap = 12;
     grid.style.maxHeight = (h * 2 + gap) + 'px';
+    setPage(currentPage);
   }
-  window.addEventListener('load', calcHeight);
+
+  window.profGridPrev = function() { setPage(currentPage - 1); };
+  window.profGridNext = function() { setPage(currentPage + 1); };
+
+  window.addEventListener('load', function() { setTimeout(calcHeight, 100); });
   window.addEventListener('resize', calcHeight);
-
-  // 페이드 표시 여부
-  function updateFade() {
-    if (!fade) return;
-    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 4;
-    fade.classList.toggle('hidden', atBottom);
-  }
-  grid.addEventListener('scroll', updateFade);
-  setTimeout(updateFade, 300);
-
-  // 휠: 그리드 안에서 스크롤 → 끝 도달하면 페이지로 넘김
-  grid.addEventListener('wheel', function(e) {
-    // 팝업 열려있으면 무시
-    if (document.getElementById('prof-lb').classList.contains('active')) return;
-
-    var atTop    = grid.scrollTop <= 0;
-    var atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 2;
-
-    if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
-      // 끝에 도달 → 페이지 스크롤로 넘김
-      return;
-    }
-    e.stopPropagation();
-    grid.scrollTop += e.deltaY * 3;
-    e.preventDefault();
-  }, { passive: false });
+  setTimeout(calcHeight, 300);
 })();
 
 // ── PROF CARD 랜덤 썸네일 ──
