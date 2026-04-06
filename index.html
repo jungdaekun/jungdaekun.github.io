@@ -220,7 +220,8 @@ section{padding:100px 80px;}
 @keyframes lockBounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}60%{transform:translateY(-3px);}}
 .professional-note-text{font-size:13px;color:#bdc3d0;line-height:1.6;}
 .prof-grid-wrap{position:relative;}
-.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow:hidden;}
+.prof-grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px;max-height:calc(var(--card-h, 320px) * 2 + 12px);overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;scroll-behavior:smooth;}
+.prof-grid::-webkit-scrollbar{display:none;}
 /* grid-column은 JS로 직접 적용 */
 .prof-grid::-webkit-scrollbar{width:4px;}
 .prof-grid::-webkit-scrollbar-track{background:transparent;}
@@ -363,6 +364,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
 /* ── PROJECT GRID ── */
 .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;justify-content:center;}
+.project-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;justify-content:center;margin-top:20px;}
 .project-card{background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:border-color .2s,transform .2s;}
 .project-card:hover{border-color:var(--border2);transform:translateY(-4px);}
 .project-card-empty{cursor:default;}
@@ -435,7 +437,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .lb-nav-next{right:16px;}
 .lb-nav-prev:hover,.lb-nav-next:hover{border-color:var(--border2);color:var(--gold);}
 
-@media(max-width:768px){.project-grid{grid-template-columns:1fr;}.lb-thumbnails{display:none;}.lb-scroll-hint{display:none;}}
+@media(max-width:768px){.project-grid{grid-template-columns:1fr;}.project-grid-4{grid-template-columns:repeat(2,1fr);}.lb-thumbnails{display:none;}.lb-scroll-hint{display:none;}}
 
 
 /* ── SCROLL ANIMATIONS ── */
@@ -1273,7 +1275,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
         </div>
       </div>
     </div>
+  </div><!-- end project-grid (3col) -->
 
+  <div class="project-grid-4">
     <!-- 2015 Forsaken Dungeon -->
     <div class="project-card" onclick="openLightbox('proj-forsaken', 0)">
       <div class="project-thumb-wrap">
@@ -1414,7 +1418,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
     <!-- 2017-2018 (이미지 추가 예정) -->
 
-  </div>
+  </div><!-- end project-grid-4 -->
 
   <!-- ── LIGHTBOX ── -->
   <div id="lightbox" class="lightbox">
