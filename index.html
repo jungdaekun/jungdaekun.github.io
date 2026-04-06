@@ -589,6 +589,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
     <div class="about-right">
       <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2025 —</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('lionheart')">Lionheart Studio</a></div>
+        <div class="exp-role">ODIN: VALHALLA RISING / MMORPG · Live Service / Mobile · PC</div>
+        <div class="exp-project">Senior Environment Artist · Level Design · Integration · Optimization</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unreal 4</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">World Creator</span>
+          <span class="exp-tag">Substance 3D Designer</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
         <div class="exp-year" translate="no">2021 — 2024</div>
         <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('ncsoft')">NCSoft</a></div>
         <div class="exp-role">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
@@ -1080,6 +1092,31 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
   <div class="prof-grid-wrap">
     <div class="prof-grid" id="prof-grid">
+    <!-- LIONHEART STUDIO -->
+    <div class="prof-card" onclick="openProfLb('lionheart')">
+      <div class="lock-badge">// NDA PROTECTED</div>
+      <div class="prof-card-media"
+           data-vid="tvAcoxRube0"
+           onmouseenter="profHoverIn(this)"
+           onmouseleave="profHoverOut(this)">
+        <img class="prof-card-thumb" loading="lazy" src="https://img.youtube.com/vi/tvAcoxRube0/mqdefault.jpg" alt="ODIN: VALHALLA RISING thumbnail">
+        <iframe class="prof-card-hover-iframe" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <div class="prof-card-media-overlay">
+          <div class="prof-card-media-label">▶ VIDEO</div>
+        </div>
+      </div>
+      <div class="prof-card-info">
+        <div class="prof-card-id" translate="no">// PROJ_016 · 2025—</div>
+        <div class="prof-card-title">Lionheart Studio</div>
+        <div class="prof-card-sub">ODIN: VALHALLA RISING · MMORPG / Mobile · PC / Live Service</div>
+        <div class="prof-card-desc">Level Design · Integration · Optimization</div>
+        <div class="prof-tags">
+          <span class="prof-tag">Developer : Lionheart Studio</span>
+          <span class="prof-tag">Publisher : Kakao Games</span>
+        </div>
+      </div>
+    </div>
+
     <!-- NCSOFT -->
     <div class="prof-card" onclick="openProfLb('ncsoft')">
       <div class="lock-badge">// NDA PROTECTED</div>
@@ -1421,7 +1458,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <script>
 (function() {
   var cards = document.querySelectorAll('#prof-grid .prof-card');
-  var spans = [30,30,20,20,20,15,15,15,15,12,12,12,12,12];
+  var spans = [30,30,20,20,20,15,15,15,15,12,12,12,12,12,12];
   cards.forEach(function(card, i){ card.style.gridColumn = 'span ' + (spans[i] || 12); });
 })();
 </script>
@@ -2354,6 +2391,15 @@ function shuffle(arr) {
 }
 
 var profProjects = {
+  'lionheart': {
+    id: '// PROFESSIONAL · LIONHEART STUDIO · 2025—',
+    title: 'ODIN: VALHALLA RISING',
+    sub: 'MMORPG / Mobile · PC / Live Service',
+    tags: ['Level Design · Integration · Optimization', 'Developer : Lionheart Studio', 'Publisher : Kakao Games'],
+    items: [
+      { type: 'video', videoId: 'tvAcoxRube0' }
+    ]
+  },
   'ncsoft': {
     id: '// PROFESSIONAL · NCSOFT · 2021—2024',
     title: 'Project M',
@@ -3287,7 +3333,7 @@ function closeProfLb() {
 // prof-grid 카드 span 직접 적용
 function applyProfGridSpans() {
   var cards = document.querySelectorAll('#prof-grid .prof-card');
-  var spans = [30,30, 20,20,20, 15,15,15,15, 12,12,12,12,12];
+  var spans = [30,30, 20,20,20, 15,15,15,15, 12,12,12,12,12,12];
   cards.forEach(function(card, i) {
     card.style.gridColumn = 'span ' + (spans[i] || 12);
   });
@@ -3295,7 +3341,7 @@ function applyProfGridSpans() {
 document.addEventListener('DOMContentLoaded', applyProfGridSpans);
 window.addEventListener('load', applyProfGridSpans);
 
-var profProjectOrder = ['ncsoft', 'changse', 'nexon', 'xlgames', 'cookapps', 'neptune', 'neptune_baseball', 'puregames', 'puresoft', 'artechsoft', 'yeinssoft', 'pixelplanet', 'sunwoo', 'aprilstudio'];
+var profProjectOrder = ['lionheart', 'ncsoft', 'changse', 'nexon', 'xlgames', 'cookapps', 'neptune', 'neptune_baseball', 'puregames', 'puresoft', 'artechsoft', 'yeinssoft', 'pixelplanet', 'sunwoo', 'aprilstudio'];
 var currentProfId = null;
 
 function profLbStep(dir) {
