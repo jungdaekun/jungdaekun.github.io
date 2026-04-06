@@ -124,14 +124,14 @@ section{padding:100px 80px;}
 
 /* ── FEATURED WORKS ── */
 #freq-viewed{background:var(--bg2);}
-.freq-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-flow:dense;gap:4px;}
+.freq-grid{display:grid;grid-template-columns:repeat(10,1fr);grid-auto-flow:dense;gap:4px;}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
 .freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;}
 .freq-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(7,1fr);}}
-@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(6,1fr);}}
+@media(max-width:1500px){.freq-grid{grid-template-columns:repeat(9,1fr);}}
+@media(max-width:1200px){.freq-grid{grid-template-columns:repeat(8,1fr);}}
 @media(max-width:900px){.freq-grid{grid-template-columns:repeat(4,1fr);}}
 @media(max-width:600px){.freq-grid{grid-template-columns:repeat(3,1fr);}}
 .freq-item:hover img{transform:scale(1.05);}
@@ -2911,7 +2911,7 @@ function renderFreqViewed() {
 
   // clientWidth = 스크롤바 제외 뷰포트 너비 (CSS media query와 동일)
   var vw = document.documentElement.clientWidth;
-  var colCount = vw >= 1500 ? 8 : vw >= 1200 ? 7 : vw >= 900 ? 6 : vw >= 600 ? 4 : 3;
+  var colCount = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
   var rows = 5;
   var totalCells = colCount * rows;
   // 1등(2x2=4칸) + 2등(2x1=2칸) + 3등(2x1=2칸) + 4등(1x1=1칸) + 5등(1x1=1칸) = 10칸
@@ -3223,7 +3223,7 @@ function setFreqRowHeight() {
   }
   if (gridW <= 10) { setTimeout(setFreqRowHeight, 100); return; }
   var vw2 = document.documentElement.clientWidth;
-  var cols = vw2 >= 1500 ? 8 : vw2 >= 1200 ? 7 : vw2 >= 900 ? 6 : vw2 >= 600 ? 4 : 3;
+  var cols = vw2 >= 1500 ? 10 : vw2 >= 1200 ? 9 : vw2 >= 900 ? 8 : vw2 >= 600 ? 4 : 3;
   var gap = 4;
   var rowH = (gridW - (cols - 1) * gap) / cols;
   var h = 5 * rowH + 4 * gap;
