@@ -937,7 +937,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     </div>
   </div><!-- end prof-grid -->
   </div><!-- end prof-grid-inner -->
-  <div class="prof-grid-fade" id="prof-grid-fade"></div>
+  </div><!-- end prof-grid-wrap -->
   <div class="prof-grid-nav" id="prof-grid-nav">
     <button class="prof-grid-nav-btn" id="prof-grid-prev" onclick="profGridPrev()" onmousedown="return false" title="이전">‹</button>
     <span class="prof-grid-nav-info" id="prof-grid-nav-info" translate="no"></span>
@@ -3255,7 +3255,6 @@ function preloadFreqImages() {
 (function() {
   var wrap = document.getElementById('prof-grid-wrap');
   var inner = document.getElementById('prof-grid-inner');
-  var fade = document.getElementById('prof-grid-fade');
   var prevBtn = document.getElementById('prof-grid-prev');
   var nextBtn = document.getElementById('prof-grid-next');
   var info = document.getElementById('prof-grid-nav-info');
@@ -3313,7 +3312,6 @@ function preloadFreqImages() {
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
     if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
-    if (fade) fade.classList.toggle('hidden', currentPage >= totalPages - 1);
   }
 
   function init() {
