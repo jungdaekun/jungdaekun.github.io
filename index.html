@@ -480,11 +480,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <header id="topbar">
 
   <nav id="main-nav">
+    <a href="#hero" onclick="closeNav()">// Start</a>
+    <a href="#professional" onclick="closeNav()">Professional</a>
     <a href="#about" onclick="closeNav()">About</a>
     <a href="#freq-viewed" onclick="closeNav()">Featured</a>
     <a href="#personal" onclick="closeNav()">Personal</a>
     <a href="#relighting" onclick="closeNav()">Re:Lighting</a>
-    <a href="#professional" onclick="closeNav()">Professional</a>
     <a href="#sketch" onclick="closeNav()">Sketch Note</a>
   </nav>
   <div class="topbar-right">
@@ -544,554 +545,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="sec-header">
-    <span class="sec-id" translate="no">// 01</span>
-    <h2 class="sec-title reveal-left">About</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="about-grid">
-    <div class="about-left">
-      <div class="name-big reveal-left">Jung<br>Daekun</div>
-      <div class="title-tag reveal-left delay-1">Senior Environment Artist</div>
-      <div class="about-contact reveal-left delay-2">
-        Contact: <span id="about-email-btn" onclick="copyAboutEmail()" style="color:var(--gold);cursor:pointer;font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;transition:color .2s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">Email <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.7;flex-shrink:0;"><rect x="5" y="1" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="4" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="var(--bg)"/></svg></span><span id="about-email-copy-msg" style="font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0;transition:opacity .3s;margin-left:4px;">✓ copied!</span>
-      </div>
-      <div class="skills-grid" id="skills-grid" style="margin-top:32px">
-        <div class="skill-item reveal-left">3ds Max</div>
-        <div class="skill-item reveal-right">Level Art & World Building</div>
-        <div class="skill-item reveal-left">Photoshop</div>
-        <div class="skill-item reveal-right">Engine Integration (Unreal/Unity)</div>
-        <div class="skill-item reveal-left">ZBrush</div>
-        <div class="skill-item reveal-right">3D Asset Creation (High/Low Poly)</div>
-        <div class="skill-item reveal-left">SpeedTree</div>
-        <div class="skill-item reveal-right">Look-dev & Environment Lighting</div>
-        <div class="skill-item reveal-left">World Creator</div>
-        <div class="skill-item reveal-right">Technical Optimization</div>
-        <div class="skill-item reveal-left">Substance Painter</div>
-        <div class="skill-item reveal-right">Outsourcing Management (OS)</div>
-        <div class="skill-item reveal-left">Substance Designer</div>
-        <div class="skill-item reveal-right">Technical Documentation / Guideline</div>
-        <div class="skill-item reveal-left">Unreal Engine 4/5</div>
-        <div class="skill-item reveal-right">Post-Production & Polishing</div>
-        <div class="skill-item reveal-left">CryEngine · Unity</div>
-        <div class="skill-item reveal-right">Art Direction & Review</div>
-      </div>
-      <div class="about-bio reveal-left delay-3" style="margin-top:32px;">
-        <p class="about-bio-headline" style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--gold);letter-spacing:.04em;margin-bottom:14px;">15년 이상의 실무 노하우로 프로젝트의 비주얼 퀄리티와 파이프라인의 효율을 극대화하는 시니어 3D 환경 아티스트 정대근입니다.</p>
-        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">단순히 보기 좋은 배경을 넘어, 플레이어가 완벽하게 몰입할 수 있는 세계를 설계합니다. 개별 에셋의 디테일한 모델링부터 깊이감 있는 레벨 아트, 그리고 프로젝트의 최적화를 고려한 환경 세팅(Environment Setup)과 룩뎁(Look-Dev)까지 배경 제작 전 공정을 아우르는 전문성을 보유하고 있습니다.</p>
-        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:24px;">수많은 AAA급 프로젝트를 리드하며 쌓은 경험을 바탕으로 팀의 비주얼 기준(Art Standard)을 높이고, 유연한 소통을 통해 최상의 시너지를 이끌어내는 든든한 조력자가 되겠습니다.</p>
-        <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:14px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">I am Daekun Jung, a Senior Environment Artist dedicated to elevating visual standards and optimizing production pipelines.</p>
-        <p style="font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:10px;">Beyond creating visually pleasing backgrounds, I strive to build immersive worlds where players can truly breathe. My expertise spans the entire production pipeline—from high-fidelity asset creation and intricate level design to look-dev and environment setups tailored for maximum project efficiency.</p>
-        <p style="font-size:13px;color:var(--text2);line-height:1.85;">Drawing on over 15 years of industry experience, I foster collaborative team environments and drive visual excellence, seamlessly bridging the gap between artistic vision and technical execution.</p>
-      </div>
-    </div>
-    <div class="about-right">
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2025 —</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('lionheart')">Lionheart Studio</a></div>
-        <div class="exp-role">ODIN: VALHALLA RISING / MMORPG · Live Service / Mobile · PC</div>
-        <div class="exp-project">Senior Environment Artist · Level Design · Integration · Lighting · Optimization</div>
-        <div class="exp-tags">
-          <span class="exp-tag">Unreal 4</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">World Creator</span>
-          <span class="exp-tag">Substance 3D Designer</span>
-        </div>
-      </div>
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2021 — 2024</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('ncsoft')">NCSoft</a></div>
-        <div class="exp-role">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
-        <div class="exp-project">Senior Environment Artist · Integration · Lighting · Tech Doc · Outsourcing · Feedback</div>
-        <div class="exp-tags">
-          <span class="exp-tag">Unreal 5</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">Maya</span>
-          <span class="exp-tag">SpeedTree</span>
-          <span class="exp-tag">Substance 3D</span>
-          <span class="exp-tag">Photoshop</span>
-          <span class="exp-tag">Marmoset</span>
-          <span class="exp-tag">RizomUV</span>
-        </div>
-      </div>
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2018 — 2020</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('changse')">Line Games</a></div>
-        <div class="exp-role">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
-        <div class="exp-project">Lead Environment Artist · Level Design · Integration · Lighting · Outsourcing · Feedback</div>
-        <div class="exp-tags">
-          <span class="exp-tag">Unreal 4</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">Photoshop</span>
-          <span class="exp-tag">Substance 3D</span>
-          <span class="exp-tag">Marmoset</span>
-        </div>
-      </div>
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2017 — 2018</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('nexon')">Nexon Korea</a></div>
-        <div class="exp-role">Ascendant One / MOBA · Open Beta / PC Online</div>
-        <div class="exp-project">Senior Environment Artist · Asset Modeling · Textures</div>
-        <div class="exp-tags">
-          <span class="exp-tag">Unreal 4</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">Photoshop</span>
-          <span class="exp-tag">Substance 3D</span>
-          <span class="exp-tag">Knald</span>
-        </div>
-      </div>
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2017 — 2017</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('xlgames')">XLGames</a></div>
-        <div class="exp-role">Civilization Online / MMORPG · Open Beta / PC Online</div>
-        <div class="exp-project">Senior Environment Artist · Integration · Lighting</div>
-        <div class="exp-tags">
-          <span class="exp-tag">CryEngine 3</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">Photoshop</span>
-          <span class="exp-tag">World Machine</span>
-        </div>
-      </div>
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2015 — 2016</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('neptune')">Neptune</a></div>
-        <div class="exp-role">Neppy Project / Simulation · Alpha / Mobile<br>プロ野球タクティクス / Sport · Service / Mobile</div>
-        <div class="exp-project">Lead Environment Artist · End-to-End Environment Creation</div>
-        <div class="exp-tags">
-          <span class="exp-tag">Unity 5</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">Photoshop</span>
-          <span class="exp-tag">Vray</span>
-          <span class="exp-tag">Zbrush</span>
-        </div>
-      </div>
-      <div class="exp-item reveal-right">
-        <div class="exp-year" translate="no">2013 — 2015</div>
-        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('puregames')">Pure Games</a></div>
-        <div class="exp-role">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
-        <div class="exp-project">Art Direction & Environment Strategy · Outsourcing · Feedback</div>
-        <div class="exp-tags">
-          <span class="exp-tag">Unity 4</span>
-          <span class="exp-tag">3ds Max</span>
-          <span class="exp-tag">Photoshop</span>
-          <span class="exp-tag">Marmoset</span>
-          <span class="exp-tag">CrazyBump</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ALL 트렌드 포트폴리오 -->
-<section id="freq-viewed">
-  <div class="sec-header">
-    <span class="sec-id" translate="no">// 02</span>
-    <h2 class="sec-title reveal-up">Featured Works</h2>
-    <div class="sec-line"></div>
-    <button class="freq-refresh" onclick="renderFreqViewed()">↺ REFRESH</button>
-    <button class="freq-refresh" onclick="resetFreqViewed()" style="margin-left:6px;color:var(--text3);">⊘ RESET</button>
-  </div>
-  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>방문할 때마다 새롭게 구성되는 랜덤 갤러리입니다. 제가 탐구해온 공간의 조각들을 자유롭게 탐색해 보세요. <span style="color:#a89050;cursor:pointer;" onclick="renderFreqViewed()" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#a89050'">↺ 새로고침 시 목록이 바뀝니다.</span><br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Works presented in random order. Freely explore the spatial fragments I've crafted as an environment designer. <span style="color:var(--gold-dim);cursor:pointer;" onclick="renderFreqViewed()" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gold-dim)'">↺ Refresh to see a different selection.</span></span></p>
-  <div class="freq-grid" id="freq-grid"></div>
-</section>
-
-<!-- FEATURED WORKS LIGHTBOX -->
-<div id="freq-lb" onclick="if(event.target===this)closeFreqLb()">
-  <div class="freq-lb-wrap">
-    <div class="freq-lb-main">
-      <img id="freq-lb-img" class="freq-lb-img" src="" alt="" style="cursor:zoom-in;">
-      <!-- 휠 힌트 오버레이 -->
-      <div class="wheel-hint-overlay" id="freq-wheel-hint">
-        <div class="wheel-hint-arrow up">▲</div>
-        <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
-              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
-              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
-            </svg>
-            <style>@keyframes wheelScroll{0%{transform:translateY(-2px);opacity:.25;}50%{transform:translateY(2px);opacity:1;}100%{transform:translateY(-2px);opacity:.25;}}</style></div>
-        <div class="wheel-hint-arrow down">▼</div>
-        <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
-      </div>
-      <button class="freq-lb-nav-prev" onclick="freqLbPrev()">‹</button>
-      <button class="freq-lb-nav-next" onclick="freqLbNext()">›</button>
-      <!-- 좌상단 타이틀 -->
-      <div class="freq-lb-overlay-info">
-        <div class="freq-lb-overlay-id" id="freq-lb-overlay-id" translate="no">// FEATURED</div>
-        <div class="freq-lb-overlay-title" id="freq-lb-title"></div>
-      </div>
-      <span id="freq-lb-counter" style="display:none"></span>
-      <!-- 줌 배지 -->
-      <div class="freq-lb-zoom-badge" id="freq-lb-zoom-badge">🔍 200%</div>
-      <!-- HUD -->
-      <div class="freq-lb-hud">
-        <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
-              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/>
-              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
-              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/>
-            </svg> Click zoom in/out</div>
-        <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
-        <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
-      </div>
-      <!-- 우상단: IMAGE배지 + 카운터 + X -->
-      <div style="position:absolute;top:16px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:4;">
-        <span class="lb-type-badge" id="freq-lb-type-badge"></span>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="freq-lb-counter-overlay"></span>
-          <button onclick="closeFreqLb()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PERSONAL WORKS -->
-<section id="personal">
-  <div class="sec-header">
-    <span class="sec-id" translate="no">// 03</span>
-    <h2 class="sec-title reveal-up">Personal Works</h2>
-    <div class="sec-line"></div>
-  </div>
-  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>프랍 제작부터 셋드레싱, 환경 셋업과 라이팅까지—배경 디자인의 전 과정을 밀도 있게 담아낸 개인 프로젝트입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">A personal project capturing the full spectrum of 3D environment design—from prop creation and set dressing to environment setup and lighting.</span></p>
-  <!-- 프로젝트 카드 그리드 -->
-  <div class="project-grid">
-
-    <!-- 2020 Rock Study -->
-    <div class="project-card" onclick="openLightbox('proj-rock', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20201124_RockStudy/Rock_Final_Thumb.jpg" alt="Modular Rock Study">
-        <div class="project-count-badge">5 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2020.11.24</div>
-          <div class="project-hover-title">Modular Rock Study - Single Asset Composition</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- M4 Carbine -->
-    <div class="project-card" onclick="openLightbox('proj-m4', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20190902_M4/M4_M203_Thumb.jpg" alt="M4 Carbine with M203 Grenade Launcher">
-        <div class="project-count-badge">14 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2019.09.02</div>
-          <div class="project-hover-title">M4 Carbine with M203 Grenade Launcher</div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- 2018 Desert Rock -->
-    <div class="project-card" onclick="openLightbox('proj-desert', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20180927_Desert_Rocks/Desert_Rocks_Thumb.jpg" alt="Desert Rock">
-        <div class="project-count-badge">5 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2018.09.27</div>
-          <div class="project-hover-title">Desert Rock</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2017 2D Normal Conversion -->
-    <div class="project-card" onclick="openLightbox('proj-2019', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20170823_EA_Test/2DNormal_Thumb.jpg" alt="2D Image-to-Normal Conversion Study">
-        <div class="project-count-badge">11 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2017.08.23</div>
-          <div class="project-hover-title">2D Image-to-Normal Conversion Study</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2017 Stylized Dungeon -->
-    <div class="project-card" onclick="openLightbox('proj-stylized', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_Thumb.jpg" alt="Stylized Dungeon">
-        <div class="project-count-badge">13 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2017.03.07</div>
-          <div class="project-hover-title">Stylized Dungeon (WIP)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2016 Zbrush Tile -->
-    <div class="project-card" onclick="openLightbox('proj-zbrushtile', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20160930_ZbrushTile/2016_ZbrushTile_Thumb.jpg" alt="Zbrush Tile & Sculpting Study">
-        <div class="project-count-badge">8 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2016.09.30</div>
-          <div class="project-hover-title">Zbrush Tile & Sculpting Study</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2015 Forsaken Dungeon -->
-    <div class="project-card" onclick="openLightbox('proj-forsaken', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20150914_Dungeon/2015_Forsaken_Dungeon_Thumb.jpg" alt="Forsaken Dungeon">
-        <div class="project-count-badge">6 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2015.09.14</div>
-          <div class="project-hover-title">Forsaken Dungeon (WIP)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2014 Afternoon Break -->
-    <div class="project-card" onclick="openLightbox('proj-afternoon', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20140522_Afternoon_Break/2014_Afternoon_Break_Thumb.jpg" alt="Afternoon Break">
-        <div class="project-count-badge">4 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2014.05.22</div>
-          <div class="project-hover-title">Afternoon Break</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2014 The Urban Hideout -->
-    <div class="project-card" onclick="openLightbox('proj-hideout', 0)"
-      onmouseenter="(function(c){var v=c.querySelector('.project-thumb-video iframe');if(v&&(!v.src||v.src==='about:blank'||v.src===location.href)){v.src=v.dataset.src;v.onload=function(){c.classList.add('video-loaded');};}else if(v&&v.src&&v.src!=='about:blank'){c.classList.add('video-loaded');}})(this)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20140613_Hideout/2014_Hideout_Thumb.jpg" alt="The Urban Hideout">
-        <div class="project-thumb-video">
-          <iframe data-src="https://www.youtube.com/embed/mcTm2DmXd3Y?autoplay=1&mute=1&loop=1&playlist=mcTm2DmXd3Y&controls=0&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="project-count-badge">▶ + 4 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label">▶ VIDEO + IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2014.06.13</div>
-          <div class="project-hover-title">The Urban Hideout</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2013 Bulldozer -->
-    <div class="project-card" onclick="openLightbox('proj-bulldozer', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20130809_BullDozer/2013_Bulldozer_Thumb.jpg" alt="MD-EX Iron Clad Bulldozer">
-        <div class="project-count-badge">5 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2013.08.09</div>
-          <div class="project-hover-title">MD-EX "Iron Clad" Bulldozer</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2011 PPSh-41 -->
-    <div class="project-card" onclick="openLightbox('proj-ppsh41', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20111008_PPSh-41/2011_PPSH41_Thumb.jpg" alt="PPSh-41">
-        <div class="project-count-badge">6 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2011.10.08</div>
-          <div class="project-hover-title">PPSh-41: The Classic Soviet SMG</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2011 CX-420 Cybernetic Micro-Uzi -->
-    <div class="project-card" onclick="openLightbox('proj-cx420', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20110722_CX-420/2011_CX-420_Thumb.jpg" alt="Cybernetic Micro-Uzi">
-        <div class="project-count-badge">8 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2011.07.22</div>
-          <div class="project-hover-title">Cybernetic Micro-Uzi</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2011 Hybrid Crawler Excavator -->
-    <div class="project-card" onclick="openLightbox('proj-excavator', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20110418_UT-EX 2077/2011_UT-EX 2077_Thumb.jpg" alt="Hybrid Crawler Excavator">
-        <div class="project-count-badge">11 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2011.04.18</div>
-          <div class="project-hover-title">Hybrid Crawler Excavator</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2011 AK-74u -->
-    <div class="project-card" onclick="openLightbox('proj-ak74u', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20110227_AK-74u/AK-74u_Final_Thumb.jpg" alt="AK-74u">
-        <div class="project-count-badge">9 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2011.02.27</div>
-          <div class="project-hover-title">AK-74u</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2005 HMMWV -->
-    <div class="project-card" onclick="openLightbox('proj-hmmwv', 0)"
-      onmouseenter="(function(c){var v=c.querySelector('.project-thumb-video iframe');if(v&&(!v.src||v.src==='about:blank'||v.src===location.href)){v.src=v.dataset.src;v.onload=function(){c.classList.add('video-loaded');};}else if(v&&v.src&&v.src!=='about:blank'){c.classList.add('video-loaded');}})(this)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20050101_HMMWV/2005_HMMWV_Thumb.jpg" alt="HMMWV">
-        <div class="project-thumb-video">
-          <iframe data-src="https://www.youtube.com/embed/WehIUseB8FQ?autoplay=1&mute=1&loop=1&playlist=WehIUseB8FQ&controls=0&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="project-count-badge">▶ + 7 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label">▶ VIDEO + IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2005.01.01</div>
-          <div class="project-hover-title">My First Diorama: HMMWV!</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2000 Old Work -->
-    <div class="project-card" onclick="openLightbox('proj-oldwork', 0)">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" loading="lazy" src="images/Personal/20000101_OldWork/Apache_Thumb.jpg" alt="Old Work Memories">
-        <div class="project-count-badge">12 images</div>
-        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
-        <div class="project-hover-overlay">
-          <div class="project-hover-sub" translate="no">2000.01.01</div>
-          <div class="project-hover-title">Old Work Memories</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2017-2018 (이미지 추가 예정) -->
-
-  </div>
-
-  <!-- ── LIGHTBOX ── -->
-  <div id="lightbox" class="lightbox">
-    <div class="lb-wrap">
-      <div class="lb-header">
-        <div class="lb-title-area">
-          <span class="lb-id" id="lb-id" translate="no"></span>
-          <span class="lb-title" id="lb-title"></span>
-        </div>
-        <div class="lb-controls">
-          <span class="lb-scroll-hint">스크롤로 이미지 넘기기</span>
-          <span class="lb-counter" id="lb-counter"></span>
-          <button class="lb-btn" onclick="closeLightbox()">✕</button>
-        </div>
-      </div>
-      <div class="lb-img-viewport" id="lb-img-viewport">
-        <!-- 좌상단 고정 타이틀 -->
-        <div id="lb-title-wrap" style="position:absolute;top:16px;left:0;right:0;padding:0 24px;pointer-events:none;z-index:3;transition:opacity .2s;">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:.15em;margin-bottom:5px;" id="lb-id-overlay" translate="no"></div>
-          <div style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);" id="lb-title-overlay"></div>
-        </div>
-        <!-- 우상단: IMAGE배지 위, 카운터+X 아래 -->
-        <div id="lb-top-right" style="position:absolute;top:12px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:4;transition:opacity .2s;">
-          <span class="lb-type-badge" id="lb-type-badge"></span>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="lb-counter-overlay"></span>
-            <button onclick="closeLightbox()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
-          </div>
-        </div>
-        <img id="lb-img" class="lb-img" src="" alt="">
-        <!-- 영상 재생 중 하단 타이틀 -->
-        <div id="lb-video-title" style="position:absolute;bottom:0;left:0;right:0;padding:40px 24px 20px;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 100%);pointer-events:none;z-index:3;opacity:0;transition:opacity .2s;">
-          <div id="lb-video-title-id" translate="no" style="font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:5px;"></div>
-          <div id="lb-video-title-text" style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);"></div>
-        </div>
-        <!-- 휠 힌트 오버레이 -->
-        <div class="wheel-hint-overlay" id="lb-wheel-hint">
-          <div class="wheel-hint-arrow up">▲</div>
-          <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
-              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
-              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
-            </svg>
-            <style>@keyframes wheelScroll{0%{transform:translateY(-2px);opacity:.25;}50%{transform:translateY(2px);opacity:1;}100%{transform:translateY(-2px);opacity:.25;}}</style></div>
-          <div class="wheel-hint-arrow down">▼</div>
-          <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
-        </div>
-        <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div id="lb-caption" style="position:absolute;top:55px;left:0;right:0;padding:4px 24px;background:none;font-family:'Noto Sans KR',var(--font-mono);font-size:13px;color:#bdc3d0;letter-spacing:.04em;line-height:1.5;pointer-events:auto;opacity:0;transition:opacity .3s;z-index:3;"></div>
-        <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
-        <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
-        <button class="lb-nav-next" onclick="lbNext()">›</button>
-        <div class="lb-nav-indicator" id="lb-nav-dots"></div>
-        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:4;pointer-events:none;">
-          <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
-              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/>
-              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
-              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/>
-            </svg> Click zoom in/out</div>
-          <div class="sz-hint" style="color:rgba(255,255,255,.15);">|</div>
-          <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
-        </div>
-      </div>
-      <div class="lb-thumbnails" id="lb-thumbnails"></div>
-    </div>
-  </div>
-
-</section>
-
-<!-- RE:LIGHTING -->
-<section id="relighting">
-  <div class="sec-header">
-    <span class="sec-id" translate="no">// 04</span>
-    <h2 class="sec-title reveal-up">Re:Lighting</h2>
-    <div class="sec-line"></div>
-  </div>
-  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>마켓 리소스에 독창적인 라이팅과 환경 셋업을 더해, 밀도 높은 공간감과 분위기로 재구성한 레벨 작업물입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Level works rebuilt with original lighting and environment setup layered over market assets — reconstructed for spatial density and atmosphere.</span></p>
-  <div class="relight-grid">
-    <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-genesis', 0)">
-      <div class="relight-num" translate="no">// RELIGHT_001</div>
-      <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
-        <img loading="lazy" src="images/ReLighting/20241027_GENESIS_G70/GENESIS_G70_Thumb.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
-        <div class="project-count-badge">5 images</div>
-        <div class="relight-hover-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;z-index:2;">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
-        </div>
-        <div class="relight-hover-overlay">
-          <div class="relight-hover-sub" translate="no">2024.10.27</div>
-          <div class="relight-hover-title">Genesis G70</div>
-          <div class="relight-hover-desc">Unreal 5 · Set Dressing · Look-dev · Shader & Lighting</div>
-        </div>
-      </div>
-    </div>
-    <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-bmw', 0)">
-      <div class="relight-num" translate="no">// RELIGHT_002</div>
-      <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
-        <img loading="lazy" src="images/ReLighting/20240912_BMW_M4GTS/BMW_M4GTS_Thumb.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
-        <div class="project-count-badge">3 images</div>
-        <div class="relight-hover-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;z-index:2;">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
-        </div>
-        <div class="relight-hover-overlay">
-          <div class="relight-hover-sub" translate="no">2024.09.12</div>
-          <div class="relight-hover-title">BMW M4 GTS</div>
-          <div class="relight-hover-desc">Unreal 5 · Set Dressing · Look-dev · Shader & Lighting</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PROFESSIONAL -->
 <section id="professional">
   <div class="sec-header">
-    <span class="sec-id" translate="no">// 05</span>
+    <span class="sec-id" translate="no">// 01</span>
     <h2 class="sec-title reveal-up">Professional</h2>
     <div class="sec-line"></div>
   </div>
@@ -1514,6 +971,550 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="prof-lb-thumbs" id="prof-lb-thumbs"></div>
   </div>
 </div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-header">
+    <span class="sec-id" translate="no">// 02</span>
+    <h2 class="sec-title reveal-left">About</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="name-big reveal-left">Jung<br>Daekun</div>
+      <div class="title-tag reveal-left delay-1">Senior Environment Artist</div>
+      <div class="about-contact reveal-left delay-2">
+        Contact: <span id="about-email-btn" onclick="copyAboutEmail()" style="color:var(--gold);cursor:pointer;font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;transition:color .2s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">Email <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.7;flex-shrink:0;"><rect x="5" y="1" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="4" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="var(--bg)"/></svg></span><span id="about-email-copy-msg" style="font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0;transition:opacity .3s;margin-left:4px;">✓ copied!</span>
+      </div>
+      <div class="skills-grid" id="skills-grid" style="margin-top:32px">
+        <div class="skill-item reveal-left">3ds Max</div>
+        <div class="skill-item reveal-right">Level Art & World Building</div>
+        <div class="skill-item reveal-left">Photoshop</div>
+        <div class="skill-item reveal-right">Engine Integration (Unreal/Unity)</div>
+        <div class="skill-item reveal-left">ZBrush</div>
+        <div class="skill-item reveal-right">3D Asset Creation (High/Low Poly)</div>
+        <div class="skill-item reveal-left">SpeedTree</div>
+        <div class="skill-item reveal-right">Look-dev & Environment Lighting</div>
+        <div class="skill-item reveal-left">World Creator</div>
+        <div class="skill-item reveal-right">Technical Optimization</div>
+        <div class="skill-item reveal-left">Substance Painter</div>
+        <div class="skill-item reveal-right">Outsourcing Management (OS)</div>
+        <div class="skill-item reveal-left">Substance Designer</div>
+        <div class="skill-item reveal-right">Technical Documentation / Guideline</div>
+        <div class="skill-item reveal-left">Unreal Engine 4/5</div>
+        <div class="skill-item reveal-right">Post-Production & Polishing</div>
+        <div class="skill-item reveal-left">CryEngine · Unity</div>
+        <div class="skill-item reveal-right">Art Direction & Review</div>
+      </div>
+      <div class="about-bio reveal-left delay-3" style="margin-top:32px;">
+        <p class="about-bio-headline" style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--gold);letter-spacing:.04em;margin-bottom:14px;">15년 이상의 실무 노하우로 프로젝트의 비주얼 퀄리티와 파이프라인의 효율을 극대화하는 시니어 3D 환경 아티스트 정대근입니다.</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:10px;">단순히 보기 좋은 배경을 넘어, 플레이어가 완벽하게 몰입할 수 있는 세계를 설계합니다. 개별 에셋의 디테일한 모델링부터 깊이감 있는 레벨 아트, 그리고 프로젝트의 최적화를 고려한 환경 세팅(Environment Setup)과 룩뎁(Look-Dev)까지 배경 제작 전 공정을 아우르는 전문성을 보유하고 있습니다.</p>
+        <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#bdc3d0;line-height:1.85;margin-bottom:24px;">수많은 AAA급 프로젝트를 리드하며 쌓은 경험을 바탕으로 팀의 비주얼 기준(Art Standard)을 높이고, 유연한 소통을 통해 최상의 시너지를 이끌어내는 든든한 조력자가 되겠습니다.</p>
+        <p class="about-bio-headline" style="font-family:var(--font-mono);font-size:14px;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;">I am Daekun Jung, a Senior Environment Artist dedicated to elevating visual standards and optimizing production pipelines.</p>
+        <p style="font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:10px;">Beyond creating visually pleasing backgrounds, I strive to build immersive worlds where players can truly breathe. My expertise spans the entire production pipeline—from high-fidelity asset creation and intricate level design to look-dev and environment setups tailored for maximum project efficiency.</p>
+        <p style="font-size:13px;color:var(--text2);line-height:1.85;">Drawing on over 15 years of industry experience, I foster collaborative team environments and drive visual excellence, seamlessly bridging the gap between artistic vision and technical execution.</p>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2025 —</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('lionheart')">Lionheart Studio</a></div>
+        <div class="exp-role">ODIN: VALHALLA RISING / MMORPG · Live Service / Mobile · PC</div>
+        <div class="exp-project">Senior Environment Artist · Level Design · Integration · Lighting · Optimization</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unreal 4</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">World Creator</span>
+          <span class="exp-tag">Substance 3D Designer</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2021 — 2024</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('ncsoft')">NCSoft</a></div>
+        <div class="exp-role">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
+        <div class="exp-project">Senior Environment Artist · Integration · Lighting · Tech Doc · Outsourcing · Feedback</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unreal 5</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">Maya</span>
+          <span class="exp-tag">SpeedTree</span>
+          <span class="exp-tag">Substance 3D</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">Marmoset</span>
+          <span class="exp-tag">RizomUV</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2018 — 2020</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('changse')">Line Games</a></div>
+        <div class="exp-role">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
+        <div class="exp-project">Lead Environment Artist · Level Design · Integration · Lighting · Outsourcing · Feedback</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unreal 4</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">Substance 3D</span>
+          <span class="exp-tag">Marmoset</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2017 — 2018</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('nexon')">Nexon Korea</a></div>
+        <div class="exp-role">Ascendant One / MOBA · Open Beta / PC Online</div>
+        <div class="exp-project">Senior Environment Artist · Asset Modeling · Textures</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unreal 4</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">Substance 3D</span>
+          <span class="exp-tag">Knald</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2017 — 2017</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('xlgames')">XLGames</a></div>
+        <div class="exp-role">Civilization Online / MMORPG · Open Beta / PC Online</div>
+        <div class="exp-project">Senior Environment Artist · Integration · Lighting</div>
+        <div class="exp-tags">
+          <span class="exp-tag">CryEngine 3</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">World Machine</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2015 — 2016</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('neptune')">Neptune</a></div>
+        <div class="exp-role">Neppy Project / Simulation · Alpha / Mobile<br>プロ野球タクティクス / Sport · Service / Mobile</div>
+        <div class="exp-project">Lead Environment Artist · End-to-End Environment Creation</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unity 5</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">Vray</span>
+          <span class="exp-tag">Zbrush</span>
+        </div>
+      </div>
+      <div class="exp-item reveal-right">
+        <div class="exp-year" translate="no">2013 — 2015</div>
+        <div class="exp-company"><a href="javascript:void(0)" onclick="openProfLb('puregames')">Pure Games</a></div>
+        <div class="exp-role">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
+        <div class="exp-project">Art Direction & Environment Strategy · Outsourcing · Feedback</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Unity 4</span>
+          <span class="exp-tag">3ds Max</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">Marmoset</span>
+          <span class="exp-tag">CrazyBump</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL 트렌드 포트폴리오 -->
+<section id="freq-viewed">
+  <div class="sec-header">
+    <span class="sec-id" translate="no">// 03</span>
+    <h2 class="sec-title reveal-up">Featured Works</h2>
+    <div class="sec-line"></div>
+    <button class="freq-refresh" onclick="renderFreqViewed()">↺ REFRESH</button>
+    <button class="freq-refresh" onclick="resetFreqViewed()" style="margin-left:6px;color:var(--text3);">⊘ RESET</button>
+  </div>
+  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>방문할 때마다 새롭게 구성되는 랜덤 갤러리입니다. 제가 탐구해온 공간의 조각들을 자유롭게 탐색해 보세요. <span style="color:#a89050;cursor:pointer;" onclick="renderFreqViewed()" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#a89050'">↺ 새로고침 시 목록이 바뀝니다.</span><br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Works presented in random order. Freely explore the spatial fragments I've crafted as an environment designer. <span style="color:var(--gold-dim);cursor:pointer;" onclick="renderFreqViewed()" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gold-dim)'">↺ Refresh to see a different selection.</span></span></p>
+  <div class="freq-grid" id="freq-grid"></div>
+</section>
+
+<!-- FEATURED WORKS LIGHTBOX -->
+<div id="freq-lb" onclick="if(event.target===this)closeFreqLb()">
+  <div class="freq-lb-wrap">
+    <div class="freq-lb-main">
+      <img id="freq-lb-img" class="freq-lb-img" src="" alt="" style="cursor:zoom-in;">
+      <!-- 휠 힌트 오버레이 -->
+      <div class="wheel-hint-overlay" id="freq-wheel-hint">
+        <div class="wheel-hint-arrow up">▲</div>
+        <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
+            </svg>
+            <style>@keyframes wheelScroll{0%{transform:translateY(-2px);opacity:.25;}50%{transform:translateY(2px);opacity:1;}100%{transform:translateY(-2px);opacity:.25;}}</style></div>
+        <div class="wheel-hint-arrow down">▼</div>
+        <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
+      </div>
+      <button class="freq-lb-nav-prev" onclick="freqLbPrev()">‹</button>
+      <button class="freq-lb-nav-next" onclick="freqLbNext()">›</button>
+      <!-- 좌상단 타이틀 -->
+      <div class="freq-lb-overlay-info">
+        <div class="freq-lb-overlay-id" id="freq-lb-overlay-id" translate="no">// FEATURED</div>
+        <div class="freq-lb-overlay-title" id="freq-lb-title"></div>
+      </div>
+      <span id="freq-lb-counter" style="display:none"></span>
+      <!-- 줌 배지 -->
+      <div class="freq-lb-zoom-badge" id="freq-lb-zoom-badge">🔍 200%</div>
+      <!-- HUD -->
+      <div class="freq-lb-hud">
+        <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/>
+            </svg> Click zoom in/out</div>
+        <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
+        <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+      </div>
+      <!-- 우상단: IMAGE배지 + 카운터 + X -->
+      <div style="position:absolute;top:16px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:4;">
+        <span class="lb-type-badge" id="freq-lb-type-badge"></span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="freq-lb-counter-overlay"></span>
+          <button onclick="closeFreqLb()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PERSONAL WORKS -->
+<section id="personal">
+  <div class="sec-header">
+    <span class="sec-id" translate="no">// 04</span>
+    <h2 class="sec-title reveal-up">Personal Works</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>프랍 제작부터 셋드레싱, 환경 셋업과 라이팅까지—배경 디자인의 전 과정을 밀도 있게 담아낸 개인 프로젝트입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">A personal project capturing the full spectrum of 3D environment design—from prop creation and set dressing to environment setup and lighting.</span></p>
+  <!-- 프로젝트 카드 그리드 -->
+  <div class="project-grid">
+
+    <!-- 2020 Rock Study -->
+    <div class="project-card" onclick="openLightbox('proj-rock', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20201124_RockStudy/Rock_Final_Thumb.jpg" alt="Modular Rock Study">
+        <div class="project-count-badge">5 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2020.11.24</div>
+          <div class="project-hover-title">Modular Rock Study - Single Asset Composition</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- M4 Carbine -->
+    <div class="project-card" onclick="openLightbox('proj-m4', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20190902_M4/M4_M203_Thumb.jpg" alt="M4 Carbine with M203 Grenade Launcher">
+        <div class="project-count-badge">14 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2019.09.02</div>
+          <div class="project-hover-title">M4 Carbine with M203 Grenade Launcher</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 2018 Desert Rock -->
+    <div class="project-card" onclick="openLightbox('proj-desert', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20180927_Desert_Rocks/Desert_Rocks_Thumb.jpg" alt="Desert Rock">
+        <div class="project-count-badge">5 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2018.09.27</div>
+          <div class="project-hover-title">Desert Rock</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2017 2D Normal Conversion -->
+    <div class="project-card" onclick="openLightbox('proj-2019', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20170823_EA_Test/2DNormal_Thumb.jpg" alt="2D Image-to-Normal Conversion Study">
+        <div class="project-count-badge">11 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2017.08.23</div>
+          <div class="project-hover-title">2D Image-to-Normal Conversion Study</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2017 Stylized Dungeon -->
+    <div class="project-card" onclick="openLightbox('proj-stylized', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20170307_Stylized_Dungeon/Stylized_Dungeon_Thumb.jpg" alt="Stylized Dungeon">
+        <div class="project-count-badge">13 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2017.03.07</div>
+          <div class="project-hover-title">Stylized Dungeon (WIP)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2016 Zbrush Tile -->
+    <div class="project-card" onclick="openLightbox('proj-zbrushtile', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20160930_ZbrushTile/2016_ZbrushTile_Thumb.jpg" alt="Zbrush Tile & Sculpting Study">
+        <div class="project-count-badge">8 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2016.09.30</div>
+          <div class="project-hover-title">Zbrush Tile & Sculpting Study</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2015 Forsaken Dungeon -->
+    <div class="project-card" onclick="openLightbox('proj-forsaken', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20150914_Dungeon/2015_Forsaken_Dungeon_Thumb.jpg" alt="Forsaken Dungeon">
+        <div class="project-count-badge">6 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2015.09.14</div>
+          <div class="project-hover-title">Forsaken Dungeon (WIP)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2014 Afternoon Break -->
+    <div class="project-card" onclick="openLightbox('proj-afternoon', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20140522_Afternoon_Break/2014_Afternoon_Break_Thumb.jpg" alt="Afternoon Break">
+        <div class="project-count-badge">4 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2014.05.22</div>
+          <div class="project-hover-title">Afternoon Break</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2014 The Urban Hideout -->
+    <div class="project-card" onclick="openLightbox('proj-hideout', 0)"
+      onmouseenter="(function(c){var v=c.querySelector('.project-thumb-video iframe');if(v&&(!v.src||v.src==='about:blank'||v.src===location.href)){v.src=v.dataset.src;v.onload=function(){c.classList.add('video-loaded');};}else if(v&&v.src&&v.src!=='about:blank'){c.classList.add('video-loaded');}})(this)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20140613_Hideout/2014_Hideout_Thumb.jpg" alt="The Urban Hideout">
+        <div class="project-thumb-video">
+          <iframe data-src="https://www.youtube.com/embed/mcTm2DmXd3Y?autoplay=1&mute=1&loop=1&playlist=mcTm2DmXd3Y&controls=0&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="project-count-badge">▶ + 4 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label">▶ VIDEO + IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2014.06.13</div>
+          <div class="project-hover-title">The Urban Hideout</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2013 Bulldozer -->
+    <div class="project-card" onclick="openLightbox('proj-bulldozer', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20130809_BullDozer/2013_Bulldozer_Thumb.jpg" alt="MD-EX Iron Clad Bulldozer">
+        <div class="project-count-badge">5 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2013.08.09</div>
+          <div class="project-hover-title">MD-EX "Iron Clad" Bulldozer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2011 PPSh-41 -->
+    <div class="project-card" onclick="openLightbox('proj-ppsh41', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20111008_PPSh-41/2011_PPSH41_Thumb.jpg" alt="PPSh-41">
+        <div class="project-count-badge">6 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2011.10.08</div>
+          <div class="project-hover-title">PPSh-41: The Classic Soviet SMG</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2011 CX-420 Cybernetic Micro-Uzi -->
+    <div class="project-card" onclick="openLightbox('proj-cx420', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20110722_CX-420/2011_CX-420_Thumb.jpg" alt="Cybernetic Micro-Uzi">
+        <div class="project-count-badge">8 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2011.07.22</div>
+          <div class="project-hover-title">Cybernetic Micro-Uzi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2011 Hybrid Crawler Excavator -->
+    <div class="project-card" onclick="openLightbox('proj-excavator', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20110418_UT-EX 2077/2011_UT-EX 2077_Thumb.jpg" alt="Hybrid Crawler Excavator">
+        <div class="project-count-badge">11 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2011.04.18</div>
+          <div class="project-hover-title">Hybrid Crawler Excavator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2011 AK-74u -->
+    <div class="project-card" onclick="openLightbox('proj-ak74u', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20110227_AK-74u/AK-74u_Final_Thumb.jpg" alt="AK-74u">
+        <div class="project-count-badge">9 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2011.02.27</div>
+          <div class="project-hover-title">AK-74u</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2005 HMMWV -->
+    <div class="project-card" onclick="openLightbox('proj-hmmwv', 0)"
+      onmouseenter="(function(c){var v=c.querySelector('.project-thumb-video iframe');if(v&&(!v.src||v.src==='about:blank'||v.src===location.href)){v.src=v.dataset.src;v.onload=function(){c.classList.add('video-loaded');};}else if(v&&v.src&&v.src!=='about:blank'){c.classList.add('video-loaded');}})(this)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20050101_HMMWV/2005_HMMWV_Thumb.jpg" alt="HMMWV">
+        <div class="project-thumb-video">
+          <iframe data-src="https://www.youtube.com/embed/WehIUseB8FQ?autoplay=1&mute=1&loop=1&playlist=WehIUseB8FQ&controls=0&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="project-count-badge">▶ + 7 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label">▶ VIDEO + IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2005.01.01</div>
+          <div class="project-hover-title">My First Diorama: HMMWV!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2000 Old Work -->
+    <div class="project-card" onclick="openLightbox('proj-oldwork', 0)">
+      <div class="project-thumb-wrap">
+        <img class="project-thumb" loading="lazy" src="images/Personal/20000101_OldWork/Apache_Thumb.jpg" alt="Old Work Memories">
+        <div class="project-count-badge">12 images</div>
+        <div class="project-open-hint"><div class="project-open-hint-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</div></div>
+        <div class="project-hover-overlay">
+          <div class="project-hover-sub" translate="no">2000.01.01</div>
+          <div class="project-hover-title">Old Work Memories</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2017-2018 (이미지 추가 예정) -->
+
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" class="lightbox">
+    <div class="lb-wrap">
+      <div class="lb-header">
+        <div class="lb-title-area">
+          <span class="lb-id" id="lb-id" translate="no"></span>
+          <span class="lb-title" id="lb-title"></span>
+        </div>
+        <div class="lb-controls">
+          <span class="lb-scroll-hint">스크롤로 이미지 넘기기</span>
+          <span class="lb-counter" id="lb-counter"></span>
+          <button class="lb-btn" onclick="closeLightbox()">✕</button>
+        </div>
+      </div>
+      <div class="lb-img-viewport" id="lb-img-viewport">
+        <!-- 좌상단 고정 타이틀 -->
+        <div id="lb-title-wrap" style="position:absolute;top:16px;left:0;right:0;padding:0 24px;pointer-events:none;z-index:3;transition:opacity .2s;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:.15em;margin-bottom:5px;" id="lb-id-overlay" translate="no"></div>
+          <div style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);" id="lb-title-overlay"></div>
+        </div>
+        <!-- 우상단: IMAGE배지 위, 카운터+X 아래 -->
+        <div id="lb-top-right" style="position:absolute;top:12px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:4;transition:opacity .2s;">
+          <span class="lb-type-badge" id="lb-type-badge"></span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="lb-counter-overlay"></span>
+            <button onclick="closeLightbox()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
+          </div>
+        </div>
+        <img id="lb-img" class="lb-img" src="" alt="">
+        <!-- 영상 재생 중 하단 타이틀 -->
+        <div id="lb-video-title" style="position:absolute;bottom:0;left:0;right:0;padding:40px 24px 20px;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 100%);pointer-events:none;z-index:3;opacity:0;transition:opacity .2s;">
+          <div id="lb-video-title-id" translate="no" style="font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:5px;"></div>
+          <div id="lb-video-title-text" style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);"></div>
+        </div>
+        <!-- 휠 힌트 오버레이 -->
+        <div class="wheel-hint-overlay" id="lb-wheel-hint">
+          <div class="wheel-hint-arrow up">▲</div>
+          <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
+            </svg>
+            <style>@keyframes wheelScroll{0%{transform:translateY(-2px);opacity:.25;}50%{transform:translateY(2px);opacity:1;}100%{transform:translateY(-2px);opacity:.25;}}</style></div>
+          <div class="wheel-hint-arrow down">▼</div>
+          <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
+        </div>
+        <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div id="lb-caption" style="position:absolute;top:55px;left:0;right:0;padding:4px 24px;background:none;font-family:'Noto Sans KR',var(--font-mono);font-size:13px;color:#bdc3d0;letter-spacing:.04em;line-height:1.5;pointer-events:auto;opacity:0;transition:opacity .3s;z-index:3;"></div>
+        <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
+        <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
+        <button class="lb-nav-next" onclick="lbNext()">›</button>
+        <div class="lb-nav-indicator" id="lb-nav-dots"></div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:4;pointer-events:none;">
+          <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/>
+            </svg> Click zoom in/out</div>
+          <div class="sz-hint" style="color:rgba(255,255,255,.15);">|</div>
+          <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+        </div>
+      </div>
+      <div class="lb-thumbnails" id="lb-thumbnails"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- RE:LIGHTING -->
+<section id="relighting">
+  <div class="sec-header">
+    <span class="sec-id" translate="no">// 05</span>
+    <h2 class="sec-title reveal-up">Re:Lighting</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>마켓 리소스에 독창적인 라이팅과 환경 셋업을 더해, 밀도 높은 공간감과 분위기로 재구성한 레벨 작업물입니다.<br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Level works rebuilt with original lighting and environment setup layered over market assets — reconstructed for spatial density and atmosphere.</span></p>
+  <div class="relight-grid">
+    <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-genesis', 0)">
+      <div class="relight-num" translate="no">// RELIGHT_001</div>
+      <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
+        <img loading="lazy" src="images/ReLighting/20241027_GENESIS_G70/GENESIS_G70_Thumb.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
+        <div class="project-count-badge">5 images</div>
+        <div class="relight-hover-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;z-index:2;">
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
+        </div>
+        <div class="relight-hover-overlay">
+          <div class="relight-hover-sub" translate="no">2024.10.27</div>
+          <div class="relight-hover-title">Genesis G70</div>
+          <div class="relight-hover-desc">Unreal 5 · Set Dressing · Look-dev · Shader & Lighting</div>
+        </div>
+      </div>
+    </div>
+    <div class="relight-card" style="cursor:pointer;" onclick="openLightbox('proj-bmw', 0)">
+      <div class="relight-num" translate="no">// RELIGHT_002</div>
+      <div class="relight-img-placeholder" style="position:relative;overflow:hidden;">
+        <img loading="lazy" src="images/ReLighting/20240912_BMW_M4GTS/BMW_M4GTS_Thumb.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;">
+        <div class="project-count-badge">3 images</div>
+        <div class="relight-hover-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;z-index:2;">
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg>VIEW IMAGES</span>
+        </div>
+        <div class="relight-hover-overlay">
+          <div class="relight-hover-sub" translate="no">2024.09.12</div>
+          <div class="relight-hover-title">BMW M4 GTS</div>
+          <div class="relight-hover-desc">Unreal 5 · Set Dressing · Look-dev · Shader & Lighting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SKETCH NOTE -->
 <section id="sketch">
