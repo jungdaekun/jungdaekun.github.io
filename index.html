@@ -259,6 +259,20 @@ section{padding:100px 80px;}
 .prof-card-media-overlay{position:absolute;inset:0;background:rgba(8,10,13,.45);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;transition:opacity .3s;}
 .prof-card-media-label{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:400;text-shadow:0 0 8px rgba(200,168,75,.4);}
 .prof-card-info{padding:16px 20px 20px;}
+@keyframes heroTagIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
+@keyframes heroTitleIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes heroDescIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes heroCtaIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes heroStatsIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+.hero-anim .hero-tag{animation:heroTagIn .6s cubic-bezier(.25,.46,.45,.94) .1s both;}
+.hero-anim h1.hero-title .name{animation:heroTitleIn .7s cubic-bezier(.25,.46,.45,.94) .25s both;}
+.hero-anim h1.hero-title .role{animation:heroTitleIn .7s cubic-bezier(.25,.46,.45,.94) .4s both;}
+.hero-anim .hero-desc{animation:heroDescIn .6s cubic-bezier(.25,.46,.45,.94) .55s both;}
+.hero-anim .hero-cta{animation:heroCtaIn .6s cubic-bezier(.25,.46,.45,.94) .7s both;}
+.hero-anim .hero-stats{animation:heroStatsIn .6s cubic-bezier(.25,.46,.45,.94) .5s both;}
+#prof-grid-inner{transition:none;}
+@keyframes profCardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.prof-card-info{animation:profCardIn .45s cubic-bezier(.25,.46,.45,.94) both;}
 
 /* ── PROF MEDIA LIGHTBOX ── */
 #prof-lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.97);flex-direction:column;}
@@ -576,10 +590,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
       <span style="font-size:13px;color:var(--text2);letter-spacing:.06em;">Due to <span style="color:var(--gold);">NDA</span> restrictions, detailed portfolios for commercial projects are available upon request via email.</span>
     </div>
   </div>
-  <div class="prof-grid-wrap" id="prof-grid-wrap" style="overflow:hidden;">
+  <div style="position:relative;">
   <button class="prof-grid-nav-btn" id="prof-grid-prev" onclick="profGridPrev()" onmousedown="return false" title="이전">‹</button>
   <button class="prof-grid-nav-btn" id="prof-grid-next" onclick="profGridNext()" onmousedown="return false" title="다음">›</button>
   <span id="prof-grid-nav-info" translate="no"></span>
+  <div class="prof-grid-wrap" id="prof-grid-wrap" style="overflow:hidden;">
     <div id="prof-grid-inner">
     <div class="prof-grid" id="prof-grid">
     <!-- LIONHEART STUDIO -->
@@ -945,11 +960,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div><!-- end prof-grid -->
   </div><!-- end prof-grid-inner -->
   </div><!-- end prof-grid-wrap -->
+  </div><!-- end outer wrapper -->
 </section>
 <script>
 (function() {
   var cards = document.querySelectorAll('#prof-grid .prof-card');
-  var spans = [30,30,20,20,20,15,15,15,15,12,12,12,12,12,12];
+  var spans = [30,30,20,20,20,12,12,12,12,12,12,12,12,12,12];
   cards.forEach(function(card, i){ card.style.gridColumn = 'span ' + (spans[i] || 12); });
 })();
 </script>
@@ -3304,14 +3320,53 @@ function preloadFreqImages() {
     return true;
   }
 
+  function animateCards() {
+    var cards = Array.from(inner.querySelectorAll('.prof-card'));
+    var pageTop = pageOffsets[currentPage] || 0;
+    var pageBottom = pageTop + (pageHeights[0] || 9999);
+
+    // 현재 페이지에 보이는 카드만 필터
+    var visibleCards = cards.filter(function(c) {
+      var t = c.offsetTop;
+      return t >= pageTop - 5 && t < pageBottom + 5;
+    });
+
+    // 전체 초기화
+    cards.forEach(function(c) {
+      var el = c.querySelector('.prof-card-info');
+      if (el) { el.style.animation = 'none'; el.style.opacity = '0'; }
+    });
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        // 보이는 카드만 순서대로 애니
+        visibleCards.forEach(function(c, i) {
+          var el = c.querySelector('.prof-card-info');
+          if (!el) return;
+          el.style.animation = '';
+          el.style.opacity = '';
+          el.style.animationDelay = (i * 120) + 'ms';
+        });
+        // 안보이는 카드는 즉시 표시
+        cards.forEach(function(c) {
+          if (visibleCards.indexOf(c) === -1) {
+            var el = c.querySelector('.prof-card-info');
+            if (el) { el.style.animation = 'none'; el.style.opacity = '1'; }
+          }
+        });
+      });
+    });
+  }
+
   function setPage(page) {
     var totalPages = pageOffsets.length;
-    currentPage = ((page % totalPages) + totalPages) % totalPages; // 순환
+    currentPage = ((page % totalPages) + totalPages) % totalPages;
     inner.style.transform = 'translateY(-' + pageOffsets[currentPage] + 'px)';
-    wrap.style.height = pageHeights[0] + 'px'; // 첫 페이지 높이 고정
+    wrap.style.height = pageHeights[0] + 'px';
     prevBtn.disabled = false;
     nextBtn.disabled = false;
     if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
+    animateCards();
   }
 
   function init() {
@@ -3321,6 +3376,7 @@ function preloadFreqImages() {
 
   window.profGridPrev = function() { setPage(currentPage - 1); };
   window.profGridNext = function() { setPage(currentPage + 1); };
+  window.profAnimateCards = animateCards;
 
   setTimeout(init, 200);
   setTimeout(init, 500);
@@ -3503,7 +3559,7 @@ function closeProfLb() {
 // prof-grid 카드 span 직접 적용
 function applyProfGridSpans() {
   var cards = document.querySelectorAll('#prof-grid .prof-card');
-  var spans = [30,30, 20,20,20, 15,15,15,15, 12,12,12,12,12,12];
+  var spans = [30,30, 20,20,20, 12,12,12,12,12, 12,12,12,12,12];
   cards.forEach(function(card, i) {
     card.style.gridColumn = 'span ' + (spans[i] || 12);
   });
@@ -3830,12 +3886,29 @@ const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('nav a');
 
 // 네비게이션 클릭 시 애니메이션 재생
+function triggerHeroAnim() {
+  var hero = document.getElementById('hero');
+  if (!hero) return;
+  hero.classList.remove('hero-anim');
+  void hero.offsetHeight;
+  hero.classList.add('hero-anim');
+}
 navLinks.forEach(function(a) {
   a.addEventListener('click', function() {
     const targetId = a.getAttribute('href').replace('#', '');
-    setTimeout(function() { replaySectionAnimation(targetId); }, 300);
+    if (targetId === 'hero') {
+      setTimeout(triggerHeroAnim, 100);
+    }
+    setTimeout(function() {
+      replaySectionAnimation(targetId);
+      if (targetId === 'professional' && typeof profAnimateCards === 'function') {
+        profAnimateCards();
+      }
+    }, 300);
   });
 });
+// 페이지 로드 시 히어로 애니메이션
+window.addEventListener('load', function() { setTimeout(triggerHeroAnim, 200); });
 
 const navObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
