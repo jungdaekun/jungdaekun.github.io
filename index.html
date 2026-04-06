@@ -939,9 +939,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div><!-- end prof-grid-inner -->
   <div class="prof-grid-fade" id="prof-grid-fade"></div>
   <div class="prof-grid-nav" id="prof-grid-nav">
-    <button class="prof-grid-nav-btn" id="prof-grid-prev" onclick="profGridPrev()" title="이전">‹</button>
+    <button class="prof-grid-nav-btn" id="prof-grid-prev" onclick="profGridPrev()" onmousedown="return false" title="이전">‹</button>
     <span class="prof-grid-nav-info" id="prof-grid-nav-info" translate="no"></span>
-    <button class="prof-grid-nav-btn" id="prof-grid-next" onclick="profGridNext()" title="다음">›</button>
+    <button class="prof-grid-nav-btn" id="prof-grid-next" onclick="profGridNext()" onmousedown="return false" title="다음">›</button>
   </div>
 </section>
 <script>
@@ -1432,9 +1432,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   </div><!-- end proj-grid-inner -->
   </div><!-- end proj-grid-viewport -->
   <div class="proj-grid-nav">
-    <button class="proj-grid-nav-btn" id="proj-nav-prev" onclick="projGridPrev()" title="이전">‹</button>
+    <button class="proj-grid-nav-btn" id="proj-nav-prev" onclick="projGridPrev()" onmousedown="return false" title="이전">‹</button>
     <span class="proj-grid-nav-info" id="proj-nav-info" translate="no"></span>
-    <button class="proj-grid-nav-btn" id="proj-nav-next" onclick="projGridNext()" title="다음">›</button>
+    <button class="proj-grid-nav-btn" id="proj-nav-next" onclick="projGridNext()" onmousedown="return false" title="다음">›</button>
   </div>
   </div><!-- end proj-grid-wrap -->
 
@@ -3255,39 +3255,53 @@ function preloadFreqImages() {
 (function() {
   var wrap = document.getElementById('prof-grid-wrap');
   var inner = document.getElementById('prof-grid-inner');
-  var grid = document.getElementById('prof-grid');
   var fade = document.getElementById('prof-grid-fade');
   var prevBtn = document.getElementById('prof-grid-prev');
   var nextBtn = document.getElementById('prof-grid-next');
   var info = document.getElementById('prof-grid-nav-info');
-  if (!grid || !inner || !wrap) return;
+  if (!wrap || !inner) return;
 
+  var ROWS_PER_PAGE = 2;
   var currentPage = 0;
   var pageOffsets = [0];
-  var pageHeight = 0;
+  var pageHeights = [];
 
-  function calcPages() {
-    // 전체 펼치기
+  function buildPages() {
     wrap.style.height = 'auto';
     inner.style.transform = '';
 
-    var cards = Array.from(grid.querySelectorAll('.prof-card'));
+    var cards = Array.from(inner.querySelectorAll('.prof-card'));
     if (!cards.length) return false;
 
-    var maxH = 0;
-    cards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
-    if (maxH < 10) return false;
+    var rowTops = [];
+    var rowBottoms = [];
+    var lastTop = -999, lastBottom = 0;
+    cards.forEach(function(c) {
+      var t = c.offsetTop;
+      var b = t + c.offsetHeight;
+      if (t - lastTop > 5) {
+        rowTops.push(t);
+        if (rowTops.length > 1) rowBottoms.push(lastBottom);
+        lastTop = t;
+        lastBottom = b;
+      } else {
+        lastBottom = Math.max(lastBottom, b);
+      }
+    });
+    rowBottoms.push(lastBottom);
 
-    var gap = 12;
-    pageHeight = maxH * 2 + gap;
-    var totalH = grid.offsetHeight;
-    var totalPages = Math.max(1, Math.ceil(totalH / pageHeight));
+    if (!rowTops.length) return false;
 
     pageOffsets = [];
-    for (var i = 0; i < totalPages; i++) {
-      pageOffsets.push(i * pageHeight);
+    pageHeights = [];
+    for (var i = 0; i < rowTops.length; i += ROWS_PER_PAGE) {
+      var startTop = rowTops[i];
+      var endBottom = rowBottoms[Math.min(i + ROWS_PER_PAGE - 1, rowBottoms.length - 1)];
+      pageOffsets.push(startTop);
+      pageHeights.push(endBottom - startTop);
     }
-    wrap.style.height = pageHeight + 'px';
+
+    wrap.style.height = pageHeights[0] + 'px';
     return true;
   }
 
@@ -3295,6 +3309,7 @@ function preloadFreqImages() {
     var totalPages = pageOffsets.length;
     currentPage = Math.max(0, Math.min(page, totalPages - 1));
     inner.style.transform = 'translateY(-' + pageOffsets[currentPage] + 'px)';
+    wrap.style.height = pageHeights[currentPage] + 'px';
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage >= totalPages - 1;
     if (info) info.textContent = (currentPage + 1) + ' / ' + totalPages;
@@ -3302,17 +3317,17 @@ function preloadFreqImages() {
   }
 
   function init() {
-    if (!calcPages()) { setTimeout(init, 200); return; }
+    if (!buildPages()) { setTimeout(init, 200); return; }
     setPage(0);
   }
 
   window.profGridPrev = function() { setPage(currentPage - 1); };
   window.profGridNext = function() { setPage(currentPage + 1); };
 
-  setTimeout(init, 100);
-  setTimeout(init, 400);
-  window.addEventListener('load', function() { setTimeout(init, 100); });
-  window.addEventListener('resize', function() { currentPage = 0; setTimeout(init, 100); });
+  setTimeout(init, 200);
+  setTimeout(init, 500);
+  window.addEventListener('load', function() { setTimeout(init, 200); });
+  window.addEventListener('resize', function() { currentPage = 0; setTimeout(init, 150); });
 })();
 
 // ── PERSONAL WORKS 그리드 페이지네이션 ──
