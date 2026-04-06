@@ -13,6 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JUNG DAEKUN — Environment Artist</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
 :root {
   --bg: #080a0d;
@@ -2258,7 +2261,30 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 
 // ── SCROLL REVEAL ANIMATION ──
 // ── ALL 트렌드 포트폴리오 ──
-var FREQ_KEY = 'jdk_freq_viewed';
+// ── FIREBASE / FIRESTORE 뷰카운트 ──
+var _fbApp = firebase.initializeApp({
+  apiKey: "AIzaSyB5EIfm9GKt6jh2VcQQJyhmLr-wTSL_XWw",
+  authDomain: "jungdaekun-portfolio.firebaseapp.com",
+  projectId: "jungdaekun-portfolio",
+  storageBucket: "jungdaekun-portfolio.firebasestorage.app",
+  messagingSenderId: "972819156766",
+  appId: "1:972819156766:web:684f017b13e471231e430f"
+});
+var _db = firebase.firestore();
+var _freqDoc = _db.collection('viewcounts').doc('freq');
+var freqDataCache = {};
+var freqDataLoaded = false;
+
+// 페이지 로드 시 Firestore에서 데이터 가져오기
+_freqDoc.get().then(function(doc) {
+  if (doc.exists) freqDataCache = doc.data() || {};
+  freqDataLoaded = true;
+  renderFreqViewed();
+}).catch(function(e) {
+  console.warn('Firestore load failed, fallback to empty', e);
+  freqDataLoaded = true;
+  renderFreqViewed();
+});
 
 // 전체 이미지 풀 (personal + professional 이미지 전체)
 function getAllImagePool() {
@@ -2285,10 +2311,11 @@ function getAllImagePool() {
 }
 
 function getFreqData() {
-  try { return JSON.parse(localStorage.getItem(FREQ_KEY) || '{}'); } catch(e) { return {}; }
+  return freqDataCache;
 }
 function saveFreqData(data) {
-  try { localStorage.setItem(FREQ_KEY, JSON.stringify(data)); } catch(e) {}
+  freqDataCache = data;
+  _freqDoc.set(data).catch(function(e) { console.warn('Firestore save failed', e); });
 }
 function trackFreqClick(key, src, title) {
   var data = getFreqData();
@@ -2301,7 +2328,8 @@ function trackFreqClick(key, src, title) {
   renderFreqViewed();
 }
 function clearFreqViewed() {
-  localStorage.removeItem(FREQ_KEY);
+  freqDataCache = {};
+  _freqDoc.delete().catch(function(e) { console.warn('Firestore delete failed', e); });
   renderFreqViewed();
 }
 function resetFreqViewed() {
@@ -2900,7 +2928,7 @@ function renderFreqViewed() {
     else                        { viewIcon = '✔️'; viewColor = '#d0cbbe'; }
     // rank 아이콘은 항상 표시, 일반은 viewCount > 0일 때만
     var showIcon = s.rank >= 0 || viewCount > 0;
-    var iconText = s.rank >= 0 ? viewIcon : (viewCount > 0 ? viewIcon + ' ' + viewCount : '');
+    var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (s.rank >= 0 ? viewIcon : '');
     var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
@@ -3089,8 +3117,7 @@ if (window.ResizeObserver) {
   });
 }
 window.addEventListener('load', function() {
-  renderFreqViewed();
-  // 여러 타이밍에 재시도 - 반드시 한 번은 성공
+  // renderFreqViewed는 Firestore 로드 완료 후 자동 호출됨
   requestAnimationFrame(setFreqRowHeight);
   setTimeout(setFreqRowHeight, 100);
   setTimeout(setFreqRowHeight, 300);
