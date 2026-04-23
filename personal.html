@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<script>window.location.replace('index.html#view=personal&section=personal');</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHZZXKF2S1"></script>
 <script>
@@ -37,25 +38,17 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;}
-body.view-professional #hero,
-body.view-professional #about,
-body.view-professional #freq-viewed,
-body.view-professional #works-hub,
-body.view-professional #personal,
-body.view-professional #relighting,
-body.view-professional #sketch,
-body.view-professional footer{display:none!important;}
-body.view-professional #professional{display:block;padding-top:44px;}
-body.view-personal #hero,
-body.view-personal #about,
-body.view-personal #freq-viewed,
-body.view-personal #works-hub,
-body.view-personal #professional,
-body.view-personal footer{display:none!important;}
-body.view-personal #personal,
-body.view-personal #relighting,
-body.view-personal #sketch{display:block;}
-body.view-personal #personal{padding-top:44px;}
+body.personal-page{padding-top:56px;}
+body.personal-page #hero,
+body.personal-page #about,
+body.personal-page #freq-viewed,
+body.personal-page #works-hub,
+body.personal-page #professional,
+body.personal-page footer{display:none!important;}
+body.personal-page #personal,
+body.personal-page #relighting,
+body.personal-page #sketch{display:block;}
+body.personal-page #personal{padding-top:44px;}
 
 .works-year-label{font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:16px;display:flex;align-items:center;gap:12px;}.works-year-label::after{content:'';flex:1;height:1px;background:var(--border);}
 /* ── SCANLINE OVERLAY ── */
@@ -67,8 +60,8 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .logo::before{content:'';width:8px;height:8px;background:var(--gold);transform:rotate(45deg);display:block;}
 nav{display:flex;gap:0;position:absolute;left:50%;transform:translateX(-50%);}
 nav a{font-family:var(--font-title);font-size:13px;font-weight:500;letter-spacing:.1em;color:var(--text2);text-decoration:none;padding:0 18px;height:56px;display:flex;align-items:center;text-transform:uppercase;border-bottom:2px solid transparent;transition:none;}
-nav a:hover{color:var(--text2);border-bottom-color:transparent;}
-nav a.active{color:var(--gold);border-bottom-color:var(--gold);}
+nav a:hover{color:var(--gold);border-bottom-color:var(--gold);}
+nav a.active{color:var(--text2);border-bottom-color:transparent;}
 .topbar-right{font-family:var(--font-mono);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:8px;margin-left:auto;}
 .online-dot{width:5px;height:5px;border-radius:50%;background:#4ae87a;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
@@ -538,19 +531,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 .hamburger{display:none;}
 </style>
 </head>
-<body>
+<body class="personal-page">
 
 <!-- TOPBAR -->
 <header id="topbar">
 
   <nav id="main-nav">
-    <a href="#hero" onclick="closeNav()">// Start</a>
-    <a href="#view=professional&section=professional" onclick="closeNav()">Professional</a>
-    <a href="#about" onclick="closeNav()">About</a>
-    <a href="#freq-viewed" onclick="closeNav()">Featured</a>
-    <a href="#view=personal&section=personal" onclick="closeNav()">Personal</a>
-    <a href="#view=personal&section=relighting" onclick="closeNav()">Re:Lighting</a>
-    <a href="#view=personal&section=sketch" onclick="closeNav()">Sketch Note</a>
+    <a href="index.html#hero" onclick="closeNav()">// Start</a>
+    <a href="professional.html" onclick="closeNav()">Professional</a>
+    <a href="index.html#about" onclick="closeNav()">About</a>
+    <a href="index.html#freq-viewed" onclick="closeNav()">Featured</a>
+    <a href="#personal" onclick="closeNav()">Personal</a>
+    <a href="#relighting" onclick="closeNav()">Re:Lighting</a>
+    <a href="#sketch" onclick="closeNav()">Sketch Note</a>
   </nav>
   <div class="topbar-right">
     <div class="online-dot"></div>
@@ -588,8 +581,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <div class="hero-cta" style="flex-direction:column;align-items:flex-start;">
       <a href="#about" class="btn-primary">View Profile</a>
       <div style="font-family:var(--font-title);font-size:14px;margin-top:4px;line-height:2;letter-spacing:.06em;">
-        <div style="color:var(--text3);">├─ <a href="#view=personal&section=personal" style="color:var(--text2);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Works</a></div>
-        <div style="color:var(--text3);">└─ <a href="#view=professional&section=professional" style="color:var(--text2);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Professional</a></div>
+        <div style="color:var(--text3);">├─ <a href="#personal" style="color:var(--text2);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Works</a></div>
+        <div style="color:var(--text3);">└─ <a href="professional.html" style="color:var(--text2);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Professional</a></div>
       </div>
     </div>
   </div>
@@ -1252,22 +1245,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
     <p class="works-hub-desc reveal-up">대표 작업을 먼저 보여준 뒤, 아래에서는 회사 작업과 개인 작업 흐름을 분리해 더 편하게 탐색할 수 있도록 레이아웃을 재정리했습니다.</p>
   </div>
   <div class="works-hub-grid">
-    <a class="works-hub-card reveal-up" href="#view=professional&section=professional">
+    <a class="works-hub-card reveal-up" href="professional.html">
       <div class="works-hub-card-id" translate="no">// TRACK 01</div>
       <div class="works-hub-card-title">Professional</div>
       <div class="works-hub-card-desc">회사 프로젝트와 NDA 기반 상업 작업을 모아둔 경력 중심 아카이브입니다.</div>
     </a>
-    <a class="works-hub-card reveal-up delay-1" href="#view=personal&section=personal">
+    <a class="works-hub-card reveal-up delay-1" href="#personal">
       <div class="works-hub-card-id" translate="no">// TRACK 02</div>
       <div class="works-hub-card-title">Personal</div>
       <div class="works-hub-card-desc">개인 제작 작업과 스타일 탐구, 장면 구성 실험을 묶은 섹션입니다.</div>
     </a>
-    <a class="works-hub-card reveal-up delay-2" href="#view=personal&section=relighting">
+    <a class="works-hub-card reveal-up delay-2" href="#relighting">
       <div class="works-hub-card-id" translate="no">// TRACK 03</div>
       <div class="works-hub-card-title">Re:Lighting</div>
       <div class="works-hub-card-desc">기존 소스를 바탕으로 조명과 공간 밀도를 다시 설계한 재구성 작업입니다.</div>
     </a>
-    <a class="works-hub-card reveal-up delay-3" href="#view=personal&section=sketch">
+    <a class="works-hub-card reveal-up delay-3" href="#sketch">
       <div class="works-hub-card-id" translate="no">// TRACK 04</div>
       <div class="works-hub-card-title">Sketch Note</div>
       <div class="works-hub-card-desc">아이디어 스케치와 초기 테스트, 제작 과정의 흔적을 모아둔 노트입니다.</div>
@@ -1278,7 +1271,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- PERSONAL WORKS -->
 <section id="personal">
   <div class="sec-header">
-    <span class="sec-id" translate="no">// 05</span>
+    <span class="sec-id" translate="no">// 04</span>
     <h2 class="sec-title reveal-up">Personal Works</h2>
     <div class="sec-line"></div>
   </div>
@@ -1589,7 +1582,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- RE:LIGHTING -->
 <section id="relighting">
   <div class="sec-header">
-    <span class="sec-id" translate="no">// 06</span>
+    <span class="sec-id" translate="no">// 05</span>
     <h2 class="sec-title reveal-up">Re:Lighting</h2>
     <div class="sec-line"></div>
   </div>
@@ -1631,7 +1624,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 <!-- SKETCH NOTE -->
 <section id="sketch">
   <div class="sec-header">
-    <span class="sec-id" translate="no">// 07</span>
+    <span class="sec-id" translate="no">// 06</span>
     <h2 class="sec-title reveal-up">Sketch Note</h2>
     <div class="sec-line"></div>
   </div>
@@ -1697,69 +1690,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
 
   worksHub.insertAdjacentElement('afterend', professional);
   if (professionalLightbox) document.body.appendChild(professionalLightbox);
-})();
-</script>
-
-<script>
-(function() {
-  var suppressNavObserverUntil = 0;
-
-  function setActiveNav(href) {
-    document.querySelectorAll('#main-nav a').forEach(function(link) {
-      link.classList.toggle('active', link.getAttribute('href') === href);
-    });
-  }
-
-  function setViewMode(mode) {
-    document.body.classList.remove('view-professional', 'view-personal');
-    if (mode === 'professional') document.body.classList.add('view-professional');
-    if (mode === 'personal') document.body.classList.add('view-personal');
-  }
-
-  function scrollToSection(sectionId) {
-    var target = document.getElementById(sectionId);
-    if (!target) return;
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        target.scrollIntoView({ behavior: 'auto', block: 'start' });
-      });
-    });
-  }
-
-  function applyViewRoute() {
-    var rawHash = window.location.hash.slice(1);
-    if (!rawHash) {
-      setViewMode('home');
-      setActiveNav('#hero');
-      suppressNavObserverUntil = Date.now() + 500;
-      return;
-    }
-
-    if (rawHash.indexOf('view=') !== 0) {
-      setViewMode('home');
-      setActiveNav('#' + rawHash);
-      suppressNavObserverUntil = Date.now() + 900;
-      scrollToSection(rawHash);
-      return;
-    }
-
-    var params = new URLSearchParams(rawHash);
-    var view = params.get('view') || 'home';
-    var section = params.get('section') || (view === 'professional' ? 'professional' : 'personal');
-
-    setViewMode(view);
-    suppressNavObserverUntil = Date.now() + 900;
-    if (view === 'professional') setActiveNav('#view=professional&section=professional');
-    if (view === 'personal') {
-      if (section === 'relighting') setActiveNav('#view=personal&section=relighting');
-      else if (section === 'sketch') setActiveNav('#view=personal&section=sketch');
-      else setActiveNav('#view=personal&section=personal');
-    }
-    scrollToSection(section);
-  }
-
-  window.addEventListener('hashchange', applyViewRoute);
-  window.addEventListener('load', applyViewRoute);
 })();
 </script>
 
@@ -4050,8 +3980,6 @@ navLinks.forEach(function(a) {
 window.addEventListener('load', function() { setTimeout(triggerHeroAnim, 200); });
 
 const navObserver = new IntersectionObserver(function(entries) {
-  if (Date.now() < suppressNavObserverUntil) return;
-  if (document.body.classList.contains('view-professional') || document.body.classList.contains('view-personal')) return;
   entries.forEach(function(entry) {
     if (!entry.isIntersecting) return;
     navLinks.forEach(function(l) { l.classList.remove('active'); });
