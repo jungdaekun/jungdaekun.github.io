@@ -92,7 +92,7 @@ h1.hero-title .role{color:var(--gold);display:block;}
 .stat-label{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-top:4px;}
 
 /* ── SECTION COMMON ── */
-section{padding:100px 80px;}
+section{padding:100px 80px;overflow:visible;}
 .sec-header{display:flex;align-items:center;gap:20px;margin-bottom:32px;}
 .sec-id{font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.15em;}
 .sec-title{font-family:var(--font-title);font-size:32px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);}
@@ -124,15 +124,10 @@ section{padding:100px 80px;}
 .exp-tag{font-family:var(--font-mono);font-size:11px;padding:2px 8px;border:1px solid var(--border);color:var(--text3);letter-spacing:.06em;}
 
 /* ── FEATURED WORKS ── */
-#freq-viewed{background:var(--bg2);}
-.freq-grid{display:grid;grid-template-columns:repeat(10,1fr);grid-auto-flow:dense;gap:4px;}
-.freq-grid-top{margin-bottom:20px;}
-.freq-grid-top .freq-item{grid-column:span 1;grid-row:span 1;}
-#freq-grid .freq-item{grid-column:span 1;grid-row:span 1;}
-.freq-top-rank-1{grid-column:1 / span 2 !important;grid-row:1 / span 2 !important;}
-.freq-top-rank-2{grid-column:4 / span 2 !important;grid-row:3 / span 1 !important;}
-.freq-top-rank-3{grid-column:7 / span 1 !important;grid-row:1 / span 2 !important;}
-.freq-grid-sentinel{height:1px;width:100%;}
+#freq-viewed{background:var(--bg2);padding:100px 0 !important;}
+#freq-viewed .sec-header,
+#freq-viewed .sketch-desc{padding-left:80px;padding-right:80px;}
+.freq-grid{display:grid;grid-template-columns:repeat(10,1fr);grid-auto-flow:dense;gap:4px;position:relative;}
 .freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
 .freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
@@ -151,30 +146,6 @@ section{padding:100px 80px;}
 .freq-item-name{display:none;}
 .freq-item-year{font-family:var(--font-mono);font-size:11px;color:var(--gold-dim);letter-spacing:.12em;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.8);transform:translateX(-16px);opacity:0;transition:transform .3s cubic-bezier(.25,.46,.45,.94),opacity .3s;display:flex;align-items:center;gap:6px;line-height:1;margin-bottom:1px;}
 .freq-item:hover .freq-item-year{transform:translateX(0);opacity:1;}
-.freq-spotlight-section{display:none;margin:20px 0 18px;padding:20px 10px 18px;background:#1c1c20;width:100%;}
-.freq-spotlight-section.active{display:block;}
-.freq-spotlight-wrap{display:flex;align-items:flex-start;gap:40px;}
-.freq-spotlight-line{flex-shrink:0;width:3px;background:#b8ff3a;align-self:stretch;min-height:100%;}
-.freq-spotlight-label{flex-shrink:0;width:400px;padding-top:6px;}
-.freq-spotlight-badge{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.1em;padding:4px 12px;display:inline-block;background:#b8ff3a;color:#141418;margin-bottom:12px;}
-.freq-spotlight-title{font-family:var(--font-title);font-size:30px;font-weight:600;color:#e0dfdf;line-height:1.2;margin-bottom:10px;white-space:nowrap;letter-spacing:.15em;text-transform:uppercase;}
-.freq-spotlight-desc-ko{font-size:12px;color:#a1a09c;line-height:1.7;margin-bottom:4px;}
-.freq-spotlight-desc-en{font-family:var(--font-mono);font-size:11px;color:#787876;line-height:1.7;}
-.freq-spotlight-cards{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.freq-spotlight-card{cursor:pointer;border-radius:8px;overflow:hidden;background:#1a1a20;border:1px solid #2a2a3e;transition:border-color .2s;position:relative;}
-.freq-spotlight-card:hover{border-color:#b8ff3a;}
-.freq-spotlight-thumb{position:relative;width:100%;padding-top:62%;overflow:hidden;}
-.freq-spotlight-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s;}
-.freq-spotlight-card:hover .freq-spotlight-thumb img{transform:scale(1.04);}
-.freq-spotlight-card-body{padding:10px 12px 12px;}
-.freq-spotlight-card-title{font-size:14px;font-weight:600;color:#e7e3d4;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.freq-spotlight-meta{display:flex;align-items:center;gap:6px;}
-.freq-spotlight-chip{font-family:var(--font-mono);font-size:9px;padding:1px 6px;border-radius:2px;border:1px solid rgba(245,196,0,0.3);color:#F5C400;}
-.freq-spotlight-chip.prof{color:#7c6af7;border-color:rgba(124,106,247,0.3);}
-.freq-spotlight-chip.relight{color:#00D4FF;border-color:rgba(0,212,255,0.3);}
-.freq-spotlight-chip.personal{color:#F5C400;border-color:rgba(245,196,0,0.3);}
-.freq-spotlight-meta-text{font-family:var(--font-mono);font-size:9px;color:#555580;}
-@media(max-width:1200px){.freq-spotlight-wrap{flex-direction:column;gap:20px;}.freq-spotlight-label{width:auto;}.freq-spotlight-cards{grid-template-columns:1fr;}}
 /* freq lightbox */
 #freq-lb{display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.97);flex-direction:column;}
 #freq-lb.active{display:flex;}
@@ -203,6 +174,15 @@ section{padding:100px 80px;}
 .freq-lb-nav-prev{left:16px;}
 .freq-lb-nav-next{right:16px;}
 .freq-lb-nav-prev:hover,.freq-lb-nav-next:hover{border-color:var(--border2);color:var(--gold);}
+/* ── Spotlight Badge ── */
+.spotlight-badge{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.12em;padding:3px 10px;display:inline-block;background:var(--gold);color:#141418;}
+.spotlight-badge span{background:linear-gradient(90deg,#e0dfdf 0%,#ffffff 40%,#f5f5f5 60%,#e0dfdf 100%);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:spotlightLoop 1.5s linear infinite;}
+@keyframes spotlightLoop{0%{background-position:100% 0;}100%{background-position:-100% 0;}}
+.spotlight-card-fw{cursor:pointer;border-radius:4px;overflow:hidden;background:#1a1a20;border:1px solid var(--border);transition:border-color .2s;position:relative;}
+.spotlight-card-fw:hover{border-color:var(--gold) !important;}
+.spotlight-card-fw:hover img{transform:scale(1.04);}
+/* ── Freq Sentinel (무한스크롤) ── */
+#freq-sentinel{height:1px;margin-top:4px;}
 .freq-refresh{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:.08em;cursor:pointer;border:1px solid var(--border);padding:4px 12px;background:none;transition:all .2s;margin-left:auto;}
 .freq-refresh:hover{color:var(--gold);border-color:var(--border2);}
 
@@ -1201,21 +1181,84 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
     <button class="freq-refresh" onclick="resetFreqViewed()" style="margin-left:6px;color:var(--text3);">⊘ RESET</button>
   </div>
   <p class="sketch-desc" style="max-width:none;white-space:nowrap;"><span style="color:var(--gold);margin-right:8px;display:inline-block;animation:starPulse 2.4s ease-in-out infinite;">✦</span>방문할 때마다 새롭게 구성되는 랜덤 갤러리입니다. 제가 탐구해온 공간의 조각들을 자유롭게 탐색해 보세요. <span style="color:#a89050;cursor:pointer;" onclick="renderFreqViewed()" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#a89050'">↺ 새로고침 시 목록이 바뀝니다.</span><br><span style="display:inline-block;padding-left:24px;font-size:13px;color:var(--text2);letter-spacing:.06em;">Works presented in random order. Freely explore the spatial fragments I've crafted as an environment designer. <span style="color:var(--gold-dim);cursor:pointer;" onclick="renderFreqViewed()" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gold-dim)'">↺ Refresh to see a different selection.</span></span></p>
-  <div class="freq-grid freq-grid-top" id="freq-grid-top"></div>
-  <div id="freq-spotlight" class="freq-spotlight-section">
-    <div class="freq-spotlight-wrap">
-      <div class="freq-spotlight-line"></div>
-      <div class="freq-spotlight-label">
-        <span class="freq-spotlight-badge">SPOTLIGHT</span>
-        <div class="freq-spotlight-title">Featured Works</div>
-        <div class="freq-spotlight-desc-ko">최근 작업과 주요 프로젝트를 모은 섹션입니다.<br>개인 및 상업 프로젝트를 포함합니다.</div>
-        <div class="freq-spotlight-desc-en">This section presents a collection of recent and major projects. It includes both personal and commercial work.</div>
+
+  <div class="freq-grid" id="freq-grid"></div>
+
+  <!-- SPOTLIGHT SECTION (참고파일 방식 그대로) -->
+  <div id="freq-spotlight-box" style="display:block;margin:0 -80px;width:calc(100% + 160px);padding:20px 80px 28px;background:#1c1c20;box-sizing:border-box;">
+    <div style="display:flex;align-items:flex-start;gap:40px;padding:0 16px;">
+      <!-- 좌측 세로 라인 -->
+      <div style="flex-shrink:0;width:3px;background:var(--gold);align-self:stretch;min-height:100%;"></div>
+      <!-- 좌측 레이블 -->
+      <div style="flex-shrink:0;width:340px;padding-top:6px;">
+        <div style="display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;">
+          <span class="spotlight-badge"><span>SPOTLIGHT</span></span>
+        </div>
+        <div style="font-family:var(--font-title);font-size:28px;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:10px;letter-spacing:.12em;text-transform:uppercase;">Featured Works</div>
+        <div style="font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:4px;">최근 작업과 주요 프로젝트를 모은 섹션입니다.<br>개인 및 상업 프로젝트를 포함합니다.</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--text3);line-height:1.7;">A curated selection of recent and major projects, including both personal and commercial work.</div>
       </div>
-      <div id="freq-spotlight-cards" class="freq-spotlight-cards"></div>
+      <!-- 우측 카드 3장 -->
+      <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+
+        <!-- 카드 1: Rock Study -->
+        <div class="spotlight-card-fw" onclick="openLightbox('proj-rock', 0)">
+          <div style="position:relative;width:100%;padding-top:62%;overflow:hidden;">
+            <img src="images/Personal/20201124_RockStudy/Rock_Final_Thumb.webp"
+              onerror="this.src='images/Personal/20201124_RockStudy/Rock_Final_001.webp'"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.3s;">
+          </div>
+          <div style="padding:10px 12px 12px;">
+            <div style="font-family:var(--font-title);font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Modular Rock Study</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-family:var(--font-mono);font-size:9px;color:var(--gold);border:1px solid rgba(212,179,85,0.3);padding:1px 6px;border-radius:2px;">PERSONAL</span>
+              <span style="font-family:var(--font-mono);font-size:9px;color:var(--text3);">2020.11.24</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카드 2: M4 Carbine -->
+        <div class="spotlight-card-fw" onclick="openLightbox('proj-m4', 0)">
+          <div style="position:relative;width:100%;padding-top:62%;overflow:hidden;">
+            <img src="images/Personal/20190902_M4/M4_M203_Thumb.webp"
+              onerror="this.src='images/Personal/20190902_M4/M4_M203_001.webp'"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.3s;">
+          </div>
+          <div style="padding:10px 12px 12px;">
+            <div style="font-family:var(--font-title);font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">M4 Carbine with M203</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-family:var(--font-mono);font-size:9px;color:var(--gold);border:1px solid rgba(212,179,85,0.3);padding:1px 6px;border-radius:2px;">PERSONAL</span>
+              <span style="font-family:var(--font-mono);font-size:9px;color:var(--text3);">2019.09.02</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카드 3: NCSoft Project M -->
+        <div class="spotlight-card-fw" onclick="openProfLb('ncsoft')">
+          <div style="position:relative;width:100%;padding-top:62%;overflow:hidden;">
+            <img src="https://img.youtube.com/vi/bDXLAaqR_Yg/mqdefault.jpg"
+              onerror="this.src='https://img.youtube.com/vi/bDXLAaqR_Yg/default.jpg'"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.3s;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+              <div style="width:36px;height:36px;background:rgba(0,0,0,0.6);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.2);">
+                <div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #fff;margin-left:3px;"></div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:10px 12px 12px;">
+            <div style="font-family:var(--font-title);font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">NCSoft - Project M</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-family:var(--font-mono);font-size:9px;color:#7c6af7;border:1px solid rgba(124,106,247,0.3);padding:1px 6px;border-radius:2px;">PRO</span>
+              <span style="font-family:var(--font-mono);font-size:9px;color:var(--text3);">NCSoft</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-  <div class="freq-grid" id="freq-grid"></div>
-  <div id="freq-grid-sentinel" class="freq-grid-sentinel"></div>
+
+  <div id="freq-sentinel"></div>
 </section>
 
 <!-- FEATURED WORKS LIGHTBOX -->
@@ -1748,7 +1791,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 </script>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER REMOVED -->
+<!--
 <footer>
   <a class="footer-logo" href="#hero" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
     <div class="footer-logo-arrow">
@@ -1766,6 +1810,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
     <span id="footer-email-btn" onclick="copyFooterEmail()" style="color:var(--text3);cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;transition:color .2s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text3)'">Email <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.7;flex-shrink:0;"><rect x="5" y="1" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="4" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="var(--bg)"/></svg></span><span id="footer-email-copy-msg" style="font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0;transition:opacity .3s;margin-left:4px;">✓ copied!</span>
   </div>
 </footer>
+-->
 
 <script>
 // ── RANDOM YOUTUBE BACKGROUND ──
@@ -2500,6 +2545,12 @@ var freqDataCache = {};
 var freqDataLoaded = false;
 
 // 페이지 로드 시 Firestore에서 데이터 가져오기
+// 스포트라이트: DOMContentLoaded 시점에 display:block
+document.addEventListener('DOMContentLoaded', function() {
+  var sp = document.getElementById('freq-spotlight-box');
+  if (sp) sp.style.display = 'block';
+});
+
 _freqDoc.get().then(function(doc) {
   if (doc.exists) freqDataCache = doc.data() || {};
   freqDataLoaded = true;
@@ -2565,304 +2616,6 @@ function resetFreqViewed() {
   } else {
     alert('비밀번호가 올바르지 않습니다.');
   }
-}
-
-function getFreqSpotlightMeta(item) {
-  var src = item && item.src ? item.src : '';
-  var yearMatch = src.match(/\/(\d{4})(\d{2})(\d{2})_/);
-  var dateText = yearMatch ? (yearMatch[1] + '.' + yearMatch[2] + '.' + yearMatch[3]) : '';
-  var type = 'PERSONAL';
-  if (src.indexOf('/Professional/') !== -1) type = 'PRO';
-  else if (src.indexOf('/ReLighting/') !== -1) type = 'RELIGHT';
-  return { type: type, dateText: dateText };
-}
-
-function renderFreqSpotlight(selected) {
-  var section = document.getElementById('freq-spotlight');
-  var cardsWrap = document.getElementById('freq-spotlight-cards');
-  if (!section || !cardsWrap) return;
-
-  var spotlightItems = (selected || []).map(function(s, idx) {
-    return { entry: s, idx: idx };
-  }).filter(function(item) {
-    return item.entry.rank >= 6 && item.entry.rank <= 8;
-  }).sort(function(a, b) {
-    return a.entry.rank - b.entry.rank;
-  });
-
-  if (!spotlightItems.length) {
-    section.classList.remove('active');
-    cardsWrap.innerHTML = '';
-    return;
-  }
-
-  cardsWrap.innerHTML = spotlightItems.map(function(item) {
-    var p = item.entry.item;
-    var meta = getFreqSpotlightMeta(p);
-    return '<div class="freq-spotlight-card" onclick="freqItemClick(' + item.idx + ')">' +
-      '<div class="freq-spotlight-thumb"><img src="' + p.src + '" alt="' + p.title + '" loading="lazy"></div>' +
-      '<div class="freq-spotlight-card-body">' +
-        '<div class="freq-spotlight-card-title">' + p.title + '</div>' +
-        '<div class="freq-spotlight-meta">' +
-          '<span class="freq-spotlight-chip ' + meta.type.toLowerCase() + '">' + meta.type + '</span>' +
-          '<span class="freq-spotlight-meta-text">' + meta.dateText + '</span>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-
-  section.classList.add('active');
-}
-
-var freqInfinitePool = [];
-var freqInfiniteCursor = 0;
-var freqInfiniteObserver = null;
-var freqInfiniteScrollBound = false;
-var freqInfiniteScrollTick = false;
-
-function buildFreqItemHTML(entry, listIdx, data, extraClass, extraStyle) {
-  var spanClass = 'span-1x1';
-  if (entry.rank === 0) spanClass = 'span-2x2';
-  else if (entry.rank === 1 || entry.rank === 2) spanClass = 'span-2x1';
-
-  var p = entry.item;
-  var yearMatch = p.src.match(/\/(\d{4})(\d{2})(\d{2})_/);
-  var yearStr = yearMatch ? yearMatch[1] + '.' + yearMatch[2] + '.' + yearMatch[3] : '';
-  var viewCount = data[p.key] ? data[p.key].count : 0;
-  var viewIcon, viewColor, viewWeight = 'normal', viewSize = '11px';
-  if      (entry.rank === 0)      { viewIcon = '🔥'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
-  else if (entry.rank === 1)      { viewIcon = '❤️'; viewColor = '#db3535'; }
-  else if (entry.rank === 2)      { viewIcon = '😆'; viewColor = '#e79c16'; }
-  else if (entry.rank === 3)      { viewIcon = '😊'; viewColor = '#d4b355'; }
-  else if (entry.rank === 4)      { viewIcon = '😂'; viewColor = '#d0cbbe'; }
-  else if (viewCount >= 1000)     { viewIcon = '❤️'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
-  else if (viewCount >= 500)      { viewIcon = '😆'; viewColor = '#db3535'; }
-  else if (viewCount >= 100)      { viewIcon = '🔥'; viewColor = '#e79c16'; }
-  else if (viewCount >= 50)       { viewIcon = '😊'; viewColor = '#d4b355'; }
-  else                            { viewIcon = '😂'; viewColor = '#d0cbbe'; }
-
-  var showIcon = entry.rank >= 0 || viewCount > 0;
-  var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (entry.rank >= 0 ? viewIcon : '');
-  var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') +
-    (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
-
-  var cls = 'freq-item ' + spanClass + (extraClass ? ' ' + extraClass : '');
-  var styleAttr = extraStyle ? ' style="' + extraStyle + '"' : '';
-  return '<div class="' + cls + '"' + styleAttr + ' data-rank="' + entry.rank + '" onclick="freqItemClick(' + listIdx + ')">' +
-    '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
-    '<div class="freq-item-name">' + p.title + '</div>' +
-    '<div class="freq-item-overlay">' +
-      (yearInner ? '<div class="freq-item-year" translate="no">' + yearInner + '</div>' : '') +
-      '<div class="freq-item-title">' + p.title + '</div>' +
-    '</div></div>';
-}
-
-function buildFreqTopItemHTML(entry, listIdx, data, layoutStyle) {
-  var p = entry.item;
-  var yearMatch = p.src.match(/\/(\d{4})(\d{2})(\d{2})_/);
-  var yearStr = yearMatch ? yearMatch[1] + '.' + yearMatch[2] + '.' + yearMatch[3] : '';
-  var viewCount = data[p.key] ? data[p.key].count : 0;
-  var viewIcon = '';
-  var viewColor = '#d0cbbe';
-  var viewWeight = 'normal';
-  var viewSize = '11px';
-
-  if      (entry.rank === 0)      { viewIcon = '?뵦'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
-  else if (entry.rank === 1)      { viewIcon = '?ㅿ툘'; viewColor = '#db3535'; }
-  else if (entry.rank === 2)      { viewIcon = '?쁿'; viewColor = '#e79c16'; }
-  else if (entry.rank === 3)      { viewIcon = '?삃'; viewColor = '#d4b355'; }
-  else if (entry.rank === 4)      { viewIcon = '?쁻'; viewColor = '#d0cbbe'; }
-  else if (viewCount >= 1000)     { viewIcon = '?ㅿ툘'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
-  else if (viewCount >= 500)      { viewIcon = '?쁿'; viewColor = '#db3535'; }
-  else if (viewCount >= 100)      { viewIcon = '?뵦'; viewColor = '#e79c16'; }
-  else if (viewCount >= 50)       { viewIcon = '?삃'; viewColor = '#d4b355'; }
-  else                            { viewIcon = '?쁻'; viewColor = '#d0cbbe'; }
-
-  var showIcon = entry.rank >= 0 || viewCount > 0;
-  var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (entry.rank >= 0 ? viewIcon : '');
-  var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') +
-    (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
-  var styleAttr = layoutStyle ? ' style="' + layoutStyle + '"' : '';
-
-  return '<div class="freq-item span-1x1"' + styleAttr + ' data-rank="' + entry.rank + '" onclick="freqItemClick(' + listIdx + ')">' +
-    '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
-    '<div class="freq-item-name">' + p.title + '</div>' +
-    '<div class="freq-item-overlay">' +
-      (yearInner ? '<div class="freq-item-year" translate="no">' + yearInner + '</div>' : '') +
-      '<div class="freq-item-title">' + p.title + '</div>' +
-    '</div></div>';
-}
-
-function getFreqTopCount(totalCount) {
-  var vw = document.documentElement.clientWidth;
-  var cols = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
-  // top 3 cards occupy 8 slots total:
-  // rank1 = 2x2 (4), rank2 = 2x1 (2), rank3 = 1x2 (2)
-  // normal 3 cards would occupy only 3 slots, so subtract 5 extra slots
-  var targetCount = Math.max(3, (cols * 4) - 5);
-  var count = Math.max(0, totalCount || 0);
-  return count <= targetCount ? count : targetCount;
-}
-
-function getFreqTopRankStyles() {
-  var vw = document.documentElement.clientWidth;
-  var cols = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
-  if (cols < 8) {
-    return [
-      'grid-column:1 / span 2;grid-row:1 / span 2;',
-      'grid-column:1 / span 2;grid-row:4 / span 1;',
-      'grid-column:' + cols + ' / span 1;grid-row:2 / span 2;'
-    ];
-  }
-  var presets = [
-    [
-      'grid-column:1 / span 2;grid-row:1 / span 2;',
-      'grid-column:5 / span 2;grid-row:4 / span 1;',
-      'grid-column:8 / span 1;grid-row:2 / span 2;'
-    ],
-    [
-      'grid-column:2 / span 2;grid-row:2 / span 2;',
-      'grid-column:7 / span 2;grid-row:1 / span 1;',
-      'grid-column:' + cols + ' / span 1;grid-row:3 / span 2;'
-    ],
-    [
-      'grid-column:' + (cols - 2) + ' / span 2;grid-row:1 / span 2;',
-      'grid-column:2 / span 2;grid-row:4 / span 1;',
-      'grid-column:5 / span 1;grid-row:2 / span 2;'
-    ]
-  ];
-  return presets[Math.floor(Math.random() * presets.length)];
-}
-
-function getFreqMainRankStyles() {
-  var vw = document.documentElement.clientWidth;
-  var cols = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
-  if (cols < 8) {
-    return [
-      'grid-column:1 / span 2;grid-row:1 / span 2;',
-      'grid-column:2 / span 1;grid-row:3 / span 2;',
-      'grid-column:1 / span 2;grid-row:5 / span 1;'
-    ];
-  }
-  var presets = [
-    [
-      'grid-column:1 / span 2;grid-row:1 / span 2;',
-      'grid-column:4 / span 1;grid-row:3 / span 2;',
-      'grid-column:7 / span 2;grid-row:5 / span 1;'
-    ],
-    [
-      'grid-column:2 / span 2;grid-row:1 / span 2;',
-      'grid-column:6 / span 1;grid-row:3 / span 2;',
-      'grid-column:8 / span 2;grid-row:5 / span 1;'
-    ],
-    [
-      'grid-column:' + (cols - 2) + ' / span 2;grid-row:1 / span 2;',
-      'grid-column:5 / span 1;grid-row:3 / span 2;',
-      'grid-column:1 / span 2;grid-row:5 / span 1;'
-    ]
-  ];
-  return presets[Math.floor(Math.random() * presets.length)];
-}
-
-function applyFeaturedRankLayout() {
-  var topGrid = document.getElementById('freq-grid-top');
-  var mainGrid = document.getElementById('freq-grid');
-
-  if (topGrid) {
-    Array.from(topGrid.children).forEach(function(el) {
-      el.style.gridColumn = '';
-      el.style.gridRow = '';
-      el.classList.remove('freq-top-rank-1', 'freq-top-rank-2', 'freq-top-rank-3');
-    });
-    var topItems = topGrid.querySelectorAll('.freq-item');
-    if (topItems[0]) topItems[0].classList.add('freq-top-rank-1');
-    if (topItems[1]) topItems[1].classList.add('freq-top-rank-2');
-    if (topItems[2]) topItems[2].classList.add('freq-top-rank-3');
-  }
-
-  if (mainGrid) {
-    Array.from(mainGrid.children).forEach(function(el) {
-      el.style.gridColumn = '';
-      el.style.gridRow = '';
-      el.classList.remove('freq-main-rank-4', 'freq-main-rank-5', 'freq-main-rank-6');
-    });
-    var mainItems = mainGrid.querySelectorAll('.freq-item');
-    if (mainItems[0]) mainItems[0].classList.add('freq-main-rank-4');
-    if (mainItems[1]) mainItems[1].classList.add('freq-main-rank-5');
-    if (mainItems[2]) mainItems[2].classList.add('freq-main-rank-6');
-  }
-}
-
-function appendFreqInfiniteItems(count) {
-  var grid = document.getElementById('freq-grid');
-  if (!grid || !freqInfinitePool.length) return false;
-
-  var data = getFreqData();
-  var html = '';
-  var batchSize = count || 16;
-  var appended = 0;
-
-  while (appended < batchSize) {
-    if (freqInfiniteCursor >= freqInfinitePool.length) {
-      freqInfinitePool = shuffle(freqInfinitePool);
-      freqInfiniteCursor = 0;
-    }
-    var item = freqInfinitePool[freqInfiniteCursor++];
-    var entry = { item: item, badge: '', rank: -1 };
-    freqCurrentItems.push(entry);
-    html += buildFreqItemHTML(entry, freqCurrentItems.length - 1, data, '', '');
-    appended++;
-  }
-
-  grid.insertAdjacentHTML('beforeend', html);
-  requestAnimationFrame(setFreqRowHeight);
-  return true;
-}
-
-function maybeAppendFreqOnScroll() {
-  if (freqInfiniteScrollTick) return;
-  freqInfiniteScrollTick = true;
-
-  requestAnimationFrame(function() {
-    freqInfiniteScrollTick = false;
-
-    var section = document.getElementById('freq-viewed');
-    if (!section || section.hidden) return;
-
-    var remaining = document.documentElement.scrollHeight - (window.innerHeight + window.scrollY);
-    if (remaining > 1200) return;
-
-    var vw = document.documentElement.clientWidth;
-    var cols = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
-    appendFreqInfiniteItems(cols * 2);
-  });
-}
-
-function setupFreqInfiniteScroll() {
-  var sentinel = document.getElementById('freq-grid-sentinel');
-  if (!sentinel) return;
-  if (freqInfiniteObserver) freqInfiniteObserver.disconnect();
-  freqInfiniteObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (!entry.isIntersecting) return;
-      var vw = document.documentElement.clientWidth;
-      var cols = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
-      appendFreqInfiniteItems(cols * 2);
-    });
-  }, {
-    root: null,
-    rootMargin: '0px 0px 1200px 0px',
-    threshold: 0.01
-  });
-  freqInfiniteObserver.observe(sentinel);
-
-  if (!freqInfiniteScrollBound) {
-    window.addEventListener('scroll', maybeAppendFreqOnScroll, { passive: true });
-    window.addEventListener('resize', maybeAppendFreqOnScroll);
-    freqInfiniteScrollBound = true;
-  }
-
-  setTimeout(maybeAppendFreqOnScroll, 50);
 }
 
 function shuffle(arr) {
@@ -3324,9 +3077,8 @@ var profProjects = {
 
 
 function renderFreqViewed() {
-  var topGrid = document.getElementById('freq-grid-top');
   var grid = document.getElementById('freq-grid');
-  if (!grid || !topGrid) return;
+  if (!grid) return;
 
   var pool = getAllImagePool();
   var data = getFreqData();
@@ -3335,12 +3087,11 @@ function renderFreqViewed() {
   // clientWidth = 스크롤바 제외 뷰포트 너비 (CSS media query와 동일)
   var vw = document.documentElement.clientWidth;
   var colCount = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
-  var rows = 5;
+  var rows = 4;
   var totalCells = colCount * rows;
   // 1등(2x2=4칸) + 2등(2x1=2칸) + 3등(2x1=2칸) + 4등(1x1=1칸) + 5등(1x1=1칸) = 10칸
   var regularCount = totalCells - 10;
   var totalItems = 5 + regularCount;
-  var topStripItems = [];
 
   // ── 랜덤 10개 ──
   var randomItems = [];
@@ -3400,7 +3151,7 @@ function renderFreqViewed() {
   // 인기 상위 5개에 rank 부여
   var rankCount = 0;
   popularKeys.forEach(function(k) {
-    if (rankCount >= 10) return;
+    if (rankCount >= 5) return;
     var found = fillItems.find(function(s){ return s.item.key === k; });
     if (!found) found = randomItems.find(function(s){ return s.item.key === k; });
     if (!found) found = newestItems.find(function(s){ return s.item.key === k; });
@@ -3408,7 +3159,7 @@ function renderFreqViewed() {
   });
   // rank가 5개 미만이면 fillItems 앞에서 채우기
   fillItems.forEach(function(s) {
-    if (rankCount >= 10) return;
+    if (rankCount >= 5) return;
     if (s.rank === -1) { s.rank = rankCount++; }
   });
 
@@ -3445,41 +3196,8 @@ function renderFreqViewed() {
   inserts.sort(function(a,b){ return a[0]-b[0]; });
   inserts.forEach(function(ins){ rest2.splice(ins[0], 0, ins[1]); });
   var selected = rest2.slice(0, totalItems);
-  var rankedItems = combined.filter(function(s) { return s.rank >= 0 && s.rank <= 9; }).sort(function(a, b) {
-    return a.rank - b.rank;
-  });
-  var unrankedItems = shuffle(combined.filter(function(s) { return s.rank < 0; }));
-  selected = rankedItems.concat(unrankedItems).slice(0, totalItems);
 
-  var topRankItems = selected.filter(function(s) { return s.rank >= 0 && s.rank <= 2; }).sort(function(a, b) {
-    return a.rank - b.rank;
-  });
-  var topStripCount = getFreqTopCount(pool.length);
-  var topExtraItems = selected.filter(function(s) {
-    return s.rank < 0;
-  }).slice(0, Math.max(0, topStripCount - topRankItems.length));
-  topStripItems = topRankItems.concat(topExtraItems);
-
-  var topStripKeySet = {};
-  topStripItems.forEach(function(s) { topStripKeySet[s.item.key] = true; });
-
-  var bottomPriorityItems = selected.filter(function(s) { return s.rank >= 3 && s.rank <= 5; }).sort(function(a, b) {
-    return a.rank - b.rank;
-  });
-  var nextRankItems = selected.filter(function(s) { return s.rank >= 6 && s.rank <= 9; }).sort(function(a, b) {
-    return a.rank - b.rank;
-  });
-  var bottomRestItems = selected.filter(function(s) {
-    return s.rank < 0 && !topStripKeySet[s.item.key];
-  });
-  nextRankItems = nextRankItems.filter(function(s) { return s.rank === 9; });
-
-  freqCurrentItems = selected.slice();
-  freqInfinitePool = shuffle(pool.filter(function(p) {
-    return !selected.some(function(s) { return s.item.key === p.key; }) &&
-           !topStripItems.some(function(s) { return s.item.key === p.key; });
-  }));
-  freqInfiniteCursor = 0;
+  freqCurrentItems = selected;
   var html = selected.map(function(s, listIdx) {
     var spanClass = 'span-1x1';
     if (s.rank === 0) spanClass = 'span-2x2';
@@ -3514,35 +3232,96 @@ function renderFreqViewed() {
   }).join('');
   // 부족한 칸 placeholder로 채우기
   var remaining = totalItems - selected.length;
-  var topRankStyles = getFreqTopRankStyles();
-  var topHtml = topStripItems.map(function(s, idx) {
-    var originalIdx = selected.findIndex(function(x) { return x.item.key === s.item.key; });
-    var extraStyle = '';
-    if (idx < 3) extraStyle = topRankStyles[idx] || '';
-    return buildFreqTopItemHTML(s, originalIdx, data, extraStyle);
-  }).join('');
-  var mainRankStyles = getFreqMainRankStyles();
-  html = bottomPriorityItems.concat(nextRankItems).concat(bottomRestItems).map(function(s, idx) {
-    var originalIdx = selected.findIndex(function(x) { return x.item.key === s.item.key; });
-    var extraClass = '';
-    var extraStyle = '';
-    if (idx === 0) extraClass = 'freq-main-rank-4';
-    else if (idx === 1) extraClass = 'freq-main-rank-5';
-    else if (idx === 2) extraClass = 'freq-main-rank-6';
-    if (idx < 3) extraStyle = mainRankStyles[idx] || '';
-    return buildFreqItemHTML(s, originalIdx, data, extraClass, extraStyle);
-  }).join('');
-  remaining = 0;
   for (var pi = 0; pi < remaining; pi++) {
     html += '<div class="freq-item span-1x1" style="background:var(--bg3);border-color:var(--border);"></div>';
   }
-  renderFreqSpotlight(selected);
-  topGrid.innerHTML = topHtml;
+  // ── Spotlight: 그리드 렌더링 전에 먼저 표시 ──
+  var sp = document.getElementById('freq-spotlight-box');
+  if (sp) sp.style.display = 'block';
+
   grid.innerHTML = html;
-  requestAnimationFrame(function() {
-    if (typeof setFreqRowHeight === 'function') setFreqRowHeight();
+  requestAnimationFrame(function() { if (typeof setFreqRowHeight === 'function') setFreqRowHeight(); });
+
+  // ── Spotlight 표시 ──
+  var sp = document.getElementById('freq-spotlight-box');
+  if (sp) sp.style.display = 'block';
+
+  // ── 무한스크롤 sentinel 재연결 ──
+  scheduleFreqInfiniteScroll();
+}
+
+// ── (renderFreqSpotlight 제거됨 — 하드코딩 + display:block 방식으로 대체) ──
+function renderFreqSpotlight() {}
+
+// ── 무한스크롤 ──
+var freqInfiniteObserver = null;
+var freqIsAppending = false;
+var freqAppendedKeys = new Set();
+
+function scheduleFreqInfiniteScroll() {
+  if (freqInfiniteObserver) { freqInfiniteObserver.disconnect(); freqInfiniteObserver = null; }
+  var sentinel = document.getElementById('freq-sentinel');
+  if (!sentinel) return;
+  freqInfiniteObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !freqIsAppending) appendFreqGrid();
+    });
+  }, { rootMargin: '0px 0px 800px 0px', threshold: 0.01 });
+  freqInfiniteObserver.observe(sentinel);
+}
+
+function appendFreqGrid() {
+  if (freqIsAppending) return;
+  freqIsAppending = true;
+  var grid = document.getElementById('freq-grid');
+  if (!grid) { freqIsAppending = false; return; }
+  var pool = getAllImagePool();
+  var data = getFreqData();
+  var usedKeys = {};
+  freqCurrentItems.forEach(function(s){ if (s.item) usedKeys[s.item.key] = true; });
+  var vw = document.documentElement.clientWidth;
+  var colCount = vw >= 1500 ? 10 : vw >= 1200 ? 9 : vw >= 900 ? 8 : vw >= 600 ? 4 : 3;
+  var chunkSize = colCount * 3;
+  var newItems = [];
+  var projCount = {};
+  shuffle(pool).forEach(function(p) {
+    if (newItems.length >= chunkSize || usedKeys[p.key]) return;
+    if ((projCount[p.projectId] || 0) >= 3) return;
+    newItems.push({ item: p, badge: '', rank: -1 });
+    usedKeys[p.key] = true;
+    projCount[p.projectId] = (projCount[p.projectId] || 0) + 1;
   });
-  setupFreqInfiniteScroll();
+  if (!newItems.length) { freqIsAppending = false; return; }
+  var startIdx = freqCurrentItems.length;
+  freqCurrentItems = freqCurrentItems.concat(newItems);
+  var html = newItems.map(function(s, i) {
+    var p = s.item;
+    var listIdx = startIdx + i;
+    var viewCount = data[p.key] ? data[p.key].count : 0;
+    var yearMatch = p.src.match(/\/(\d{4})(\d{2})(\d{2})_/);
+    var yearStr = yearMatch ? yearMatch[1]+'.'+yearMatch[2]+'.'+yearMatch[3] : '';
+    var viewIcon = '\u2714\ufe0f', viewColor = '#d0cbbe', viewWeight = 'normal', viewSize = '11px';
+    if      (viewCount >= 1000) { viewIcon = '\u2764\ufe0f'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
+    else if (viewCount >= 500)  { viewIcon = '\u2b50'; viewColor = '#db3535'; }
+    else if (viewCount >= 100)  { viewIcon = '\ud83d\udd25'; viewColor = '#e79c16'; }
+    else if (viewCount >= 50)   { viewIcon = '\ud83d\ude4f'; viewColor = '#d4b355'; }
+    var showIcon = viewCount > 0;
+    var iconText = showIcon ? viewIcon + ' ' + viewCount : '';
+    var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">'+yearStr+'</span>' : '') +
+                   (showIcon ? '<span style="color:'+viewColor+';vertical-align:middle;font-weight:'+viewWeight+';font-size:'+viewSize+';">'+iconText+'</span>' : '');
+    return '<div class="freq-item span-1x1" onclick="freqItemClick('+listIdx+')">' +
+      '<img src="'+p.src+'" alt="'+p.title+'" loading="lazy">' +
+      '<div class="freq-item-name">'+p.title+'</div>' +
+      '<div class="freq-item-overlay">' +
+        (yearInner ? '<div class="freq-item-year" translate="no">'+yearInner+'</div>' : '') +
+        '<div class="freq-item-title">'+p.title+'</div>' +
+      '</div></div>';
+  }).join('');
+  grid.insertAdjacentHTML('beforeend', html);
+  setTimeout(function() {
+    freqIsAppending = false;
+    scheduleFreqInfiniteScroll();
+  }, 100);
 }
 
 var freqCurrentItems = [];
@@ -3690,10 +3469,8 @@ document.addEventListener('wheel', function(e) {
 
 // 페이지 로드 + 리사이즈 시 렌더
 function setFreqRowHeight() {
-  var topGrid = document.getElementById('freq-grid-top');
   var grid = document.getElementById('freq-grid');
   if (!grid) return;
-  // section의 실제 paddingLeft/Right를 읽어서 grid 너비 정확 계산
   var section = document.getElementById('freq-viewed');
   var gridW = 0;
   if (section) {
@@ -3708,16 +3485,10 @@ function setFreqRowHeight() {
   var cols = vw2 >= 1500 ? 10 : vw2 >= 1200 ? 9 : vw2 >= 900 ? 8 : vw2 >= 600 ? 4 : 3;
   var gap = 4;
   var rowH = (gridW - (cols - 1) * gap) / cols;
-  if (topGrid) {
-    var topH = 4 * rowH + 3 * gap;
-    topGrid.style.gridAutoRows = rowH.toFixed(2) + 'px';
-    topGrid.style.gridTemplateRows = 'repeat(4,' + rowH.toFixed(2) + 'px)';
-    topGrid.style.height = topH.toFixed(2) + 'px';
-  }
-  var h = 5 * rowH + 4 * gap;
   grid.style.gridAutoRows = rowH.toFixed(2) + 'px';
-  grid.style.gridTemplateRows = 'repeat(5,' + rowH.toFixed(2) + 'px)';
-  grid.style.height = h.toFixed(2) + 'px';
+  // height 고정 제거 — 무한스크롤로 동적 증가
+  grid.style.gridTemplateRows = '';
+  grid.style.height = '';
 }
 // ResizeObserver 실시간 감지
 if (window.ResizeObserver) {
@@ -4394,15 +4165,11 @@ const homeSectionIds = ['hero', 'about', 'freq-viewed'];
 const professionalSectionIds = ['professional'];
 const personalSectionIds = ['personal', 'relighting', 'designer', 'sketch'];
 
-function setSectionsVisibility(visibleIds, activeId) {
+function setSectionsVisibility(visibleIds) {
   sections.forEach(function(section) {
     section.hidden = visibleIds.indexOf(section.id) === -1;
   });
-  if (pageFooter) {
-    var hideFooter = homeSectionIds.indexOf(activeId) !== -1;
-    pageFooter.hidden = hideFooter;
-    pageFooter.style.display = hideFooter ? 'none' : '';
-  }
+  if (pageFooter) pageFooter.hidden = false;
 }
 
 function setActiveNavLink(targetId) {
@@ -4424,7 +4191,7 @@ function applyMainView(targetId, options) {
   var resolvedTargetId = visibleIds.indexOf(targetId) !== -1 ? targetId : visibleIds[0];
   var targetEl = document.getElementById(resolvedTargetId);
 
-  setSectionsVisibility(visibleIds, resolvedTargetId);
+  setSectionsVisibility(visibleIds);
   setActiveNavLink(resolvedTargetId);
 
   if (opts.updateHash !== false) {
