@@ -133,7 +133,7 @@ section{padding:100px 80px;}
 .freq-top-rank-2{grid-column:4 / span 2 !important;grid-row:3 / span 1 !important;}
 .freq-top-rank-3{grid-column:7 / span 1 !important;grid-row:1 / span 2 !important;}
 .freq-grid-sentinel{height:1px;width:100%;}
-.freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);}
+.freq-item{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--border);background:var(--bg3);border-radius:6px;}
 .freq-item.span-2x2{grid-column:span 2;grid-row:span 2;}
 .freq-item.span-2x1{grid-column:span 2;grid-row:span 1;}
 .freq-item.span-1x1{grid-column:span 1;grid-row:span 1;}
@@ -2496,16 +2496,106 @@ var _fbApp = firebase.initializeApp({
 });
 var _db = firebase.firestore();
 var _freqDoc = _db.collection('viewcounts').doc('freq');
+var _freqSnapshotCol = _db.collection('viewcountSnapshots');
 var freqDataCache = {};
+var freqRankDataCache = {};
+var freqRankSnapshotKey = '';
 var freqDataLoaded = false;
 
+function getSeoulNowParts(date) {
+  var now = date || new Date();
+  var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  var seoul = new Date(utc + (9 * 60 * 60 * 1000));
+  return {
+    year: seoul.getUTCFullYear(),
+    month: seoul.getUTCMonth() + 1,
+    day: seoul.getUTCDate(),
+    hour: seoul.getUTCHours()
+  };
+}
+
+function pad2(num) {
+  return String(num).padStart(2, '0');
+}
+
+function formatDateKeyFromParts(parts) {
+  return parts.year + '-' + pad2(parts.month) + '-' + pad2(parts.day);
+}
+
+function shiftDateKey(dateKey, deltaDays) {
+  var parts = dateKey.split('-').map(Number);
+  var shifted = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + deltaDays));
+  return shifted.getUTCFullYear() + '-' + pad2(shifted.getUTCMonth() + 1) + '-' + pad2(shifted.getUTCDate());
+}
+
+function getTargetFreqSnapshotKey() {
+  var parts = getSeoulNowParts();
+  var todayKey = formatDateKeyFromParts(parts);
+  return parts.hour >= 9 ? todayKey : shiftDateKey(todayKey, -1);
+}
+
+function cloneFreqCounts(data) {
+  return JSON.parse(JSON.stringify(data || {}));
+}
+
+function setFreqRankData(data, snapshotKey) {
+  freqRankDataCache = cloneFreqCounts(data);
+  freqRankSnapshotKey = snapshotKey || '';
+}
+
 // 페이지 로드 시 Firestore에서 데이터 가져오기
+function loadFreqRankSnapshot(liveData) {
+  var seoulParts = getSeoulNowParts();
+  var targetKey = getTargetFreqSnapshotKey();
+  var targetRef = _freqSnapshotCol.doc(targetKey);
+
+  return targetRef.get().then(function(doc) {
+    if (doc.exists) {
+      var snapshot = doc.data() || {};
+      setFreqRankData(snapshot.counts || {}, targetKey);
+      return;
+    }
+
+    if (seoulParts.hour >= 9) {
+      var payload = {
+        snapshotKey: targetKey,
+        timezone: 'Asia/Seoul',
+        capturedAt: Date.now(),
+        counts: cloneFreqCounts(liveData)
+      };
+      return targetRef.set(payload).then(function() {
+        setFreqRankData(payload.counts, targetKey);
+      }).catch(function(e) {
+        console.warn('Snapshot save failed, keeping rank snapshot empty', e);
+        setFreqRankData({}, targetKey + ':empty');
+      });
+    }
+
+    return _freqSnapshotCol.orderBy(firebase.firestore.FieldPath.documentId(), 'desc').limit(1).get().then(function(query) {
+      if (!query.empty) {
+        var latestDoc = query.docs[0];
+        var latestSnapshot = latestDoc.data() || {};
+        setFreqRankData(latestSnapshot.counts || {}, latestDoc.id);
+      } else {
+        setFreqRankData({}, targetKey + ':empty');
+      }
+    }).catch(function(e) {
+      console.warn('Snapshot fallback load failed, keeping rank snapshot empty', e);
+      setFreqRankData({}, targetKey + ':empty');
+    });
+  });
+}
+
 _freqDoc.get().then(function(doc) {
   if (doc.exists) freqDataCache = doc.data() || {};
+  return loadFreqRankSnapshot(freqDataCache);
+}).then(function() {
   freqDataLoaded = true;
   renderFreqViewed();
 }).catch(function(e) {
   console.warn('Firestore load failed, fallback to empty', e);
+  freqDataCache = {};
+  setFreqRankData({}, '');
   freqDataLoaded = true;
   renderFreqViewed();
 });
@@ -2537,6 +2627,9 @@ function getAllImagePool() {
 function getFreqData() {
   return freqDataCache;
 }
+function getFreqRankData() {
+  return freqRankDataCache || {};
+}
 function saveFreqData(data) {
   freqDataCache = data;
   _freqDoc.set(data).catch(function(e) { console.warn('Firestore save failed', e); });
@@ -2556,16 +2649,45 @@ function clearFreqViewed() {
   _freqDoc.delete().catch(function(e) { console.warn('Firestore delete failed', e); });
   renderFreqViewed();
 }
-function resetFreqViewed() {
-  var pw = prompt('비밀번호를 입력하세요:');
+var FREQ_RESET_PW_HASH = '13c6f7d6022a155ce7e38d7485faf6830594bae46f2120dbe04c795ec4cc0e20';
+
+function setFreqResetVisibility(visible) {
+  var btn = document.getElementById('freq-reset-btn') || document.querySelector('button[onclick="resetFreqViewed()"]');
+  if (!btn) return;
+  btn.hidden = !visible;
+  btn.style.display = visible ? '' : 'none';
+}
+
+async function sha256Hex(text) {
+  var enc = new TextEncoder().encode(text);
+  var digest = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(digest)).map(function(b) {
+    return b.toString(16).padStart(2, '0');
+  }).join('');
+}
+
+async function resetFreqViewed() {
+  var pw = prompt('????? ?????:');
   if (pw === null) return;
-  if (pw === '0625') {
+  var hash = await sha256Hex(String(pw).trim());
+  if (hash === FREQ_RESET_PW_HASH) {
     clearFreqViewed();
-    alert('클릭 데이터가 초기화되었습니다.');
+    alert('?? ???? ????????.');
   } else {
-    alert('비밀번호가 올바르지 않습니다.');
+    alert('????? ???? ????.');
   }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  setFreqResetVisibility(false);
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.altKey && e.shiftKey && String(e.key).toLowerCase() === 'r') {
+      var btn = document.getElementById('freq-reset-btn') || document.querySelector('button[onclick="resetFreqViewed()"]');
+      var isHidden = !btn || btn.hidden || btn.style.display === 'none';
+      setFreqResetVisibility(isHidden);
+    }
+  });
+});
 
 function getFreqSpotlightMeta(item) {
   var src = item && item.src ? item.src : '';
@@ -2577,17 +2699,73 @@ function getFreqSpotlightMeta(item) {
   return { type: type, dateText: dateText };
 }
 
+function getImageAgeInDaysFromSrc(src) {
+  if (!src) return null;
+  var match = src.match(/\/(\d{4})(\d{2})(\d{2})_/);
+  if (!match) return null;
+  var imageUtc = Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  var nowParts = getSeoulNowParts();
+  var todayUtc = Date.UTC(nowParts.year, nowParts.month - 1, nowParts.day);
+  return Math.floor((todayUtc - imageUtc) / 86400000);
+}
+
+function getFreqBadge(rank, viewCount, src) {
+  var countLabel = viewCount >= 10 ? (' · ' + String(viewCount)) : '';
+  if (rank === 0) return { label: 'TOP 1' + countLabel, color: '#ff0000', weight: '700', size: '12px' };
+  if (rank === 1) return { label: 'TOP 2' + countLabel, color: '#db3535', weight: '700', size: '11px' };
+  if (rank === 2) return { label: 'TOP 3' + countLabel, color: '#e79c16', weight: '700', size: '11px' };
+  if (rank === 3) return { label: 'TOP 4' + countLabel, color: '#d4b355', weight: '700', size: '11px' };
+  if (rank === 4) return { label: 'TOP 5' + countLabel, color: '#d0cbbe', weight: '700', size: '11px' };
+  var imageAge = getImageAgeInDaysFromSrc(src);
+  if (imageAge !== null && imageAge >= 0 && imageAge <= 100) {
+    return { label: 'NEW' + countLabel, color: '#7fd6a3', weight: '700', size: '11px' };
+  }
+  if (viewCount >= 1000) return { label: String(viewCount), color: '#ff0000', weight: '700', size: '12px' };
+  if (viewCount >= 500) return { label: String(viewCount), color: '#db3535', weight: '700', size: '11px' };
+  if (viewCount >= 100) return { label: String(viewCount), color: '#e79c16', weight: '700', size: '11px' };
+  if (viewCount >= 50) return { label: String(viewCount), color: '#d4b355', weight: '700', size: '11px' };
+  if (viewCount >= 10) return { label: String(viewCount), color: '#d0cbbe', weight: '700', size: '11px' };
+  return null;
+}
+
+var freqSpotlightFixedProjectIds = ['ncsoft', 'proj-bmw', 'proj-2019'];
+
+function getFixedSpotlightItems() {
+  var pool = getAllImagePool();
+  return freqSpotlightFixedProjectIds.map(function(projectId) {
+    var projectItems = pool.filter(function(item) {
+      return item.projectId === projectId;
+    });
+    if (!projectItems.length) return null;
+    return projectItems[Math.floor(Math.random() * projectItems.length)];
+  }).filter(Boolean);
+}
+
+function openFreqLbByKey(key) {
+  var idx = freqCurrentItems.findIndex(function(entry) {
+    return entry && entry.item && entry.item.key === key;
+  });
+  if (idx === -1) {
+    var poolItem = getAllImagePool().find(function(item) { return item.key === key; });
+    if (!poolItem) return;
+    freqCurrentItems = [{ item: poolItem, rank: -1, badge: '' }];
+    idx = 0;
+  }
+  freqLbIdx = idx;
+  openFreqLb(idx);
+}
+
+function freqSpotlightClick(key) {
+  openFreqLbByKey(key);
+}
+
 function renderFreqSpotlight(selected) {
   var section = document.getElementById('freq-spotlight');
   var cardsWrap = document.getElementById('freq-spotlight-cards');
   if (!section || !cardsWrap) return;
 
-  var spotlightItems = (selected || []).map(function(s, idx) {
-    return { entry: s, idx: idx };
-  }).filter(function(item) {
-    return item.entry.rank >= 6 && item.entry.rank <= 8;
-  }).sort(function(a, b) {
-    return a.entry.rank - b.entry.rank;
+  var spotlightItems = getFixedSpotlightItems().map(function(item) {
+    return { item: item };
   });
 
   if (!spotlightItems.length) {
@@ -2597,9 +2775,9 @@ function renderFreqSpotlight(selected) {
   }
 
   cardsWrap.innerHTML = spotlightItems.map(function(item) {
-    var p = item.entry.item;
+    var p = item.item;
     var meta = getFreqSpotlightMeta(p);
-    return '<div class="freq-spotlight-card" onclick="freqItemClick(' + item.idx + ')">' +
+    return '<div class="freq-spotlight-card" onclick="freqSpotlightClick(\'' + p.key + '\')">' +
       '<div class="freq-spotlight-thumb"><img src="' + p.src + '" alt="' + p.title + '" loading="lazy"></div>' +
       '<div class="freq-spotlight-card-body">' +
         '<div class="freq-spotlight-card-title">' + p.title + '</div>' +
@@ -2645,6 +2823,9 @@ function buildFreqItemHTML(entry, listIdx, data, extraClass, extraStyle) {
   var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (entry.rank >= 0 ? viewIcon : '');
   var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') +
     (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
+  var safeBadge = getFreqBadge(entry.rank, viewCount, p.src);
+  yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') +
+    (safeBadge ? '<span style="color:' + safeBadge.color + ';vertical-align:middle;font-style:normal;font-weight:' + safeBadge.weight + ';font-size:' + safeBadge.size + ';margin-left:8px;">' + safeBadge.label + '</span>' : '');
 
   var cls = 'freq-item ' + spanClass + (extraClass ? ' ' + extraClass : '');
   var styleAttr = extraStyle ? ' style="' + extraStyle + '"' : '';
@@ -2682,6 +2863,9 @@ function buildFreqTopItemHTML(entry, listIdx, data, layoutStyle) {
   var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (entry.rank >= 0 ? viewIcon : '');
   var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') +
     (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
+  var safeBadge = getFreqBadge(entry.rank, viewCount, p.src);
+  yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') +
+    (safeBadge ? '<span style="color:' + safeBadge.color + ';vertical-align:middle;font-style:normal;font-weight:' + safeBadge.weight + ';font-size:' + safeBadge.size + ';margin-left:8px;">' + safeBadge.label + '</span>' : '');
   var styleAttr = layoutStyle ? ' style="' + layoutStyle + '"' : '';
 
   return '<div class="freq-item span-1x1"' + styleAttr + ' data-rank="' + entry.rank + '" onclick="freqItemClick(' + listIdx + ')">' +
@@ -2797,7 +2981,7 @@ function appendFreqInfiniteItems(count) {
   var grid = document.getElementById('freq-grid');
   if (!grid || !freqInfinitePool.length) return false;
 
-  var data = getFreqData();
+  var data = getFreqRankData();
   var html = '';
   var batchSize = count || 16;
   var appended = 0;
@@ -3329,7 +3513,7 @@ function renderFreqViewed() {
   if (!grid || !topGrid) return;
 
   var pool = getAllImagePool();
-  var data = getFreqData();
+  var data = getFreqRankData();
   var usedKeys = {};
 
   // clientWidth = 스크롤바 제외 뷰포트 너비 (CSS media query와 동일)
@@ -3451,6 +3635,62 @@ function renderFreqViewed() {
   var unrankedItems = shuffle(combined.filter(function(s) { return s.rank < 0; }));
   selected = rankedItems.concat(unrankedItems).slice(0, totalItems);
 
+  var rankSelected = [];
+  var rankUsedKeys = {};
+  var rankProjectCounts = {};
+  var rankBySnapshot = [];
+  var extraBySnapshot = [];
+  var snapshotPopularKeys = Object.keys(data)
+    .filter(function(key) {
+      return data[key] && data[key].count > 0;
+    })
+    .sort(function(a, b) {
+      var countDiff = data[b].count - data[a].count;
+      if (countDiff !== 0) return countDiff;
+      return (data[b].ts || 0) - (data[a].ts || 0);
+    });
+
+  function canUseRankItem(item) {
+    if (!item || rankUsedKeys[item.key]) return false;
+    if ((rankProjectCounts[item.projectId] || 0) >= 2) return false;
+    return true;
+  }
+
+  function pushRankEntry(entry) {
+    rankUsedKeys[entry.item.key] = true;
+    rankProjectCounts[entry.item.projectId] = (rankProjectCounts[entry.item.projectId] || 0) + 1;
+    rankSelected.push(entry);
+  }
+
+  snapshotPopularKeys.forEach(function(key) {
+    if (rankBySnapshot.length >= 10) return;
+    var item = pool.find(function(candidate) { return candidate.key === key; });
+    if (!canUseRankItem(item)) return;
+    var entry = { item: item, badge: '', rank: rankBySnapshot.length };
+    rankBySnapshot.push(entry);
+    pushRankEntry(entry);
+  });
+
+  pool.slice().reverse().forEach(function(item) {
+    if (rankBySnapshot.length >= 10) return;
+    if (!canUseRankItem(item)) return;
+    var entry = { item: item, badge: '', rank: rankBySnapshot.length };
+    rankBySnapshot.push(entry);
+    pushRankEntry(entry);
+  });
+
+  shuffle(pool.slice()).forEach(function(item) {
+    if (rankSelected.length >= totalItems) return;
+    if (!canUseRankItem(item)) return;
+    var entry = { item: item, badge: '', rank: -1 };
+    extraBySnapshot.push(entry);
+    pushRankEntry(entry);
+  });
+
+  rankedItems = rankBySnapshot.slice();
+  selected = rankSelected.slice();
+  unrankedItems = extraBySnapshot.slice();
+
   var topRankItems = selected.filter(function(s) { return s.rank >= 0 && s.rank <= 2; }).sort(function(a, b) {
     return a.rank - b.rank;
   });
@@ -3472,7 +3712,6 @@ function renderFreqViewed() {
   var bottomRestItems = selected.filter(function(s) {
     return s.rank < 0 && !topStripKeySet[s.item.key];
   });
-  nextRankItems = nextRankItems.filter(function(s) { return s.rank === 9; });
 
   freqCurrentItems = selected.slice();
   freqInfinitePool = shuffle(pool.filter(function(p) {
@@ -3504,6 +3743,8 @@ function renderFreqViewed() {
     var showIcon = s.rank >= 0 || viewCount > 0;
     var iconText = viewCount > 0 ? viewIcon + ' ' + viewCount : (s.rank >= 0 ? viewIcon : '');
     var yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (showIcon ? '<span style="color:' + viewColor + ';vertical-align:middle;font-style:normal;font-weight:' + viewWeight + ';font-size:' + viewSize + ';">' + iconText + '</span>' : '');
+    var safeBadge = getFreqBadge(s.rank, viewCount, p.src);
+    yearInner = (yearStr ? '<span style="color:var(--gold);vertical-align:middle;">' + yearStr + '</span>' : '') + (safeBadge ? '<span style="color:' + safeBadge.color + ';vertical-align:middle;font-style:normal;font-weight:' + safeBadge.weight + ';font-size:' + safeBadge.size + ';margin-left:8px;">' + safeBadge.label + '</span>' : '');
     return '<div class="freq-item ' + spanClass + '" onclick="freqItemClick(' + listIdx + ')">' +
       '<img src="' + p.src + '" alt="' + p.title + '" loading="lazy">' +
       '<div class="freq-item-name">' + p.title + '</div>' +
