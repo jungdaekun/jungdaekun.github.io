@@ -552,9 +552,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 
   <nav id="main-nav">
     <a href="#hero" onclick="closeNav()">// Start</a>
-    <a href="#professional" onclick="closeNav()">Professional</a>
     <a href="#about" onclick="closeNav()">About</a>
     <a href="#freq-viewed" onclick="closeNav()">Featured</a>
+    <a href="#professional" onclick="closeNav()">Professional</a>
     <a href="#personal" onclick="closeNav()">Personal</a>
     <a href="#relighting" onclick="closeNav()">Re:Lighting</a>
     <a href="#designer" onclick="closeNav()">Designer</a>
@@ -1256,12 +1256,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
       </div>
       <!-- 우상단: IMAGE배지 + 카운터 + X -->
-      <div style="position:absolute;top:16px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:4;">
+      <div style="position:absolute;top:16px;right:20px;display:flex;align-items:center;gap:10px;z-index:4;">
         <span class="lb-type-badge" id="freq-lb-type-badge"></span>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="freq-lb-counter-overlay"></span>
-          <button onclick="closeFreqLb()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
-        </div>
+        <span style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="freq-lb-counter-overlay"></span>
+        <button onclick="closeFreqLb()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 2L10 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M10 2L2 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
       </div>
     </div>
   </div>
@@ -2981,7 +2979,7 @@ function appendFreqInfiniteItems(count) {
   var grid = document.getElementById('freq-grid');
   if (!grid || !freqInfinitePool.length) return false;
 
-  var data = getFreqRankData();
+  var data = getFreqData();
   var html = '';
   var batchSize = count || 16;
   var appended = 0;
@@ -3513,7 +3511,8 @@ function renderFreqViewed() {
   if (!grid || !topGrid) return;
 
   var pool = getAllImagePool();
-  var data = getFreqRankData();
+  var rankData = getFreqRankData();
+  var liveData = getFreqData();
   var usedKeys = {};
 
   // clientWidth = 스크롤바 제외 뷰포트 너비 (CSS media query와 동일)
@@ -3549,9 +3548,9 @@ function renderFreqViewed() {
   });
 
   // ── 나머지 채우기 (인기순 → 랜덤 보충) ──
-  var popularKeys = Object.keys(data)
-    .filter(function(k) { return data[k].count > 0; })
-    .sort(function(a,b) { return data[b].count - data[a].count; });
+  var popularKeys = Object.keys(rankData)
+    .filter(function(k) { return rankData[k] && rankData[k].count > 0; })
+    .sort(function(a,b) { return rankData[b].count - rankData[a].count; });
 
   var fillItems = [];
   var fillProjCount = {};
@@ -3640,14 +3639,14 @@ function renderFreqViewed() {
   var rankProjectCounts = {};
   var rankBySnapshot = [];
   var extraBySnapshot = [];
-  var snapshotPopularKeys = Object.keys(data)
+  var snapshotPopularKeys = Object.keys(rankData)
     .filter(function(key) {
-      return data[key] && data[key].count > 0;
+      return rankData[key] && rankData[key].count > 0;
     })
     .sort(function(a, b) {
-      var countDiff = data[b].count - data[a].count;
+      var countDiff = rankData[b].count - rankData[a].count;
       if (countDiff !== 0) return countDiff;
-      return (data[b].ts || 0) - (data[a].ts || 0);
+      return (rankData[b].ts || 0) - (rankData[a].ts || 0);
     });
 
   function canUseRankItem(item) {
@@ -3727,7 +3726,7 @@ function renderFreqViewed() {
     // 연도 추출: 이미지 경로 앞 4자리 숫자
     var yearMatch = p.src.match(/\/(\d{4})(\d{2})(\d{2})_/);
     var yearStr = yearMatch ? yearMatch[1] + '.' + yearMatch[2] + '.' + yearMatch[3] : '';
-    var viewCount = data[p.key] ? data[p.key].count : 0;
+    var viewCount = liveData[p.key] ? liveData[p.key].count : 0;
     var viewIcon, viewColor, viewWeight = 'normal', viewSize = '11px';
     if      (s.rank === 0)      { viewIcon = '🔥'; viewColor = '#ff0000'; viewWeight = '700'; viewSize = '12px'; }
     else if (s.rank === 1)      { viewIcon = '❤️'; viewColor = '#db3535'; }
@@ -3760,7 +3759,7 @@ function renderFreqViewed() {
     var originalIdx = selected.findIndex(function(x) { return x.item.key === s.item.key; });
     var extraStyle = '';
     if (idx < 3) extraStyle = topRankStyles[idx] || '';
-    return buildFreqTopItemHTML(s, originalIdx, data, extraStyle);
+    return buildFreqTopItemHTML(s, originalIdx, liveData, extraStyle);
   }).join('');
   var mainRankStyles = getFreqMainRankStyles();
   html = bottomPriorityItems.concat(nextRankItems).concat(bottomRestItems).map(function(s, idx) {
@@ -3771,7 +3770,7 @@ function renderFreqViewed() {
     else if (idx === 1) extraClass = 'freq-main-rank-5';
     else if (idx === 2) extraClass = 'freq-main-rank-6';
     if (idx < 3) extraStyle = mainRankStyles[idx] || '';
-    return buildFreqItemHTML(s, originalIdx, data, extraClass, extraStyle);
+    return buildFreqItemHTML(s, originalIdx, liveData, extraClass, extraStyle);
   }).join('');
   remaining = 0;
   for (var pi = 0; pi < remaining; pi++) {
