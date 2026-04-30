@@ -314,53 +314,41 @@ section{padding:100px 80px;}
 #prof-lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.97);flex-direction:column;}
 #prof-lb.active{display:flex;}
 .prof-lb-wrap{width:100vw;height:100vh;display:flex;flex-direction:column;}
-.prof-lb-body{display:flex;flex:1;overflow:hidden;}
+.prof-lb-header{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(8,10,13,.9);border-bottom:1px solid var(--border);flex-shrink:0;}
+.prof-lb-title-area{display:flex;align-items:center;gap:14px;}
+.prof-lb-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;}
+.prof-lb-title{font-family:var(--font-title);font-size:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}
+.prof-lb-controls{display:flex;align-items:center;gap:16px;}
+.prof-lb-counter{font-family:var(--font-mono);font-size:12px;color:var(--text2);}
+.prof-lb-btn{background:none;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.prof-lb-btn:hover{border-color:var(--border2);color:var(--gold);}
 .prof-lb-main{flex:1;display:flex;align-items:center;justify-content:center;background:#000;position:relative;overflow:hidden;}
 .prof-lb-video-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .prof-lb-video-wrap iframe{width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;}
 .prof-lb-wheel-overlay{position:absolute;inset:0;z-index:1;background:transparent;cursor:default;}
-.prof-lb-img-el{display:block;max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;image-rendering:high-quality;transition:opacity .18s ease;}
-.prof-lb-nav-prev,.prof-lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#a1a09c;width:44px;height:44px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;}
+.prof-lb-img-el{display:block;max-width:96vw;max-height:92vh;width:100%;height:100%;object-fit:contain;image-rendering:high-quality;transition:opacity .18s ease;}
+.prof-lb-nav-prev,.prof-lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;}
 .prof-lb-nav-prev{left:16px;}
 .prof-lb-nav-next{right:16px;}
-.prof-lb-nav-prev:hover,.prof-lb-nav-next:hover{border-color:var(--border2);color:var(--gold);background:var(--gold-glow);}
+.prof-lb-nav-prev:hover,.prof-lb-nav-next:hover{border-color:var(--border2);color:var(--gold);}
 .prof-lb-dots{position:absolute;bottom:16px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:2;}
-.prof-lb-dot{width:6px;height:6px;border-radius:50%;background:rgba(212,179,85,0.22);cursor:pointer;transition:all .2s;}
+.prof-lb-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .2s;}
 .prof-lb-dot.active{background:var(--gold);transform:scale(1.4);}
-.prof-lb-type-badge{position:absolute;top:16px;left:16px;font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;z-index:4;}
-.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.12em;}
+.prof-lb-type-badge{position:absolute;top:16px;right:20px;font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(8,10,13,.75);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;z-index:4;}
+.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(8,10,13,.75);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;}
 #freq-lb-type-badge{color:var(--gold-dim);border-color:var(--border);}
 .prof-lb-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:20px;align-items:center;z-index:4;pointer-events:none;}
-.prof-lb-hud .sz-hint{color:rgba(212,179,85,0.5);}
-.prof-lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(20,20,24,.9);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
+.prof-lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
 .prof-lb-zoom-badge.visible{opacity:1;}
-.lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(20,20,24,.9);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
+.lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(8,10,13,.85);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
 .lb-zoom-badge.visible{opacity:1;}
-.prof-lb-panel{width:320px;flex-shrink:0;background:#141418;border-left:1px solid #2a2a3e;display:flex;flex-direction:column;overflow:hidden;}
-.prof-lb-panel-head{padding:10px 10px 0;flex-shrink:0;}
-.prof-lb-panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;}
-.prof-lb-id{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.2em;text-transform:uppercase;display:block;}
-.prof-lb-title,.prof-lb-title-text{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#e0dfdf;display:block;line-height:1.1;margin-bottom:4px;}
-.prof-lb-sub-text{font-family:'Outfit',sans-serif;font-size:13px;color:var(--gold);letter-spacing:.02em;display:block;margin-bottom:6px;}
-.prof-lb-controls{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.prof-lb-counter{font-family:var(--font-mono);font-size:11px;color:#888;border:1px solid #383848;padding:2px 8px;border-radius:3px;white-space:nowrap;}
-.prof-lb-btn{background:none;border:1px solid #888;color:#888;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-.prof-lb-btn:hover{border-color:var(--border2);color:var(--gold);}
-.prof-lb-btn svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;}
-.prof-lb-tags-row{display:flex;flex-direction:column;gap:2px;margin-bottom:8px;}
-.prof-lb-tag{font-family:var(--font-mono);font-size:10px;color:#a1a09c;background:rgba(255,255,255,.06);padding:3px 10px;letter-spacing:.08em;text-align:center;white-space:normal;word-break:break-word;}
-.prof-lb-tag.dev{color:var(--gold-dim);}
-.prof-lb-kb{flex-shrink:0;padding:6px 10px;background:rgba(255,255,255,.06);text-align:center;margin:0 10px;}
-.prof-lb-kb-title{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.1em;margin-bottom:6px;}
-.prof-lb-shortcuts{display:flex;justify-content:center;align-items:center;gap:14px;}
-.prof-lb-shortcut{font-family:var(--font-mono);font-size:10px;color:#888;display:flex;align-items:center;gap:5px;}
-.prof-lb-shortcut-key{border:1px solid #383848;padding:2px 6px;border-radius:3px;color:#888;cursor:pointer;transition:all .15s;}
-.prof-lb-shortcut-key:hover{border-color:var(--border2);color:var(--gold);}
-.prof-lb-thumbs{display:flex;flex-direction:column;gap:4px;padding:10px;overflow-y:auto;flex:1;}
-.prof-lb-thumbs-inner{display:flex;flex-direction:column;gap:4px;}
-.prof-lb-thumbs::-webkit-scrollbar{width:4px;}
-.prof-lb-thumbs::-webkit-scrollbar-thumb{background:rgba(212,179,85,0.3);border-radius:2px;}
-.prof-lb-thumb-item{flex-shrink:0;width:100%;height:70px;border:1px solid #2a2a3e;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s,opacity .2s;opacity:.5;}
+
+/* prof-lb 썸네일 스트립 */
+.prof-lb-thumbs{display:flex;gap:6px;padding:10px 16px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;min-height:68px;align-items:center;}
+.prof-lb-thumbs-inner{display:flex;gap:6px;margin:0 auto;align-items:center;}
+.prof-lb-thumbs::-webkit-scrollbar{height:4px;}
+.prof-lb-thumbs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.prof-lb-thumb-item{flex-shrink:0;width:96px;height:54px;border:1px solid var(--border);cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s,opacity .2s;opacity:.5;}
 .prof-lb-thumb-item:hover,.prof-lb-thumb-item.active{opacity:1;border-color:var(--gold);}
 .prof-lb-thumb-item img{width:100%;height:100%;object-fit:cover;display:block;}
 .prof-lb-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);font-size:16px;color:var(--gold);}
@@ -478,14 +466,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 .lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.96);align-items:stretch;justify-content:center;flex-direction:column;}
 .lightbox.active{display:flex;}
 .lb-wrap{width:100vw;height:100vh;background:#000;display:flex;flex-direction:column;}
-.lb-body{display:flex;flex:1;overflow:hidden;}
 .lb-header{display:none;}
-.lb-id{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.2em;text-transform:uppercase;display:block;}
-.lb-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#e0dfdf;display:block;line-height:1.1;margin-bottom:4px;}
-.lb-counter{font-family:var(--font-mono);font-size:11px;color:#888;border:1px solid #383848;padding:2px 8px;border-radius:3px;white-space:nowrap;}
-.lb-btn{background:none;border:1px solid #888;color:#888;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.lb-btn:hover{border-color:rgba(232,115,0,0.6);color:#E87300;}
-.lb-btn svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;}
+.lb-title-area{display:flex;align-items:center;gap:14px;}
+.lb-id{font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;}
+.lb-title{font-family:var(--font-title);font-size:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);}
+.lb-controls{display:flex;align-items:center;gap:16px;}
+.lb-counter{font-family:'Noto Sans KR',var(--font-mono);font-size:12px;color:var(--text2);}
+.lb-scroll-hint{font-family:'Noto Sans KR',var(--font-mono);font-size:12px;color:var(--text2);letter-spacing:.04em;display:flex;align-items:center;gap:6px;}
+.lb-scroll-hint::before{content:'↕';color:var(--gold-dim);}
+.lb-btn{background:none;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.lb-btn:hover{border-color:var(--border2);color:var(--gold);}
 .lb-img-viewport{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;position:relative;height:100%;}
 .lb-img-viewport::-webkit-scrollbar{width:6px;height:6px;}
 .lb-img-viewport::-webkit-scrollbar-track{background:#000;}
@@ -495,36 +485,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 .lb-img.zoomed.dragging{cursor:grabbing;transition:none;}
 .lb-img-transition{animation:lbFade .25s ease;}
 @keyframes lbFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.lb-thumbnails{display:flex;flex-direction:column;gap:4px;padding:10px;overflow-y:auto;flex:1;}
-.lb-thumbnails::-webkit-scrollbar{width:4px;}
-.lb-thumbnails::-webkit-scrollbar-thumb{background:rgba(232,115,0,0.3);border-radius:2px;}
-.lb-thumb{flex-shrink:0;width:100%;height:70px;object-fit:cover;border:1px solid #2a2a3e;cursor:pointer;opacity:.5;transition:opacity .2s,border-color .2s;display:block;}
+.lb-thumbnails{display:flex;gap:5px;padding:9px 14px;background:rgba(8,10,13,.95);border-top:1px solid var(--border);overflow-x:auto;flex-shrink:0;align-items:center;justify-content:center;}
+.lb-thumbnails::-webkit-scrollbar{height:3px;}
+.lb-thumbnails::-webkit-scrollbar-track{background:var(--bg);}
+.lb-thumbnails::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.lb-thumb{flex-shrink:0;width:72px;height:44px;object-fit:cover;border:1px solid var(--border);cursor:pointer;opacity:.45;transition:opacity .2s,border-color .2s;display:block;}
 .lb-thumb:hover{opacity:.85;}
-.lb-thumb.active{opacity:1;border-color:#E87300;}
+.lb-thumb.active{opacity:1;border-color:var(--gold);}
 .lb-nav-indicator{position:absolute;bottom:70px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:3;}
-.lb-nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(232,115,0,0.2);transition:all .2s;cursor:pointer;}
-.lb-nav-dot.active{background:#E87300;transform:scale(1.4);}
-.lb-nav-prev,.lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#a1a09c;width:44px;height:44px;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3;}
+.lb-nav-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .2s;cursor:pointer;}
+.lb-nav-dot.active{background:var(--gold);transform:scale(1.4);}
+.lb-nav-prev,.lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:44px;height:44px;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3;}
 .lb-nav-prev{left:16px;}
 .lb-nav-next{right:16px;}
-.lb-nav-prev:hover,.lb-nav-next:hover{border-color:rgba(232,115,0,0.6);color:#E87300;background:rgba(232,115,0,0.08);}
-.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.12em;position:absolute;top:16px;left:16px;z-index:4;}
-.lb-panel{width:320px;flex-shrink:0;background:#141418;border-left:1px solid #2a2a3e;display:flex;flex-direction:column;overflow:hidden;}
-.lb-panel-head{padding:10px 10px 0;flex-shrink:0;}
-.lb-panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;}
-.lb-panel-sub{font-family:'Outfit',sans-serif;font-size:13px;color:#c8905a;letter-spacing:.02em;display:block;margin-bottom:6px;}
-.lb-info-box{background:rgba(255,255,255,.06);padding:8px 10px;margin-bottom:8px;font-size:13px;color:#bdc3d0;line-height:1.6;}
-.lb-info-box:empty{display:none;}
-.lb-info-box a{color:var(--gold);text-decoration:none;}
-.lb-info-box a:hover{color:var(--gold2);}
-.lb-shortcut-panel{flex-shrink:0;padding:6px 10px;background:rgba(255,255,255,.06);text-align:center;margin:0 10px;}
-.lb-shortcut-title{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.1em;margin-bottom:6px;}
-.lb-shortcuts{display:flex;justify-content:center;align-items:center;gap:14px;}
-.lb-shortcut{font-family:var(--font-mono);font-size:10px;color:#888;display:flex;align-items:center;gap:5px;}
-.lb-shortcut-key{border:1px solid #383848;padding:2px 6px;border-radius:3px;color:#888;cursor:pointer;transition:all .15s;}
-.lb-shortcut-key:hover{border-color:rgba(232,115,0,0.6);color:#E87300;}
-@media(max-width:980px){.prof-lb-body,.lb-body{flex-direction:column;}.prof-lb-panel,.lb-panel{width:100%;border-left:none;border-top:1px solid #2a2a3e;max-height:42vh;}.prof-lb-thumbs,.lb-thumbnails{flex-direction:row;overflow-x:auto;overflow-y:hidden;}.prof-lb-thumbs-inner{flex-direction:row;}.prof-lb-thumb-item,.lb-thumb{width:120px;height:70px;}}
-@media(max-width:768px){#proj-grid-inner{grid-template-columns:1fr;}.project-card{grid-column:1 / -1 !important;}}
+.lb-nav-prev:hover,.lb-nav-next:hover{border-color:var(--border2);color:var(--gold);}
+
+@media(max-width:768px){#proj-grid-inner{grid-template-columns:1fr;}.project-card{grid-column:1 / -1 !important;}.lb-thumbnails{display:none;}.lb-scroll-hint{display:none;}}
 
 
 /* ── SCROLL ANIMATIONS ── */
@@ -1038,48 +1014,40 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 
 <div id="prof-lb">
   <div class="prof-lb-wrap">
-    <div class="prof-lb-body">
-      <div class="prof-lb-main" id="prof-lb-main">
-        <button class="prof-lb-nav-prev" onclick="profLbStep(-1)">&#8249;</button>
-        <button class="prof-lb-nav-next" onclick="profLbStep(1)">&#8250;</button>
-        <div class="prof-lb-dots" id="prof-lb-dots"></div>
-        <div class="prof-lb-zoom-badge" id="prof-lb-zoom-badge">ZOOM 100%</div>
-        <div class="prof-lb-type-badge" id="prof-lb-type-badge"></div>
-        <div class="wheel-hint-overlay" id="prof-wheel-hint">
-          <div class="wheel-hint-arrow up">&#9650;</div>
-          <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/><line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/><rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/></svg></div>
-          <div class="wheel-hint-arrow down">&#9660;</div>
-        </div>
-        <div class="prof-lb-hud">
-          <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/><line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/><rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/></svg> Click zoom in/out</div>
-          <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
-          <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
-        </div>
+    <div class="prof-lb-header">
+      <div class="prof-lb-title-area">
+        <span class="prof-lb-id" id="prof-lb-id" translate="no"></span>
+        <span class="prof-lb-title" id="prof-lb-title"></span>
       </div>
-      <div class="prof-lb-panel">
-        <div class="prof-lb-panel-head">
-          <div class="prof-lb-panel-top">
-            <div><span class="prof-lb-id" id="prof-lb-id" translate="no"></span></div>
-            <div class="prof-lb-controls">
-              <span class="prof-lb-counter" id="prof-lb-counter"></span>
-              <button class="prof-lb-btn" onclick="closeProfLb()" aria-label="Close"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M3 3L13 13M13 3L3 13"/></svg></button>
-            </div>
-          </div>
-          <span class="prof-lb-title" id="prof-lb-title"></span>
-          <span class="prof-lb-sub-text" id="prof-lb-sub-text"></span>
-          <div class="prof-lb-tags-row" id="prof-lb-tags-row"></div>
-        </div>
-        <div class="prof-lb-kb">
-          <div class="prof-lb-kb-title">Keyboard Shortcuts</div>
-          <div class="prof-lb-shortcuts">
-            <span class="prof-lb-shortcut"><span class="prof-lb-shortcut-key" onclick="profLbPrevProject()">&#8592;</span> Previous</span>
-            <span class="prof-lb-shortcut"><span class="prof-lb-shortcut-key" onclick="profLbNextProject()">&#8594;</span> Next</span>
-            <span class="prof-lb-shortcut"><span class="prof-lb-shortcut-key" onclick="closeProfLb()">esc</span> Close</span>
-          </div>
-        </div>
-        <div class="prof-lb-thumbs" id="prof-lb-thumbs"></div>
+      <div class="prof-lb-controls">
+        <span class="prof-lb-counter" id="prof-lb-counter"></span>
+        <button class="prof-lb-btn" onclick="closeProfLb()">✕</button>
       </div>
     </div>
+    <div class="prof-lb-main" id="prof-lb-main">
+      <button class="prof-lb-nav-prev" onclick="profLbPrevProject()">‹</button>
+      <button class="prof-lb-nav-next" onclick="profLbNextProject()">›</button>
+      <div class="prof-lb-dots" id="prof-lb-dots"></div>
+      <div class="prof-lb-zoom-badge" id="prof-lb-zoom-badge">🔍 100%</div>
+      <div class="prof-lb-type-badge" id="prof-lb-type-badge"></div>
+      <!-- 휠 힌트 오버레이 -->
+      <div class="wheel-hint-overlay" id="prof-wheel-hint">
+        <div class="wheel-hint-arrow up">▲</div>
+        <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
+            </svg></div>
+        <div class="wheel-hint-arrow down">▼</div>
+      </div>
+      <!-- HUD -->
+      <div class="prof-lb-hud">
+        <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/><line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/><rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/></svg> Click zoom in/out</div>
+        <div class="sz-hint" style="color:rgba(255,255,255,.15)">|</div>
+        <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+      </div>
+    </div>
+    <div class="prof-lb-thumbs" id="prof-lb-thumbs"></div>
   </div>
 </div>
 
@@ -1543,51 +1511,66 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
   <!-- ── LIGHTBOX ── -->
   <div id="lightbox" class="lightbox">
     <div class="lb-wrap">
-      <div class="lb-body">
-        <div class="lb-img-viewport" id="lb-img-viewport">
-          <span class="lb-type-badge" id="lb-type-badge"></span>
-          <img id="lb-img" class="lb-img" src="" alt="">
-          <div class="wheel-hint-overlay" id="lb-wheel-hint">
-            <div class="wheel-hint-arrow up">&#9650;</div>
-            <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/><line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/><rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/></svg></div>
-            <div class="wheel-hint-arrow down">&#9660;</div>
-            <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
-          </div>
-          <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-          <div class="lb-zoom-badge" id="lb-zoom-badge">ZOOM 100%</div>
-          <button class="lb-nav-prev" onclick="lbPrevImg()">&#8249;</button>
-          <button class="lb-nav-next" onclick="lbNextImg()">&#8250;</button>
-          <div class="lb-nav-indicator" id="lb-nav-dots"></div>
-          <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:4;pointer-events:none;">
-            <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/><line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/><rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/></svg> Click zoom in/out</div>
-            <div class="sz-hint" style="color:rgba(255,255,255,.15);">|</div>
-            <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
-          </div>
+      <div class="lb-header">
+        <div class="lb-title-area">
+          <span class="lb-id" id="lb-id" translate="no"></span>
+          <span class="lb-title" id="lb-title"></span>
         </div>
-        <div class="lb-panel">
-          <div class="lb-panel-head">
-            <div class="lb-panel-top">
-              <div><span class="lb-id" id="lb-id" translate="no"></span></div>
-              <div style="display:flex;align-items:center;gap:8px;">
-                <span class="lb-counter" id="lb-counter"></span>
-                <button class="lb-btn" onclick="closeLightbox()" aria-label="Close"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M3 3L13 13M13 3L3 13"/></svg></button>
-              </div>
-            </div>
-            <span class="lb-title" id="lb-title"></span>
-            <span class="lb-panel-sub" id="lb-panel-sub"></span>
-            <div class="lb-info-box" id="lb-caption"></div>
-          </div>
-          <div class="lb-shortcut-panel">
-            <div class="lb-shortcut-title">Keyboard Shortcuts</div>
-            <div class="lb-shortcuts">
-              <span class="lb-shortcut"><span class="lb-shortcut-key" onclick="lbPrev()">&#8592;</span> Previous</span>
-              <span class="lb-shortcut"><span class="lb-shortcut-key" onclick="lbNext()">&#8594;</span> Next</span>
-              <span class="lb-shortcut"><span class="lb-shortcut-key" onclick="closeLightbox()">esc</span> Close</span>
-            </div>
-          </div>
-          <div class="lb-thumbnails" id="lb-thumbnails"></div>
+        <div class="lb-controls">
+          <span class="lb-scroll-hint">스크롤로 이미지 넘기기</span>
+          <span class="lb-counter" id="lb-counter"></span>
+          <button class="lb-btn" onclick="closeLightbox()">✕</button>
         </div>
       </div>
+      <div class="lb-img-viewport" id="lb-img-viewport">
+        <!-- 좌상단 고정 타이틀 -->
+        <div id="lb-title-wrap" style="position:absolute;top:16px;left:0;right:0;padding:0 24px;pointer-events:none;z-index:3;transition:opacity .2s;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:.15em;margin-bottom:5px;" id="lb-id-overlay" translate="no"></div>
+          <div style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);" id="lb-title-overlay"></div>
+        </div>
+        <!-- 우상단: IMAGE배지 위, 카운터+X 아래 -->
+        <div id="lb-top-right" style="position:absolute;top:12px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:4;transition:opacity .2s;">
+          <span class="lb-type-badge" id="lb-type-badge"></span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--text2);" id="lb-counter-overlay"></span>
+            <button onclick="closeLightbox()" style="background:rgba(8,10,13,.7);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">✕</button>
+          </div>
+        </div>
+        <img id="lb-img" class="lb-img" src="" alt="">
+        <!-- 영상 재생 중 하단 타이틀 -->
+        <div id="lb-video-title" style="position:absolute;bottom:0;left:0;right:0;padding:40px 24px 20px;background:linear-gradient(to top,rgba(8,10,13,.85) 0%,transparent 100%);pointer-events:none;z-index:3;opacity:0;transition:opacity .2s;">
+          <div id="lb-video-title-id" translate="no" style="font-family:var(--font-mono);font-size:10px;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:5px;"></div>
+          <div id="lb-video-title-text" style="font-family:var(--font-title);font-size:18px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);"></div>
+        </div>
+        <!-- 휠 힌트 오버레이 -->
+        <div class="wheel-hint-overlay" id="lb-wheel-hint">
+          <div class="wheel-hint-arrow up">▲</div>
+          <div class="wheel-hint-mouse"><svg width="20" height="30" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="1.5"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="1.5" style="animation:wheelScroll 1.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box;"/>
+            </svg>
+            <style>@keyframes wheelScroll{0%{transform:translateY(-2px);opacity:.25;}50%{transform:translateY(2px);opacity:1;}100%{transform:translateY(-2px);opacity:.25;}}</style></div>
+          <div class="wheel-hint-arrow down">▼</div>
+          <div class="wheel-hint-text">SCROLL TO NAVIGATE</div>
+        </div>
+        <div id="lb-youtube-wrap" style="display:none;width:100%;height:100%;position:absolute;inset:0;"><iframe id="lb-youtube-iframe" style="width:min(100%,calc(100vh*16/9));height:min(100%,calc(100vw*9/16));max-width:96vw;max-height:92vh;border:0;margin:auto;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div id="lb-caption" style="position:absolute;top:55px;left:0;right:0;padding:4px 24px;background:none;font-family:'Noto Sans KR',var(--font-mono);font-size:13px;color:#bdc3d0;letter-spacing:.04em;line-height:1.5;pointer-events:auto;opacity:0;transition:opacity .3s;z-index:3;"></div>
+        <div class="lb-zoom-badge" id="lb-zoom-badge">🔍 100%</div>
+        <button class="lb-nav-prev" onclick="lbPrev()">‹</button>
+        <button class="lb-nav-next" onclick="lbNext()">›</button>
+        <div class="lb-nav-indicator" id="lb-nav-dots"></div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:4;pointer-events:none;">
+          <div class="sz-hint"><svg width="13" height="19" viewBox="0 0 28 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;">
+              <rect x="1" y="1" width="26" height="40" rx="13" stroke="rgba(200,168,75,0.7)" stroke-width="2"/>
+              <line x1="14" y1="1" x2="14" y2="20" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
+              <rect x="11.5" y="7" width="5" height="9" rx="2.5" fill="rgba(200,168,75,0.15)" stroke="#d4b355" stroke-width="2"/>
+            </svg> Click zoom in/out</div>
+          <div class="sz-hint" style="color:rgba(255,255,255,.15);">|</div>
+          <div class="sz-hint"><span class="sz-key">ESC</span> close</div>
+        </div>
+      </div>
+      <div class="lb-thumbnails" id="lb-thumbnails"></div>
     </div>
   </div>
 
@@ -2136,13 +2119,19 @@ let scrollTimer = null;
 
 function openLightbox(projectId, startIdx) {
   currentProject = projects[projectId];
-  if (!currentProject) return;
   currentProjectId = projectId;
   currentIdx = startIdx || 0;
-  document.getElementById('lb-id').textContent = currentProject.id || '';
-  document.getElementById('lb-title').textContent = currentProject.title || '';
+  document.getElementById('lb-id').textContent = currentProject.id;
+  // 오버레이 업데이트
+  var idOv = document.getElementById('lb-id-overlay');
+  var titleOv = document.getElementById('lb-title-overlay');
+  var counterOv = document.getElementById('lb-counter-overlay');
+  if (idOv) idOv.textContent = currentProject.id;
+  if (titleOv) titleOv.textContent = currentProject.title;
+  document.getElementById('lb-title').textContent = currentProject.title;
   renderLightbox(true);
   document.getElementById('lightbox').classList.add('active');
+  // 휠 힌트 5초 표시
   var lbHint = document.getElementById('lb-wheel-hint');
   if (lbHint) {
     clearTimeout(lbHint._t);
@@ -2150,56 +2139,84 @@ function openLightbox(projectId, startIdx) {
     lbHint._t = setTimeout(function(){ lbHint.classList.remove('visible'); }, 2000);
   }
   document.body.style.overflow = 'hidden';
+  // 트래킹 - 이미지 단위로
   var key = projectId + '_' + currentIdx;
   var src = currentProject.images[currentIdx];
   trackFreqClick(key, src, currentProject.title);
 }
 
-function getLightboxCaptionHtml() {
-  if (!currentProject) return '';
-  var captions = currentProject.captions || [];
-  return captions[currentIdx] || captions[0] || '';
-}
-
 function renderLightbox(instant) {
-  var imgs = currentProject.images;
-  var item = imgs[currentIdx];
-  var img = document.getElementById('lb-img');
-  var thumbs = document.getElementById('lb-thumbnails');
-  var dots = document.getElementById('lb-nav-dots');
-  var badge = document.getElementById('lb-type-badge');
-  var caption = document.getElementById('lb-caption');
-  var counter = document.getElementById('lb-counter');
-  var panelSub = document.getElementById('lb-panel-sub');
+  const imgs = currentProject.images;
+  const img = document.getElementById('lb-img');
+
+  // 카운터 & 도트 즉시 업데이트
+  document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + imgs.length;
+  var counterOv2 = document.getElementById('lb-counter-overlay');
+  if (counterOv2) counterOv2.textContent = (currentIdx + 1) + ' / ' + imgs.length;
+
+  // 캡션 처리
+  // type-badge 업데이트
+  var typeBadge = document.getElementById('lb-type-badge');
+  if (typeBadge) {
+    var isYt = typeof imgs[currentIdx] === 'object' && imgs[currentIdx].type === 'youtube';
+    typeBadge.textContent = isYt ? '▶ VIDEO' : '■ IMAGE';
+    typeBadge.style.display = '';
+  }
+  var capEl = document.getElementById('lb-caption');
+  if (capEl) {
+    var cap = (currentProject.captions && currentProject.captions[currentIdx]) || '';
+    capEl.innerHTML = cap;
+    capEl.style.opacity = cap ? '1' : '0';
+  }
+  const dots = document.getElementById('lb-nav-dots');
+  if (dots) {
+    dots.innerHTML = imgs.map((_, i) =>
+      '<div class="lb-nav-dot' + (i === currentIdx ? ' active' : '') + '" onclick="lbGoto(' + i + ')"></div>'
+    ).join('');
+  }
+
+  // 썸네일 스트립
+  const thumbs = document.getElementById('lb-thumbnails');
+  if (thumbs) {
+    thumbs.innerHTML = imgs.map((src, i) => {
+      var thumbSrc = (typeof src === 'object' && src.type === 'youtube')
+        ? 'https://img.youtube.com/vi/' + src.id + '/mqdefault.jpg'
+        : (typeof src === 'object' && src.thumb) ? src.thumb : src;
+      var isYt = typeof src === 'object' && src.type === 'youtube';
+      return '<div style="position:relative;display:inline-block;flex-shrink:0;">' +
+        '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + thumbSrc + '" loading="lazy" onclick="lbGoto(' + i + ')">' +
+        (isYt ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;"><span style="font-size:16px;">▶</span></div>' : '') +
+        '</div>';
+    }).join('');
+  }
+
+  const newSrc = imgs[currentIdx];
+  var isYoutube = newSrc && typeof newSrc === 'object' && newSrc.type === 'youtube';
+  var lbImg = document.getElementById('lb-img');
   var lbYtWrap = document.getElementById('lb-youtube-wrap');
   var lbYtIframe = document.getElementById('lb-youtube-iframe');
-  var isYoutube = item && typeof item === 'object' && item.type === 'youtube';
-
-  counter.textContent = (currentIdx + 1) + ' / ' + imgs.length;
-  badge.textContent = isYoutube ? 'VIDEO' : 'IMAGE';
-  panelSub.textContent = isYoutube ? 'Embedded Video Preview' : 'High Resolution Still Image';
-  caption.innerHTML = getLightboxCaptionHtml();
-
-  dots.innerHTML = imgs.map(function(_, i) {
-    return '<div class="lb-nav-dot' + (i === currentIdx ? ' active' : '') + '" onclick="lbGoto(' + i + ')"></div>';
-  }).join('');
-
-  thumbs.innerHTML = imgs.map(function(src, i) {
-    var thumbSrc = (typeof src === 'object' && src.type === 'youtube')
-      ? 'https://img.youtube.com/vi/' + src.id + '/mqdefault.jpg'
-      : (typeof src === 'object' && src.thumb) ? src.thumb : src;
-    var isYtThumb = typeof src === 'object' && src.type === 'youtube';
-    return '<div style="position:relative;display:block;flex-shrink:0;">'
-      + '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + thumbSrc + '" loading="lazy" onclick="lbGoto(' + i + ')">'
-      + (isYtThumb ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:#E87300;font-size:16px;background:rgba(0,0,0,.22);">&#9654;</div>' : '')
-      + '</div>';
-  }).join('');
 
   if (isYoutube) {
     isAnimating = false;
-    img.style.display = 'none';
+    lbImg.style.display = 'none';
     lbYtWrap.style.display = 'block';
-    lbYtIframe.src = 'https://www.youtube.com/embed/' + item.id + '?autoplay=1&mute=1&rel=0&modestbranding=1';
+    // src가 없을 때만 설정 → 이어서 재생 (이미 로드된 경우 src 유지)
+    if (!lbYtIframe.src || lbYtIframe.src === 'about:blank' || lbYtIframe.src === window.location.href) {
+      lbYtIframe.src = 'https://www.youtube.com/embed/' + newSrc.id + '?autoplay=1&mute=1&rel=0&modestbranding=1';
+    }
+    // 좌상단 + 우상단 텍스트/배지 모두 숨김
+    var titleWrap = document.getElementById('lb-title-wrap');
+    if (titleWrap) titleWrap.style.opacity = '0';
+    var topRight = document.getElementById('lb-top-right');
+    if (topRight) topRight.style.opacity = '0';
+    // 하단 타이틀 표시
+    var vtitle = document.getElementById('lb-video-title');
+    var vtitleId = document.getElementById('lb-video-title-id');
+    var vtitleText = document.getElementById('lb-video-title-text');
+    if (vtitle) vtitle.style.opacity = '1';
+    if (vtitleId) vtitleId.textContent = currentProject.id;
+    if (vtitleText) vtitleText.textContent = currentProject.title;
+    // 뷰포트 전체를 덮는 휠 캡처 오버레이
     var vp = document.getElementById('lb-img-viewport');
     var existOverlay = vp ? vp.querySelector('.lb-yt-wheel-overlay') : null;
     if (!existOverlay && vp) {
@@ -2210,63 +2227,90 @@ function renderLightbox(instant) {
     } else if (existOverlay) {
       existOverlay.style.display = 'block';
     }
-    var zoomBadge = document.getElementById('lb-zoom-badge');
-    if (zoomBadge) zoomBadge.classList.remove('visible');
-    requestAnimationFrame(function() {
-      var t = thumbs.children[currentIdx];
-      if (!t) return;
-      var tRect = t.getBoundingClientRect();
-      var cRect = thumbs.getBoundingClientRect();
-      var tCenter = tRect.top - cRect.top + thumbs.scrollTop + tRect.height / 2;
-      thumbs.scrollTop = tCenter - thumbs.clientHeight / 2;
-    });
+    if (thumbs) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var t = thumbs.children[currentIdx];
+          if (!t) return;
+          var tRect = t.getBoundingClientRect();
+          var cRect = thumbs.getBoundingClientRect();
+          var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+          thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+        });
+      });
+    }
     return;
-  }
-
-  lbYtWrap.style.display = 'none';
-  lbYtIframe.src = '';
-  img.style.display = 'block';
-  var vp2 = document.getElementById('lb-img-viewport');
-  if (vp2) {
-    var ov = vp2.querySelector('.lb-yt-wheel-overlay');
-    if (ov) ov.style.display = 'none';
+  } else {
+    lbYtWrap.style.display = 'none';
+    // src 유지 (이어서 재생을 위해 초기화 안 함 - closeLightbox에서만 초기화)
+    lbImg.style.display = 'block';
+    // 좌상단 + 우상단 복원
+    var titleWrap2 = document.getElementById('lb-title-wrap');
+    if (titleWrap2) titleWrap2.style.opacity = '';
+    var topRight2 = document.getElementById('lb-top-right');
+    if (topRight2) topRight2.style.opacity = '';
+    // 하단 타이틀 숨김
+    var vtitle2 = document.getElementById('lb-video-title');
+    if (vtitle2) vtitle2.style.opacity = '0';
+    // 휠 오버레이 제거
+    var vp2 = document.getElementById('lb-img-viewport');
+    if (vp2) { var ov = vp2.querySelector('.lb-yt-wheel-overlay'); if (ov) ov.style.display = 'none'; }
   }
 
   if (instant || !img.src || img.src === window.location.href) {
     img.style.transition = 'none';
     img.style.opacity = '1';
-    img.src = item;
-    isAnimating = false;
-  } else {
-    img.style.transition = 'opacity 0.18s ease';
-    img.style.opacity = '0';
-    var preload = new Image();
-    preload.onload = function() {
-      img.src = item;
-      requestAnimationFrame(function() { img.style.opacity = '1'; });
-      isAnimating = false;
-    };
-    preload.onerror = function() {
-      img.src = item;
-      img.style.opacity = '1';
-      isAnimating = false;
-    };
-    preload.src = item;
+    img.src = newSrc;
+    // 썸네일 active 스크롤
+    if (thumbs) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var t = thumbs.children[currentIdx];
+          if (!t) return;
+          var tRect = t.getBoundingClientRect();
+          var cRect = thumbs.getBoundingClientRect();
+          var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+          thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+        });
+      });
+    }
+    return;
   }
 
-  requestAnimationFrame(function() {
-    var t = thumbs.children[currentIdx];
-    if (!t) return;
-    var tRect = t.getBoundingClientRect();
-    var cRect = thumbs.getBoundingClientRect();
-    var tCenter = tRect.top - cRect.top + thumbs.scrollTop + tRect.height / 2;
-    thumbs.scrollTop = tCenter - thumbs.clientHeight / 2;
-  });
+  // fade out → 프리로드 → src 교체 → fade in
+  img.style.transition = 'opacity 0.18s ease';
+  img.style.opacity = '0';
+
+  const preload = new Image();
+  preload.onload = function() {
+    img.src = newSrc;
+    requestAnimationFrame(function() { img.style.opacity = '1'; });
+    isAnimating = false;
+    if (thumbs) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var t = thumbs.children[currentIdx];
+          if (!t) return;
+          var tRect = t.getBoundingClientRect();
+          var cRect = thumbs.getBoundingClientRect();
+          var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+          thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+        });
+      });
+    }
+  };
+  preload.onerror = function() {
+    img.src = newSrc;
+    img.style.opacity = '1';
+    isAnimating = false;
+  };
+  preload.src = newSrc;
 
   var vpScroll = document.getElementById('lb-img-viewport');
   if (vpScroll) vpScroll.scrollTop = 0;
 }
 
+// 개인작업 + 리라이팅 프로젝트 순서
 var lbProjectOrder = ['proj-rock', 'proj-m4', 'proj-desert', 'proj-2019', 'proj-stylized', 'proj-zbrushtile', 'proj-forsaken', 'proj-afternoon', 'proj-hideout', 'proj-bulldozer', 'proj-ppsh41', 'proj-cx420', 'proj-excavator', 'proj-ak74u', 'proj-hmmwv', 'proj-oldwork', 'proj-genesis', 'proj-bmw'];
 
 function lbNext() {
@@ -4224,14 +4268,6 @@ function openProfLb(key, idx) {
   profIdx = idx || 0;
   document.getElementById('prof-lb-id').textContent = profCurrent.id;
   document.getElementById('prof-lb-title').textContent = profCurrent.title;
-  document.getElementById('prof-lb-sub-text').textContent = profCurrent.sub || '';
-  var profTags = document.getElementById('prof-lb-tags-row');
-  if (profTags) {
-    profTags.innerHTML = (profCurrent.tags || []).map(function(tag) {
-      var cls = /Developer|Publisher/i.test(tag) ? 'prof-lb-tag dev' : 'prof-lb-tag';
-      return '<span class="' + cls + '">' + tag + '</span>';
-    }).join('');
-  }
   renderProfLb();
   document.getElementById('prof-lb').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -4297,8 +4333,11 @@ function profLbPrevProject() {
 function renderProfLb() {
   var item = profCurrent.items[profIdx];
   var main = document.getElementById('prof-lb-main');
+
+  // 기존 콘텐츠 제거 (nav 버튼, dots, badge 제외)
   var prev = main.querySelector('.prof-lb-video-wrap, .prof-lb-img-el');
   if (prev) {
+    // 영상이었으면 src 초기화
     var oldIframe = prev.querySelector('iframe');
     if (oldIframe) oldIframe.src = '';
     prev.remove();
@@ -4308,16 +4347,18 @@ function renderProfLb() {
     var wrap = document.createElement('div');
     wrap.className = 'prof-lb-video-wrap';
     var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube.com/embed/' + item.videoId + '?autoplay=1&mute=1&rel=0&modestbranding=1' + (item.start ? '&start=' + item.start : '');
+    iframe.src = 'https://www.youtube.com/embed/' + item.videoId +
+      '?autoplay=1&mute=1&rel=0&modestbranding=1' + (item.start ? '&start=' + item.start : '');
     iframe.allow = 'autoplay; encrypted-media';
     iframe.allowFullscreen = true;
     iframe.frameBorder = '0';
+    // 휠 이벤트 캡처용 투명 오버레이 (iframe이 휠 이벤트 가로채는 것 방지)
     var overlay = document.createElement('div');
     overlay.className = 'prof-lb-wheel-overlay';
     wrap.appendChild(iframe);
     wrap.appendChild(overlay);
     main.insertBefore(wrap, main.querySelector('.prof-lb-nav-prev'));
-    document.getElementById('prof-lb-type-badge').textContent = 'VIDEO';
+    document.getElementById('prof-lb-type-badge').textContent = '▶ VIDEO';
   } else {
     var img = document.createElement('img');
     img.className = 'prof-lb-img-el';
@@ -4326,42 +4367,54 @@ function renderProfLb() {
     img.style.transition = 'opacity 0.18s ease';
     main.insertBefore(img, main.querySelector('.prof-lb-nav-prev'));
     requestAnimationFrame(function() { img.style.opacity = '1'; });
-    document.getElementById('prof-lb-type-badge').textContent = 'IMAGE';
+    document.getElementById('prof-lb-type-badge').textContent = '■ IMAGE';
   }
 
-  document.getElementById('prof-lb-counter').textContent = (profIdx + 1) + ' / ' + profCurrent.items.length;
-  document.getElementById('prof-lb-title').textContent = profCurrent.title || '';
-  document.getElementById('prof-lb-sub-text').textContent = profCurrent.sub || '';
+  // 카운터
+  document.getElementById('prof-lb-counter').textContent =
+    (profIdx + 1) + ' / ' + profCurrent.items.length;
 
+  // Dots
   var dots = document.getElementById('prof-lb-dots');
   dots.innerHTML = profCurrent.items.map(function(it, i) {
-    return '<div class="prof-lb-dot' + (i === profIdx ? ' active' : '') + '" onclick="profIdx=' + i + ';renderProfLb()"></div>';
+    return '<div class="prof-lb-dot' + (i === profIdx ? ' active' : '') +
+      '" onclick="profIdx=' + i + ';renderProfLb()"></div>';
   }).join('');
 
+  // 썸네일 스트립
   var thumbs = document.getElementById('prof-lb-thumbs');
-  thumbs.innerHTML = '<div class="prof-lb-thumbs-inner">' + profCurrent.items.map(function(it, i) {
-    var thumbSrc = it.type === 'video' ? 'https://img.youtube.com/vi/' + it.videoId + '/mqdefault.jpg' : it.src;
-    var playIcon = it.type === 'video' ? '<div class="prof-lb-thumb-play">&#9654;</div>' : '';
-    return '<div class="prof-lb-thumb-item' + (i === profIdx ? ' active' : '') + '" onclick="profIdx=' + i + ';renderProfLb()">'
-      + '<img src="' + thumbSrc + '" loading="lazy">'
-      + playIcon
-      + '</div>';
-  }).join('') + '</div>';
+  var thumbsHtml = profCurrent.items.map(function(it, i) {
+    var thumbSrc = it.type === 'video'
+      ? 'https://img.youtube.com/vi/' + it.videoId + '/mqdefault.jpg'
+      : it.src;
+    var playIcon = it.type === 'video' ? '<div class="prof-lb-thumb-play">▶</div>' : '';
+    return '<div class="prof-lb-thumb-item' + (i === profIdx ? ' active' : '') +
+      '" onclick="profIdx=' + i + ';renderProfLb()">' +
+      '<img src="' + thumbSrc + '" loading="lazy">' +
+      playIcon + '</div>';
+  }).join('');
+  thumbs.innerHTML = '<div class="prof-lb-thumbs-inner">' + thumbsHtml + '</div>';
 
+  // 활성 썸네일 가운데 정렬
   requestAnimationFrame(function() {
-    var activeThumb = thumbs.querySelector('.prof-lb-thumb-item.active');
-    if (!activeThumb) return;
-    var tRect = activeThumb.getBoundingClientRect();
-    var cRect = thumbs.getBoundingClientRect();
-    var tCenter = tRect.top - cRect.top + thumbs.scrollTop + tRect.height / 2;
-    thumbs.scrollTop = tCenter - thumbs.clientHeight / 2;
+    requestAnimationFrame(function() {
+      var activeThumb = thumbs.querySelector('.prof-lb-thumb-item.active');
+      if (!activeThumb) return;
+      var tRect = activeThumb.getBoundingClientRect();
+      var cRect = thumbs.getBoundingClientRect();
+      var tCenter = tRect.left - cRect.left + thumbs.scrollLeft + tRect.width / 2;
+      thumbs.scrollLeft = tCenter - thumbs.clientWidth / 2;
+    });
   });
 
+  // nav 버튼 표시 여부
   var showNav = profCurrent.items.length > 1;
   main.querySelector('.prof-lb-nav-prev').style.display = showNav ? 'flex' : 'none';
   main.querySelector('.prof-lb-nav-next').style.display = showNav ? 'flex' : 'none';
 
+  // 줌 리셋
   if (window.profZoomReset) window.profZoomReset();
+  // 휠 힌트
   var profHint = document.getElementById('prof-wheel-hint');
   if (profHint) {
     clearTimeout(profHint._t);
@@ -4370,6 +4423,7 @@ function renderProfLb() {
   }
 }
 
+// 키보드 + 배경 클릭 닫기
 document.addEventListener('keydown', function(e) {
   if (!document.getElementById('prof-lb').classList.contains('active')) return;
   if (e.key === 'Escape') closeProfLb();
