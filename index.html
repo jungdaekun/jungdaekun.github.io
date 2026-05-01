@@ -337,19 +337,20 @@ section{padding:100px 80px;}
 .lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(20,20,24,.9);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
 .lb-zoom-badge.visible{opacity:1;}
 .prof-lb-panel{width:320px;flex-shrink:0;background:#141418;border-left:1px solid #2a2a3e;display:flex;flex-direction:column;overflow:hidden;}
-.prof-lb-panel-head{padding:10px 10px 0;flex-shrink:0;}
-.prof-lb-panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;}
-.prof-lb-id{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.2em;text-transform:uppercase;display:block;}
-.prof-lb-title,.prof-lb-title-text{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#e0dfdf;display:block;line-height:1.1;margin-bottom:4px;}
-.prof-lb-sub-text{font-family:'Outfit',sans-serif;font-size:13px;color:var(--gold);letter-spacing:.02em;display:block;margin-bottom:6px;}
+.prof-lb-panel-head{padding:8px 10px 0;flex-shrink:0;}
+.prof-lb-panel-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;}
+.prof-lb-id{font-family:var(--font-mono);font-size:11px;color:#888;letter-spacing:.2em;text-transform:uppercase;display:block;}
+.prof-lb-title,.prof-lb-title-text{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;text-transform:none;color:#e0dfdf;display:block;line-height:1.1;margin-bottom:6px;}
+.prof-lb-sub-text{font-family:'Outfit',sans-serif;font-size:13px;color:var(--gold);letter-spacing:.02em;display:block;margin-bottom:8px;}
 .prof-lb-controls{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.prof-lb-counter{font-family:var(--font-mono);font-size:11px;color:#888;border:1px solid #383848;padding:2px 8px;border-radius:3px;white-space:nowrap;}
-.prof-lb-btn{background:none;border:1px solid #888;color:#888;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.prof-lb-counter{font-family:var(--font-mono);font-size:11px;color:#888;border:1px solid #383848;padding:0 8px;border-radius:3px;white-space:nowrap;line-height:1.1;height:24px;display:flex;align-items:center;box-sizing:border-box;}
+.prof-lb-btn{background:none;border:1px solid #888;color:#888;width:24px;height:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;padding:0;box-sizing:border-box;}
 .prof-lb-btn:hover{border-color:var(--border2);color:var(--gold);}
 .prof-lb-btn svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;}
-.prof-lb-tags-row{display:flex;flex-direction:column;gap:2px;margin-bottom:8px;}
-.prof-lb-tag{font-family:var(--font-mono);font-size:10px;color:#a1a09c;background:rgba(255,255,255,.06);padding:3px 10px;letter-spacing:.08em;text-align:center;white-space:normal;word-break:break-word;}
-.prof-lb-tag.dev{color:var(--gold-dim);}
+.prof-lb-tags-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:6px;}
+.prof-lb-tag{font-family:var(--font-mono);font-size:10px;color:#a1a09c;background:rgba(255,255,255,.06);border:1px solid #2a2a3e;padding:5px 8px;letter-spacing:.08em;text-align:center;white-space:normal;word-break:break-word;line-height:1.2;}
+.prof-lb-tag.dev{color:var(--gold);border-color:rgba(245,196,0,0.28);}
+.prof-lb-desc-box{font-family:var(--font-mono);font-size:10px;color:#a1a09c;background:rgba(255,255,255,.06);border:1px solid #2a2a3e;padding:6px 10px;letter-spacing:.08em;text-align:center;line-height:1.55;margin-bottom:8px;}
 .prof-lb-kb{flex-shrink:0;padding:6px 10px;background:rgba(255,255,255,.06);text-align:center;margin:0 10px;}
 .prof-lb-kb-title{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.1em;margin-bottom:6px;}
 .prof-lb-shortcuts{display:flex;justify-content:center;align-items:center;gap:14px;}
@@ -1068,6 +1069,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <span class="prof-lb-title" id="prof-lb-title"></span>
           <span class="prof-lb-sub-text" id="prof-lb-sub-text"></span>
           <div class="prof-lb-tags-row" id="prof-lb-tags-row"></div>
+          <div class="prof-lb-desc-box" id="prof-lb-desc-box"></div>
         </div>
         <div class="prof-lb-kb">
           <div class="prof-lb-kb-title">Keyboard Shortcuts</div>
@@ -4222,16 +4224,20 @@ function openProfLb(key, idx) {
   if (!profCurrent) return;
   currentProfId = key;
   profIdx = idx || 0;
-  document.getElementById('prof-lb-id').textContent = profCurrent.id;
-  document.getElementById('prof-lb-title').textContent = profCurrent.title;
-  document.getElementById('prof-lb-sub-text').textContent = profCurrent.sub || '';
+  var layoutData = getProfLbLayoutData(profCurrent, key);
+  if (key === 'ncsoft') layoutData.id = 'PROJ_14 · 2021-2024';
+  document.getElementById('prof-lb-id').textContent = layoutData.id || profCurrent.id;
+  document.getElementById('prof-lb-title').textContent = layoutData.title;
+  document.getElementById('prof-lb-sub-text').textContent = layoutData.sub;
   var profTags = document.getElementById('prof-lb-tags-row');
+  var profDesc = document.getElementById('prof-lb-desc-box');
   if (profTags) {
-    profTags.innerHTML = (profCurrent.tags || []).map(function(tag) {
-      var cls = /Developer|Publisher/i.test(tag) ? 'prof-lb-tag dev' : 'prof-lb-tag';
+    profTags.innerHTML = layoutData.metaTags.map(function(tag) {
+      var cls = 'prof-lb-tag' + ((key === 'ncsoft' || /Developer|Publisher|NCSoft/i.test(tag)) ? ' dev' : '');
       return '<span class="' + cls + '">' + tag + '</span>';
     }).join('');
   }
+  if (profDesc) profDesc.textContent = (layoutData.desc || '').replace(/ 쨌 /g, ' · ');
   renderProfLb();
   document.getElementById('prof-lb').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -4249,6 +4255,58 @@ function closeProfLb() {
   main.querySelectorAll('iframe').forEach(function(f) { f.src = ''; });
   var prev = main.querySelector('.prof-lb-video-wrap, .prof-lb-img-el');
   if (prev) prev.remove();
+}
+
+function getProfLbLayoutData(project, key) {
+  var profLbIdMap = {
+    lionheart: 'PROJ_16 · 2025-',
+    ncsoft: 'PROJ_14 · 2021-2024',
+    changse: 'PROJ_14 · 2018-2020',
+    nexon: 'PROJ_13 · 2017-2018',
+    xlgames: 'PROJ_12 · 2017-2017',
+    cookapps: 'PROJ_11 · 2019-2020',
+    neptune: 'PROJ_10 · 2015-2016',
+    neptune_baseball: 'PROJ_09 · 2015-2016',
+    puregames: 'PROJ_08 · 2014-2015',
+    puresoft: 'PROJ_07 · 2012-2014',
+    artechsoft: 'PROJ_06 · 2009-2011',
+    yeinssoft: 'PROJ_05 · 2008-2009',
+    pixelplanet: 'PROJ_04 · 2006-2007',
+    sunwoo: 'PROJ_03 · 2006-2006',
+    aprilstudio: 'PROJ_02 · 2005-2005'
+  };
+  var tags = (project && project.tags ? project.tags.slice() : []);
+  var devTag = tags.find(function(tag) { return /Developer/i.test(tag); }) || '';
+  var pubTag = tags.find(function(tag) { return /Publisher/i.test(tag); }) || '';
+  var descTags = tags.filter(function(tag) { return !/Developer|Publisher/i.test(tag); });
+
+  var id = profLbIdMap[key] || project.id || '';
+  var title = project.title || '';
+  var sub = project.sub || '';
+  var metaTags = [];
+
+  if (key === 'ncsoft') {
+    id = 'PRO_14 · 2021-2024';
+    title = 'NCSoft - Project M';
+    sub = 'PlayStation 5 / Interactive Adventure / Alpha';
+    metaTags = ['Dev : Project M', 'Pub : NCSoft'];
+  } else {
+    if (devTag) metaTags.push(devTag.replace(/Developer\s*:/i, 'Dev :'));
+    if (pubTag) metaTags.push(pubTag.replace(/Publisher\s*:/i, 'Pub :'));
+    if (!metaTags.length && descTags.length >= 2) {
+      metaTags = [descTags.shift(), descTags.shift()];
+    }
+  }
+
+  var desc = descTags.join(' · ');
+  if (key === 'ncsoft') desc = 'Integration · Lighting · Tech Doc · Outsourcing · Feedback';
+  return {
+    id: id,
+    title: title,
+    sub: sub,
+    metaTags: metaTags.slice(0, 2),
+    desc: desc
+  };
 }
 
 // prof-grid 카드 span 직접 적용
@@ -4330,8 +4388,20 @@ function renderProfLb() {
   }
 
   document.getElementById('prof-lb-counter').textContent = (profIdx + 1) + ' / ' + profCurrent.items.length;
-  document.getElementById('prof-lb-title').textContent = profCurrent.title || '';
-  document.getElementById('prof-lb-sub-text').textContent = profCurrent.sub || '';
+  var layoutData = getProfLbLayoutData(profCurrent, currentProfId);
+  if (currentProfId === 'ncsoft') layoutData.id = 'PROJ_14 · 2021-2024';
+  document.getElementById('prof-lb-id').textContent = layoutData.id || profCurrent.id || '';
+  document.getElementById('prof-lb-title').textContent = layoutData.title || '';
+  document.getElementById('prof-lb-sub-text').textContent = layoutData.sub || '';
+  var profTags = document.getElementById('prof-lb-tags-row');
+  var profDesc = document.getElementById('prof-lb-desc-box');
+  if (profTags) {
+    profTags.innerHTML = layoutData.metaTags.map(function(tag) {
+      var cls = 'prof-lb-tag' + ((currentProfId === 'ncsoft' || /Developer|Publisher|NCSoft/i.test(tag)) ? ' dev' : '');
+      return '<span class="' + cls + '">' + tag + '</span>';
+    }).join('');
+  }
+  if (profDesc) profDesc.textContent = (layoutData.desc || '').replace(/ 쨌 /g, ' · ');
 
   var dots = document.getElementById('prof-lb-dots');
   dots.innerHTML = profCurrent.items.map(function(it, i) {
