@@ -328,13 +328,13 @@ section{padding:100px 80px;}
 .prof-lb-dot{width:6px;height:6px;border-radius:50%;background:rgba(212,179,85,0.22);cursor:pointer;transition:all .2s;}
 .prof-lb-dot.active{background:var(--gold);transform:scale(1.4);}
 .prof-lb-type-badge{position:absolute;top:16px;left:16px;font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;z-index:4;}
-.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.12em;}
+.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;}
 #freq-lb-type-badge{color:var(--gold-dim);border-color:var(--border);}
 .prof-lb-hud{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:20px;align-items:center;z-index:4;pointer-events:none;}
 .prof-lb-hud .sz-hint{color:rgba(212,179,85,0.5);}
 .prof-lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(20,20,24,.9);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
 .prof-lb-zoom-badge.visible{opacity:1;}
-.lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(20,20,24,.9);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
+.lb-zoom-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;padding:4px 12px;background:rgba(20,20,24,.9);border:1px solid var(--border2);color:var(--gold);letter-spacing:.1em;z-index:3;opacity:0;transition:opacity .2s;pointer-events:none;}
 .lb-zoom-badge.visible{opacity:1;}
 .prof-lb-panel{width:320px;flex-shrink:0;background:#141418;border-left:1px solid #2a2a3e;display:flex;flex-direction:column;overflow:hidden;}
 .prof-lb-panel-head{padding:8px 10px 0;flex-shrink:0;}
@@ -481,11 +481,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 .lb-wrap{width:100vw;height:100vh;background:#000;display:flex;flex-direction:column;}
 .lb-body{display:flex;flex:1;overflow:hidden;}
 .lb-header{display:none;}
-.lb-id{font-family:var(--font-mono);font-size:10px;color:#888;letter-spacing:.2em;text-transform:uppercase;display:block;}
+.lb-id{font-family:var(--font-mono);font-size:11px;color:#888;letter-spacing:.2em;text-transform:uppercase;display:block;}
 .lb-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#e0dfdf;display:block;line-height:1.1;margin-bottom:4px;}
-.lb-counter{font-family:var(--font-mono);font-size:11px;color:#888;border:1px solid #383848;padding:2px 8px;border-radius:3px;white-space:nowrap;}
-.lb-btn{background:none;border:1px solid #888;color:#888;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.lb-btn:hover{border-color:rgba(232,115,0,0.6);color:#E87300;}
+.lb-counter{font-family:var(--font-mono);font-size:11px;color:#888;border:1px solid #383848;padding:0 8px;border-radius:3px;white-space:nowrap;line-height:1.1;height:24px;display:flex;align-items:center;box-sizing:border-box;}
+.lb-btn{background:none;border:1px solid #888;color:#888;width:24px;height:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;padding:0;box-sizing:border-box;}
+.lb-btn:hover{border-color:var(--border2);color:var(--gold);}
 .lb-btn svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;}
 .lb-img-viewport{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;position:relative;height:100%;}
 .lb-img-viewport::-webkit-scrollbar{width:6px;height:6px;}
@@ -498,22 +498,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 @keyframes lbFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 .lb-thumbnails{display:flex;flex-direction:column;gap:4px;padding:10px;overflow-y:auto;flex:1;}
 .lb-thumbnails::-webkit-scrollbar{width:4px;}
-.lb-thumbnails::-webkit-scrollbar-thumb{background:rgba(232,115,0,0.3);border-radius:2px;}
+.lb-thumbnails::-webkit-scrollbar-thumb{background:rgba(212,179,85,0.3);border-radius:2px;}
 .lb-thumb{flex-shrink:0;width:100%;height:70px;object-fit:cover;border:1px solid #2a2a3e;cursor:pointer;opacity:.5;transition:opacity .2s,border-color .2s;display:block;}
 .lb-thumb:hover{opacity:.85;}
-.lb-thumb.active{opacity:1;border-color:#E87300;}
+.lb-thumb.active{opacity:1;border-color:var(--gold);}
 .lb-nav-indicator{position:absolute;bottom:70px;right:20px;display:flex;flex-direction:column;gap:4px;z-index:3;}
-.lb-nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(232,115,0,0.2);transition:all .2s;cursor:pointer;}
-.lb-nav-dot.active{background:#E87300;transform:scale(1.4);}
+.lb-nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(212,179,85,0.22);transition:all .2s;cursor:pointer;}
+.lb-nav-dot.active{background:var(--gold);transform:scale(1.4);}
 .lb-nav-prev,.lb-nav-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#a1a09c;width:44px;height:44px;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3;}
 .lb-nav-prev{left:16px;}
 .lb-nav-next{right:16px;}
-.lb-nav-prev:hover,.lb-nav-next:hover{border-color:rgba(232,115,0,0.6);color:#E87300;background:rgba(232,115,0,0.08);}
-.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid #2a2a3e;color:#E87300;letter-spacing:.12em;position:absolute;top:16px;left:16px;z-index:4;}
+.lb-nav-prev:hover,.lb-nav-next:hover{border-color:var(--border2);color:var(--gold);background:var(--gold-glow);}
+.lb-type-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;background:rgba(20,20,24,.8);border:1px solid var(--border2);color:var(--gold);letter-spacing:.12em;position:absolute;top:16px;left:16px;z-index:4;}
 .lb-panel{width:320px;flex-shrink:0;background:#141418;border-left:1px solid #2a2a3e;display:flex;flex-direction:column;overflow:hidden;}
 .lb-panel-head{padding:10px 10px 0;flex-shrink:0;}
-.lb-panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;}
-.lb-panel-sub{font-family:'Outfit',sans-serif;font-size:13px;color:#c8905a;letter-spacing:.02em;display:block;margin-bottom:6px;}
+.lb-panel-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;}
+.lb-panel-sub{font-family:'Outfit',sans-serif;font-size:13px;color:var(--gold);letter-spacing:.02em;display:block;margin-bottom:6px;}
 .lb-info-box{background:rgba(255,255,255,.06);padding:8px 10px;margin-bottom:8px;font-size:13px;color:#bdc3d0;line-height:1.6;}
 .lb-info-box:empty{display:none;}
 .lb-info-box a{color:var(--gold);text-decoration:none;}
@@ -523,7 +523,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
 .lb-shortcuts{display:flex;justify-content:center;align-items:center;gap:14px;}
 .lb-shortcut{font-family:var(--font-mono);font-size:10px;color:#888;display:flex;align-items:center;gap:5px;}
 .lb-shortcut-key{border:1px solid #383848;padding:2px 6px;border-radius:3px;color:#888;cursor:pointer;transition:all .15s;}
-.lb-shortcut-key:hover{border-color:rgba(232,115,0,0.6);color:#E87300;}
+.lb-shortcut-key:hover{border-color:var(--border2);color:var(--gold);}
 @media(max-width:980px){.prof-lb-body,.lb-body{flex-direction:column;}.prof-lb-panel,.lb-panel{width:100%;border-left:none;border-top:1px solid #2a2a3e;max-height:42vh;}.prof-lb-thumbs,.lb-thumbnails{flex-direction:row;overflow-x:auto;overflow-y:hidden;}.prof-lb-thumbs-inner{flex-direction:row;}.prof-lb-thumb-item,.lb-thumb{width:120px;height:70px;}}
 @media(max-width:768px){#proj-grid-inner{grid-template-columns:1fr;}.project-card{grid-column:1 / -1 !important;}}
 
@@ -678,7 +678,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_016 · 2025—</div>
+        <div class="prof-card-id" translate="no">// PROJ_15 · 2025—</div>
         <div class="prof-card-title">Lionheart Studio</div>
         <div class="prof-card-sub">ODIN: VALHALLA RISING / MMORPG · Live Service / Mobile · PC</div>
         <div class="prof-card-desc">Level Design · Integration · Lighting · Optimization</div>
@@ -704,7 +704,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_015 · 2021—2024</div>
+        <div class="prof-card-id" translate="no">// PROJ_14 · 2021—2024</div>
         <div class="prof-card-title">NCSoft</div>
         <div class="prof-card-sub">Project M / Interactive Adventure · Alpha / PlayStation 5</div>
         <div class="prof-card-desc">Integration · Lighting · Tech Doc · Outsourcing · Feedback</div>
@@ -729,7 +729,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_014 · 2018—2020</div>
+        <div class="prof-card-id" translate="no">// PROJ_13 · 2018—2020</div>
         <div class="prof-card-title">Line Games</div>
         <div class="prof-card-sub">창세기전: 회색의 잔영 / SRPG · Alpha / Nintendo Switch</div>
         <div class="prof-card-desc">Level Design · Integration · Lighting · Outsourcing · Feedback</div>
@@ -752,7 +752,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_013 · 2017—2018</div>
+        <div class="prof-card-id" translate="no">// PROJ_12 · 2017—2018</div>
         <div class="prof-card-title">Nexon Korea</div>
         <div class="prof-card-sub">Ascendant One / MOBA · Open Beta / PC Online</div>
         <div class="prof-card-desc">Asset Modeling · Textures</div>
@@ -775,7 +775,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_012 · 2017—2017</div>
+        <div class="prof-card-id" translate="no">// PROJ_11 · 2017—2017</div>
         <div class="prof-card-title">XLGames</div>
         <div class="prof-card-sub">Civilization Online / MMORPG · Open Beta / PC Online</div>
         <div class="prof-card-desc">Integration · Lighting</div>
@@ -798,14 +798,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_011 · 2019—2020</div>
+        <div class="prof-card-id" translate="no">// PROJ_10 · 2019—2020</div>
         <div class="prof-card-title">CookApps</div>
         <div class="prof-card-sub">Outsourcing / SNG / Mobile</div>
         <div class="prof-card-desc">Modeling, Textures, Shader, Vray Lighting</div>
         <div class="prof-tags">
-          <span class="prof-tag">Developer : CookApps</span>
-          <span class="prof-tag">Vray</span>
-          <span class="prof-tag">3ds Max</span>
+            <span class="prof-tag">Developer : CookApps</span>
+            <span class="prof-tag">Publisher : CookApps</span>
         </div>
       </div>
     </div>
@@ -822,13 +821,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_010 · 2015—2016</div>
+        <div class="prof-card-id" translate="no">// PROJ_09 · 2015—2016</div>
         <div class="prof-card-title">Neptune</div>
         <div class="prof-card-sub">Neppy Project / Simulation · Alpha / Mobile</div>
         <div class="prof-card-desc">End-to-End Environment Creation</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : Neptune</span>
-          <span class="prof-tag">Publisher : X</span>
+            <span class="prof-tag">Publisher : X</span>
         </div>
       </div>
     </div>
@@ -845,10 +844,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_009 · 2015—2016</div>
+        <div class="prof-card-id" translate="no">// PROJ_08 · 2015—2016</div>
         <div class="prof-card-title">Neptune</div>
         <div class="prof-card-sub">プロ野球タクティクス / Sport · Service / Mobile</div>
-        <div class="prof-card-desc">All Background Creation</div>
+        <div class="prof-card-desc">Modeling · Textures · Composition</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : Neptune</span>
           <span class="prof-tag">Publisher : Gloops</span>
@@ -869,7 +868,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_008 · 2014—2015</div>
+        <div class="prof-card-id" translate="no">// PROJ_07 · 2014—2015</div>
         <div class="prof-card-title">Pure Games</div>
         <div class="prof-card-sub">Vendetta - One of Them / MORPG · Korea Service / Mobile<br>Warhand Project / MORPG · Alpha / Mobile</div>
         <div class="prof-card-desc">Art Direction & Environment Strategy · Outsourcing · Feedback</div>
@@ -894,7 +893,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_007 · 2012—2014</div>
+        <div class="prof-card-id" translate="no">// PROJ_06 · 2012—2014</div>
         <div class="prof-card-title">Pure Soft</div>
         <div class="prof-card-sub">Robokids, 라이스맨 · Mobile & People · Outsourcing</div>
         <div class="prof-card-desc">Modeling, Texturing, Animation & FX, Engine</div>
@@ -918,7 +917,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_006 · 2009 — 2011</div>
+        <div class="prof-card-id" translate="no">// PROJ_05 · 2009 — 2011</div>
         <div class="prof-card-title">ArtechSoft</div>
         <div class="prof-card-sub">신의하루 · Xkick Online</div>
         <div class="prof-card-desc">All Background Creation<br>SNG · Web · Service · Sport · Online · Service<br>Level Design, Lighting</div>
@@ -943,13 +942,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_005 · 2008 — 2009</div>
+        <div class="prof-card-id" translate="no">// PROJ_04 · 2008 — 2009</div>
         <div class="prof-card-title">Yeins Soft</div>
         <div class="prof-card-sub">Style Rush · Racing · Online · Alpha Version</div>
         <div class="prof-card-desc">All Background Creation</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : Yeins Soft</span>
-          <span class="prof-tag">Publisher : X</span>
+          <span class="prof-tag">Publisher : Yedang Online</span>
           <span class="prof-tag">Torque Engine</span>
         </div>
       </div>
@@ -967,13 +966,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
           <div class="prof-card-media-label"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity=".4"/></svg> VIEW IMAGES</div></div>
         </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_004 · 2006 — 2007</div>
+        <div class="prof-card-id" translate="no">// PROJ_03 · 2006 — 2007</div>
         <div class="prof-card-title">Pixel Planet</div>
         <div class="prof-card-sub">Z-Ranger · TV Animation · Service</div>
         <div class="prof-card-desc">Shader, Lighting, Compositing</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : PIXEL PLANET</span>
-          <span class="prof-tag">Publisher : KBS2, Tooniverse</span>
+          <span class="prof-tag">Publisher : Tooniverse</span>
         </div>
       </div>
     </div>
@@ -991,13 +990,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_003 · 2006—2006</div>
+        <div class="prof-card-id" translate="no">// PROJ_02 · 2006—2006</div>
         <div class="prof-card-title">Sunwoo Entertainment</div>
         <div class="prof-card-sub">WarRook Episode II Cinematic</div>
         <div class="prof-card-desc">Prop Modeling & Textures</div>
         <div class="prof-tags">
           <span class="prof-tag">Developer : SUNWOO ENTERTAINMENT</span>
-          <span class="prof-tag">Publisher : Nexon & Dream Execution Techno</span>
+          <span class="prof-tag">Publisher : Dream Execution</span>
         </div>
       </div>
     </div>
@@ -1015,12 +1014,13 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 80px
         </div>
       </div>
       <div class="prof-card-info">
-        <div class="prof-card-id" translate="no">// PROJ_002 · 2005—2005</div>
+        <div class="prof-card-id" translate="no">// PROJ_01 · 2005-2005</div>
         <div class="prof-card-title">April Studio</div>
         <div class="prof-card-sub">대한주택공사 / Demo Reel</div>
-        <div class="prof-card-desc">All Background Creation</div>
+        <div class="prof-card-desc">Modeling · Textures · Composition</div>
         <div class="prof-tags">
-          <span class="prof-tag">Developer : APRIL STUDIO</span>
+          <span class="prof-tag">Developer : April Studio</span>
+          <span class="prof-tag">Publisher : 대한주택공사</span>
         </div>
       </div>
     </div>
@@ -2193,7 +2193,7 @@ function renderLightbox(instant) {
     var isYtThumb = typeof src === 'object' && src.type === 'youtube';
     return '<div style="position:relative;display:block;flex-shrink:0;">'
       + '<img class="lb-thumb' + (i === currentIdx ? ' active' : '') + '" src="' + thumbSrc + '" loading="lazy" onclick="lbGoto(' + i + ')">'
-      + (isYtThumb ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:#E87300;font-size:16px;background:rgba(0,0,0,.22);">&#9654;</div>' : '')
+        + (isYtThumb ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:var(--gold);font-size:16px;background:rgba(0,0,0,.22);">&#9654;</div>' : '')
       + '</div>';
   }).join('');
 
@@ -3074,7 +3074,7 @@ var profProjects = {
     id: '// PROFESSIONAL · ARTECHSOFT · 2009—2011',
     title: 'ArtechSoft',
     sub: '신의하루 · Xkick Online · SNG / Web / Sport / Online',
-    tags: ['All Background Creation', 'Level Design', 'Lighting'],
+    tags: ['All Background Creation', 'Developer : Artech Soft', 'Publisher : NHN'],
     items: [
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_001.webp' },
       { type: 'image', src: 'images/Professional/2009_ArtechSoft/2009_ArtechSoft_002.webp' },
@@ -3103,7 +3103,7 @@ var profProjects = {
     id: '// PROFESSIONAL · APRIL STUDIO · 2005',
     title: '대한주택공사 / Demo Reel',
     sub: 'Demo Reel · Architectural Visualization',
-    tags: ['Developer : April Studio'],
+    tags: ['Modeling', 'Textures', 'Composition', 'Developer : April Studio', 'Publisher : 대한주택공사'],
     items: [
       { type: 'video', videoId: 'OgDEUY0JS_k' },
       { type: 'image', src: 'images/Professional/2005_Aprilstudio/2005_Aprilstudio_001.webp' },
@@ -3121,7 +3121,7 @@ var profProjects = {
     id: '// PROFESSIONAL · SUNWOO ENTERTAINMENT · 2006',
     title: 'WarRook Episode II',
     sub: 'WarRook Episode II · TV Animation / Service',
-    tags: ['Shader', 'Lighting', 'Compositing', 'Developer : Sunwoo Ent.'],
+    tags: ['Shader', 'Lighting', 'Compositing', 'Developer : Sunwoo Ent.', 'Publisher : Dream Execution'],
     items: [
       { type: 'video', videoId: '-y3fQ73U-2Q', start: 5 },
       { type: 'image', src: 'images/Professional/2006_SunwooEntertainment/2006_SunwooEntertainment_001.webp' },
@@ -3140,7 +3140,7 @@ var profProjects = {
     id: '// PROFESSIONAL · PIXEL PLANET · 2006—2007',
     title: 'Z-Ranger',
     sub: 'Z-Ranger · TV Animation / Service',
-    tags: ['Shader', 'Lighting', 'Compositing', 'Developer : Pixel Planet'],
+    tags: ['Shader', 'Lighting', 'Compositing', 'Developer : Pixel Planet', 'Publisher : Tooniverse'],
     items: [
       { type: 'video', videoId: 'q5VgiNs5ZpE', start: 10 },
       { type: 'image', src: 'images/Professional/2006_PixelPlanet/2006_PixelPlanet_001.webp' },
@@ -3165,7 +3165,7 @@ var profProjects = {
     id: '// PROFESSIONAL · YEINS SOFT · 2008—2009',
     title: 'Style Rush',
     sub: 'Style Rush · Racing / Online / Alpha Version',
-    tags: ['All Background Creation', 'Developer : Yeins Soft'],
+    tags: ['All Background Creation', 'Developer : Yeins Soft', 'Publisher : Yedang Online'],
     items: [
       { type: 'image', src: 'images/Professional/2008_YeinsSoft/2008_YeinsSoft_001.webp' },
       { type: 'image', src: 'images/Professional/2008_YeinsSoft/2008_YeinsSoft_002.webp' },
@@ -3200,7 +3200,7 @@ var profProjects = {
     id: '// PROFESSIONAL · PURE SOFT',
     title: 'Pure Soft',
     sub: 'Robokids, 라이스맨 · Mobile & PC / Outsourcing',
-    tags: ['Modeling', 'Texturing', 'Animation & FX', 'Engine'],
+    tags: ['All Background Creation', 'Developer : Pure Soft', 'Publisher : X'],
     items: [
       { type: 'video', videoId: 'DfN9IJYPGDU' },
       { type: 'image', src: 'images/Professional/2012_PureSoft/2012_PureSoft_002.webp' },
@@ -3254,7 +3254,7 @@ var profProjects = {
     id: '// PROFESSIONAL · PURE GAMES · 2014—2015',
     title: 'Vendetta',
     sub: 'Vendetta · MORPG / Mobile / Service',
-    tags: ['Art Direction', 'Character & Background Creation', 'Developer : Pure Games'],
+    tags: ['Art Direction', 'Outsourcing', 'Feedback', 'Developer : Pure Games', 'Publisher : T Store'],
     items: [
       { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_001.webp' },
       { type: 'image', src: 'images/Professional/2014_PureGames/2014_PureGamesVendetta_002.webp' },
@@ -3286,7 +3286,7 @@ var profProjects = {
     id: '// PROFESSIONAL · NEPTUNE · 2015—2016',
     title: 'Neppy Rush',
     sub: 'Neppy Rush · Defence / Mobile / Alpha Version',
-    tags: ['Level Design', 'Shader', 'Lighting', 'Modeling', 'Textures'],
+    tags: ['All Background Creation', 'Developer : Neptune', 'Publisher : X'],
     items: [
       { type: 'image', src: 'images/Professional/2015_Neptune/2015_Neptune_NeppyRush_001.webp' },
       { type: 'image', src: 'images/Professional/2015_Neptune/2015_Neptune_NeppyRush_002.webp' },
@@ -3315,7 +3315,7 @@ var profProjects = {
     id: '// PROFESSIONAL · COOKAPPS · OUTSOURCING · 2019—2020',
     title: 'CookApps',
     sub: 'Outsourcing / SNG / Mobile',
-    tags: ['Modeling', 'Textures', 'Shader', 'Vray Lighting', 'Developer : CookApps'],
+    tags: ['Modeling', 'Textures', 'Shader', 'Vray Lighting', 'Developer : CookApps', 'Publisher : CookApps'],
     items: [
       { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_01.gif' },
       { type: 'image', src: 'images/Professional/2020_Cookapps/Cookapps_02.gif' },
@@ -4233,7 +4233,7 @@ function openProfLb(key, idx) {
   var profDesc = document.getElementById('prof-lb-desc-box');
   if (profTags) {
     profTags.innerHTML = layoutData.metaTags.map(function(tag) {
-      var cls = 'prof-lb-tag' + ((key === 'ncsoft' || /Developer|Publisher|NCSoft/i.test(tag)) ? ' dev' : '');
+      var cls = 'prof-lb-tag' + (isProfLbMetaAccentTag(tag) ? ' dev' : '');
       return '<span class="' + cls + '">' + tag + '</span>';
     }).join('');
   }
@@ -4257,23 +4257,27 @@ function closeProfLb() {
   if (prev) prev.remove();
 }
 
+function isProfLbMetaAccentTag(tag) {
+  return /^(Dev|Pub)\s*:/i.test(tag) || /^(Developer|Publisher)\s*:/i.test(tag);
+}
+
 function getProfLbLayoutData(project, key) {
   var profLbIdMap = {
-    lionheart: 'PROJ_16 · 2025-',
+    lionheart: 'PROJ_15 · 2025-',
     ncsoft: 'PROJ_14 · 2021-2024',
-    changse: 'PROJ_14 · 2018-2020',
-    nexon: 'PROJ_13 · 2017-2018',
-    xlgames: 'PROJ_12 · 2017-2017',
-    cookapps: 'PROJ_11 · 2019-2020',
-    neptune: 'PROJ_10 · 2015-2016',
-    neptune_baseball: 'PROJ_09 · 2015-2016',
-    puregames: 'PROJ_08 · 2014-2015',
-    puresoft: 'PROJ_07 · 2012-2014',
-    artechsoft: 'PROJ_06 · 2009-2011',
-    yeinssoft: 'PROJ_05 · 2008-2009',
-    pixelplanet: 'PROJ_04 · 2006-2007',
-    sunwoo: 'PROJ_03 · 2006-2006',
-    aprilstudio: 'PROJ_02 · 2005-2005'
+    changse: 'PROJ_13 · 2018-2020',
+    nexon: 'PROJ_12 · 2017-2018',
+    xlgames: 'PROJ_11 · 2017-2017',
+    cookapps: 'PROJ_10 · 2019-2020',
+    neptune: 'PROJ_09 · 2015-2016',
+    neptune_baseball: 'PROJ_08 · 2015-2016',
+    puregames: 'PROJ_07 · 2014-2015',
+    puresoft: 'PROJ_06 · 2012-2014',
+    artechsoft: 'PROJ_05 · 2009-2011',
+    yeinssoft: 'PROJ_04 · 2008-2009',
+    pixelplanet: 'PROJ_03 · 2006-2007',
+    sunwoo: 'PROJ_02 · 2006-2006',
+    aprilstudio: 'PROJ_01 · 2005-2005'
   };
   var tags = (project && project.tags ? project.tags.slice() : []);
   var devTag = tags.find(function(tag) { return /Developer/i.test(tag); }) || '';
@@ -4286,7 +4290,7 @@ function getProfLbLayoutData(project, key) {
   var metaTags = [];
 
   if (key === 'ncsoft') {
-    id = 'PRO_14 · 2021-2024';
+    id = 'PROJ_14 · 2021-2024';
     title = 'NCSoft - Project M';
     sub = 'PlayStation 5 / Interactive Adventure / Alpha';
     metaTags = ['Dev : Project M', 'Pub : NCSoft'];
@@ -4397,7 +4401,7 @@ function renderProfLb() {
   var profDesc = document.getElementById('prof-lb-desc-box');
   if (profTags) {
     profTags.innerHTML = layoutData.metaTags.map(function(tag) {
-      var cls = 'prof-lb-tag' + ((currentProfId === 'ncsoft' || /Developer|Publisher|NCSoft/i.test(tag)) ? ' dev' : '');
+        var cls = 'prof-lb-tag' + (isProfLbMetaAccentTag(tag) ? ' dev' : '');
       return '<span class="' + cls + '">' + tag + '</span>';
     }).join('');
   }
